@@ -43,6 +43,11 @@
   .rec{color:var(--ac);font-weight:700;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;}
   textarea,input[type=text]{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;resize:vertical;}
 
+  .involves{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0;}
+  .ivc{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:12px 14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .ivh{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ac);margin-bottom:4px;}
+  .ivc ul{margin:0;padding-left:16px;} .ivc li{font-size:12.7px;margin:3px 0;color:#33403d;}
+  @media(max-width:620px){.involves{grid-template-columns:1fr;}}
   .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
   .barin{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
   .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
@@ -96,6 +101,14 @@
     </div>
   </div>
 </div>
+<h2>What this actually involves</h2>
+<p class="sub">The depth behind those three steps — the real work, so it reads as a plan, not a vague ask.</p>
+<div class="involves">
+<div class="ivc"><div class="ivh">Content to create</div><ul><li>Real photography set per development</li><li>Interior walkthrough video</li><li>Development / village “setting” film</li><li>Refreshed listing copy</li><li>Local social promo of the walkthroughs</li></ul></div>
+<div class="ivc"><div class="ivh">The online build</div><ul><li>Refresh (or rebuild) the site — Astro/Next on Vercel</li><li>Swap out the CGI; keep listings current</li><li>Register-interest + brochure capture</li><li>Optional 360 / virtual tour per house type</li><li>CMS so listings stay current</li></ul></div>
+<div class="ivc"><div class="ivh">Data &amp; tracking</div><ul><li>Airtable CRM for enquiries</li><li>Automated follow-up (Make.com)</li><li>GA4 + video-view tracking</li><li>Monthly report: enquiries + video views</li></ul></div>
+<div class="ivc"><div class="ivh">Links to the others</div><ul><li>Bakery welcome hampers in new homes</li><li>Show-homes styled with bakery product</li><li>Cross-promote “quality + place” to the Island House audience</li><li>Shared capture crew across all three</li></ul></div>
+</div>
 <h2>What we need you to direct, Steve</h2>
 <p class="sub">Advertising's decided. These set how far the refresh goes and get the camera on site.</p>
   <div class="need" data-kind="dec" data-item="Sancler — scope of the website change" data-business="Sancler Property">
@@ -121,6 +134,10 @@
   <div class="need">
     <div class="q">Can we walk each house with Carl — the different kitchen designs &amp; spec options to feature?</div><div class="why">The design/spec detail is what makes the real photography sell; Carl has it.</div>
     <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Sancler — house briefs with Carl" data-business="Sancler Property" placeholder="Best way/time to get the house briefs + spec options from Carl…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">What does success look like 12 months from now?</div><div class="why">Sets the target — enquiries, viewings, homes sold — we build and report against.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Sancler — 12-month success" data-business="Sancler Property" placeholder="e.g. X enquiries a month, plots selling faster, every development filmed…"></textarea>
   </div>
 
 </div>

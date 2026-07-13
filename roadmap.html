@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steve Kirkwood — The Roadmap</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--blue:#2b4a6b;--warm:#8a5a2b;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px 130px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:940px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  header p{max-width:680px;color:#e6dcc8;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:#6a7b76;font-size:13px;margin:0 0 12px;}
+  .method{background:#fff;border:1px solid #dfe6e2;border-left:4px solid var(--gold);border-radius:8px;padding:12px 15px;font-size:13.4px;margin:12px 0;}
+  .method b{color:var(--dark);}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:#5a6b66;margin:10px 0 4px;}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 8px;border-radius:10px;}
+  .tag.now{background:#fbe7e2;color:#b0472b;} .tag.wait{background:#fbf3e0;color:#8a6a2b;}
+
+  .tl{position:relative;margin:14px 0 0;padding-left:26px;}
+  .tl:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:#d7e0db;}
+  .ph{position:relative;margin:0 0 16px;}
+  .ph:before{content:"";position:absolute;left:-22px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid #fff;box-shadow:0 0 0 2px #d7e0db;}
+  .card{background:#fff;border:1px solid #dfe6e2;border-radius:12px;box-shadow:0 2px 10px rgba(20,50,45,.06);overflow:hidden;}
+  .ch{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:12px 16px;background:linear-gradient(90deg,var(--green),var(--dark));color:#fff;}
+  .ch .when{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:#d8c9a8;}
+  .ch b{font-family:Georgia,serif;font-weight:600;font-size:17px;}
+  .ch.bk{background:linear-gradient(90deg,var(--warm),#5c3a17);} .ch.sc{background:linear-gradient(90deg,var(--blue),#1a2f47);}
+  .cb{padding:12px 16px 14px;}
+  .lbl{font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--green);margin:0 0 4px;}
+  .bk .lbl{color:var(--warm);} .sc .lbl{color:var(--blue);}
+  .cb ul{margin:0 0 10px;padding-left:18px;} .cb li{font-size:13.4px;margin:3px 0;color:#33403d;}
+  .gate{background:#f7f9f7;border:1px solid #e2e8e4;border-radius:8px;padding:9px 12px;margin-top:6px;}
+  .gate .gi{font-size:13px;margin:4px 0;color:#33403d;}
+  .gate .gi .tag{margin-right:7px;}
+  .who{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .chip{background:#f2f5f3;border:1px solid #e0e7e3;border-radius:20px;padding:3px 10px;font-size:11px;color:#40514c;}
+
+  .need{background:#fff;border:1px solid #dfe6e2;border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px;margin:14px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .need .q{font-weight:700;font-size:14.5px;margin-bottom:3px;} .need .why{font-size:12.3px;color:#6a7b76;margin-bottom:8px;}
+  .opts label{display:block;padding:9px 11px;border:1px solid #e2e8e4;border-radius:8px;margin:6px 0;font-size:13.4px;cursor:pointer;}
+  .opts label:hover{background:#f5f8f6;} .opts input{margin-right:8px;} .opts .od{display:block;margin:3px 0 0 24px;font-size:12.2px;color:#66756f;}
+  textarea{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;resize:vertical;}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
+  .barin{max-width:940px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+  .whom{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
+  .seg{background:#f2f5f3;border:1.5px solid #dfe6e2;color:#3a4a47;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:7px;cursor:pointer;}
+  .seg.on{background:var(--green);border-color:var(--green);color:#fff;}
+  .btn{background:var(--green);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;}
+  .btn:hover{background:var(--dark);} .btn.alt{background:#fff;color:var(--green);border:2px solid var(--green);padding:9px 16px;}
+  #status{font-size:13px;font-weight:600;text-align:center;padding:6px 0 0;} #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+  #fallback{display:none;justify-content:center;gap:8px;margin-top:6px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Back to the plan</a><a href="commercials.html">The money framework →</a></div>
+  <div class="kicker">Private · Steve Kirkwood Build Project</div>
+  <h1>The Roadmap — what happens, and when</h1>
+  <p>The whole thing in order: foundations first, then the bakery live, Sancler alongside, and Island House building through. Each stop shows what we do, who drives it, and the decisions we need from you at that gate — 🔴 the ones that unblock the next step, 🟡 the ones we can settle on the way.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="method">
+    <b>How we work, every time:</b> understand it → show you the comparables → <b>you tell us what you like</b> → we build only what you've reacted to → we report as we go. We never build before you've seen and steered. Day-to-day runs on a fixed weekly rhythm (capture Mon, edit Tue, bakery content Wed, publish Thu, recap Fri) so the work is predictable.
+  </div>
+  <div class="legend">
+    <span><span class="tag now">🔴 Decide now</span> unblocks the next step</span>
+    <span><span class="tag wait">🟡 Can wait</span> settle on the way / neutral for now</span>
+  </div>
+
+  <h2>The sequence</h2>
+  <div class="tl">
+
+    <div class="ph"><div class="card">
+      <div class="ch"><span class="when">Now · Week 0</span><b>Phase 0 — Foundations</b></div>
+      <div class="cb">
+        <div class="lbl">What we do</div>
+        <ul>
+          <li>Stand up the password manager (1Password) — <b>before</b> any logins move.</li>
+          <li>Set up the M-series Mac + dev tools; domains/DNS into Cloudflare; Backblaze backup + a working drive.</li>
+          <li>Gather every login + domain for the existing sites into the vault.</li>
+        </ul>
+        <div class="gate">
+          <div class="gi"><span class="tag now">Decide now</span>Settle the day rate (£200 / £220 / £250) for the invoice.</div>
+          <div class="gi"><span class="tag now">Decide now</span>Confirm the order: <b>bakery first</b>, Sancler + Island House alongside.</div>
+          <div class="gi"><span class="tag wait">Can wait</span>Exact framework / CMS choices — we pick as we build.</div>
+        </div>
+        <div class="who"><span class="chip"><b>Idris</b> · systems</span><span class="chip"><b>Marcus</b> · setup</span><span class="chip"><b>O'Brien</b> · orchestration</span></div>
+      </div>
+    </div></div>
+
+    <div class="ph"><div class="card">
+      <div class="ch bk"><span class="when">Weeks 1–4 · live first</span><b>Phase 1 — The Globe Bakery</b></div>
+      <div class="cb">
+        <div class="lbl">What we do</div>
+        <ul>
+          <li>Build the brand from the name; build the Shopify shop + the weekly loaf+pastry subscription.</li>
+          <li>First food-photography day; wire collection + local delivery; soft-launch, then open subscriptions.</li>
+        </ul>
+        <div class="gate">
+          <div class="gi"><span class="tag now">Decide now</span>Product list + prices + weekly capacity; delivery reach; the hero product.</div>
+          <div class="gi"><span class="tag now">Decide now</span>Rough build budget (so Rhys can cost + phase it).</div>
+          <div class="gi"><span class="tag wait">Can wait</span>Wine-bar relationship; wholesale timing; national delivery.</div>
+        </div>
+        <div class="who"><span class="chip"><b>Delphine</b> · brand</span><span class="chip"><b>Marcus</b> · web</span><span class="chip"><b>Sol</b> · commerce</span><span class="chip"><b>Cass</b> · photo</span><span class="chip"><b>Nia</b> · social</span></div>
+      </div>
+    </div></div>
+
+    <div class="ph"><div class="card">
+      <div class="ch sc"><span class="when">Weeks 2–5 · alongside</span><b>Phase 2 — Sancler Property</b></div>
+      <div class="cb">
+        <div class="lbl">What we do</div>
+        <ul>
+          <li>Same-day trust fixes on the live site; confirm the priority development + access; build the shot list.</li>
+          <li>One photo/video day; swap the CGI; add register-interest + brochure capture; publish and keep listings current.</li>
+        </ul>
+        <div class="gate">
+          <div class="gi"><span class="tag now">Decide now</span>Scope (fixes / refresh / rebuild); which houses + shoot priority; who holds the CMS login.</div>
+          <div class="gi"><span class="tag now">Decide now</span>Walkthrough each house with Carl for the kitchen/spec detail.</div>
+          <div class="gi"><span class="tag wait">Can wait</span>360 / virtual tours; paid ads + portals (parked — organic first).</div>
+        </div>
+        <div class="who"><span class="chip"><b>Cass</b> · photo/video</span><span class="chip"><b>Marcus</b> · web</span><span class="chip"><b>Nia</b> · social</span></div>
+      </div>
+    </div></div>
+
+    <div class="ph"><div class="card">
+      <div class="ch"><span class="when">Weeks 3–8+ · the flagship</span><b>Phase 3 — Island House</b></div>
+      <div class="cb">
+        <div class="lbl">What we do</div>
+        <ul>
+          <li>Back up + AI-sort the 20k photos; audit the record; sign off the standards with the pro team.</li>
+          <li>Build the new site (story/journal + progress + heritage) and the documentation/inspection system.</li>
+          <li>Publish the first chapter + first monthly inspection; pursue the discovery/grants play.</li>
+        </ul>
+        <div class="gate">
+          <div class="gi"><span class="tag now">Decide now</span>Recording level; formal CMP?; <b>what the record is for</b>; consent status; who's on the pro team.</div>
+          <div class="gi"><span class="tag now">Decide now</span>Publishing sensitivities; keep or rebuild the current site.</div>
+          <div class="gi"><span class="tag wait">Can wait</span>The interactive dashboard; grant-application timing; the discovery/grants go-ahead (recommended, but can follow).</div>
+        </div>
+        <div class="who"><span class="chip"><b>Elin</b> · heritage</span><span class="chip"><b>Gethin</b> · compliance</span><span class="chip"><b>Idris</b> · data</span><span class="chip"><b>Delphine</b> · story</span><span class="chip"><b>Ffion</b> · grants</span><span class="chip"><b>Carys</b> · PR</span></div>
+      </div>
+    </div></div>
+
+    <div class="ph"><div class="card">
+      <div class="ch"><span class="when">Throughout · ongoing</span><b>Running the machine</b></div>
+      <div class="cb">
+        <div class="lbl">What we do</div>
+        <ul>
+          <li>The fixed weekly content rhythm across all three; one capture crew, one shared CRM + media library.</li>
+          <li>A monthly report per business (what we did, the numbers, what's next) in your preferred channel.</li>
+        </ul>
+        <div class="who"><span class="chip"><b>Vera</b> · reporting</span><span class="chip"><b>Cass</b> · capture</span><span class="chip"><b>O'Brien</b> · keeps you in the loop</span></div>
+      </div>
+    </div></div>
+
+  </div>
+
+  <h2>One decision that ties them together</h2>
+  <p class="sub">Your businesses aren't three islands — they're a Laugharne cluster that can quietly feed each other.</p>
+  <div class="need" data-kind="dec" data-item="Cross-business — the Laugharne family umbrella" data-business="General">
+    <div class="q">Do we link the three under a light “Laugharne family”?</div>
+    <div class="why">The bakery supplies bread to Island House and puts hampers in Sancler's new homes; one shared CRM, capture crew, PR and the medieval-town/Dylan-Thomas tourism halo lift all three. Your call how tightly.</div>
+    <div class="opts">
+      <label><input type="radio" name="umbrella" value="A) Yes — light umbrella"> A · Yes, a light umbrella <span style="color:var(--green);font-weight:700;font-size:10.5px;text-transform:uppercase;">recommended</span>
+        <span class="od">Keep each business its own brand, but wire the shared links (supply, hampers, CRM, PR, tourism halo) behind the scenes.</span></label>
+      <label><input type="radio" name="umbrella" value="B) Keep them fully separate"> B · Keep them fully separate
+        <span class="od">Run all three independently, no cross-links.</span></label>
+      <label><input type="radio" name="umbrella" value="C) Decide later"> C · Decide later
+        <span class="od">Focus on getting each live first, revisit the links after.</span></label>
+    </div>
+  </div>
+  <div class="need">
+    <div class="q">Anything else on the sequence or timing?</div>
+    <div class="why">Deadlines, a launch you want to hit, anything to reorder.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Roadmap — notes on sequence/timing" data-business="General" placeholder="Any dates, priorities or reordering…"></textarea>
+  </div>
+
+</div>
+
+<div class="bar">
+  <div class="barin">
+    <div class="whom">Sending as:
+      <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+      <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+      <button class="btn" type="button" onclick="sendAll()">Send to Dominic</button>
+    </div>
+  </div>
+  <div id="status"></div>
+  <div id="fallback">
+    <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+    <button class="btn alt" type="button" onclick="emailAll()">Email to Dominic</button>
+  </div>
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.whom .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function collect(){
+    var items=[];
+    document.querySelectorAll('[data-kind="dec"]').forEach(function(el){var c=el.querySelector('input[type=radio]:checked');if(c)items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:'Decision',answer:c.value});});
+    document.querySelectorAll('[data-kind="field"]').forEach(function(el){var v=(el.value||'').trim();if(v)items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:el.getAttribute('data-type')||'Discussion',answer:v});});
+    return items;
+  }
+  function asText(items){var L=["Steve — Roadmap notes","Sent by: "+who,""];items.forEach(function(it){L.push((it.type==='Discussion'?'? ':'• ')+it.item.replace(/^Discussion — /,'')+": "+it.answer);});return L.join("\\n");}
+  window.sendAll=function(){var items=collect(),st=document.getElementById('status');if(!items.length){st.className='err';st.textContent='Nothing to send yet — make a pick or write a note.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:items})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved to the tracker ('+res.j.created+' item'+(res.j.created===1?'':'s')+'). Dominic has it.';document.getElementById('fallback').style.display='none';}else{fail(res.j,items);}})
+      .catch(function(){fail(null,items);});};
+  function fail(j,items){var st=document.getElementById('status');st.className='err';st.textContent=(j&&j.error==='not_configured')?'Tracker isn’t connected yet — your answers are safe, use Copy or Email below.':'Couldn’t reach the tracker — your answers are safe, use Copy or Email below.';window.__t=asText(items);document.getElementById('fallback').style.display='flex';}
+  window.copyAll=function(){var t=window.__t||asText(collect());navigator.clipboard.writeText(t).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied — paste it to Dominic.';},function(){prompt('Copy this:',t);});};
+  window.emailAll=function(){var t=window.__t||asText(collect());window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Steve — Roadmap notes')+'&body='+encodeURIComponent(t);};
+})();
+</script>
+</body></html>

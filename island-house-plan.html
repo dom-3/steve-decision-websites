@@ -43,6 +43,11 @@
   .rec{color:var(--ac);font-weight:700;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;}
   textarea,input[type=text]{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;resize:vertical;}
 
+  .involves{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0;}
+  .ivc{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:12px 14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .ivh{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ac);margin-bottom:4px;}
+  .ivc ul{margin:0;padding-left:16px;} .ivc li{font-size:12.7px;margin:3px 0;color:#33403d;}
+  @media(max-width:620px){.involves{grid-template-columns:1fr;}}
   .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
   .barin{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
   .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
@@ -96,6 +101,14 @@
     </div>
   </div>
 </div>
+<h2>What this actually involves</h2>
+<p class="sub">The depth behind those three steps — the real work, so it reads as a plan, not a vague ask.</p>
+<div class="involves">
+<div class="ivc"><div class="ivh">Content to create</div><ul><li>The fact-checked history → story / journal chapters</li><li>Restoration time-lapse + drone capture</li><li>“Reveal” milestone campaigns</li><li>Heritage & local press (the discovery story)</li><li>The medieval-quay / Dylan Thomas angle</li></ul></div>
+<div class="ivc"><div class="ivh">The online build</div><ul><li>New website — story/journal + progress + heritage (Next/Astro + Vercel + CMS)</li><li>Cloudinary media serving</li><li>Inspection templates + management / Conservation Plan docs</li><li>Interactive “one area” dashboard (Supabase)</li></ul></div>
+<div class="ivc"><div class="ivh">Data &amp; tracking</div><ul><li>Inspection register — RICS ratings + RIBA % + spend vs budget</li><li>PhotoPrism AI-tagging + 3-2-1 backup of the 20k photos</li><li>Monthly compliance + public report</li><li>Single-source-of-truth capture discipline</li></ul></div>
+<div class="ivc"><div class="ivh">Links to the others</div><ul><li>Bakery as wholesale client + hamper channel</li><li>Shared Dylan-Thomas / medieval-town tourism halo</li><li>Grants & partners — Cadw, National Lottery Heritage Fund, a university</li><li>Shared PR + capture crew</li></ul></div>
+</div>
 <h2>What we need you to direct, Steve</h2>
 <p class="sub">The recommendations are ready — a tick each confirms them — plus the four facts that unblock the build.</p>
   <div class="need" data-kind="dec" data-item="Island House — recording standard" data-business="Island House">
@@ -123,8 +136,24 @@
     <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — professional team engaged" data-business="Island House" placeholder="Names/firms already on the project…"></textarea>
   </div>
   <div class="need">
-    <div class="q">What&#x27;s the restoration timeline &amp; key milestones?</div><div class="why">Lets us plan the story chapters and “reveal” moments around real progress.</div>
-    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — restoration timeline" data-business="Island House" placeholder="Rough phases + dates, key milestones…"></textarea>
+    <div class="q">What is the inspection / evidence record formally FOR — grants, heritage compliance, insurance, warranty?</div><div class="why">This one answer shapes the whole data-tracking system we build — the fields, the rigour, the outputs.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — what the record is FOR" data-business="Island House" placeholder="Any/all of: grant funding, Cadw/heritage, insurance, build warranty…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">How much can we publish — any listed-building / heritage / security sensitivities?</div><div class="why">Sets what the public story can show vs what stays internal.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — publishing sensitivities" data-business="Island House" placeholder="Anything we should not show publicly…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">Can we tell the architect&#x27;s and interior designer&#x27;s stories publicly?</div><div class="why">They&#x27;re rich content — but only if they&#x27;re happy to be featured.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — architect &amp; designer stories" data-business="Island House" placeholder="Who they are, and whether we can feature them…"></textarea>
+  </div>
+  <div class="need" data-kind="dec" data-item="Island House — keep or rebuild the current site" data-business="Island House">
+    <div class="q">The existing islandhouse.wales site — keep, refresh, or rebuild?</div><div class="why">Decides whether we build fresh or work with what&#x27;s there.</div>
+    <div class="opts"><label><input type="radio" name="Island_House_—_keep_or_rebuild_the_current_site" value="A) Rebuild fresh" checked> A) Rebuild fresh <span class="rec">recommended</span><span class="od">A new site built for the story/journal + progress + heritage.</span></label><label><input type="radio" name="Island_House_—_keep_or_rebuild_the_current_site" value="B) Refresh the existing"> B) Refresh the existing<span class="od">Work with the current site, modernise it.</span></label><label><input type="radio" name="Island_House_—_keep_or_rebuild_the_current_site" value="C) Keep as-is for now"> C) Keep as-is for now<span class="od">Leave it, focus on documentation first.</span></label></div>
+  </div>
+  <div class="need">
+    <div class="q">What does success look like 12 months from now?</div><div class="why">Sets the target — story audience, compliance, milestones, funding — we build and report against.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — 12-month success" data-business="Island House" placeholder="e.g. journal following, a grant secured, first phase documented…"></textarea>
   </div>
 
 </div>

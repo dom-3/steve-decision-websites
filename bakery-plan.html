@@ -43,6 +43,11 @@
   .rec{color:var(--ac);font-weight:700;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;}
   textarea,input[type=text]{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;resize:vertical;}
 
+  .involves{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0;}
+  .ivc{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:12px 14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .ivh{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ac);margin-bottom:4px;}
+  .ivc ul{margin:0;padding-left:16px;} .ivc li{font-size:12.7px;margin:3px 0;color:#33403d;}
+  @media(max-width:620px){.involves{grid-template-columns:1fr;}}
   .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
   .barin{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
   .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
@@ -96,6 +101,14 @@
     </div>
   </div>
 </div>
+<h2>What this actually involves</h2>
+<p class="sub">The depth behind those three steps — the real work, so it reads as a plan, not a vague ask.</p>
+<div class="involves">
+<div class="ivc"><div class="ivh">Content to create</div><ul><li>Brand identity + premium-organic tone of voice</li><li>Food photography — rolling capture of every bake</li><li>Shop + product copy, local SEO</li><li>Launch campaign + weekly Facebook/Instagram</li><li>Email flows — welcome + the weekly box</li></ul></div>
+<div class="ivc"><div class="ivh">The online build</div><ul><li>Shopify shop + checkout (payments, tax handled)</li><li>Subscription app for the weekly loaf+pastry box</li><li>Stripe payments; Klaviyo email</li><li>Collection + local delivery (EasyRoutes + Make.com)</li><li>Canva/Figma for the brand</li></ul></div>
+<div class="ivc"><div class="ivh">Data &amp; tracking</div><ul><li>Airtable customer CRM + subscriber list</li><li>GA4 + Search Console + Google Business Profile</li><li>Order → bake → deliver automation (Make.com)</li><li>Monthly report: orders, active subscribers, repeat rate, ranking</li></ul></div>
+<div class="ivc"><div class="ivh">Links to the others</div><ul><li>Supplies bread to Island House (wholesale) + hampers</li><li>Welcome hampers in Sancler's new homes</li><li>Shared local-SEO halo + one capture crew</li><li>Wine-bar cross-sell when it's live</li></ul></div>
+</div>
 <h2>What we need you to direct, Steve</h2>
 <p class="sub">The name and the box are decided — these are the facts and calls that unlock the build.</p>
   <div class="need">
@@ -109,6 +122,18 @@
   <div class="need">
     <div class="q">Can you deliver — own driver, courier, or collection only? What radius?</div><div class="why">Decides the fulfilment logic on the site and how far the subscription can reach.</div>
     <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Bakery — delivery capability &amp; radius" data-business="Bakery" placeholder="e.g. own van 5-mile radius + collection, or collection only to start…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">What&#x27;s the one product people already come to you for?</div><div class="why">That&#x27;s the hero we lead the brand and the launch with.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Bakery — hero product" data-business="Bakery" placeholder="The signature loaf / bake people ask for…"></textarea>
+  </div>
+  <div class="need" data-kind="dec" data-item="Bakery — wine-bar relationship" data-business="Bakery">
+    <div class="q">How does the wine bar relate to the bakery?</div><div class="why">Decides whether we build one brand, two linked brands, or keep them fully separate — it changes the site and the branding.</div>
+    <div class="opts"><label><input type="radio" name="Bakery_—_wine-bar_relationship" value="A) Combined brand"> A) Combined brand<span class="od">One brand, bakery by day / wine bar by evening.</span></label><label><input type="radio" name="Bakery_—_wine-bar_relationship" value="B) Linked but separate"> B) Linked but separate<span class="od">Two identities that cross-refer and share a site.</span></label><label><input type="radio" name="Bakery_—_wine-bar_relationship" value="C) Fully separate"> C) Fully separate<span class="od">Handle the wine bar as its own thing, later.</span></label><label><input type="radio" name="Bakery_—_wine-bar_relationship" value="D) Decide later"> D) Decide later<span class="od">Park it for now — focus on the bakery.</span></label></div>
+  </div>
+  <div class="need">
+    <div class="q">What does success look like 12 months from now?</div><div class="why">Sets the target we build and report against.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Bakery — 12-month success" data-business="Bakery" placeholder="e.g. X active subscribers, the wine bar open, known locally for…"></textarea>
   </div>
   <div class="need">
     <div class="q">Rough budget for getting the bakery live?</div><div class="why">Lets Rhys put real costs + payback against each part of the build.</div>

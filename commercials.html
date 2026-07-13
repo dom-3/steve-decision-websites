@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steve Kirkwood — The Money Framework</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--blue:#2b4a6b;--warm:#8a5a2b;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px 130px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:940px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  header p{max-width:680px;color:#e6dcc8;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:#6a7b76;font-size:13px;margin:0 0 12px;}
+  .note{background:#fbf7ee;border:1px dashed #e0cfa6;border-radius:8px;padding:11px 14px;font-size:13px;color:#6a5a35;margin:12px 0;}
+
+  .pc{background:#fff;border:1px solid #dfe6e2;border-left:5px solid var(--green);border-radius:12px;padding:15px 17px;margin:14px 0;box-shadow:0 2px 10px rgba(20,50,45,.06);}
+  .pc.bk{border-left-color:var(--warm);} .pc.sc{border-left-color:var(--blue);}
+  .pc h3{font-family:Georgia,serif;font-size:18px;margin:0 0 10px;color:var(--dark);}
+  .rows{display:grid;grid-template-columns:1fr;gap:8px;}
+  .row{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center;}
+  .row .rl{font-size:13.3px;color:#33403d;} .row .rl small{display:block;color:#7a8a86;font-size:11.5px;}
+  .row input{width:100%;padding:8px 10px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;text-align:right;}
+  .get{background:#f5f8f6;border-radius:8px;padding:10px 12px;margin-top:11px;}
+  .get .gl{font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--green);margin-bottom:3px;}
+  .pc.bk .get .gl{color:var(--warm);} .pc.sc .get .gl{color:var(--blue);}
+  .get ul{margin:0;padding-left:16px;} .get li{font-size:12.7px;margin:3px 0;color:#40514c;}
+
+  .tools table{width:100%;border-collapse:collapse;font-size:12.8px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .tools th{background:var(--green);color:#fff;text-align:left;padding:8px 11px;font-size:11.5px;}
+  .tools td{padding:7px 11px;border-bottom:1px solid #eef1ee;} .tools tr:last-child td{border-bottom:0;}
+  .terms{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:14px 16px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .terms li{font-size:13.3px;margin:5px 0;}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
+  .barin{max-width:940px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+  .whom{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
+  .seg{background:#f2f5f3;border:1.5px solid #dfe6e2;color:#3a4a47;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:7px;cursor:pointer;}
+  .seg.on{background:var(--green);border-color:var(--green);color:#fff;}
+  .btn{background:var(--green);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;}
+  .btn:hover{background:var(--dark);} .btn.alt{background:#fff;color:var(--green);border:2px solid var(--green);padding:9px 16px;}
+  #status{font-size:13px;font-weight:600;text-align:center;padding:6px 0 0;} #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+  #fallback{display:none;justify-content:center;gap:8px;margin-top:6px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Back to the plan</a><a href="roadmap.html">The roadmap →</a></div>
+  <div class="kicker">Private · Steve Kirkwood Build Project</div>
+  <h1>The Money Framework</h1>
+  <p>The structure for what each project costs, what it returns, and the tools behind it — with the figures left blank on purpose, for you and Rhys to set. Type numbers straight in and hit send; they save to our tracker alongside everything else.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="note">📌 No numbers are invented here. The cost lines and “what you get” are the framework; you fill the £ figures. The only real figures shown are the published tool prices (bottom) and the retainer terms we already agreed.</div>
+
+  <h2>Cost &amp; return — per project</h2>
+  <p class="sub">Four cost lines each, plus what it's driving. Fill any you want; leave the rest blank.</p>
+
+  <div class="pc bk">
+    <h3>🥖 The Globe Bakery</h3>
+    <div class="rows">
+      <div class="row"><div class="rl">One-off build <small>site + Shopify shop + subscription setup</small></div><input type="text" data-kind="field" data-item="Cost — Bakery — build" data-business="Bakery" placeholder="£ —"></div>
+      <div class="row"><div class="rl">Content / photography <small>brand + first food shoot + launch content</small></div><input type="text" data-kind="field" data-item="Cost — Bakery — content" data-business="Bakery" placeholder="£ —"></div>
+      <div class="row"><div class="rl">Tools / subscriptions <small>Shopify, subscription app, Klaviyo (per month)</small></div><input type="text" data-kind="field" data-item="Cost — Bakery — tools/mo" data-business="Bakery" placeholder="£ / mo"></div>
+      <div class="row"><div class="rl">Ongoing <small>marketing + content days per month</small></div><input type="text" data-kind="field" data-item="Cost — Bakery — ongoing/mo" data-business="Bakery" placeholder="days / mo"></div>
+    </div>
+    <div class="get"><div class="gl">What it drives</div><ul>
+      <li>Online orders + a recurring <b>weekly-subscription</b> revenue line no local rival has</li>
+      <li>Wholesale to Island House + hamper cross-sell</li>
+    </ul></div>
+  </div>
+
+  <div class="pc sc">
+    <h3>🏡 Sancler Property</h3>
+    <div class="rows">
+      <div class="row"><div class="rl">One-off build <small>site refresh + lead capture</small></div><input type="text" data-kind="field" data-item="Cost — Sancler — build" data-business="Sancler Property" placeholder="£ —"></div>
+      <div class="row"><div class="rl">Content / photography <small>photo + video day per development</small></div><input type="text" data-kind="field" data-item="Cost — Sancler — content" data-business="Sancler Property" placeholder="£ —"></div>
+      <div class="row"><div class="rl">Tools / subscriptions <small>CRM, automation, hosting (per month)</small></div><input type="text" data-kind="field" data-item="Cost — Sancler — tools/mo" data-business="Sancler Property" placeholder="£ / mo"></div>
+      <div class="row"><div class="rl">Ongoing <small>listings + content days per month</small></div><input type="text" data-kind="field" data-item="Cost — Sancler — ongoing/mo" data-business="Sancler Property" placeholder="days / mo"></div>
+    </div>
+    <div class="get"><div class="gl">What it drives</div><ul>
+      <li>More enquiries + viewings from real photo/video vs CGI</li>
+      <li>Faster sales; every development filmed once, reused everywhere</li>
+    </ul></div>
+  </div>
+
+  <div class="pc ih">
+    <h3>🏰 Island House</h3>
+    <div class="rows">
+      <div class="row"><div class="rl">One-off build <small>website + documentation/inspection system</small></div><input type="text" data-kind="field" data-item="Cost — Island House — build" data-business="Island House" placeholder="£ —"></div>
+      <div class="row"><div class="rl">Content / media <small>photo sort + backup + story capture kit</small></div><input type="text" data-kind="field" data-item="Cost — Island House — content" data-business="Island House" placeholder="£ —"></div>
+      <div class="row"><div class="rl">Tools / subscriptions <small>hosting, media, backup (per month)</small></div><input type="text" data-kind="field" data-item="Cost — Island House — tools/mo" data-business="Island House" placeholder="£ / mo"></div>
+      <div class="row"><div class="rl">Ongoing <small>capture + monthly inspection/report days</small></div><input type="text" data-kind="field" data-item="Cost — Island House — ongoing/mo" data-business="Island House" placeholder="days / mo"></div>
+    </div>
+    <div class="get"><div class="gl">What it drives</div><ul>
+      <li>A story audience + the “super-special” brand for the hotel/bar/restaurant</li>
+      <li><b>Grant funding</b> toward the restoration + national PR from the medieval-quay discovery</li>
+    </ul></div>
+  </div>
+
+  <h2>Tools — the real running costs</h2>
+  <p class="sub">Most of the stack is free or near-free to start; these are the published prices for the paid pieces.</p>
+  <div class="tools"><table>
+    <tr><th>Tool</th><th>What for</th><th>Rough price</th></tr>
+    <tr><td>GitHub · Vercel · Supabase · Cloudinary · Airtable · Make · GA4 · Bitwarden · DaVinci · PhotoPrism</td><td>Build, host, data, automation, analytics, media</td><td>Free / low-cost tiers</td></tr>
+    <tr><td>Shopify</td><td>Bakery shop + subscription</td><td>~£25+/mo</td></tr>
+    <tr><td>Klaviyo</td><td>Bakery email/subscription flows</td><td>Usage-based</td></tr>
+    <tr><td>Backblaze B2</td><td>Offsite backup of the 20k photos</td><td>~£5/mo</td></tr>
+    <tr><td>1Password</td><td>Credential store (do first)</td><td>~£3/mo</td></tr>
+    <tr><td>Matterport (optional)</td><td>Sancler virtual tours</td><td>Optional</td></tr>
+    <tr><td>Claude</td><td>The AI brain</td><td>Steve-approved</td></tr>
+  </table></div>
+
+  <h2>The engagement terms (agreed)</h2>
+  <div class="terms"><ul>
+    <li>Billed as a <b>consultancy retainer</b> from Dominic's company, invoiced monthly (or weekly when needed).</li>
+    <li><b>£5,000 advance</b> to steady cashflow through the ramp-up.</li>
+    <li><b>Day rate £200–£250</b> — to be fixed on the first invoice.</li>
+    <li><b>50% drawdown rule</b> — no more than half of any invoice is offset against the advance, so work keeps flowing forward.</li>
+  </ul></div>
+
+</div>
+
+<div class="bar">
+  <div class="barin">
+    <div class="whom">Sending as:
+      <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+      <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+      <button class="btn" type="button" onclick="sendAll()">Save the figures</button>
+    </div>
+  </div>
+  <div id="status"></div>
+  <div id="fallback">
+    <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+    <button class="btn alt" type="button" onclick="emailAll()">Email to Dominic</button>
+  </div>
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.whom .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function collect(){var items=[];document.querySelectorAll('[data-kind="field"]').forEach(function(el){var v=(el.value||'').trim();if(v)items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:'Decision',answer:v});});return items;}
+  function asText(items){var L=["Steve — Money framework figures","Sent by: "+who,""];items.forEach(function(it){L.push("• "+it.item.replace(/^Cost — /,'')+": "+it.answer);});return L.join("\\n");}
+  window.sendAll=function(){var items=collect(),st=document.getElementById('status');if(!items.length){st.className='err';st.textContent='No figures entered yet — type a number in and try again.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:items})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved '+res.j.created+' figure'+(res.j.created===1?'':'s')+' to the tracker.';document.getElementById('fallback').style.display='none';}else{fail(res.j,items);}})
+      .catch(function(){fail(null,items);});};
+  function fail(j,items){var st=document.getElementById('status');st.className='err';st.textContent=(j&&j.error==='not_configured')?'Tracker isn’t connected yet — your figures are safe, use Copy or Email below.':'Couldn’t reach the tracker — your figures are safe, use Copy or Email below.';window.__t=asText(items);document.getElementById('fallback').style.display='flex';}
+  window.copyAll=function(){var t=window.__t||asText(collect());navigator.clipboard.writeText(t).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied.';},function(){prompt('Copy this:',t);});};
+  window.emailAll=function(){var t=window.__t||asText(collect());window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Steve — Money framework figures')+'&body='+encodeURIComponent(t);};
+})();
+</script>
+</body></html>

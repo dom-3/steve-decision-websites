@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Globe Bakery — Three Authentic Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Space+Mono:wght@400;700&family=Oswald:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&family=Caveat:wght@600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Jost","Helvetica Neue",Arial,sans-serif;color:#1c1a17;background:#111;}
+  .intro{background:#16130f;color:#efe7d8;padding:52px 24px 44px;text-align:center;}
+  .intro .k{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#c79a5a;}
+  .intro h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(30px,4vw,44px);margin:14px 0 12px;color:#fff;}
+  .intro p{max-width:620px;margin:0 auto;color:#c3b8a5;font-size:15.5px;font-weight:300;line-height:1.7;}
+  .intro .why{max-width:640px;margin:18px auto 0;font-size:13px;color:#9a8f7d;border-top:1px solid #322b22;padding-top:16px;}
+
+  .panel{padding:56px 24px 60px;position:relative;}
+  .pwrap{max-width:1080px;margin:0 auto;}
+  .badge{display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:2px;font-weight:600;}
+  .lead{display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:center;margin:22px 0 30px;}
+  @media(max-width:720px){.lead{grid-template-columns:1fr;gap:20px;text-align:center;} .emblem{margin:0 auto;}}
+  .emblem{width:200px;height:200px;}
+  .cname{font-size:12px;letter-spacing:3px;text-transform:uppercase;}
+  .ctitle{font-size:clamp(26px,3.4vw,38px);line-height:1.08;margin:8px 0 10px;}
+  .cidea{font-size:15px;line-height:1.7;max-width:560px;}
+  .specrow{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px;}
+  @media(max-width:720px){.specrow{grid-template-columns:1fr;}}
+  .spec h4{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px;opacity:.7;}
+  .swatches{display:flex;gap:0;border-radius:3px;overflow:hidden;height:46px;}
+  .swatches div{flex:1;}
+  .typespec{font-size:14px;line-height:1.6;}
+  .heroline{font-size:clamp(22px,3vw,32px);line-height:1.12;margin:6px 0;}
+  .auth{margin:22px 0 0;padding:0;list-style:none;}
+  .auth li{font-size:13.5px;line-height:1.55;margin:7px 0;padding-left:20px;position:relative;}
+  .auth li:before{content:"◆";position:absolute;left:0;font-size:9px;top:4px;}
+  .pick{margin-top:24px;border:0;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;padding:13px 24px;border-radius:2px;cursor:pointer;}
+
+  /* ---------- CONCEPT 1 · Popty'r Globe (Welsh + place) ---------- */
+  .c1{background:#eae4d6;color:#2b3630;font-family:"Jost",sans-serif;}
+  .c1 .badge{background:#4a5c4f;color:#f0ead9;}
+  .c1 .cname{color:#8a6a3a;font-family:"Jost";}
+  .c1 .ctitle,.c1 .heroline{font-family:"Fraunces",Georgia,serif;font-weight:600;color:#2b3630;}
+  .c1 .ctitle em,.c1 .heroline em{font-style:italic;color:#9a5a3a;}
+  .c1 .cidea,.c1 .typespec,.c1 .auth{color:#43514a;}
+  .c1 .auth li:before{color:#8a6a3a;}
+  .c1 .pick{background:#4a5c4f;color:#f0ead9;}
+  .c1 .welsh{font-family:"Fraunces",serif;font-style:italic;color:#9a5a3a;}
+
+  /* ---------- CONCEPT 2 · The Bench (craft / scoreline) ---------- */
+  .c2{background:#c8b79b;color:#221c14;font-family:"Oswald",sans-serif;
+      background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.18),transparent 40%),radial-gradient(circle at 80% 80%,rgba(0,0,0,.06),transparent 45%);}
+  .c2 .badge{background:#1c150e;color:#e9dcc2;font-family:"Space Mono",monospace;letter-spacing:1px;}
+  .c2 .cname{color:#7a3b2a;font-family:"Space Mono",monospace;letter-spacing:2px;}
+  .c2 .ctitle{font-family:"Oswald",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#1c150e;}
+  .c2 .heroline{font-family:"Oswald",sans-serif;font-weight:700;text-transform:uppercase;color:#1c150e;}
+  .c2 .cidea,.c2 .typespec,.c2 .auth{color:#3a2f22;font-family:"Space Mono",monospace;font-size:13px;}
+  .c2 h4{font-family:"Space Mono",monospace;}
+  .c2 .auth li:before{color:#7a3b2a;}
+  .c2 .pick{background:#7a3b2a;color:#f3e7d1;font-family:"Space Mono",monospace;}
+
+  /* ---------- CONCEPT 3 · The Honest Loaf (people / health) ---------- */
+  .c3{background:#f7f4ec;color:#191a17;font-family:"Space Grotesk",sans-serif;}
+  .c3 .badge{background:#3f6b3a;color:#f2f7ee;}
+  .c3 .cname{color:#3f6b3a;letter-spacing:3px;}
+  .c3 .ctitle{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.5px;color:#111;}
+  .c3 .heroline{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.5px;color:#111;}
+  .c3 .hand{font-family:"Caveat",cursive;font-weight:600;color:#3f6b3a;font-size:1.5em;}
+  .c3 .cidea,.c3 .typespec,.c3 .auth{color:#33352f;}
+  .c3 .auth li:before{color:#3f6b3a;}
+  .c3 .pick{background:#111;color:#fff;border-radius:40px;}
+
+  .foot{background:#16130f;color:#9a8f7d;padding:30px 24px 40px;text-align:center;font-size:13px;}
+  .foot .who{display:inline-flex;gap:6px;align-items:center;margin:10px 0;}
+  .foot .seg{background:#241e17;border:1px solid #3a3227;color:#c3b8a5;font-size:12px;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;}
+  .foot .seg.on{background:#c79a5a;border-color:#c79a5a;color:#1a1510;}
+  #status{font-size:13px;font-weight:600;margin-top:10px;min-height:18px;color:#c79a5a;}
+</style></head><body>
+
+<div class="intro">
+  <div class="k">Globe Bakery · Talacharn · Laugharne</div>
+  <h1>Three authentic directions</h1>
+  <p>Not three versions of the same “premium” look — three genuinely different souls, each grown from a real truth about the bakery. Pick the one that feels like <em>us</em>, and we build it out properly (and can brief a Welsh studio to take it further).</p>
+  <div class="why">Why the last one felt generic: it borrowed the default “premium” template (serif + italic word, muted wine/cream, tidy grids) instead of coming from something only Globe Bakery in Laugharne has. Each of these starts from a real thing: our <b>place &amp; language</b>, our <b>craft</b>, or our <b>honest promise</b>.</div>
+</div>
+
+<!-- CONCEPT 1 -->
+<section class="panel c1"><div class="pwrap">
+  <span class="badge">Direction 1</span>
+  <div class="lead">
+    <svg class="emblem" viewBox="0 0 200 200" fill="none">
+      <defs><path id="c1arc" d="M 34 100 A 66 66 0 0 1 166 100"/></defs>
+      <circle cx="100" cy="100" r="94" stroke="#4a5c4f" stroke-width="2"/>
+      <circle cx="100" cy="100" r="82" stroke="#4a5c4f" stroke-width="1"/>
+      <text font-family="Fraunces,serif" font-size="15" font-weight="600" fill="#4a5c4f" letter-spacing="2"><textPath href="#c1arc" startOffset="50%" text-anchor="middle">POPTY'R GLOBE</textPath></text>
+      <!-- loaf -->
+      <path d="M64 108 q0 -24 36 -24 q36 0 36 24 q0 10 -8 10 H72 q-8 0 -8 -10 Z" fill="#9a5a3a"/>
+      <path d="M82 92 l6 12 M100 88 l0 14 M118 92 l-6 12" stroke="#eae4d6" stroke-width="2" stroke-linecap="round"/>
+      <!-- wheat -->
+      <path d="M100 128 v22 M100 134 q-8 -3 -10 -9 q8 1 10 9 M100 134 q8 -3 10 -9 q-8 1 -10 9 M100 142 q-8 -3 -10 -9 q8 1 10 9 M100 142 q8 -3 10 -9 q-8 1 -10 9" stroke="#4a5c4f" stroke-width="1.6" stroke-linecap="round"/>
+      <text x="100" y="176" text-anchor="middle" font-family="Jost,sans-serif" font-size="8.5" letter-spacing="3" fill="#8a6a3a">TALACHARN · EST. 2026</text>
+    </svg>
+    <div>
+      <div class="cname">Popty'r Globe — Rooted in Laugharne</div>
+      <div class="ctitle"><span class="welsh">Bara go iawn,</span><br>from the old township.</div>
+      <div class="cidea">Welsh-first and unmistakably <em>here</em>. Bilingual naming (Popty'r Globe · the Globe Bakery), the loaves named in Welsh and English, a hand-drawn roundel that could be an old enamel sign on Duncan Street. It carries the estuary, the castle and Dylan Thomas's township in its bones — a brand no one anywhere else could own.</div>
+    </div>
+  </div>
+  <div class="specrow">
+    <div class="spec"><h4>Palette — estuary &amp; hearth</h4>
+      <div class="swatches"><div style="background:#4a5c4f"></div><div style="background:#9a5a3a"></div><div style="background:#8a6a3a"></div><div style="background:#eae4d6"></div><div style="background:#2b3630"></div></div>
+      <p class="typespec" style="margin-top:10px;">Slate-green &amp; estuary tones, warm terracotta, oat cream — drawn from the town and the marsh, not the “hospitality” default.</p>
+    </div>
+    <div class="spec"><h4>Type &amp; voice</h4>
+      <p class="typespec"><b>Fraunces</b> — a warm, characterful old-style serif (soft, a little wonky) for a heritage-signwriting feel; plain Jost for the everyday.</p>
+      <div class="heroline">Torth y dydd.<br><em>Today's loaf.</em></div>
+    </div>
+  </div>
+  <ul class="auth">
+    <li><b>Ownable:</b> the Welsh place (Talacharn) and language can't be copied by a chain.</li>
+    <li>Ties naturally to The Globe and to Laugharne's tourism / Dylan Thomas pull.</li>
+    <li>Warm and local — the opposite of slick-anonymous.</li>
+  </ul>
+  <button class="pick" onclick="choose('Direction 1 — Popty\'r Globe (Welsh + place)')">Choose this direction →</button>
+</div></section>
+
+<!-- CONCEPT 2 -->
+<section class="panel c2"><div class="pwrap">
+  <span class="badge">Direction 2</span>
+  <div class="lead">
+    <svg class="emblem" viewBox="0 0 200 200" fill="none">
+      <rect x="18" y="18" width="164" height="164" rx="4" stroke="#1c150e" stroke-width="3"/>
+      <rect x="28" y="28" width="144" height="144" rx="2" stroke="#1c150e" stroke-width="1" stroke-dasharray="3 4"/>
+      <text x="100" y="60" text-anchor="middle" font-family="'Space Mono',monospace" font-size="13" font-weight="700" fill="#1c150e" letter-spacing="3">GLOBE</text>
+      <text x="100" y="76" text-anchor="middle" font-family="'Space Mono',monospace" font-size="10" fill="#7a3b2a" letter-spacing="4">BAKERY</text>
+      <!-- scoreline slashes (the motif) -->
+      <path d="M62 108 l30 -18 M78 122 l30 -18 M94 136 l30 -18" stroke="#7a3b2a" stroke-width="5" stroke-linecap="round"/>
+      <text x="100" y="166" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#1c150e" letter-spacing="2">SCORED BY HAND · LAUGHARNE</text>
+    </svg>
+    <div>
+      <div class="cname">The Bench — built from the craft</div>
+      <div class="ctitle">Scored by hand.<br>Baked before dawn.</div>
+      <div class="cidea">The identity comes straight off the workbench — the <b>score-lines</b> the baker slashes into each loaf become the graphic motif (exactly how Rose Bakery built theirs). Ink-stamped kraft paper bands, flour-dust textures, a hand-cut look. Raw, tactile, honest — it looks made, not designed.</div>
+    </div>
+  </div>
+  <div class="specrow">
+    <div class="spec"><h4>Palette — kraft &amp; ink</h4>
+      <div class="swatches"><div style="background:#c8b79b"></div><div style="background:#1c150e"></div><div style="background:#7a3b2a"></div><div style="background:#e9dcc2"></div><div style="background:#8a7a5c"></div></div>
+      <p class="typespec" style="margin-top:10px;">Kraft-paper brown, black ink, one oxblood stamp. Monochrome + one hit — cheap to print, looks handmade.</p>
+    </div>
+    <div class="spec"><h4>Type &amp; voice</h4>
+      <p class="typespec"><b>Oswald</b> (bold condensed, stencil-ish) for headlines; <b>Space Mono</b> for the stamped labels &amp; prices — like a workshop docket.</p>
+      <div class="heroline">FLOUR ON THE FLOOR.</div>
+    </div>
+  </div>
+  <ul class="auth">
+    <li><b>Ownable:</b> the actual score-pattern &amp; the kraft band Steve already wants — a true thing.</li>
+    <li>Tactile &amp; imperfect — reads as genuinely artisan, never AI-slick.</li>
+    <li>Cheap and practical to produce (stamps, one ink, kraft).</li>
+  </ul>
+  <button class="pick" onclick="choose('Direction 2 — The Bench (scoreline / craft)')">Choose this direction →</button>
+</div></section>
+
+<!-- CONCEPT 3 -->
+<section class="panel c3"><div class="pwrap">
+  <span class="badge">Direction 3</span>
+  <div class="lead">
+    <svg class="emblem" viewBox="0 0 200 200" fill="none">
+      <text x="100" y="86" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="34" font-weight="700" fill="#111" letter-spacing="-1">GLOBE</text>
+      <text x="100" y="104" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="500" fill="#3f6b3a" letter-spacing="5">BAKERY</text>
+      <path d="M52 116 q48 14 96 0" stroke="#3f6b3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <text x="100" y="140" text-anchor="middle" font-family="'Caveat',cursive" font-size="20" fill="#111">honest bakers</text>
+      <text x="100" y="164" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="9" fill="#66695f" letter-spacing="3">LAUGHARNE · SINCE 2026</text>
+    </svg>
+    <div>
+      <div class="cname">The Honest Loaf — people &amp; health</div>
+      <div class="ctitle">Flour. Water.<br>Salt. Time. <span class="hand">that's it.</span></div>
+      <div class="cidea">Plain-spoken and human — the soul is <b>honest bread that helps people eat well</b>. Big confident type, the bakers' hands and faces front and centre, real testimonials (the customer who couldn't eat bread for years, and now can). A zine-ish, warm, no-nonsense feel. Not fancy — <em>true</em>.</div>
+    </div>
+  </div>
+  <div class="specrow">
+    <div class="spec"><h4>Palette — paper &amp; a good-for-you green</h4>
+      <div class="swatches"><div style="background:#f7f4ec"></div><div style="background:#111111"></div><div style="background:#3f6b3a"></div><div style="background:#d8a24a"></div><div style="background:#e6e0d2"></div></div>
+      <p class="typespec" style="margin-top:10px;">Paper white, honest black, a wholesome green, a wheat-gold accent. Warm-minimal, not cold-minimal.</p>
+    </div>
+    <div class="spec"><h4>Type &amp; voice</h4>
+      <p class="typespec"><b>Space Grotesk</b> — a confident, plain, modern grotesque; <b>Caveat</b> handwriting for the human asides.</p>
+      <div class="heroline">Bread you can<br>actually eat.</div>
+    </div>
+  </div>
+  <ul class="auth">
+    <li><b>Ownable:</b> the real testimonials &amp; the health-first promise are yours, and rare.</li>
+    <li>Puts the real people up front — instantly authentic, hard to fake.</li>
+    <li>Confident and clean without being the “luxury template”.</li>
+  </ul>
+  <button class="pick" onclick="choose('Direction 3 — The Honest Loaf (people / health)')">Choose this direction →</button>
+</div></section>
+
+<div class="foot">
+  These are starting points — the winner gets built out fully, and we can hand a brief to a Welsh studio (Formation Creative) to push it further.
+  <div class="who">Choosing as:
+    <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+    <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+  </div>
+  <div id="status"></div>
+  <div style="margin-top:14px;"><a href="index.html" style="color:#c79a5a;text-decoration:none;">← Back to the plan</a></div>
+</div>
+
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.who .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  window.choose=function(label){
+    var st=document.getElementById('status');st.textContent='Saving your pick…';
+    var items=[{item:'Bakery brand concept — chosen direction',business:'Bakery',type:'Decision',answer:label+' (chosen by '+who+')'}];
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:items})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.textContent='✓ Saved: '+label+'. Dominic will build it out.';}else{st.textContent='Noted: '+label+' — (tracker offline; tell Dominic).';}})
+      .catch(function(){st.textContent='Noted: '+label+' — (tracker offline; tell Dominic).';});
+  };
+})();
+</script>
+</body></html>

@@ -1,155 +1,320 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Steve Kirkwood — Decision Portal</title>
+<title>Steve Kirkwood — The Plan & Your Decisions</title>
 <style>
-  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;}
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--blue:#2b4a6b;--warm:#8a5a2b;}
   *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
-  .wrap{max-width:960px;margin:0 auto;padding:0 22px 70px;}
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px 130px;}
   header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:44px 22px 36px;}
-  header .inner{max-width:960px;margin:0 auto;}
+  header .inner{max-width:980px;margin:0 auto;}
   .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
   h1{font-family:Georgia,serif;font-weight:400;font-size:32px;margin:10px 0 8px;}
-  header p{max-width:640px;color:#e6dcc8;font-size:15px;margin:0;}
+  header p{max-width:660px;color:#e6dcc8;font-size:15px;margin:0;}
   hr.r{width:60mm;max-width:220px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
-  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 6px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:21px;margin:38px 0 6px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:#6a7b76;font-size:13px;margin:0 0 14px;}
+  .planbtns{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px;}
+  .pbtn{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--green);color:var(--green);
+        text-decoration:none;font-size:13px;font-weight:700;padding:9px 15px;border-radius:8px;}
+  .pbtn:hover{background:var(--green);color:#fff;}
+  .pbtn.gold{border-color:var(--gold);color:#8a5a12;} .pbtn.gold:hover{background:var(--gold);color:#fff;}
+
+  .arch{background:#fff;border:1px solid #dfe6e2;border-radius:12px;padding:16px 18px;margin:12px 0 6px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .stages{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:6px 0 4px;}
+  .stage{position:relative;background:#f4f7f5;border:1px solid #e2e8e4;border-radius:8px;padding:9px 8px;font-size:11.5px;text-align:center;color:#5a6b66;}
+  .stage b{display:block;font-size:12.5px;color:var(--dark);}
+  .stage.on{background:#eef4ec;border-color:var(--green);}
+  .stage.now{background:var(--green);border-color:var(--green);color:#eaf3ef;}
+  .stage.now b{color:#fff;} .stage .st{font-size:9px;letter-spacing:1px;text-transform:uppercase;opacity:.8;}
+  .archnote{font-size:12px;color:#6a7b76;margin-top:8px;}
+  @media(max-width:640px){.stages{grid-template-columns:repeat(2,1fr);} }
+
+  .plan{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0;}
+  .pc{background:#fff;border:1px solid #dfe6e2;border-left:5px solid var(--green);border-radius:10px;padding:15px 17px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .pc.bk{border-left-color:var(--warm);} .pc.sc{border-left-color:var(--blue);} .pc.ih{border-left-color:var(--green);}
+  .pc h3{font-family:Georgia,serif;font-size:18px;margin:0 0 2px;color:var(--dark);}
+  .pc .tagline{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .pc p{font-size:13.7px;color:#33403d;margin:0 0 10px;}
+
   .look{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:14px 0;}
   .lk{display:block;background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(20,50,45,.06);}
   .lk:hover{border-color:var(--green);}
   .lk b{display:block;font-family:Georgia,serif;font-size:17px;color:var(--green);}
   .lk span{font-size:12.5px;color:#6a7b76;}
   .lk .go{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--gold);}
-  .dec{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:16px 18px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
-  .dec .q{font-weight:700;font-size:14.5px;margin-bottom:8px;}
-  .opts label{display:block;padding:7px 10px;border:1px solid #e2e8e4;border-radius:7px;margin:5px 0;font-size:13.5px;cursor:pointer;}
+
+  .dec{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:15px 18px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .dec .q{font-weight:700;font-size:14.5px;margin-bottom:4px;}
+  .dec .qsub{font-size:12px;color:#6a7b76;margin-bottom:9px;}
+  .opts label{display:block;padding:9px 11px;border:1px solid #e2e8e4;border-radius:8px;margin:6px 0;font-size:13.4px;cursor:pointer;}
   .opts label:hover{background:#f5f8f6;}
   .opts input{margin-right:8px;}
-  .rec{color:var(--green);font-weight:700;font-size:11px;}
+  .opts .od{display:block;margin:3px 0 0 24px;font-size:12.3px;color:#66756f;}
+  .rec{color:var(--green);font-weight:700;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;}
+  .pick{background:#1f7a4d;color:#fff;font-weight:700;font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:10px;margin-left:6px;}
   input[type=text],textarea{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;}
-  .note{font-size:12px;color:#6a7b76;}
-  .bar{position:sticky;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:14px 22px;margin:24px -22px -70px;box-shadow:0 -2px 10px rgba(20,50,45,.08);text-align:center;}
-  .btn{display:inline-block;background:var(--green);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 22px;border-radius:8px;cursor:pointer;margin:0 6px;text-decoration:none;}
-  .btn.alt{background:#fff;color:var(--green);border:2px solid var(--green);}
+  textarea{resize:vertical;}
+  .confirmed{background:#eef4f0;border:1px solid #cfe3d9;border-left:4px solid #1f7a4d;border-radius:8px;padding:11px 13px;font-size:13.4px;}
+  .confirmed b{color:#1f7a4d;}
+  .disc{margin-top:10px;background:#fbf7ee;border:1px dashed #e0cfa6;border-radius:8px;padding:10px 12px;}
+  .disc label{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#8a6a2b;margin-bottom:4px;}
+  .parked{font-size:12px;color:#8a7a55;background:#f6f2e9;border-radius:6px;padding:7px 10px;margin-top:8px;}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
+  .barin{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+  .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
+  .seg{background:#f2f5f3;border:1.5px solid #dfe6e2;color:#3a4a47;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:7px;cursor:pointer;}
+  .seg.on{background:var(--green);border-color:var(--green);color:#fff;}
+  .btns{display:flex;gap:8px;}
+  .btn{background:var(--green);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;}
   .btn:hover{background:var(--dark);}
-  .tag{display:inline-block;background:#eef4f0;color:var(--green);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:10px;margin-left:6px;}
-  #done{display:none;background:#eef4f0;border-left:4px solid var(--green);padding:12px 14px;border-radius:6px;margin-top:12px;font-size:13.5px;}
+  .btn.alt{background:#fff;color:var(--green);border:2px solid var(--green);padding:9px 16px;}
+  #status{font-size:13px;font-weight:600;text-align:center;padding:6px 0 0;}
+  #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+  #fallback{display:none;justify-content:center;gap:8px;margin-top:6px;}
 </style></head><body>
 <header><div class="inner">
   <div class="kicker">Private &middot; Steve Kirkwood Build Project</div>
-  <h1>Decision Portal</h1>
-  <p>Everything that needs your call, in one place. Look through the three comparables lookbooks, then make your picks below — hit send and they go straight to Dominic, timestamped. Quick as you like.</p>
+  <h1>The Plan &amp; Your Decisions</h1>
+  <p>Here's what we're going to do across the three businesses, the comparables to react to, and the handful of calls we need from you. Nothing's set in stone — there's a box under everything to talk it through. Your answers save straight to our tracker, timestamped.</p>
   <hr class="r">
 </div></header>
 <div class="wrap">
 
-  <h2>1 · The three lookbooks</h2>
-  <p class="note">Open each, see the competitors and the best in the field, and note what you like / don't.</p>
+  <h2>1 · The plan — what we're going to do</h2>
+  <p class="sub">The short version. The full detail sits behind these documents and the three lookbooks below.</p>
+  <div class="planbtns">
+    <a class="pbtn" href="the-plan.pdf" target="_blank">📄 Open the full plan (PDF)</a>
+    <a class="pbtn gold" href="#lookbooks">🔎 Jump to the comparables</a>
+    <a class="pbtn gold" href="#decisions">✅ Jump to the decisions</a>
+  </div>
+
+  <div class="arch">
+    <div style="font-weight:700;font-size:13px;margin-bottom:6px;">The overarching architecture — every project runs the same five stages, so all three stay comparable and trackable.</div>
+    <div class="stages">
+      <div class="stage on"><span class="st">Stage 1</span><b>Discovery &amp; Research</b>Comparables, standards, assets</div>
+      <div class="stage now"><span class="st">Stage 2 · we are here</span><b>Strategy &amp; Architecture</b>Sign off the plan &amp; these decisions</div>
+      <div class="stage"><span class="st">Stage 3</span><b>Design &amp; Build</b>Sites, content, capture</div>
+      <div class="stage"><span class="st">Stage 4</span><b>Launch</b>Go-live &amp; announce</div>
+      <div class="stage"><span class="st">Stage 5</span><b>Operate &amp; Grow</b>Content, reporting, marketing</div>
+    </div>
+    <div class="archnote">Then it splits into three separate projects — <b>Island House</b>, <b>The Globe Bakery</b> and <b>Sancler Property</b> — each with its own team and board, sharing one method. Right now we just need your steer to move from Stage 2 into build.</div>
+  </div>
+
+  <div class="plan">
+    <div class="pc bk">
+      <h3>The Globe Bakery <span style="font-size:11px;color:#1f7a4d;font-weight:700;">— live first</span></h3>
+      <div class="tagline">Premium organic · own the weekly habit</div>
+      <p>We build <b>The Globe Bakery</b> a premium organic website + online shop, and a <b>weekly subscription box</b> — the reliable loaf + pastry none of the local bakeries (Rock'N'Dough, Crwst, Loafley) offer. We match their craft and polish, then own the habit they've all left open: order online, collect or delivered. The content library builds from day one by shooting every bake. Local Facebook/Instagram + search marketing switches on once you're happy. First to go live.</p>
+      <div class="disc"><label>Talk about this — anything to change or add?</label>
+        <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Discussion — Bakery plan" data-business="Bakery" placeholder="Your thoughts on the bakery plan…"></textarea></div>
+    </div>
+
+    <div class="pc sc">
+      <h3>Sancler Property</h3>
+      <div class="tagline">Real photos + video · sell on trust</div>
+      <p>We <b>replace the CGI with real photography + video walkthroughs</b>, fix the trust-killers on the current site today (it still says "Homes Ready 2023", the Site Plan page is blank, images load slowly), and drive buyers through <b>the website itself</b> — register-interest + brochure with automated follow-up. Per your steer, portals and paid ads are <b>parked for now</b>: website-only, organic-first, until you and Steve decide to open the taps.</p>
+      <div class="disc"><label>Talk about this — anything to change or add?</label>
+        <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Discussion — Sancler plan" data-business="Sancler Property" placeholder="Your thoughts on the Sancler plan…"></textarea></div>
+    </div>
+
+    <div class="pc ih">
+      <h3>Island House <span style="font-size:11px;color:var(--gold);font-weight:700;">— the flagship</span></h3>
+      <div class="tagline">Sell the restoration · tell the story</div>
+      <p>We tell the story of <b>Britain's medieval port as it's restored</b> — a living journal, chapter by chapter — and set up the rigorous documentation a Grade II* listed building deserves. The history is <b>done and fact-checked</b>: the dig on your site uncovered <b>the first medieval quay ever excavated in Wales</b> — national history, and a grant + PR hook in one. The 20,000 photos get backed up and <b>AI-sorted into ~50 clusters</b>, not sorted by hand. New site + the story + the discovery/grants play.</p>
+      <div class="disc"><label>Talk about this — anything to change or add?</label>
+        <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Discussion — Island House plan" data-business="Island House" placeholder="Your thoughts on the Island House plan…"></textarea></div>
+    </div>
+  </div>
+
+  <h2 id="lookbooks">2 · The three lookbooks</h2>
+  <p class="sub">Open each, look through the competitors and the best in the field — and hit <b>✎ My notes</b> on any card. What you like, what to borrow, what to avoid — it all saves to our tracker.</p>
   <div class="look">
     <a class="lk" href="bakery.html" target="_blank"><b>The Bakery</b><span>Local rivals + national models</span><span class="go">Open →</span></a>
     <a class="lk" href="sancler.html" target="_blank"><b>Sancler Property</b><span>House-builder sites to beat</span><span class="go">Open →</span></a>
     <a class="lk" href="island-house.html" target="_blank"><b>Island House</b><span>Heritage &amp; story comparables</span><span class="go">Open →</span></a>
   </div>
 
-  <h2>2 · Your decisions</h2>
-  <p class="note">Pick one per line (our recommendation is marked). Add a note anywhere you want.</p>
-  <form id="f">
+  <h2 id="decisions">3 · Your decisions</h2>
+  <p class="sub">A few are already settled (marked ✓). For the rest, pick one — our recommendation is marked — and use the discussion boxes for anything you'd rather talk through.</p>
 
-  <div class="dec"><div class="q">🥖 Bakery — subscription</div><div class="opts">
-    <label><input type="radio" name="bk_sub" value="A) Weekly loaf only"> A · Weekly loaf only</label>
-    <label><input type="radio" name="bk_sub" value="B) Loaf + pastry box"> B · Loaf + pastry box <span class="rec">recommended</span></label>
-    <label><input type="radio" name="bk_sub" value="C) Tiered boxes"> C · Tiered boxes</label>
-  </div></div>
-
-  <div class="dec"><div class="q">🥖 Bakery — fulfilment</div><div class="opts">
-    <label><input type="radio" name="bk_ful" value="A) Collection + local delivery"> A · Collection + local delivery <span class="rec">recommended</span></label>
-    <label><input type="radio" name="bk_ful" value="B) + piggyback milk/veg rounds"> B · + piggyback on milk/veg rounds</label>
-    <label><input type="radio" name="bk_ful" value="C) + national (ambient only)"> C · + national (ambient lines only)</label>
-  </div></div>
-
-  <div class="dec"><div class="q">🥖 Bakery — wine bar</div><div class="opts">
-    <label><input type="radio" name="bk_wine" value="A) Combined brand"> A · Combined brand</label>
-    <label><input type="radio" name="bk_wine" value="B) Linked site"> B · Linked site</label>
-    <label><input type="radio" name="bk_wine" value="C) Separate"> C · Separate</label>
-  </div></div>
-
-  <div class="dec"><div class="q">🥖 Bakery — the name</div>
-    <input type="text" name="bk_name" placeholder="What's the bakery called?">
+  <div class="dec" data-kind="dec" data-name="bk_sub" data-item="Bakery — subscription" data-business="Bakery">
+    <div class="q">🥖 The Globe Bakery — subscription <span class="pick">✓ Steve's pick</span></div>
+    <div class="qsub">The engine of the whole bakery — the reliable weekly order customers set and forget.</div>
+    <div class="opts">
+      <label><input type="radio" name="bk_sub" value="A) Weekly loaf only"> A · Weekly loaf only
+        <span class="od">One premium organic loaf each week, collect or delivered. Simplest to run, lowest basket value, least reason to stay subscribed.</span></label>
+      <label><input type="radio" name="bk_sub" value="B) Loaf + pastry box" checked> B · Loaf + pastry box <span class="rec">recommended</span>
+        <span class="od">The weekly loaf plus a rotating pastry / treat box. Higher value, more of a weekly ritual, harder to cancel — the wedge that beats the locals.</span></label>
+      <label><input type="radio" name="bk_sub" value="C) Tiered boxes"> C · Tiered boxes
+        <span class="od">Several sizes / price points (solo, family, feast). Most choice for customers, but more to build and manage at launch.</span></label>
+    </div>
   </div>
 
-  <div class="dec"><div class="q">🏡 Sancler — lead capture</div><div class="opts">
-    <label><input type="radio" name="sc_lead" value="A) Register-interest + brochure"> A · Register-interest + brochure <span class="rec">recommended</span></label>
-    <label><input type="radio" name="sc_lead" value="B) + interactive plot picker"> B · + interactive plot picker</label>
-    <label><input type="radio" name="sc_lead" value="C) + full virtual tours"> C · + full virtual tours</label>
-  </div></div>
-
-  <div class="dec"><div class="q">🏡 Sancler — portals</div><div class="opts">
-    <label><input type="radio" name="sc_port" value="A) Rightmove + Zoopla"> A · Rightmove + Zoopla <span class="rec">recommended</span></label>
-    <label><input type="radio" name="sc_port" value="B) + OnTheMarket"> B · + OnTheMarket</label>
-    <label><input type="radio" name="sc_port" value="C) Own site only"> C · Own site only</label>
-  </div></div>
-
-  <div class="dec"><div class="q">🏡 Sancler — advertising</div><div class="opts">
-    <label><input type="radio" name="sc_ads" value="A) Facebook/Instagram lead ads + retargeting"> A · FB/Instagram lead ads + retargeting <span class="rec">recommended</span></label>
-    <label><input type="radio" name="sc_ads" value="B) + Google search ads"> B · + Google search ads</label>
-    <label><input type="radio" name="sc_ads" value="C) Organic first"> C · Organic first</label>
-  </div></div>
-
-  <div class="dec"><div class="q">🏡 Sancler — first development to shoot</div>
-    <input type="text" name="sc_dev" placeholder="e.g. Clôs Hugdon, Laugharne">
+  <div class="dec">
+    <div class="q">🥖 The Globe Bakery — the name <span class="pick">✓ Confirmed</span></div>
+    <div class="qsub">Locked in — this is what we'll brand around. Change it here if it moves.</div>
+    <input type="text" data-kind="field" data-type="Decision" data-item="Bakery — name" data-business="Bakery" value="The Globe Bakery">
+    <div class="parked">Fulfilment and the wine-bar question are <b>parked for now</b> at your request — we'll pick them up when the core bakery's moving.</div>
   </div>
 
-  <div class="dec"><div class="q">🏰 Island House — how rigorously we document it</div><div class="opts">
-    <label><input type="radio" name="ih_rec" value="A) Descriptive record"> A · Descriptive</label>
-    <label><input type="radio" name="ih_rec" value="B) Analytical record"> B · Analytical <span class="rec">recommended for a listed building</span></label>
-  </div></div>
-
-  <div class="dec"><div class="q">🏰 Island House — formal Conservation Plan?</div><div class="opts">
-    <label><input type="radio" name="ih_cmp" value="A) Yes, formal"> A · Yes, formal (often needed for grants)</label>
-    <label><input type="radio" name="ih_cmp" value="B) Lighter internal version"> B · Lighter internal version</label>
-  </div></div>
-
-  <div class="dec"><div class="q">🏰 Island House — the discovery / grants play</div><div class="opts">
-    <label><input type="radio" name="ih_disc" value="A) Yes — pursue research + grant/university partnership"> A · Yes — pursue it <span class="rec">big PR + funding</span></label>
-    <label><input type="radio" name="ih_disc" value="B) Later"> B · Later</label>
-  </div></div>
-
-  <div class="dec"><div class="q">💬 Anything else for Dominic</div>
-    <textarea name="extra" rows="3" placeholder="Notes, changes, questions..."></textarea>
+  <div class="dec" data-kind="dec" data-name="sc_lead" data-item="Sancler — lead capture" data-business="Sancler Property">
+    <div class="q">🏡 Sancler — how the website captures buyers</div>
+    <div class="qsub">How hard the site works to turn a browser into an enquiry — since we're going website-only, this matters more.</div>
+    <div class="opts">
+      <label><input type="radio" name="sc_lead" value="A) Register-interest + brochure" checked> A · Register-interest + brochure <span class="rec">recommended</span>
+        <span class="od">Capture name/email, auto-send the brochure, follow up automatically. Fastest to build, proven, everything we need to start.</span></label>
+      <label><input type="radio" name="sc_lead" value="B) + interactive plot picker"> B · + interactive plot picker
+        <span class="od">Adds a clickable site plan showing each plot's status — available / reserved / sold. More engaging, a bit more to build.</span></label>
+      <label><input type="radio" name="sc_lead" value="C) + full virtual tours"> C · + full virtual tours
+        <span class="od">Adds 3D / video walkthroughs of each house type. The most immersive, needs the filming done first.</span></label>
+    </div>
   </div>
 
-  <div id="done">✅ Decisions ready — your email should have opened. If it didn't, tap <b>Copy</b> and paste it to Dominic.</div>
-  </form>
+  <div class="dec">
+    <div class="q">🏡 Sancler — advertising <span class="pick">✓ Your steer</span></div>
+    <div class="confirmed"><b>Organic first — website only.</b> Facebook &amp; Instagram paid ads are <b>paused pending Steve's OK</b>, and we're using <b>none of the portals</b> (Rightmove / Zoopla / OnTheMarket) for now. We drive enquiries through the website and organic reach, and revisit paid + portals once you and Steve decide.</div>
+    <span data-kind="locked" data-item="Sancler — advertising" data-business="Sancler Property" data-answer="Organic first — website only. FB/Instagram paid paused pending Steve's OK. No portals for now."></span>
+  </div>
 
-  <div class="bar">
-    <button class="btn" type="button" onclick="send()">Send my decisions to Dominic</button>
-    <button class="btn alt" type="button" onclick="copyIt()">Copy</button>
+  <div class="dec">
+    <div class="q">🏡 Sancler — first development to shoot</div>
+    <div class="qsub">Where the first real photo + video day happens.</div>
+    <input type="text" data-kind="field" data-type="Decision" data-item="Sancler — first development to shoot" data-business="Sancler Property" placeholder="e.g. Clôs Hugdon, Laugharne">
+  </div>
+
+  <div class="dec">
+    <div class="q">🏡 Sancler — things to talk through</div>
+    <div class="qsub">Your open questions from our call — jot the steer and we'll run with it.</div>
+    <div class="disc"><label>How much of the current website do you want changed?</label>
+      <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Discussion — Sancler website scope" data-business="Sancler Property" placeholder="Light trust-fixes only, or a full rebuild? Your call…"></textarea></div>
+    <div class="disc"><label>Which houses are for sale right now / which to photograph first?</label>
+      <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Discussion — Sancler houses for sale / photo priority" data-business="Sancler Property" placeholder="List the live ones and the priority order…"></textarea></div>
+    <div class="disc"><label>Walk through each house with Carl — kitchen &amp; design options to feature?</label>
+      <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Discussion — Sancler house briefs with Carl" data-business="Sancler Property" placeholder="Different kitchen designs / spec options we can showcase…"></textarea></div>
+  </div>
+
+  <div class="dec" data-kind="dec" data-name="ih_rec" data-item="Island House — recording standard" data-business="Island House">
+    <div class="q">🏰 Island House — how rigorously we document it</div>
+    <div class="qsub">The record we keep as it's restored — this underpins grants, consent and the story.</div>
+    <div class="opts">
+      <label><input type="radio" name="ih_rec" value="A) Descriptive record"> A · Descriptive record
+        <span class="od">A clear written + photographic record of what's there and what's done. Lighter, quicker.</span></label>
+      <label><input type="radio" name="ih_rec" value="B) Analytical record" checked> B · Analytical record <span class="rec">recommended for a listed building</span>
+        <span class="od">Adds the "why" — phases, fabric analysis, significance. The standard Cadw and funders expect for a Grade II* building; makes grants and consent far easier.</span></label>
+    </div>
+  </div>
+
+  <div class="dec" data-kind="dec" data-name="ih_cmp" data-item="Island House — Conservation Plan" data-business="Island House">
+    <div class="q">🏰 Island House — a formal Conservation Plan?</div>
+    <div class="qsub">The document that guides what can and can't change — often required for grants and consent.</div>
+    <div class="opts">
+      <label><input type="radio" name="ih_cmp" value="A) Yes, formal" checked> A · Yes, formal <span class="rec">unlocks grants</span>
+        <span class="od">A proper Conservation Plan to heritage standard. More work up front, but it's the key that opens funding and smooth consent.</span></label>
+      <label><input type="radio" name="ih_cmp" value="B) Lighter internal version"> B · Lighter internal version
+        <span class="od">A working internal version to guide us now, upgraded to formal later if we chase grants.</span></label>
+    </div>
+  </div>
+
+  <div class="dec" data-kind="dec" data-name="ih_disc" data-item="Island House — discovery / grants play" data-business="Island House">
+    <div class="q">🏰 Island House — the discovery / grants play</div>
+    <div class="qsub">Do we actively pursue the research + funding angle off the back of the medieval quay find?</div>
+    <div class="opts">
+      <label><input type="radio" name="ih_disc" value="A) Yes — pursue research + grant/university partnership" checked> A · Yes — pursue it <span class="rec">big PR + funding</span>
+        <span class="od">Partner with a university / Heritage Fund, turn the dig into original research. National press, credibility, and money toward the restoration.</span></label>
+      <label><input type="radio" name="ih_disc" value="B) Later"> B · Later
+        <span class="od">Park it, focus on the build and the story first, come back to grants when there's capacity.</span></label>
+    </div>
+  </div>
+
+  <div class="dec">
+    <div class="q">💬 Anything else for Dominic</div>
+    <textarea rows="3" data-kind="field" data-type="Discussion" data-item="General — other notes" data-business="General" placeholder="Notes, changes, questions, anything…"></textarea>
+  </div>
+
+</div>
+
+<div class="bar">
+  <div class="barin">
+    <div class="who">Sending as:
+      <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+      <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+    </div>
+    <div class="btns">
+      <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+      <button class="btn" type="button" onclick="sendAll()">Send my decisions</button>
+    </div>
+  </div>
+  <div id="status"></div>
+  <div id="fallback">
+    <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+    <button class="btn alt" type="button" onclick="emailAll()">Email to Dominic</button>
   </div>
 </div>
 
 <script>
-function build(){
-  var f=document.getElementById('f');
-  var lines=["Steve's decisions — "+new Date().toLocaleString(),""];
-  var radios={};
-  f.querySelectorAll('input[type=radio]:checked').forEach(function(r){radios[r.name]=r.value;});
-  function add(label,name){ if(radios[name]) lines.push(label+": "+radios[name]); }
-  function addText(label,name){ var v=f.elements[name].value.trim(); if(v) lines.push(label+": "+v); }
-  lines.push("— BAKERY —");
-  add("Subscription","bk_sub"); add("Fulfilment","bk_ful"); add("Wine bar","bk_wine"); addText("Name","bk_name");
-  lines.push(""); lines.push("— SANCLER —");
-  add("Lead capture","sc_lead"); add("Portals","sc_port"); add("Advertising","sc_ads"); addText("First development","sc_dev");
-  lines.push(""); lines.push("— ISLAND HOUSE —");
-  add("Recording level","ih_rec"); add("Conservation Plan","ih_cmp"); add("Discovery/grants","ih_disc");
-  var ex=f.elements['extra'].value.trim(); if(ex){ lines.push(""); lines.push("Notes: "+ex); }
-  return lines.join("\n");
-}
-function send(){
-  var body=build();
-  document.getElementById('done').style.display='block';
-  window.location.href="mailto:pullenmarketing@gmail.com?subject="+encodeURIComponent("Steve's decisions")+"&body="+encodeURIComponent(body);
-}
-function copyIt(){
-  var t=build();
-  navigator.clipboard.writeText(t).then(function(){ alert("Copied — paste it to Dominic."); },function(){ prompt("Copy this:",t); });
-}
+(function(){
+  var who = "Steve";
+  window.setWho = function(v){ who=v; document.querySelectorAll('.who .seg').forEach(function(s){ s.classList.toggle('on', s.getAttribute('data-r')===v); }); };
+
+  function collect(){
+    var items=[];
+    document.querySelectorAll('[data-kind="dec"]').forEach(function(el){
+      var c=el.querySelector('input[type=radio]:checked');
+      if(c) items.push({item:el.getAttribute('data-item'), business:el.getAttribute('data-business'), type:'Decision', answer:c.value});
+    });
+    document.querySelectorAll('[data-kind="field"]').forEach(function(el){
+      var v=(el.value||'').trim();
+      if(v) items.push({item:el.getAttribute('data-item'), business:el.getAttribute('data-business'), type:el.getAttribute('data-type')||'Decision', answer:v});
+    });
+    document.querySelectorAll('[data-kind="locked"]').forEach(function(el){
+      items.push({item:el.getAttribute('data-item'), business:el.getAttribute('data-business'), type:'Decision', answer:el.getAttribute('data-answer')});
+    });
+    return items;
+  }
+  function asText(items){
+    var L=["Steve Kirkwood — decisions & discussion", "Sent by: "+who, ""];
+    var byBiz={};
+    items.forEach(function(it){ (byBiz[it.business]=byBiz[it.business]||[]).push(it); });
+    Object.keys(byBiz).forEach(function(b){
+      L.push("— "+b.toUpperCase()+" —");
+      byBiz[b].forEach(function(it){ L.push((it.type==='Discussion'?'? ':'• ')+it.item.replace(/^Discussion — /,'')+": "+it.answer); });
+      L.push("");
+    });
+    return L.join("\n");
+  }
+
+  window.sendAll = function(){
+    var items=collect();
+    var st=document.getElementById('status');
+    if(!items.length){ st.className='err'; st.textContent='Nothing to send yet — make a pick or write a note.'; return; }
+    st.className=''; st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who, items:items})})
+      .then(function(r){ return r.json().catch(function(){return{};}).then(function(j){ return {ok:r.ok,j:j}; }); })
+      .then(function(res){
+        if(res.ok && res.j && res.j.ok){
+          st.className='ok'; st.textContent='✓ Saved to the tracker ('+res.j.created+' item'+(res.j.created===1?'':'s')+'). Thanks — Dominic has it.';
+          document.getElementById('fallback').style.display='none';
+        } else { fail(res.j, items); }
+      })
+      .catch(function(){ fail(null, items); });
+  };
+  function fail(j, items){
+    var st=document.getElementById('status');
+    st.className='err';
+    st.textContent=(j&&j.error==='not_configured') ? 'Tracker isn’t connected yet — your answers are safe, use Copy or Email below.' : 'Couldn’t reach the tracker — your answers are safe, use Copy or Email below.';
+    window.__allText=asText(items);
+    document.getElementById('fallback').style.display='flex';
+  }
+  window.copyAll = function(){
+    var t=window.__allText||asText(collect());
+    navigator.clipboard.writeText(t).then(function(){ var st=document.getElementById('status'); st.className='ok'; st.textContent='Copied — paste it to Dominic.'; },
+      function(){ prompt('Copy this:', t); });
+  };
+  window.emailAll = function(){
+    var t=window.__allText||asText(collect());
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Steve — decisions & discussion')+'&body='+encodeURIComponent(t);
+  };
+})();
 </script>
 </body></html>

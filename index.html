@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steve Kirkwood — Decision Portal</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px 70px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:44px 22px 36px;}
+  header .inner{max-width:960px;margin:0 auto;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:32px;margin:10px 0 8px;}
+  header p{max-width:640px;color:#e6dcc8;font-size:15px;margin:0;}
+  hr.r{width:60mm;max-width:220px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 6px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .look{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:14px 0;}
+  .lk{display:block;background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(20,50,45,.06);}
+  .lk:hover{border-color:var(--green);}
+  .lk b{display:block;font-family:Georgia,serif;font-size:17px;color:var(--green);}
+  .lk span{font-size:12.5px;color:#6a7b76;}
+  .lk .go{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--gold);}
+  .dec{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:16px 18px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .dec .q{font-weight:700;font-size:14.5px;margin-bottom:8px;}
+  .opts label{display:block;padding:7px 10px;border:1px solid #e2e8e4;border-radius:7px;margin:5px 0;font-size:13.5px;cursor:pointer;}
+  .opts label:hover{background:#f5f8f6;}
+  .opts input{margin-right:8px;}
+  .rec{color:var(--green);font-weight:700;font-size:11px;}
+  input[type=text],textarea{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;}
+  .note{font-size:12px;color:#6a7b76;}
+  .bar{position:sticky;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:14px 22px;margin:24px -22px -70px;box-shadow:0 -2px 10px rgba(20,50,45,.08);text-align:center;}
+  .btn{display:inline-block;background:var(--green);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 22px;border-radius:8px;cursor:pointer;margin:0 6px;text-decoration:none;}
+  .btn.alt{background:#fff;color:var(--green);border:2px solid var(--green);}
+  .btn:hover{background:var(--dark);}
+  .tag{display:inline-block;background:#eef4f0;color:var(--green);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:10px;margin-left:6px;}
+  #done{display:none;background:#eef4f0;border-left:4px solid var(--green);padding:12px 14px;border-radius:6px;margin-top:12px;font-size:13.5px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="kicker">Private &middot; Steve Kirkwood Build Project</div>
+  <h1>Decision Portal</h1>
+  <p>Everything that needs your call, in one place. Look through the three comparables lookbooks, then make your picks below — hit send and they go straight to Dominic, timestamped. Quick as you like.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <h2>1 · The three lookbooks</h2>
+  <p class="note">Open each, see the competitors and the best in the field, and note what you like / don't.</p>
+  <div class="look">
+    <a class="lk" href="bakery.html" target="_blank"><b>The Bakery</b><span>Local rivals + national models</span><span class="go">Open →</span></a>
+    <a class="lk" href="sancler.html" target="_blank"><b>Sancler Property</b><span>House-builder sites to beat</span><span class="go">Open →</span></a>
+    <a class="lk" href="island-house.html" target="_blank"><b>Island House</b><span>Heritage &amp; story comparables</span><span class="go">Open →</span></a>
+  </div>
+
+  <h2>2 · Your decisions</h2>
+  <p class="note">Pick one per line (our recommendation is marked). Add a note anywhere you want.</p>
+  <form id="f">
+
+  <div class="dec"><div class="q">🥖 Bakery — subscription</div><div class="opts">
+    <label><input type="radio" name="bk_sub" value="A) Weekly loaf only"> A · Weekly loaf only</label>
+    <label><input type="radio" name="bk_sub" value="B) Loaf + pastry box"> B · Loaf + pastry box <span class="rec">recommended</span></label>
+    <label><input type="radio" name="bk_sub" value="C) Tiered boxes"> C · Tiered boxes</label>
+  </div></div>
+
+  <div class="dec"><div class="q">🥖 Bakery — fulfilment</div><div class="opts">
+    <label><input type="radio" name="bk_ful" value="A) Collection + local delivery"> A · Collection + local delivery <span class="rec">recommended</span></label>
+    <label><input type="radio" name="bk_ful" value="B) + piggyback milk/veg rounds"> B · + piggyback on milk/veg rounds</label>
+    <label><input type="radio" name="bk_ful" value="C) + national (ambient only)"> C · + national (ambient lines only)</label>
+  </div></div>
+
+  <div class="dec"><div class="q">🥖 Bakery — wine bar</div><div class="opts">
+    <label><input type="radio" name="bk_wine" value="A) Combined brand"> A · Combined brand</label>
+    <label><input type="radio" name="bk_wine" value="B) Linked site"> B · Linked site</label>
+    <label><input type="radio" name="bk_wine" value="C) Separate"> C · Separate</label>
+  </div></div>
+
+  <div class="dec"><div class="q">🥖 Bakery — the name</div>
+    <input type="text" name="bk_name" placeholder="What's the bakery called?">
+  </div>
+
+  <div class="dec"><div class="q">🏡 Sancler — lead capture</div><div class="opts">
+    <label><input type="radio" name="sc_lead" value="A) Register-interest + brochure"> A · Register-interest + brochure <span class="rec">recommended</span></label>
+    <label><input type="radio" name="sc_lead" value="B) + interactive plot picker"> B · + interactive plot picker</label>
+    <label><input type="radio" name="sc_lead" value="C) + full virtual tours"> C · + full virtual tours</label>
+  </div></div>
+
+  <div class="dec"><div class="q">🏡 Sancler — portals</div><div class="opts">
+    <label><input type="radio" name="sc_port" value="A) Rightmove + Zoopla"> A · Rightmove + Zoopla <span class="rec">recommended</span></label>
+    <label><input type="radio" name="sc_port" value="B) + OnTheMarket"> B · + OnTheMarket</label>
+    <label><input type="radio" name="sc_port" value="C) Own site only"> C · Own site only</label>
+  </div></div>
+
+  <div class="dec"><div class="q">🏡 Sancler — advertising</div><div class="opts">
+    <label><input type="radio" name="sc_ads" value="A) Facebook/Instagram lead ads + retargeting"> A · FB/Instagram lead ads + retargeting <span class="rec">recommended</span></label>
+    <label><input type="radio" name="sc_ads" value="B) + Google search ads"> B · + Google search ads</label>
+    <label><input type="radio" name="sc_ads" value="C) Organic first"> C · Organic first</label>
+  </div></div>
+
+  <div class="dec"><div class="q">🏡 Sancler — first development to shoot</div>
+    <input type="text" name="sc_dev" placeholder="e.g. Clôs Hugdon, Laugharne">
+  </div>
+
+  <div class="dec"><div class="q">🏰 Island House — how rigorously we document it</div><div class="opts">
+    <label><input type="radio" name="ih_rec" value="A) Descriptive record"> A · Descriptive</label>
+    <label><input type="radio" name="ih_rec" value="B) Analytical record"> B · Analytical <span class="rec">recommended for a listed building</span></label>
+  </div></div>
+
+  <div class="dec"><div class="q">🏰 Island House — formal Conservation Plan?</div><div class="opts">
+    <label><input type="radio" name="ih_cmp" value="A) Yes, formal"> A · Yes, formal (often needed for grants)</label>
+    <label><input type="radio" name="ih_cmp" value="B) Lighter internal version"> B · Lighter internal version</label>
+  </div></div>
+
+  <div class="dec"><div class="q">🏰 Island House — the discovery / grants play</div><div class="opts">
+    <label><input type="radio" name="ih_disc" value="A) Yes — pursue research + grant/university partnership"> A · Yes — pursue it <span class="rec">big PR + funding</span></label>
+    <label><input type="radio" name="ih_disc" value="B) Later"> B · Later</label>
+  </div></div>
+
+  <div class="dec"><div class="q">💬 Anything else for Dominic</div>
+    <textarea name="extra" rows="3" placeholder="Notes, changes, questions..."></textarea>
+  </div>
+
+  <div id="done">✅ Decisions ready — your email should have opened. If it didn't, tap <b>Copy</b> and paste it to Dominic.</div>
+  </form>
+
+  <div class="bar">
+    <button class="btn" type="button" onclick="send()">Send my decisions to Dominic</button>
+    <button class="btn alt" type="button" onclick="copyIt()">Copy</button>
+  </div>
+</div>
+
+<script>
+function build(){
+  var f=document.getElementById('f');
+  var lines=["Steve's decisions — "+new Date().toLocaleString(),""];
+  var radios={};
+  f.querySelectorAll('input[type=radio]:checked').forEach(function(r){radios[r.name]=r.value;});
+  function add(label,name){ if(radios[name]) lines.push(label+": "+radios[name]); }
+  function addText(label,name){ var v=f.elements[name].value.trim(); if(v) lines.push(label+": "+v); }
+  lines.push("— BAKERY —");
+  add("Subscription","bk_sub"); add("Fulfilment","bk_ful"); add("Wine bar","bk_wine"); addText("Name","bk_name");
+  lines.push(""); lines.push("— SANCLER —");
+  add("Lead capture","sc_lead"); add("Portals","sc_port"); add("Advertising","sc_ads"); addText("First development","sc_dev");
+  lines.push(""); lines.push("— ISLAND HOUSE —");
+  add("Recording level","ih_rec"); add("Conservation Plan","ih_cmp"); add("Discovery/grants","ih_disc");
+  var ex=f.elements['extra'].value.trim(); if(ex){ lines.push(""); lines.push("Notes: "+ex); }
+  return lines.join("\n");
+}
+function send(){
+  var body=build();
+  document.getElementById('done').style.display='block';
+  window.location.href="mailto:pullenmarketing@gmail.com?subject="+encodeURIComponent("Steve's decisions")+"&body="+encodeURIComponent(body);
+}
+function copyIt(){
+  var t=build();
+  navigator.clipboard.writeText(t).then(function(){ alert("Copied — paste it to Dominic."); },function(){ prompt("Copy this:",t); });
+}
+</script>
+</body></html>

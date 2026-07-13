@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Globe Bakery — The Plan</title>
+<style>
+  :root{--ac:#8a5a2b;--acd:#5c3a17;--gold:#b07d2b;--ink:#22302e;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px 130px;}
+  header{background:linear-gradient(160deg,var(--ac),var(--acd));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:920px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e8dcc4;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  .direction{max-width:680px;color:#f0e7d5;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--acd);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:#6a7b76;font-size:13px;margin:0 0 8px;}
+
+  .flow{display:grid;grid-template-columns:1fr;gap:14px;margin:14px 0;}
+  .step{background:#fff;border:1px solid #dfe6e2;border-radius:12px;padding:0;box-shadow:0 2px 10px rgba(20,50,45,.06);overflow:hidden;}
+  .step .sh{display:flex;align-items:center;gap:12px;padding:13px 16px;background:linear-gradient(90deg,var(--ac),var(--acd));color:#fff;}
+  .step .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);
+             display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
+  .step .sh b{font-family:Georgia,serif;font-weight:600;font-size:16.5px;}
+  .step .sh .out{margin-left:auto;font-size:11px;letter-spacing:.5px;text-transform:uppercase;opacity:.9;text-align:right;max-width:230px;}
+  .step .sb{padding:13px 16px 14px;}
+  .step .lbl{font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--ac);margin:0 0 5px;}
+  .step ul{margin:0 0 10px;padding-left:18px;} .step li{font-size:13.6px;margin:4px 0;color:#33403d;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+  .chip{background:#f2f5f3;border:1px solid #e0e7e3;border-radius:20px;padding:4px 11px;font-size:11.5px;color:#40514c;}
+  .chip b{color:var(--acd);}
+
+  .settled{background:#eef4f0;border:1px solid #cfe3d9;border-left:4px solid #1f7a4d;border-radius:8px;padding:11px 14px;font-size:13.4px;margin:12px 0;}
+  .settled b{color:#1f7a4d;}
+
+  .need{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .need .q{font-weight:700;font-size:14px;margin-bottom:3px;}
+  .need .why{font-size:12.3px;color:#6a7b76;margin-bottom:8px;}
+  .opts label{display:block;padding:9px 11px;border:1px solid #e2e8e4;border-radius:8px;margin:6px 0;font-size:13.4px;cursor:pointer;}
+  .opts label:hover{background:#f5f8f6;} .opts input{margin-right:8px;}
+  .opts .od{display:block;margin:3px 0 0 24px;font-size:12.2px;color:#66756f;}
+  .rec{color:var(--ac);font-weight:700;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;}
+  textarea,input[type=text]{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;resize:vertical;}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
+  .barin{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+  .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
+  .seg{background:#f2f5f3;border:1.5px solid #dfe6e2;color:#3a4a47;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:7px;cursor:pointer;}
+  .seg.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+  .btns{display:flex;gap:8px;}
+  .btn{background:var(--ac);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;}
+  .btn:hover{background:var(--acd);}
+  .btn.alt{background:#fff;color:var(--ac);border:2px solid var(--ac);padding:9px 16px;}
+  #status{font-size:13px;font-weight:600;text-align:center;padding:6px 0 0;} #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+  #fallback{display:none;justify-content:center;gap:8px;margin-top:6px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Back to the plan</a><a href="bakery.html" target="_blank">See the comparables →</a></div>
+  <div class="kicker">The Globe Bakery · Live first</div>
+  <h1>The Globe Bakery — The Plan</h1>
+  <p class="direction">A premium organic bakery that owns the one habit none of the locals offer — a reliable weekly loaf + pastry box, ordered online. We match their craft and polish, then take the ground they've left open. First of the three to go live.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+<h2>Already settled</h2>
+<div class="settled">Name — <b>The Globe Bakery</b>. Subscription — <b>loaf + pastry box</b>. Fulfilment &amp; wine-bar — parked for now.</div>
+<h2>The plan — three steps</h2>
+<p class="sub">The actions we'll take, in order, and who on the team drives each.</p>
+<div class="flow">
+  <div class="step">
+    <div class="sh"><div class="num">1</div><b>Brand & foundations</b><div class="out">Output: Brand + model ready to build</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>Build the brand from the confirmed name <b>The Globe Bakery</b> — logo, palette, premium-organic tone of voice.</li><li>Lock the product list + pricing (loaf ~£3) and the subscription design: loaf + pastry box, with pause / skip / cancel.</li><li>Choose the e-commerce + subscription-billing stack (one platform that handles the weekly box).</li><li>Set the data / GDPR + payments approach — proper consent &amp; security from day one.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Delphine</b> · Voice & brand</span><span class="chip"><b>Marcus</b> · Web & platform</span><span class="chip"><b>Sol</b> · Commerce & subscriptions</span><span class="chip"><b>Rhys</b> · Pricing & ROI</span></div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sh"><div class="num">2</div><b>Build the shop & subscription</b><div class="out">Output: A working shop + weekly box</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>Build the premium, appetising website + online shop + checkout.</li><li>Build the <b>weekly subscription engine</b> — the loaf + pastry box people set and forget.</li><li>Wire collection + local delivery (time slots, order cut-offs, delivery radius).</li><li>First food-photography day, then rolling capture of every bake so the content library builds itself.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Marcus</b> · Web & platform</span><span class="chip"><b>Sol</b> · Commerce & subscriptions</span><span class="chip"><b>Cass</b> · Photography</span></div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sh"><div class="num">3</div><b>Launch & grow</b><div class="out">Output: Live, taking orders + subscribers</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>Soft-launch on collection + online orders, then open subscriptions and push the weekly box.</li><li>Set up local SEO + a Facebook/Instagram presence; run the launch announcement (local + organic story).</li><li>Grow subscribers, add bundles + the wine-bar cross-sell when it's time.</li><li>Monthly report: orders, active subscribers, repeat rate, local ranking.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Nia</b> · Social & SEO</span><span class="chip"><b>Delphine</b> · Voice & brand</span><span class="chip"><b>Carys</b> · PR & press</span><span class="chip"><b>Vera</b> · Reporting</span></div>
+    </div>
+  </div>
+</div>
+<h2>What we need you to direct, Steve</h2>
+<p class="sub">The name and the box are decided — these are the facts and calls that unlock the build.</p>
+  <div class="need">
+    <div class="q">What do you sell, at what price — and how many can you make a week?</div><div class="why">Sets the shop catalogue, the subscription price, and the cap so we never oversell what the ovens can make.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Bakery — products, prices &amp; weekly volume" data-business="Bakery" placeholder="e.g. sourdough £4, organic tin £3.50, croissants… and rough weekly capacity…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">How do people order from you today?</div><div class="why">Tells us what we&#x27;re replacing/upgrading and what habits customers already have.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Bakery — current ordering method" data-business="Bakery" placeholder="Walk-in only, phone, a book, nothing yet…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">Can you deliver — own driver, courier, or collection only? What radius?</div><div class="why">Decides the fulfilment logic on the site and how far the subscription can reach.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Bakery — delivery capability &amp; radius" data-business="Bakery" placeholder="e.g. own van 5-mile radius + collection, or collection only to start…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">Rough budget for getting the bakery live?</div><div class="why">Lets Rhys put real costs + payback against each part of the build.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Bakery — budget steer" data-business="Bakery" placeholder="A ballpark is fine — it shapes scope and phasing…"></textarea>
+  </div>
+
+</div>
+<div class="bar">
+  <div class="barin">
+    <div class="who">Sending as:
+      <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+      <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+    </div>
+    <div class="btns">
+      <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+      <button class="btn" type="button" onclick="sendAll()">Send to Dominic</button>
+    </div>
+  </div>
+  <div id="status"></div>
+  <div id="fallback">
+    <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+    <button class="btn alt" type="button" onclick="emailAll()">Email to Dominic</button>
+  </div>
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.who .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function collect(){
+    var items=[];
+    document.querySelectorAll('[data-kind="dec"]').forEach(function(el){
+      var c=el.querySelector('input[type=radio]:checked');
+      if(c) items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:'Decision',answer:c.value});
+    });
+    document.querySelectorAll('[data-kind="field"]').forEach(function(el){
+      var v=(el.value||'').trim();
+      if(v) items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:el.getAttribute('data-type')||'Discussion',answer:v});
+    });
+    return items;
+  }
+  function asText(items){
+    var L=["Steve — "+(document.title)||"", "Sent by: "+who, ""];
+    items.forEach(function(it){ L.push((it.type==='Discussion'?'? ':'• ')+it.item.replace(/^Discussion — /,'')+": "+it.answer); });
+    return L.join("\n");
+  }
+  window.sendAll=function(){
+    var items=collect(),st=document.getElementById('status');
+    if(!items.length){st.className='err';st.textContent='Nothing to send yet — make a pick or write a note.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:items})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){ if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved to the tracker ('+res.j.created+' item'+(res.j.created===1?'':'s')+'). Dominic has it.';document.getElementById('fallback').style.display='none';} else {fail(res.j,items);} })
+      .catch(function(){fail(null,items);});
+  };
+  function fail(j,items){var st=document.getElementById('status');st.className='err';
+    st.textContent=(j&&j.error==='not_configured')?'Tracker isn’t connected yet — your answers are safe, use Copy or Email below.':'Couldn’t reach the tracker — your answers are safe, use Copy or Email below.';
+    window.__t=asText(items);document.getElementById('fallback').style.display='flex';}
+  window.copyAll=function(){var t=window.__t||asText(collect());navigator.clipboard.writeText(t).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied — paste it to Dominic.';},function(){prompt('Copy this:',t);});};
+  window.emailAll=function(){var t=window.__t||asText(collect());window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Steve — '+document.title)+'&body='+encodeURIComponent(t);};
+})();
+</script>
+</body></html>

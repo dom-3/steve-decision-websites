@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sancler Property — The Plan</title>
+<style>
+  :root{--ac:#2b4a6b;--acd:#1a2f47;--gold:#b07d2b;--ink:#22302e;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px 130px;}
+  header{background:linear-gradient(160deg,var(--ac),var(--acd));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:920px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e8dcc4;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  .direction{max-width:680px;color:#f0e7d5;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--acd);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:#6a7b76;font-size:13px;margin:0 0 8px;}
+
+  .flow{display:grid;grid-template-columns:1fr;gap:14px;margin:14px 0;}
+  .step{background:#fff;border:1px solid #dfe6e2;border-radius:12px;padding:0;box-shadow:0 2px 10px rgba(20,50,45,.06);overflow:hidden;}
+  .step .sh{display:flex;align-items:center;gap:12px;padding:13px 16px;background:linear-gradient(90deg,var(--ac),var(--acd));color:#fff;}
+  .step .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);
+             display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
+  .step .sh b{font-family:Georgia,serif;font-weight:600;font-size:16.5px;}
+  .step .sh .out{margin-left:auto;font-size:11px;letter-spacing:.5px;text-transform:uppercase;opacity:.9;text-align:right;max-width:230px;}
+  .step .sb{padding:13px 16px 14px;}
+  .step .lbl{font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--ac);margin:0 0 5px;}
+  .step ul{margin:0 0 10px;padding-left:18px;} .step li{font-size:13.6px;margin:4px 0;color:#33403d;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+  .chip{background:#f2f5f3;border:1px solid #e0e7e3;border-radius:20px;padding:4px 11px;font-size:11.5px;color:#40514c;}
+  .chip b{color:var(--acd);}
+
+  .settled{background:#eef4f0;border:1px solid #cfe3d9;border-left:4px solid #1f7a4d;border-radius:8px;padding:11px 14px;font-size:13.4px;margin:12px 0;}
+  .settled b{color:#1f7a4d;}
+
+  .need{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .need .q{font-weight:700;font-size:14px;margin-bottom:3px;}
+  .need .why{font-size:12.3px;color:#6a7b76;margin-bottom:8px;}
+  .opts label{display:block;padding:9px 11px;border:1px solid #e2e8e4;border-radius:8px;margin:6px 0;font-size:13.4px;cursor:pointer;}
+  .opts label:hover{background:#f5f8f6;} .opts input{margin-right:8px;}
+  .opts .od{display:block;margin:3px 0 0 24px;font-size:12.2px;color:#66756f;}
+  .rec{color:var(--ac);font-weight:700;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;}
+  textarea,input[type=text]{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;resize:vertical;}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
+  .barin{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+  .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
+  .seg{background:#f2f5f3;border:1.5px solid #dfe6e2;color:#3a4a47;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:7px;cursor:pointer;}
+  .seg.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+  .btns{display:flex;gap:8px;}
+  .btn{background:var(--ac);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;}
+  .btn:hover{background:var(--acd);}
+  .btn.alt{background:#fff;color:var(--ac);border:2px solid var(--ac);padding:9px 16px;}
+  #status{font-size:13px;font-weight:600;text-align:center;padding:6px 0 0;} #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+  #fallback{display:none;justify-content:center;gap:8px;margin-top:6px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Back to the plan</a><a href="sancler.html" target="_blank">See the comparables →</a></div>
+  <div class="kicker">Sancler Property · Real photos, real trust</div>
+  <h1>Sancler Property — The Plan</h1>
+  <p class="direction">Sell the homes on real photography and video instead of CGI, fix what's costing sales today, and drive every enquiry through the website itself — organic-first, no portals or paid ads until you say so. The lightest of the three: a sharp refresh, not a rebuild.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+<h2>Already settled</h2>
+<div class="settled">Advertising — <b>organic first, website only</b>. Facebook/Instagram paid <b>paused pending your OK</b>. <b>No portals</b> (Rightmove/Zoopla/OnTheMarket) for now.</div>
+<h2>The plan — three steps</h2>
+<p class="sub">The actions we'll take, in order, and who on the team drives each.</p>
+<div class="flow">
+  <div class="step">
+    <div class="sh"><div class="num">1</div><b>Fix now & plan the shoot</b><div class="out">Output: Trust fixed + shoot ready</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>Same-day trust fixes on the live site: kill the “Homes Ready 2023” line, fix the blank Site Plan page, speed up the slow/broken images.</li><li>Confirm the priority development to shoot first and the status of each (available / sold / new phase).</li><li>Build the capture plan — shot list for exterior, interior walk-through, the “village position”, drone / 360.</li><li>Get CMS / login access so we can swap the CGI out.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Marcus</b> · Web refresh</span><span class="chip"><b>Cass</b> · Photo & video</span><span class="chip"><b>Nia</b> · Local social</span></div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sh"><div class="num">2</div><b>Shoot & rebuild the site</b><div class="out">Output: Real-photo site that captures leads</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>One photo/video day — capture everything: stills, interior walkthrough, and the development/village setting film.</li><li>Edit the interior video, the setting film, and a refreshed real-photo set.</li><li>Update the website — replace the CGI, refresh the listings, and add <b>register-interest + brochure</b> capture with automated follow-up.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Cass</b> · Photo & video</span><span class="chip"><b>Marcus</b> · Web refresh</span><span class="chip"><b>Sol</b> · Enquiry capture</span></div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sh"><div class="num">3</div><b>Publish & keep it current</b><div class="out">Output: A living site + organic pipeline</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>Publish the refreshed site and promote the walkthrough videos on local + organic social.</li><li>Keep listings current as homes sell / phases release.</li><li>Rolling content as new homes complete; monthly report on enquiries + video views.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Nia</b> · Local social</span><span class="chip"><b>Marcus</b> · Web</span><span class="chip"><b>Vera</b> · Reporting</span></div>
+    </div>
+  </div>
+</div>
+<h2>What we need you to direct, Steve</h2>
+<p class="sub">Advertising's decided. These set how far the refresh goes and get the camera on site.</p>
+  <div class="need" data-kind="dec" data-item="Sancler — scope of the website change" data-business="Sancler Property">
+    <div class="q">How much of the current site do you want changed?</div><div class="why">This is the single biggest scope call — it decides time, cost and how soon we&#x27;re live.</div>
+    <div class="opts"><label><input type="radio" name="Sancler_—_scope_of_the_website_change" value="A) Light trust-fixes only"> A) Light trust-fixes only<span class="od">Just fix the trust-killers (dates, blank page, slow images) on the existing site. Fastest, cheapest.</span></label><label><input type="radio" name="Sancler_—_scope_of_the_website_change" value="B) Refresh — swap CGI, keep the structure" checked> B) Refresh — swap CGI, keep the structure <span class="rec">recommended</span><span class="od">Fix the trust issues AND replace the CGI with real photo/video, refresh listings, add lead capture. Keeps the site&#x27;s bones.</span></label><label><input type="radio" name="Sancler_—_scope_of_the_website_change" value="C) Full rebuild"> C) Full rebuild<span class="od">A brand-new site from scratch. Most work, only if you want a clean slate.</span></label></div>
+  </div>
+  <div class="need" data-kind="dec" data-item="Sancler — lead capture level" data-business="Sancler Property">
+    <div class="q">How hard should the site work to capture a buyer?</div><div class="why">Since we&#x27;re website-only, this is the enquiry engine — how much we build now vs later.</div>
+    <div class="opts"><label><input type="radio" name="Sancler_—_lead_capture_level" value="A) Register-interest + brochure" checked> A) Register-interest + brochure <span class="rec">recommended</span><span class="od">Capture name/email, auto-send the brochure, follow up automatically. Everything we need to start.</span></label><label><input type="radio" name="Sancler_—_lead_capture_level" value="B) + interactive plot picker"> B) + interactive plot picker<span class="od">Adds a clickable site plan showing each plot&#x27;s status.</span></label><label><input type="radio" name="Sancler_—_lead_capture_level" value="C) + full virtual tours"> C) + full virtual tours<span class="od">Adds 3D/video walkthroughs per house type — needs the filming done first.</span></label></div>
+  </div>
+  <div class="need">
+    <div class="q">Which houses are for sale right now, and which do we photograph first?</div><div class="why">Sets the shoot order so we capture the homes that are actually selling.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Sancler — houses for sale &amp; photo priority" data-business="Sancler Property" placeholder="List the live developments/plots and the priority order…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">When can we get on site — and are homes dressed to film, or shot as-is?</div><div class="why">Decides the shoot date and whether we stage or capture as-is.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Sancler — shoot access &amp; timing" data-business="Sancler Property" placeholder="e.g. show home ready at Clôs Hugdon from…; others as-is…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">Who controls the current website login / CMS?</div><div class="why">We need access to swap the CGI and refresh listings.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Sancler — CMS / site access" data-business="Sancler Property" placeholder="Platform + who holds the login…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">Can we walk each house with Carl — the different kitchen designs &amp; spec options to feature?</div><div class="why">The design/spec detail is what makes the real photography sell; Carl has it.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Sancler — house briefs with Carl" data-business="Sancler Property" placeholder="Best way/time to get the house briefs + spec options from Carl…"></textarea>
+  </div>
+
+</div>
+<div class="bar">
+  <div class="barin">
+    <div class="who">Sending as:
+      <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+      <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+    </div>
+    <div class="btns">
+      <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+      <button class="btn" type="button" onclick="sendAll()">Send to Dominic</button>
+    </div>
+  </div>
+  <div id="status"></div>
+  <div id="fallback">
+    <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+    <button class="btn alt" type="button" onclick="emailAll()">Email to Dominic</button>
+  </div>
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.who .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function collect(){
+    var items=[];
+    document.querySelectorAll('[data-kind="dec"]').forEach(function(el){
+      var c=el.querySelector('input[type=radio]:checked');
+      if(c) items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:'Decision',answer:c.value});
+    });
+    document.querySelectorAll('[data-kind="field"]').forEach(function(el){
+      var v=(el.value||'').trim();
+      if(v) items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:el.getAttribute('data-type')||'Discussion',answer:v});
+    });
+    return items;
+  }
+  function asText(items){
+    var L=["Steve — "+(document.title)||"", "Sent by: "+who, ""];
+    items.forEach(function(it){ L.push((it.type==='Discussion'?'? ':'• ')+it.item.replace(/^Discussion — /,'')+": "+it.answer); });
+    return L.join("\n");
+  }
+  window.sendAll=function(){
+    var items=collect(),st=document.getElementById('status');
+    if(!items.length){st.className='err';st.textContent='Nothing to send yet — make a pick or write a note.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:items})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){ if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved to the tracker ('+res.j.created+' item'+(res.j.created===1?'':'s')+'). Dominic has it.';document.getElementById('fallback').style.display='none';} else {fail(res.j,items);} })
+      .catch(function(){fail(null,items);});
+  };
+  function fail(j,items){var st=document.getElementById('status');st.className='err';
+    st.textContent=(j&&j.error==='not_configured')?'Tracker isn’t connected yet — your answers are safe, use Copy or Email below.':'Couldn’t reach the tracker — your answers are safe, use Copy or Email below.';
+    window.__t=asText(items);document.getElementById('fallback').style.display='flex';}
+  window.copyAll=function(){var t=window.__t||asText(collect());navigator.clipboard.writeText(t).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied — paste it to Dominic.';},function(){prompt('Copy this:',t);});};
+  window.emailAll=function(){var t=window.__t||asText(collect());window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Steve — '+document.title)+'&body='+encodeURIComponent(t);};
+})();
+</script>
+</body></html>

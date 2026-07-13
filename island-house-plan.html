@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Island House — The Plan</title>
+<style>
+  :root{--ac:#1f5c4d;--acd:#153f35;--gold:#b07d2b;--ink:#22302e;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px 130px;}
+  header{background:linear-gradient(160deg,var(--ac),var(--acd));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:920px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e8dcc4;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  .direction{max-width:680px;color:#f0e7d5;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--acd);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:#6a7b76;font-size:13px;margin:0 0 8px;}
+
+  .flow{display:grid;grid-template-columns:1fr;gap:14px;margin:14px 0;}
+  .step{background:#fff;border:1px solid #dfe6e2;border-radius:12px;padding:0;box-shadow:0 2px 10px rgba(20,50,45,.06);overflow:hidden;}
+  .step .sh{display:flex;align-items:center;gap:12px;padding:13px 16px;background:linear-gradient(90deg,var(--ac),var(--acd));color:#fff;}
+  .step .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);
+             display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
+  .step .sh b{font-family:Georgia,serif;font-weight:600;font-size:16.5px;}
+  .step .sh .out{margin-left:auto;font-size:11px;letter-spacing:.5px;text-transform:uppercase;opacity:.9;text-align:right;max-width:230px;}
+  .step .sb{padding:13px 16px 14px;}
+  .step .lbl{font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--ac);margin:0 0 5px;}
+  .step ul{margin:0 0 10px;padding-left:18px;} .step li{font-size:13.6px;margin:4px 0;color:#33403d;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+  .chip{background:#f2f5f3;border:1px solid #e0e7e3;border-radius:20px;padding:4px 11px;font-size:11.5px;color:#40514c;}
+  .chip b{color:var(--acd);}
+
+  .settled{background:#eef4f0;border:1px solid #cfe3d9;border-left:4px solid #1f7a4d;border-radius:8px;padding:11px 14px;font-size:13.4px;margin:12px 0;}
+  .settled b{color:#1f7a4d;}
+
+  .need{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .need .q{font-weight:700;font-size:14px;margin-bottom:3px;}
+  .need .why{font-size:12.3px;color:#6a7b76;margin-bottom:8px;}
+  .opts label{display:block;padding:9px 11px;border:1px solid #e2e8e4;border-radius:8px;margin:6px 0;font-size:13.4px;cursor:pointer;}
+  .opts label:hover{background:#f5f8f6;} .opts input{margin-right:8px;}
+  .opts .od{display:block;margin:3px 0 0 24px;font-size:12.2px;color:#66756f;}
+  .rec{color:var(--ac);font-weight:700;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;}
+  textarea,input[type=text]{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;resize:vertical;}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
+  .barin{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+  .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
+  .seg{background:#f2f5f3;border:1.5px solid #dfe6e2;color:#3a4a47;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:7px;cursor:pointer;}
+  .seg.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+  .btns{display:flex;gap:8px;}
+  .btn{background:var(--ac);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;}
+  .btn:hover{background:var(--acd);}
+  .btn.alt{background:#fff;color:var(--ac);border:2px solid var(--ac);padding:9px 16px;}
+  #status{font-size:13px;font-weight:600;text-align:center;padding:6px 0 0;} #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+  #fallback{display:none;justify-content:center;gap:8px;margin-top:6px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Back to the plan</a><a href="island-house.html" target="_blank">See the comparables →</a></div>
+  <div class="kicker">Island House · The flagship</div>
+  <h1>Island House — The Plan</h1>
+  <p class="direction">Tell the story of Britain's medieval port as it's brought back to life — a living journal, chapter by chapter — and set up the rigorous documentation a Grade II* listed building deserves. The history is done and fact-checked; the dig on your site uncovered the first medieval quay ever excavated in Wales — national history, and a grant + PR hook in one.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+<h2>Already settled</h2>
+<div class="settled">History — <b>done and fact-checked</b>. Recording level, Conservation Plan and the discovery/grants play have recommendations ready for your tick (below).</div>
+<h2>The plan — three steps</h2>
+<p class="sub">The actions we'll take, in order, and who on the team drives each.</p>
+<div class="flow">
+  <div class="step">
+    <div class="sh"><div class="num">1</div><b>Secure the assets & set the standard</b><div class="out">Output: Assets safe & standards agreed</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>Back up and <b>AI-sort the 20,000 photos</b> into ~50 labelled clusters — not sorted by hand.</li><li>Audit what's already recorded; confirm listed-building consent status &amp; obligations with Cadw.</li><li>Identify the professional team already engaged (conservation architect, QS, engineer) so we plug in, not duplicate.</li><li>Sign off the recording level and whether a formal Conservation Plan is produced; confirm the restoration timeline.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Elin</b> · Heritage & conservation</span><span class="chip"><b>Gethin</b> · Controls & compliance</span><span class="chip"><b>Idris</b> · Systems & data</span></div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sh"><div class="num">2</div><b>Build the site & the documentation system</b><div class="out">Output: Site + compliance system ready</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>Build the new website — the story/journal + restoration progress + heritage, and shape the fact-checked history into chapters.</li><li>Build the inspection templates + management / Conservation Plan documents.</li><li>Stand up the database + media library (naming, backups) and the monthly-report template; prototype the interactive “one area” dashboard.</li><li>Set the capture kit + Historic-England-standard recording protocol so every visit feeds compliance, story and marketing at once.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Marcus</b> · Web & platform</span><span class="chip"><b>Delphine</b> · Story</span><span class="chip"><b>Idris</b> · Systems & data</span><span class="chip"><b>Gethin</b> · Compliance</span></div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sh"><div class="num">3</div><b>Launch the story & pursue the funding</b><div class="out">Output: Public story + funding engine</div></div>
+    <div class="sb">
+      <div class="lbl">What we do</div>
+      <ul><li>Publish the site + the first story chapter; run the first formal monthly inspection + report.</li><li>Weekly capture + monthly report cadence; grow the journal audience with milestone “reveal” campaigns.</li><li>Pursue the discovery/grants play — a university / Heritage Fund partnership and PR around the medieval-quay find.</li></ul>
+      <div class="lbl">Who leads it</div>
+      <div class="chips"><span class="chip"><b>Delphine</b> · Story</span><span class="chip"><b>Cass</b> · Video & photo</span><span class="chip"><b>Ffion</b> · Grants & funding</span><span class="chip"><b>Carys</b> · PR & press</span><span class="chip"><b>Vera</b> · Reporting</span></div>
+    </div>
+  </div>
+</div>
+<h2>What we need you to direct, Steve</h2>
+<p class="sub">The recommendations are ready — a tick each confirms them — plus the four facts that unblock the build.</p>
+  <div class="need" data-kind="dec" data-item="Island House — recording standard" data-business="Island House">
+    <div class="q">How rigorously do we document it?</div><div class="why">Underpins grants, consent and the story — the record a listed building lives or dies by.</div>
+    <div class="opts"><label><input type="radio" name="Island_House_—_recording_standard" value="A) Descriptive record"> A) Descriptive record<span class="od">A clear written + photographic record of what&#x27;s there and what&#x27;s done. Lighter, quicker.</span></label><label><input type="radio" name="Island_House_—_recording_standard" value="B) Analytical record" checked> B) Analytical record <span class="rec">recommended for a listed building</span><span class="od">Adds the “why” — phases, fabric analysis, significance. The standard Cadw and funders expect for a Grade II* building.</span></label></div>
+  </div>
+  <div class="need" data-kind="dec" data-item="Island House — formal Conservation Plan" data-business="Island House">
+    <div class="q">Do we produce a formal Conservation Plan?</div><div class="why">It guides what can and can&#x27;t change — and it&#x27;s often the key that unlocks grants and consent.</div>
+    <div class="opts"><label><input type="radio" name="Island_House_—_formal_Conservation_Plan" value="A) Yes, formal" checked> A) Yes, formal <span class="rec">unlocks grants</span><span class="od">A proper Conservation Plan to heritage standard. More work up front, opens funding + smooth consent.</span></label><label><input type="radio" name="Island_House_—_formal_Conservation_Plan" value="B) Lighter internal version"> B) Lighter internal version<span class="od">A working internal version now, upgraded to formal later if we chase grants.</span></label></div>
+  </div>
+  <div class="need" data-kind="dec" data-item="Island House — discovery / grants play" data-business="Island House">
+    <div class="q">Do we pursue the research + funding angle?</div><div class="why">The medieval-quay find can attract real money and national press, not just knowledge.</div>
+    <div class="opts"><label><input type="radio" name="Island_House_—_discovery_/_grants_play" value="A) Yes — pursue research + grant/university partnership" checked> A) Yes — pursue research + grant/university partnership <span class="rec">big PR + funding</span><span class="od">Turn the dig into original research with a university / Heritage Fund partner. Big PR + funding toward the restoration.</span></label><label><input type="radio" name="Island_House_—_discovery_/_grants_play" value="B) Later"> B) Later<span class="od">Park it, focus on the build and story first.</span></label></div>
+  </div>
+  <div class="need">
+    <div class="q">Where&#x27;s the existing photo library, and can we get a copy to back up + sort?</div><div class="why">It&#x27;s the raw material for the story and the record — first job is to secure it.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — existing photo library" data-business="Island House" placeholder="Where the 20k photos live, and how we get them…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">What&#x27;s the listed-building consent status and obligations with Cadw?</div><div class="why">Shapes what we can document/change and the compliance we set up.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — listed-building consent status" data-business="Island House" placeholder="Consents in place, pending, obligations…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">Which professionals are already engaged (conservation architect, QS, engineer)?</div><div class="why">So Elin, Gethin and Ffion plug into the real team instead of duplicating it.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — professional team engaged" data-business="Island House" placeholder="Names/firms already on the project…"></textarea>
+  </div>
+  <div class="need">
+    <div class="q">What&#x27;s the restoration timeline &amp; key milestones?</div><div class="why">Lets us plan the story chapters and “reveal” moments around real progress.</div>
+    <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Island House — restoration timeline" data-business="Island House" placeholder="Rough phases + dates, key milestones…"></textarea>
+  </div>
+
+</div>
+<div class="bar">
+  <div class="barin">
+    <div class="who">Sending as:
+      <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+      <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+    </div>
+    <div class="btns">
+      <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+      <button class="btn" type="button" onclick="sendAll()">Send to Dominic</button>
+    </div>
+  </div>
+  <div id="status"></div>
+  <div id="fallback">
+    <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+    <button class="btn alt" type="button" onclick="emailAll()">Email to Dominic</button>
+  </div>
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.who .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function collect(){
+    var items=[];
+    document.querySelectorAll('[data-kind="dec"]').forEach(function(el){
+      var c=el.querySelector('input[type=radio]:checked');
+      if(c) items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:'Decision',answer:c.value});
+    });
+    document.querySelectorAll('[data-kind="field"]').forEach(function(el){
+      var v=(el.value||'').trim();
+      if(v) items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:el.getAttribute('data-type')||'Discussion',answer:v});
+    });
+    return items;
+  }
+  function asText(items){
+    var L=["Steve — "+(document.title)||"", "Sent by: "+who, ""];
+    items.forEach(function(it){ L.push((it.type==='Discussion'?'? ':'• ')+it.item.replace(/^Discussion — /,'')+": "+it.answer); });
+    return L.join("\n");
+  }
+  window.sendAll=function(){
+    var items=collect(),st=document.getElementById('status');
+    if(!items.length){st.className='err';st.textContent='Nothing to send yet — make a pick or write a note.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:items})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){ if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved to the tracker ('+res.j.created+' item'+(res.j.created===1?'':'s')+'). Dominic has it.';document.getElementById('fallback').style.display='none';} else {fail(res.j,items);} })
+      .catch(function(){fail(null,items);});
+  };
+  function fail(j,items){var st=document.getElementById('status');st.className='err';
+    st.textContent=(j&&j.error==='not_configured')?'Tracker isn’t connected yet — your answers are safe, use Copy or Email below.':'Couldn’t reach the tracker — your answers are safe, use Copy or Email below.';
+    window.__t=asText(items);document.getElementById('fallback').style.display='flex';}
+  window.copyAll=function(){var t=window.__t||asText(collect());navigator.clipboard.writeText(t).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied — paste it to Dominic.';},function(){prompt('Copy this:',t);});};
+  window.emailAll=function(){var t=window.__t||asText(collect());window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Steve — '+document.title)+'&body='+encodeURIComponent(t);};
+})();
+</script>
+</body></html>

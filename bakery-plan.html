@@ -48,6 +48,11 @@
   .ivh{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ac);margin-bottom:4px;}
   .ivc ul{margin:0;padding-left:16px;} .ivc li{font-size:12.7px;margin:3px 0;color:#33403d;}
   @media(max-width:620px){.involves{grid-template-columns:1fr;}}
+  .principles{background:#fff;border:1px solid #dfe6e2;border-left:5px solid var(--ac);border-radius:10px;padding:12px 16px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .principles ul{margin:0;padding-left:18px;} .principles li{font-size:13.6px;margin:5px 0;color:#33403d;}
+  .principles li b{color:var(--acd);}
+  .teamq{background:#fbf7ee;border:1px dashed #e0cfa6;border-radius:10px;padding:14px 16px;margin:12px 0;}
+  .teamq .q{font-weight:700;font-size:14px;margin-bottom:3px;} .teamq .why{font-size:12.3px;color:#8a6a2b;margin-bottom:8px;}
   .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
   .barin{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
   .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
@@ -64,22 +69,25 @@
   <div class="top"><a href="index.html">← Back to the plan</a><a href="bakery.html" target="_blank">See the comparables →</a></div>
   <div class="kicker">The Globe Bakery · Live first</div>
   <h1>The Globe Bakery — The Plan</h1>
-  <p class="direction">A premium organic bakery that owns the one habit none of the locals offer — a reliable weekly loaf + pastry box, ordered online. We match their craft and polish, then take the ground they've left open. First of the three to go live.</p>
+  <p class="direction">A premium organic bakery that leads with one thing — <b>selling great bread</b>. Simple, focused, Welsh. We start from the bread itself, price it, and build a clean bread-first website around it (patisserie comes later). Alex Gooch is our reference. First of the three to go live.</p>
   <hr class="r">
 </div></header>
 <div class="wrap">
 <h2>Already settled</h2>
-<div class="settled">Name — <b>The Globe Bakery</b>. Subscription — <b>loaf + pastry box</b>. Fulfilment &amp; wine-bar — parked for now.</div>
+<div class="settled">Name <b>The Globe Bakery</b> · subscription <b>loaf + pastry box</b> · <b>bread is the hero</b> (patisserie later) · look &amp; feel: <b>simple, organic, Welsh — Alex Gooch is our reference</b>.</div>
+<h2>Design direction — from the walkthrough with Steve</h2>
+<p class="sub">What we saw looking at the site together — the north star for the build.</p>
+<div class="principles"><ul><li><b>Lead with selling the bread.</b> Straight to it — the old direction buried it and drifted toward coffee. Bread is what we sell.</li><li><b>Keep it simple.</b> The site mustn't feel overcomplicated — focused, clean, easy to buy.</li><li><b>Showcase the bread.</b> Photography-led, the loaves front and centre.</li><li><b>Organic + Welsh feel — Alex Gooch is our reference.</b> The best site we saw: it showcases the bread and matches on organic, bakery and Welsh. We aim for that.</li><li><b>Show the price clearly.</b> No hunting for it.</li><li><b>No hero image bleeding past the screen.</b> Steve doesn't like the hero shooting past the background — keep it contained and tidy.</li><li><b>Bread is the hero; a few loaf types.</b> Patisserie can come in later, but it is not the focus.</li></ul></div>
 <h2>The plan — three steps</h2>
 <p class="sub">The actions we'll take, in order, and who on the team drives each.</p>
 <div class="flow">
   <div class="step">
-    <div class="sh"><div class="num">1</div><b>Brand & foundations</b><div class="out">Output: Brand + model ready to build</div></div>
+    <div class="sh"><div class="num">1</div><b>The skeleton — the bread & the price</b><div class="out">Output: The core range, priced, ready to build on</div></div>
     <div class="sb">
       <div class="lbl">What we do</div>
-      <ul><li>Build the brand from the confirmed name <b>The Globe Bakery</b> — logo, palette, premium-organic tone of voice.</li><li>Lock the product list + pricing (loaf ~£3) and the subscription design: loaf + pastry box, with pause / skip / cancel.</li><li>Choose the e-commerce + subscription-billing stack (one platform that handles the weekly box).</li><li>Set the data / GDPR + payments approach — proper consent &amp; security from day one.</li></ul>
+      <ul><li>Sit with the bakery team to define <b>the loaf (or few loaves)</b> we lead with and can make reliably — this is the skeleton.</li><li>Set the price per loaf; keep the range tight — <b>bread is the hero</b>, patisserie added later.</li><li>Build a simple brand from the name — organic + Welsh, with <b>Alex Gooch</b> as the look-and-feel reference.</li><li>Choose the shop + subscription stack; set the data/GDPR + payments approach.</li></ul>
       <div class="lbl">Who leads it</div>
-      <div class="chips"><span class="chip"><b>Delphine</b> · Voice & brand</span><span class="chip"><b>Marcus</b> · Web & platform</span><span class="chip"><b>Sol</b> · Commerce & subscriptions</span><span class="chip"><b>Rhys</b> · Pricing & ROI</span></div>
+      <div class="chips"><span class="chip"><b>Sol</b> · Commerce</span><span class="chip"><b>Delphine</b> · Brand & voice</span><span class="chip"><b>Rhys</b> · Pricing</span><span class="chip"><b>Marcus</b> · Web</span></div>
     </div>
   </div>
   <div class="step">
@@ -139,6 +147,17 @@
     <div class="q">Rough budget for getting the bakery live?</div><div class="why">Lets Rhys put real costs + payback against each part of the build.</div>
     <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Bakery — budget steer" data-business="Bakery" placeholder="A ballpark is fine — it shapes scope and phasing…"></textarea>
   </div>
+<h2>Questions for the bakery-team meeting</h2>
+<p class="sub">Take these into the sit-down with the bakery team — the answers become the skeleton (the bread + the price) we build the website and business around. Fill them in here and it's tracked.</p>
+  <div class="teamq"><div class="q">Which loaf (or few loaves) do we lead with?</div><div class="why">The hero product the whole site is built around.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — the lead loaf/loaves" data-business="Bakery" placeholder="Signature loaf + any others to launch with…"></textarea></div>
+  <div class="teamq"><div class="q">What can we make consistently, day to day?</div><div class="why">We only put on the site what the ovens can deliver reliably.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — what we can make reliably" data-business="Bakery" placeholder="The bakes we&#x27;re confident in at volume…"></textarea></div>
+  <div class="teamq"><div class="q">What&#x27;s the price per loaf (and any premium line)?</div><div class="why">Sets the shop price and the subscription maths.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — price per loaf" data-business="Bakery" placeholder="£ per loaf; any premium/large options…"></textarea></div>
+  <div class="teamq"><div class="q">How many loaves can we produce a day / week?</div><div class="why">Caps the shop + subscription so we never oversell.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — daily/weekly capacity" data-business="Bakery" placeholder="Rough numbers per day and per week…"></textarea></div>
+  <div class="teamq"><div class="q">Which days do we bake, and what are the order cut-offs / lead times?</div><div class="why">Drives the collection + delivery logic on the site.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — baking schedule &amp; cut-offs" data-business="Bakery" placeholder="Bake days, order cut-off times, lead time…"></textarea></div>
+  <div class="teamq"><div class="q">Are we certified organic? Welsh / local flour? The provenance story?</div><div class="why">This is the premium + Welsh story the brand leans on.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — organic &amp; provenance" data-business="Bakery" placeholder="Organic status, flour source, provenance…"></textarea></div>
+  <div class="teamq"><div class="q">Shelf life and packaging — good for collection and local delivery?</div><div class="why">Decides how far the subscription can travel and how it&#x27;s boxed.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — shelf life &amp; packaging" data-business="Bakery" placeholder="Shelf life, packaging, delivery suitability…"></textarea></div>
+  <div class="teamq"><div class="q">Which bakes look best to showcase?</div><div class="why">We build the photo-led site around the most beautiful bakes.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — best for photography" data-business="Bakery" placeholder="The most photogenic loaves/bakes…"></textarea></div>
+  <div class="teamq"><div class="q">Anything people already ask for? Any spare capacity for wholesale (to supply Island House)?</div><div class="why">Bestsellers guide the launch; wholesale is a cross-business link.</div><textarea rows="2" data-kind="field" data-type="Decision" data-item="Bakery team — existing favourites &amp; wholesale" data-business="Bakery" placeholder="Current favourites; wholesale capacity…"></textarea></div>
 
 </div>
 <div class="bar">

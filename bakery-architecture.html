@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Globe Bakery — Website Architecture</title>
+<style>
+  :root{--warm:#8a5a2b;--dark:#5c3a17;--gold:#b07d2b;--ink:#2a2420;--green:#1f7a4d;}
+  *{box-sizing:border-box;} body{margin:0;background:#efeae1;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px 130px;}
+  header{background:linear-gradient(160deg,var(--warm),var(--dark));color:#f7efe2;padding:40px 22px 34px;}
+  header .inner{max-width:960px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;}
+  .top a{color:#eaddc7;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e7d3af;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  header p{max-width:680px;color:#efe0c8;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:#7a6a55;font-size:13px;margin:0 0 12px;}
+
+  .princ{background:#fbf3e4;border-left:4px solid var(--gold);border-radius:8px;padding:11px 15px;font-size:13.4px;margin:12px 0;}
+  .princ b{color:var(--dark);}
+
+  .map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;}
+  .mnode{background:#fff;border:1px solid #e6ded1;border-radius:10px;padding:11px 13px;box-shadow:0 2px 8px rgba(60,40,20,.06);}
+  .mnode b{display:block;font-family:Georgia,serif;color:var(--warm);font-size:15px;}
+  .mnode span{font-size:11.7px;color:#7a6a55;}
+  .mnode.home{grid-column:1 / -1;border-color:var(--gold);background:#fffdf8;}
+  @media(max-width:620px){.map{grid-template-columns:1fr 1fr;}}
+
+  .page{background:#fff;border:1px solid #e6ded1;border-radius:12px;box-shadow:0 2px 10px rgba(60,40,20,.06);overflow:hidden;margin:12px 0;}
+  .ph{display:flex;align-items:center;gap:10px;padding:12px 16px;background:linear-gradient(90deg,var(--warm),var(--dark));color:#fff;}
+  .ph .n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
+  .ph b{font-family:Georgia,serif;font-size:16px;} .ph .role{margin-left:auto;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;opacity:.9;}
+  .pb{padding:12px 16px 14px;}
+  .purpose{font-size:13px;color:#6a5a45;margin:0 0 8px;font-style:italic;}
+  .blocks{list-style:none;margin:0;padding:0;counter-reset:b;}
+  .blocks li{position:relative;padding:6px 0 6px 22px;font-size:13.5px;border-bottom:1px dashed #efe6d6;color:#33302b;}
+  .blocks li:last-child{border-bottom:0;}
+  .blocks li:before{content:"▸";position:absolute;left:2px;color:var(--gold);}
+  .blocks li b{color:var(--dark);}
+
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:12px 0;}
+  .fstep{flex:1 1 150px;background:#fff;border:1px solid #e6ded1;border-radius:10px;padding:11px 13px;box-shadow:0 2px 8px rgba(60,40,20,.05);position:relative;}
+  .fstep .fn{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);}
+  .fstep b{display:block;font-size:14px;color:var(--dark);margin:2px 0;} .fstep span{font-size:12.3px;color:#6a5a45;}
+
+  .tech{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0;}
+  .tc{background:#fff;border:1px solid #e6ded1;border-radius:10px;padding:11px 14px;box-shadow:0 2px 8px rgba(60,40,20,.05);}
+  .tc h4{margin:0 0 4px;font-size:13.5px;color:var(--dark);} .tc p{margin:0;font-size:12.7px;color:#5a4d3d;}
+  @media(max-width:620px){.tech{grid-template-columns:1fr;}}
+
+  .later{background:#fff;border:1px dashed #e0cfa6;border-radius:10px;padding:12px 15px;}
+  .later ul{margin:0;padding-left:18px;} .later li{font-size:13.3px;margin:4px 0;color:#5a4d3d;}
+
+  .react{background:#fff;border:1px solid #e6ded1;border-radius:10px;padding:14px 16px;margin:16px 0;box-shadow:0 2px 8px rgba(60,40,20,.05);}
+  .react label{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#5a6b66;}
+  textarea{width:100%;padding:9px 11px;border:1px solid #d8cdbb;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:6px;resize:vertical;}
+  .bar{display:flex;justify-content:flex-end;gap:8px;margin-top:8px;align-items:center;}
+  .who{margin-right:auto;font-size:12.5px;color:#5a6b66;display:flex;gap:6px;align-items:center;}
+  .seg{background:#f4efe6;border:1.5px solid #e0d6c5;color:#5a4d3d;font-size:12px;font-weight:700;padding:5px 11px;border-radius:7px;cursor:pointer;}
+  .seg.on{background:var(--warm);border-color:var(--warm);color:#fff;}
+  .btn{background:var(--warm);color:#fff;border:0;font-size:13.5px;font-weight:700;padding:9px 16px;border-radius:8px;cursor:pointer;} .btn:hover{background:var(--dark);}
+  .btn.alt{background:#fff;color:var(--warm);border:2px solid var(--warm);}
+  #status{font-size:13px;font-weight:600;margin-top:8px;} #status.ok{color:var(--green);} #status.err{color:#b0472b;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Back to the plan</a><a href="bakery-plan.html">The bakery plan →</a></div>
+  <div class="kicker">Globe Bakery · Website Architecture</div>
+  <h1>How the website works</h1>
+  <p>The blueprint for the bakery site — kept deliberately simple, built around one job: <b>sell bread for collection</b>. This is what we build from with each persona once the iMac's set up. Scaled off the sites we liked (Alex Gooch is the bar).</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="princ"><b>The rule for every page:</b> lead with the bread, show the price, keep it simple, let people order for collection in two clicks. Contained hero (no image bleeding past the screen), photography-led, organic + Welsh. Pastries and everything else are secondary.</div>
+
+  <h2>1 · The sitemap</h2>
+  <p class="sub">Lean on purpose — six pages, everything one tap from home. Nothing that doesn't help sell bread.</p>
+  <div class="map">
+    <div class="mnode home"><b>Home</b><span>Bread front-and-centre · one clear “Order for collection” button</span></div>
+    <div class="mnode"><b>The Bread ▸ Order</b><span>The range + prices, order for collection</span></div>
+    <div class="mnode"><b>Weekly Box</b><span>Simple subscription (loaf + pastry)</span></div>
+    <div class="mnode"><b>Pastries</b><span>Croissants &amp; Danish — the add-on</span></div>
+    <div class="mnode"><b>Our Story</b><span>Ethos, the bakers, the Globe</span></div>
+    <div class="mnode"><b>Visit</b><span>Hours, location, how collection works</span></div>
+  </div>
+
+  <h2>2 · Page by page</h2>
+  <p class="sub">Each page top-to-bottom — the blocks in order. The lead persona for each is on the right.</p>
+
+  <div class="page">
+    <div class="ph"><div class="n">1</div><b>Home</b><span class="role">Marcus + Delphine + Cass</span></div>
+    <div class="pb">
+      <div class="purpose">Get them to the bread and to “order for collection” fast.</div>
+      <ul class="blocks">
+        <li><b>Header:</b> Globe Bakery logo · nav (Bread · Weekly Box · Pastries · Story · Visit) · a bold <b>“Order for collection”</b> button.</li>
+        <li><b>Hero (contained):</b> one beautiful loaf, headline “Real bread, baked in Laugharne”, subline “Organic, stone-ground, no additives”, primary CTA <b>Order bread</b>. No full-bleed overflow.</li>
+        <li><b>This week's bread:</b> a tidy grid — photo + name + price + “Add to order”. The heart of the page.</li>
+        <li><b>Why our bread:</b> three short proofs — organic stone-ground · Cotswold flour · no additives.</li>
+        <li><b>How it works:</b> order online → we bake it → collect Tue–Sat.</li>
+        <li><b>The bakers:</b> the photo of the pair with their bread → “Our story”.</li>
+        <li><b>Footer:</b> hours, phone, the Globe wine bar link, socials.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="ph"><div class="n">2</div><b>The Bread — Order</b><span class="role">Sol + Marcus</span></div>
+    <div class="pb">
+      <div class="purpose">The engine — browse, order, pick a collection slot, done.</div>
+      <ul class="blocks">
+        <li><b>The full range:</b> each loaf — photo, name, size (<b>400g / 800g</b>), price, “Add to order”.</li>
+        <li><b>Order summary:</b> what's in the basket, running total.</li>
+        <li><b>Collection slot:</b> pick the day + time (Tue–Sat, 8:30 or ~12) with the order cut-off shown.</li>
+        <li><b>Checkout:</b> pay or reserve — simple, no account needed. <b>Collection only, no delivery.</b></li>
+        <li><b>Why pre-order:</b> a gentle line — “order ahead so we bake it fresh for you” (this is what stops us baking blind).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="ph"><div class="n">3</div><b>Weekly Box</b><span class="role">Sol</span></div>
+    <div class="pb">
+      <div class="purpose">Turn a one-off into a habit — kept dead simple.</div>
+      <ul class="blocks">
+        <li><b>One clear offer:</b> a weekly loaf + pastry box, collected each week.</li>
+        <li><b>Simple controls:</b> pause / skip / cancel any time. No tiers or loyalty gimmicks (per Steve).</li>
+        <li><b>One CTA:</b> “Start your weekly box”.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="ph"><div class="n">4</div><b>Pastries</b><span class="role">Delphine + Cass</span></div>
+    <div class="pb">
+      <div class="purpose">The profitable add-on — present it, don't let it upstage the bread.</div>
+      <ul class="blocks">
+        <li>Croissants — naked, pistachio, chocolate; Danish — apple, apricot, black cherry.</li>
+        <li>“Add to your order” — folds into the same collection basket.</li>
+        <li>Note: coffee &amp; croissants in the wine bar to ~12:00 (a soft cross-link).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="ph"><div class="n">5</div><b>Our Story</b><span class="role">Delphine</span></div>
+    <div class="pb">
+      <div class="purpose">The reason to trust and love it — the premium, human, Welsh story.</div>
+      <ul class="blocks">
+        <li>The ethos: organic, stone-ground, Cotswold flour, <b>no additives — no sugar, no softeners</b>.</li>
+        <li>The bakers, in their whites — the “it's our bakery”, home-baked feel.</li>
+        <li>Testimonials (esp. gluten-sensitive customers who can eat it).</li>
+        <li>Part of the Globe — a nod to the wine bar.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="ph"><div class="n">6</div><b>Visit</b><span class="role">Marcus + Nia</span></div>
+    <div class="pb">
+      <div class="purpose">Everything to actually come and collect.</div>
+      <ul class="blocks">
+        <li>Hours: <b>Tue–Saturday</b>, from 8:30 (and the ~12 second bake). Closed Sun &amp; Mon.</li>
+        <li>Location + map; parking; the phone number for phone orders.</li>
+        <li>How collection works — order ahead, or walk-in while it lasts.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>3 · The order journey (the money path)</h2>
+  <p class="sub">Two clicks from “nice loaf” to “it's reserved”. This is the whole point of the site.</p>
+  <div class="flow">
+    <div class="fstep"><div class="fn">Step 1</div><b>Browse the bread</b><span>Home or The Bread — photos + prices.</span></div>
+    <div class="fstep"><div class="fn">Step 2</div><b>Add + pick a slot</b><span>Choose loaves + a collection day/time.</span></div>
+    <div class="fstep"><div class="fn">Step 3</div><b>Pay or reserve</b><span>Quick checkout, no account needed.</span></div>
+    <div class="fstep"><div class="fn">Step 4</div><b>Collect fresh</b><span>We baked it because you ordered it.</span></div>
+  </div>
+  <p class="sub">Repeat customers convert to the <b>Weekly Box</b> — same path, set once.</p>
+
+  <h2>4 · How it's built (simple on purpose)</h2>
+  <div class="tech">
+    <div class="tc"><h4>Shopify — the engine</h4><p>Handles the shop, payments, tax and <b>local pickup / collection</b> out of the box, plus a subscription app for the weekly box. We don't hand-build a store.</p></div>
+    <div class="tc"><h4>A clean, bread-first theme</h4><p>Premium, photography-led, fast — Alex Gooch level. Contained hero, price always visible.</p></div>
+    <div class="tc"><h4>Photography (Cloudinary)</h4><p>The bread shots served crisp and optimised. Bakers snap → Dominic edits → auto-posts.</p></div>
+    <div class="tc"><h4>Orders → the bakery</h4><p>Make.com pushes each order to the team (so they bake the right amount); Klaviyo for the weekly-box emails.</p></div>
+  </div>
+  <p class="sub">Launch on Shopify to be live fast; a custom front-end (Astro on Vercel, headless) can come later if we ever want it. No delivery, no accounts, no clutter — simple.</p>
+
+  <h2>5 · What we deliberately leave for later</h2>
+  <div class="later"><ul>
+    <li>Expand the pastry range; a proper coffee / wine-bar tie-in page.</li>
+    <li><b>Trade &amp; wholesale</b> — a simple “trade enquiry” once we're steady. (Seed it early with partners like <b>Lynette</b>, whose letting-agent / Airbnb contacts could take regular bread + croissant drops as a buy-in.)</li>
+    <li>A separate bakery social presence (stays with the wine bar for now).</li>
+    <li>Delivery — only if demand clearly calls for it.</li>
+  </ul></div>
+
+  <div class="react">
+    <label>React to this architecture — approve, change, or add</label>
+    <textarea id="note" rows="2" placeholder="Anything you'd move, cut, or add before we build it…"></textarea>
+    <div class="bar">
+      <div class="who">By:
+        <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+        <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+      </div>
+      <button class="btn alt" type="button" onclick="copyNote()">Copy</button>
+      <button class="btn" type="button" onclick="saveNote()">Send feedback</button>
+    </div>
+    <div id="status"></div>
+  </div>
+
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.who .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function val(){return (document.getElementById('note').value||'').trim();}
+  window.saveNote=function(){
+    var v=val(),st=document.getElementById('status');
+    if(!v){st.className='err';st.textContent='Write a note first.';return;}
+    st.className='';st.textContent='Saving…';
+    var items=[{item:'Bakery website architecture — feedback',business:'Bakery',type:'Discussion',answer:v}];
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:items})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved to the tracker.';document.getElementById('note').value='';}else{st.className='err';st.textContent='Couldn’t reach the tracker — use Copy.';}})
+      .catch(function(){st.className='err';st.textContent='Couldn’t reach the tracker — use Copy.';});
+  };
+  window.copyNote=function(){var v=val();navigator.clipboard.writeText(v).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied.';},function(){prompt('Copy:',v);});};
+})();
+</script>
+</body></html>

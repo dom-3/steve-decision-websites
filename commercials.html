@@ -159,4 +159,66 @@
   window.emailAll=function(){var t=window.__t||asText(collect());window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Steve — Money framework figures')+'&body='+encodeURIComponent(t);};
 })();
 </script>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var p=location.pathname.toLowerCase(), biz='General';
+  if(p.indexOf('bakery')>=0||p.indexOf('globe')>=0) biz='Bakery';
+  else if(p.indexOf('sancler')>=0) biz='Sancler Property';
+  else if(p.indexOf('island')>=0) biz='Island House';
+  var who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
 </body></html>

@@ -17,7 +17,8 @@ so nothing is ever lost.
 1. Go to **https://airtable.com/create/tokens** (log in as you).
 2. Click **Create new token**.
 3. Name: `Steve portal`.
-4. **Scopes** → add **`data.records:write`** (and `data.records:read` if you like).
+4. **Scopes** → add **`data.records:write`** AND **`data.records:read`**.
+   *(Read is needed so the Work Log and Business dashboard pages can display what's saved.)*
 5. **Access** → **Add a base** → choose **Steve Kirkwood — Build Projects**.
 6. Click **Create token**, then **copy** the token it shows (starts with `pat...`).
    Copy it now — Airtable only shows it once.

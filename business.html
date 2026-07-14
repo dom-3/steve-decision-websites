@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business — Steve Kirkwood Build Project</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px 90px;}
+  header{background:linear-gradient(160deg,#2b4a6b,#1a2f47);color:#eef3f8;padding:38px 22px 32px;}
+  header .inner{max-width:940px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;}
+  .top a{color:#dbe6f2;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#b9cbe0;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:29px;margin:8px 0 6px;}
+  header p{max-width:640px;color:#d5e1ee;font-size:14.5px;margin:0;}
+  h2{font-family:Georgia,serif;color:#1a2f47;font-size:19px;margin:28px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+  .state{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:20px;text-align:center;color:var(--muted);font-size:14px;}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 2px;}
+  .lk{background:#fff;border:1.5px solid #2b4a6b;color:#2b4a6b;text-decoration:none;font-size:13px;font-weight:700;padding:9px 15px;border-radius:8px;}
+  .lk:hover{background:#2b4a6b;color:#fff;}
+
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(20,50,45,.05);margin-top:6px;}
+  th{background:#1a2f47;color:#fff;text-align:left;padding:10px 12px;font-size:11px;letter-spacing:.5px;text-transform:uppercase;}
+  td{padding:11px 12px;border-bottom:1px solid #eef1f4;font-size:13.5px;vertical-align:top;}
+  tr:last-child td{border-bottom:0;}
+  td .it{font-weight:700;color:#1a2f47;} td .nt{color:var(--muted);font-size:12.5px;margin-top:2px;}
+  .badge{font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+  .b-todo{background:#fbe7e2;color:#b0472b;} .b-prog{background:#fbf3e0;color:#8a6a2b;} .b-sent{background:#eef2f7;color:#2b4a6b;}
+  .b-place{background:#eef4f0;color:#1f7a4d;} .b-signed{background:#1f7a4d;color:#fff;}
+  .ty{font-size:11px;color:var(--muted);}
+  @media(max-width:620px){ th:nth-child(4),td:nth-child(4){display:none;} }
+
+  .add{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .add label{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:10px 0 4px;}
+  .add input,.add textarea,.add select{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;} @media(max-width:560px){.row3{grid-template-columns:1fr;}}
+  .btn{background:#2b4a6b;color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;margin-top:14px;}
+  .btn:hover{background:#1a2f47;}
+  #addStatus{font-size:13px;font-weight:600;margin-top:8px;} #addStatus.ok{color:#1f7a4d;} #addStatus.err{color:#b0472b;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Dashboard</a><a href="worklog.html">Work Log →</a></div>
+  <div class="kicker">Private · Steve Kirkwood Build Project</div>
+  <h1>Business</h1>
+  <p>The business side — contracts, agreements, invoices, access and admin. What's agreed, what's outstanding, and who owns it.</p>
+</div></header>
+<div class="wrap">
+
+  <div class="links" style="margin-top:16px;">
+    <a class="lk" href="commercials.html">💷 The money framework →</a>
+    <a class="lk" href="the-plan.pdf" target="_blank">📄 The plan (PDF) →</a>
+  </div>
+
+  <h2>Contracts, agreements &amp; admin</h2>
+  <p class="sub" id="sub">Loading from the tracker…</p>
+  <div id="list"><div class="state">Loading…</div></div>
+
+  <div class="add">
+    <h2 style="margin-top:2px;">Add a business item</h2>
+    <label>Item</label>
+    <input id="f_item" placeholder="e.g. Bakery insurance">
+    <div class="row3">
+      <div><label>Type</label>
+        <select id="f_type"><option>Contract</option><option>Agreement</option><option>Invoice</option><option>Access / Login</option><option>Insurance</option><option>Admin</option></select></div>
+      <div><label>Status</label>
+        <select id="f_status"><option>To do</option><option>In progress</option><option>Sent</option><option>In place</option><option>Signed</option></select></div>
+      <div><label>Owner</label>
+        <select id="f_owner"><option>Dominic</option><option>Steve</option></select></div>
+    </div>
+    <label>Notes</label>
+    <textarea id="f_notes" rows="2" placeholder="Any detail…"></textarea>
+    <button class="btn" onclick="addItem()">Add item</button>
+    <div id="addStatus"></div>
+  </div>
+
+</div>
+<script>
+(function(){
+  function esc(s){return (s==null?"":String(s)).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  var scls={"To do":"b-todo","In progress":"b-prog","Sent":"b-sent","In place":"b-place","Signed":"b-signed"};
+  function render(items){
+    var el=document.getElementById('list');
+    if(!items.length){el.innerHTML='<div class="state">No items yet — add the first below.</div>';document.getElementById('sub').textContent='';return;}
+    document.getElementById('sub').textContent=items.length+' item'+(items.length===1?'':'s')+'.';
+    var rows=items.map(function(it){
+      return '<tr><td><div class="it">'+esc(it.Item||'')+'</div>'+(it.Notes?'<div class="nt">'+esc(it.Notes)+'</div>':'')+'</td>'+
+        '<td class="ty">'+esc(it.Type||'')+'</td>'+
+        '<td><span class="badge '+(scls[it.Status]||'')+'">'+esc(it.Status||'')+'</span></td>'+
+        '<td class="ty">'+esc(it.Owner||'')+'</td></tr>';
+    }).join('');
+    el.innerHTML='<table><tr><th>Item</th><th>Type</th><th>Status</th><th>Owner</th></tr>'+rows+'</table>';
+  }
+  function load(){
+    fetch('/api/business').then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,st:r.status,j:j};});})
+      .then(function(res){
+        if(res.ok&&res.j&&res.j.ok){render(res.j.items||[]);}
+        else if(res.st===403){document.getElementById('list').innerHTML='<div class="state">The tracker token needs <b>read</b> access — add the <b>data.records:read</b> scope to the Airtable token, then reload.</div>';}
+        else if(res.j&&res.j.error==='not_configured'){document.getElementById('list').innerHTML='<div class="state">Add <b>AIRTABLE_TOKEN</b> in Vercel to switch this on.</div>';}
+        else {document.getElementById('list').innerHTML='<div class="state">Couldn’t load right now. (Works once deployed with the token.)</div>';}
+      })
+      .catch(function(){document.getElementById('list').innerHTML='<div class="state">Couldn’t load — this page reads live once it’s deployed.</div>';});
+  }
+  window.addItem=function(){
+    var st=document.getElementById('addStatus');
+    var payload={item:document.getElementById('f_item').value,type:document.getElementById('f_type').value,
+      status:document.getElementById('f_status').value,owner:document.getElementById('f_owner').value,
+      notes:document.getElementById('f_notes').value};
+    if(!payload.item){st.className='err';st.textContent='Give the item a name first.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/business',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Added.';document.getElementById('f_item').value='';document.getElementById('f_notes').value='';load();}else{st.className='err';st.textContent='Couldn’t save — is the token set (with write)?';}})
+      .catch(function(){st.className='err';st.textContent='Couldn’t reach the tracker.';});
+  };
+  load();
+})();
+</script>
+</body></html>

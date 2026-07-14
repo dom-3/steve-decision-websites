@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sancler Property — Website Architecture</title>
+<style>
+  :root{--ac:#2b4a6b;--acd:#1a2f47;--gold:#b07d2b;--ink:#212a33;--muted:#6a7885;--line:#dde5ec;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1f4;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px 120px;}
+  header{background:linear-gradient(160deg,var(--ac),var(--acd));color:#eef3f8;padding:40px 22px 34px;}
+  header .inner{max-width:960px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;}
+  .top a{color:#dbe6f2;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#b9cbe0;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  header p{max-width:680px;color:#d5e1ee;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--acd);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 12px;}
+  .princ{background:#eef4fb;border-left:4px solid var(--ac);border-radius:8px;padding:11px 15px;font-size:13.4px;margin:12px 0;}
+  .princ b{color:var(--acd);}
+  .map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;}
+  .mnode{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;box-shadow:0 2px 8px rgba(30,50,70,.05);}
+  .mnode b{display:block;font-family:Georgia,serif;color:var(--ac);font-size:15px;} .mnode span{font-size:11.7px;color:var(--muted);}
+  .mnode.home{grid-column:1/-1;border-color:var(--gold);background:#fbfdff;}
+  @media(max-width:620px){.map{grid-template-columns:1fr 1fr;}}
+  .page{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 10px rgba(30,50,70,.06);overflow:hidden;margin:12px 0;}
+  .ph{display:flex;align-items:center;gap:10px;padding:12px 16px;background:linear-gradient(90deg,var(--ac),var(--acd));color:#fff;}
+  .ph .n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
+  .ph b{font-family:Georgia,serif;font-size:16px;} .ph .role{margin-left:auto;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;opacity:.9;}
+  .pb{padding:12px 16px 14px;} .purpose{font-size:13px;color:#5a6773;margin:0 0 8px;font-style:italic;}
+  .blocks{list-style:none;margin:0;padding:0;} .blocks li{position:relative;padding:6px 0 6px 22px;font-size:13.5px;border-bottom:1px dashed #eef1f4;color:#2f3a44;}
+  .blocks li:last-child{border-bottom:0;} .blocks li:before{content:"▸";position:absolute;left:2px;color:var(--gold);} .blocks li b{color:var(--acd);}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+  .fstep{flex:1 1 150px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;box-shadow:0 2px 8px rgba(30,50,70,.05);}
+  .fstep .fn{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);}
+  .fstep b{display:block;font-size:14px;color:var(--acd);margin:2px 0;} .fstep span{font-size:12.3px;color:#5a6773;}
+  .tech{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0;}
+  .tc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 14px;box-shadow:0 2px 8px rgba(30,50,70,.05);}
+  .tc h4{margin:0 0 4px;font-size:13.5px;color:var(--acd);} .tc p{margin:0;font-size:12.7px;color:#4a5763;}
+  @media(max-width:620px){.tech{grid-template-columns:1fr;}}
+  .later{background:#fff;border:1px dashed #c9d6e2;border-radius:10px;padding:12px 15px;} .later ul{margin:0;padding-left:18px;} .later li{font-size:13.3px;margin:4px 0;color:#4a5763;}
+  .react{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:16px 0;box-shadow:0 2px 8px rgba(30,50,70,.05);}
+  .react label{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);}
+  textarea{width:100%;padding:9px 11px;border:1px solid #cfd8e0;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:6px;resize:vertical;}
+  .bar{display:flex;justify-content:flex-end;gap:8px;margin-top:8px;align-items:center;}
+  .who{margin-right:auto;font-size:12.5px;color:var(--muted);display:flex;gap:6px;align-items:center;}
+  .seg{background:#eef2f7;border:1.5px solid var(--line);color:#3a4a57;font-size:12px;font-weight:700;padding:5px 11px;border-radius:7px;cursor:pointer;} .seg.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+  .btn{background:var(--ac);color:#fff;border:0;font-size:13.5px;font-weight:700;padding:9px 16px;border-radius:8px;cursor:pointer;} .btn:hover{background:var(--acd);} .btn.alt{background:#fff;color:var(--ac);border:2px solid var(--ac);}
+  #status{font-size:13px;font-weight:600;margin-top:8px;} #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Dashboard</a><a href="sancler-plan.html">The Sancler plan →</a></div>
+  <div class="kicker">Sancler Property · Website Architecture</div>
+  <h1>How the website works</h1>
+  <p>The blueprint for the Sancler site — built around one job: <b>turn browsers into viewings</b> with real photography and video, and capture every enquiry. A refresh of the current site, not a portal listing.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="princ"><b>The rule for every page:</b> real photos and video (never CGI), the homes shown at their best, and a <b>register-interest</b> capture never more than one click away. Website-only, organic-first — no portals or paid ads until Steve says so.</div>
+  <p style="text-align:center;margin:14px 0 0;"><a href="sancler-plan.html" style="display:inline-block;background:var(--ac);color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:12px 22px;border-radius:10px;">See the Sancler plan &amp; the decisions →</a></p>
+
+  <h2>1 · The sitemap</h2>
+  <p class="sub">Lean and lead-focused — everything points to a development and to registering interest.</p>
+  <div class="map">
+    <div class="mnode home"><b>Home</b><span>The hero development, real photography, one clear “Register your interest”</span></div>
+    <div class="mnode"><b>Developments</b><span>All current sites, filterable, with status</span></div>
+    <div class="mnode"><b>Development detail</b><span>Per site: photos, video, plots, spec, register</span></div>
+    <div class="mnode"><b>House types &amp; spec</b><span>Layouts, kitchens, finishes (Carl's detail)</span></div>
+    <div class="mnode"><b>Why Sancler</b><span>Quality, place, the people behind the homes</span></div>
+    <div class="mnode"><b>Register / Contact</b><span>Capture + brochure + auto follow-up</span></div>
+  </div>
+
+  <h2>2 · Page by page</h2>
+  <p class="sub">Each page top-to-bottom — the blocks in order. Lead persona on the right.</p>
+
+  <div class="page"><div class="ph"><div class="n">1</div><b>Home</b><span class="role">Cass + Marcus</span></div>
+    <div class="pb"><div class="purpose">Show a real, beautiful home and get the enquiry.</div>
+      <ul class="blocks">
+        <li><b>Hero (real photo/video):</b> the flagship development — no CGI — with a bold <b>“Register your interest”</b>.</li>
+        <li><b>Featured developments:</b> a tidy set of cards, each with status (available / selling / coming).</li>
+        <li><b>Why Sancler:</b> three proofs — real homes, local quality, the setting (“why live in Laugharne”).</li>
+        <li><b>A walkthrough video</b> block — the thing CGI can never do.</li>
+        <li><b>Register / brochure</b> strip + footer (phone, area, socials).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">2</div><b>Developments</b><span class="role">Marcus + Sol</span></div>
+    <div class="pb"><div class="purpose">Browse what's available, fast.</div>
+      <ul class="blocks">
+        <li>Filterable cards per development — name, location, from-price, status.</li>
+        <li>Clear <b>availability</b> up front (available / reserved / sold).</li>
+        <li>Every card → the development detail; register-interest never far.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">3</div><b>Development detail</b><span class="role">Cass + Marcus + Sol</span></div>
+    <div class="pb"><div class="purpose">The engine — where a browser becomes a viewing.</div>
+      <ul class="blocks">
+        <li><b>Photo gallery + walkthrough video</b> + the setting/village film.</li>
+        <li><b>Plots / availability</b> and the house types on this site.</li>
+        <li><b>Specification</b> — kitchens, finishes, the detail (from Carl).</li>
+        <li><b>Register interest + brochure</b> — capture name/email, auto-send brochure, automated follow-up.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">4</div><b>Why Sancler</b><span class="role">Nia + Marcus</span></div>
+    <div class="pb"><div class="purpose">The reason to trust and to choose local.</div>
+      <ul class="blocks">
+        <li>The quality &amp; craftsmanship story — real homes, real people.</li>
+        <li>Place-making — living in Laugharne / West Wales.</li>
+        <li>Testimonials from happy buyers.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">5</div><b>Register / Contact</b><span class="role">Sol + Marcus</span></div>
+    <div class="pb"><div class="purpose">Make it effortless to raise a hand.</div>
+      <ul class="blocks">
+        <li>Simple register-interest form (which development, contact).</li>
+        <li>Auto-send brochure + a friendly automated follow-up sequence.</li>
+        <li>Phone number for direct enquiries.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>3 · The enquiry journey (the money path)</h2>
+  <p class="sub">From “nice house” to a booked viewing — with follow-up that never drops the ball.</p>
+  <div class="flow">
+    <div class="fstep"><div class="fn">Step 1</div><b>Browse developments</b><span>Real photos + video, availability clear.</span></div>
+    <div class="fstep"><div class="fn">Step 2</div><b>View a home</b><span>Gallery, walkthrough, spec, plots.</span></div>
+    <div class="fstep"><div class="fn">Step 3</div><b>Register interest</b><span>Name/email → brochure auto-sent.</span></div>
+    <div class="fstep"><div class="fn">Step 4</div><b>Auto follow-up → viewing</b><span>Nurtured until they book.</span></div>
+  </div>
+
+  <h2>4 · How it's built (simple, lead-first)</h2>
+  <div class="tech">
+    <div class="tc"><h4>Fast marketing site</h4><p>Astro / Next on Vercel — quick, SEO-friendly, easy to update. Real photography/video led.</p></div>
+    <div class="tc"><h4>Lead capture + CRM</h4><p>Register-interest forms → <b>Airtable CRM</b>; Make.com sends the brochure and the follow-up sequence.</p></div>
+    <div class="tc"><h4>Media (Cloudinary)</h4><p>The real photos + walkthrough videos served fast and optimised.</p></div>
+    <div class="tc"><h4>Measure</h4><p>GA4 + video-view tracking; a monthly report on enquiries and views.</p></div>
+  </div>
+  <p class="sub">Same-day trust fixes on the current site first (kill “Homes Ready 2023”, fix the blank Site Plan, speed the images) so we stop losing buyers while the refresh is built. No portals, no paid ads for now — organic-first.</p>
+
+  <h2>5 · What we deliberately leave for later</h2>
+  <div class="later"><ul>
+    <li>Interactive plot picker + full 3D/virtual tours (once the core is live and filming's done).</li>
+    <li>Paid Facebook/Instagram lead ads + retargeting — parked pending Steve's OK.</li>
+    <li>Portals (Rightmove/Zoopla/OnTheMarket) — none for now.</li>
+  </ul></div>
+
+  <div class="react">
+    <label>React to this architecture — approve, change, or add</label>
+    <textarea id="note" rows="2" placeholder="Anything you'd move, cut, or add before we build it…"></textarea>
+    <div class="bar">
+      <div class="who">By:
+        <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+        <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+      </div>
+      <button class="btn alt" type="button" onclick="copyNote()">Copy</button>
+      <button class="btn" type="button" onclick="saveNote()">Send feedback</button>
+    </div>
+    <div id="status"></div>
+  </div>
+
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.who .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function val(){return (document.getElementById('note').value||'').trim();}
+  window.saveNote=function(){var v=val(),st=document.getElementById('status');if(!v){st.className='err';st.textContent='Write a note first.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:[{item:'Sancler website architecture — feedback',business:'Sancler Property',type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved to the tracker.';document.getElementById('note').value='';}else{st.className='err';st.textContent='Couldn’t reach the tracker — use Copy.';}})
+      .catch(function(){st.className='err';st.textContent='Couldn’t reach the tracker — use Copy.';});};
+  window.copyNote=function(){var v=val();navigator.clipboard.writeText(v).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied.';},function(){prompt('Copy:',v);});};
+})();
+</script>
+</body></html>

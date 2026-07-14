@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Island House — Website Architecture</title>
+<style>
+  :root{--ac:#1f5c4d;--acd:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px 120px;}
+  header{background:linear-gradient(160deg,var(--ac),var(--acd));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:960px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  header p{max-width:680px;color:#e6dcc8;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--acd);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 12px;}
+  .princ{background:#eef4ec;border-left:4px solid var(--ac);border-radius:8px;padding:11px 15px;font-size:13.4px;margin:12px 0;}
+  .princ b{color:var(--acd);}
+  .map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;}
+  .mnode{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .mnode b{display:block;font-family:Georgia,serif;color:var(--ac);font-size:15px;} .mnode span{font-size:11.7px;color:var(--muted);}
+  .mnode.home{grid-column:1/-1;border-color:var(--gold);background:#fbfdfb;}
+  @media(max-width:620px){.map{grid-template-columns:1fr 1fr;}}
+  .page{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 10px rgba(20,50,45,.06);overflow:hidden;margin:12px 0;}
+  .ph{display:flex;align-items:center;gap:10px;padding:12px 16px;background:linear-gradient(90deg,var(--ac),var(--acd));color:#fff;}
+  .ph .n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
+  .ph b{font-family:Georgia,serif;font-size:16px;} .ph .role{margin-left:auto;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;opacity:.9;}
+  .pb{padding:12px 16px 14px;} .purpose{font-size:13px;color:#5a6b66;margin:0 0 8px;font-style:italic;}
+  .blocks{list-style:none;margin:0;padding:0;} .blocks li{position:relative;padding:6px 0 6px 22px;font-size:13.5px;border-bottom:1px dashed #eef2ef;color:#33403d;}
+  .blocks li:last-child{border-bottom:0;} .blocks li:before{content:"▸";position:absolute;left:2px;color:var(--gold);} .blocks li b{color:var(--acd);}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+  .fstep{flex:1 1 150px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .fstep .fn{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);}
+  .fstep b{display:block;font-size:14px;color:var(--acd);margin:2px 0;} .fstep span{font-size:12.3px;color:#5a6b66;}
+  .tech{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0;}
+  .tc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .tc h4{margin:0 0 4px;font-size:13.5px;color:var(--acd);} .tc p{margin:0;font-size:12.7px;color:#4a5751;}
+  @media(max-width:620px){.tech{grid-template-columns:1fr;}}
+  .later{background:#fff;border:1px dashed #cfe0d6;border-radius:10px;padding:12px 15px;} .later ul{margin:0;padding-left:18px;} .later li{font-size:13.3px;margin:4px 0;color:#4a5751;}
+  .react{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:16px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .react label{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);}
+  textarea{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:6px;resize:vertical;}
+  .bar{display:flex;justify-content:flex-end;gap:8px;margin-top:8px;align-items:center;}
+  .who{margin-right:auto;font-size:12.5px;color:var(--muted);display:flex;gap:6px;align-items:center;}
+  .seg{background:#eef4f0;border:1.5px solid var(--line);color:#3a4a47;font-size:12px;font-weight:700;padding:5px 11px;border-radius:7px;cursor:pointer;} .seg.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+  .btn{background:var(--ac);color:#fff;border:0;font-size:13.5px;font-weight:700;padding:9px 16px;border-radius:8px;cursor:pointer;} .btn:hover{background:var(--acd);} .btn.alt{background:#fff;color:var(--ac);border:2px solid var(--ac);}
+  #status{font-size:13px;font-weight:600;margin-top:8px;} #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Dashboard</a><a href="island-house-plan.html">The Island House plan →</a></div>
+  <div class="kicker">Island House · Website Architecture</div>
+  <h1>How the website works</h1>
+  <p>The blueprint for the Island House site — built around one job: <b>tell the restoration story as it happens</b> and grow an audience who follow it. A living journal, not a static brochure. The history is done and fact-checked.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="princ"><b>The rule for every page:</b> sell the <b>restoration itself</b> — the process is the attraction. Chapter by chapter, evidence-true, beautifully shot. Give people a reason to <b>follow</b>, then to visit when it opens.</div>
+  <p style="text-align:center;margin:14px 0 0;"><a href="island-house-plan.html" style="display:inline-block;background:var(--ac);color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:12px 22px;border-radius:10px;">See the Island House plan &amp; the decisions →</a></p>
+
+  <h2>1 · The sitemap</h2>
+  <p class="sub">Story-led — everything invites you to follow the journey.</p>
+  <div class="map">
+    <div class="mnode home"><b>Home</b><span>The hook: Britain's medieval port, brought back to life — “follow the story”</span></div>
+    <div class="mnode"><b>The Journal</b><span>Chapters, updated as the restoration moves</span></div>
+    <div class="mnode"><b>The Restoration</b><span>Live progress, milestones, the craft</span></div>
+    <div class="mnode"><b>History &amp; Heritage</b><span>The fact-checked story, the medieval quay, the finds</span></div>
+    <div class="mnode"><b>The Vision</b><span>The future hotel · bar · restaurant</span></div>
+    <div class="mnode"><b>Follow / Press</b><span>Join the journal · press · contact</span></div>
+  </div>
+
+  <h2>2 · Page by page</h2>
+  <p class="sub">Each page top-to-bottom — the blocks in order. Lead persona on the right.</p>
+
+  <div class="page"><div class="ph"><div class="n">1</div><b>Home</b><span class="role">Delphine + Cass + Marcus</span></div>
+    <div class="pb"><div class="purpose">Hook them into the story and get the follow.</div>
+      <ul class="blocks">
+        <li><b>Hero:</b> a striking image/film of the building + the line — “Britain's medieval port, brought back to life.”</li>
+        <li><b>The latest chapter</b> — the newest journal entry, front and centre.</li>
+        <li><b>Why it matters</b> — the medieval quay (a national first), Dylan Thomas's town, the finds.</li>
+        <li><b>Follow the story</b> — join the journal (email) — the key action.</li>
+        <li>A taste of <b>the vision</b> (hotel/bar/restaurant) + footer.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">2</div><b>The Journal</b><span class="role">Delphine + Cass</span></div>
+    <div class="pb"><div class="purpose">The heart — the living story, chapter by chapter.</div>
+      <ul class="blocks">
+        <li>Chapters in order, each with photos/film — the craft, the discoveries, the people.</li>
+        <li>Milestone “reveal” moments flagged.</li>
+        <li>Editable by non-devs via a simple <b>CMS</b> so chapters ship regularly.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">3</div><b>The Restoration</b><span class="role">Idris + Gethin + Cass</span></div>
+    <div class="pb"><div class="purpose">Show the progress honestly — and set up the record.</div>
+      <ul class="blocks">
+        <li>Live progress + milestones (before / during / the plan).</li>
+        <li>Time-lapse + drone; the craftsmanship up close.</li>
+        <li>Hooks into the <b>documentation / inspection system</b> (the interactive “one area” view, later).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">4</div><b>History &amp; Heritage</b><span class="role">Delphine + Ffion</span></div>
+    <div class="pb"><div class="purpose">The depth — evidence-true, and the grant/PR hook.</div>
+      <ul class="blocks">
+        <li>The fact-checked history (fact / tradition kept separate).</li>
+        <li>The medieval quay discovery — the national-first story.</li>
+        <li>The Dylan Thomas / Laugharne connection.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">5</div><b>The Vision</b><span class="role">Delphine + Marcus</span></div>
+    <div class="pb"><div class="purpose">Where it's heading — build anticipation.</div>
+      <ul class="blocks">
+        <li>The future hotel · bar · restaurant, told as a promise.</li>
+        <li>“Be the first to know” — register to visit / stay when it opens.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page"><div class="ph"><div class="n">6</div><b>Follow / Press</b><span class="role">Nia + Carys</span></div>
+    <div class="pb"><div class="purpose">Grow the audience and feed the press.</div>
+      <ul class="blocks">
+        <li>Join the journal (email) + social.</li>
+        <li>Press area — the discovery story, images, contact for media.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>3 · The audience journey</h2>
+  <p class="sub">From “what a story” to a follower who feels part of it — and, in time, a visitor.</p>
+  <div class="flow">
+    <div class="fstep"><div class="fn">Step 1</div><b>Discover the story</b><span>The hook + the latest chapter.</span></div>
+    <div class="fstep"><div class="fn">Step 2</div><b>Follow the journal</b><span>Join by email; get each chapter.</span></div>
+    <div class="fstep"><div class="fn">Step 3</div><b>Milestone reveals</b><span>Big moments bring them back + share.</span></div>
+    <div class="fstep"><div class="fn">Step 4</div><b>Visit when it opens</b><span>The audience becomes guests.</span></div>
+  </div>
+
+  <h2>4 · How it's built</h2>
+  <div class="tech">
+    <div class="tc"><h4>Story-first site + CMS</h4><p>Next/Astro on Vercel with a simple CMS so journal chapters ship without a developer.</p></div>
+    <div class="tc"><h4>Media (Cloudinary)</h4><p>The photography, film and time-lapse served fast — heavy media handled properly.</p></div>
+    <div class="tc"><h4>Audience (Airtable + email)</h4><p>The journal following captured and nurtured; press list managed.</p></div>
+    <div class="tc"><h4>The record (Supabase, later)</h4><p>The inspection/documentation data + the interactive “one area” dashboard when we build it.</p></div>
+  </div>
+  <p class="sub">The site and the documentation system share one capture — a photo taken on site can feed the record, the story and the marketing at once (“capture once, use everywhere”).</p>
+
+  <h2>5 · What we deliberately leave for later</h2>
+  <div class="later"><ul>
+    <li>The interactive “one area” restoration dashboard (build after the standards are signed off).</li>
+    <li>A grants / partnership microsite if the discovery route is pursued.</li>
+    <li>Booking / stays — added when the hospitality side nears opening.</li>
+  </ul></div>
+
+  <div class="react">
+    <label>React to this architecture — approve, change, or add</label>
+    <textarea id="note" rows="2" placeholder="Anything you'd move, cut, or add before we build it…"></textarea>
+    <div class="bar">
+      <div class="who">By:
+        <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+        <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+      </div>
+      <button class="btn alt" type="button" onclick="copyNote()">Copy</button>
+      <button class="btn" type="button" onclick="saveNote()">Send feedback</button>
+    </div>
+    <div id="status"></div>
+  </div>
+
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.who .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function val(){return (document.getElementById('note').value||'').trim();}
+  window.saveNote=function(){var v=val(),st=document.getElementById('status');if(!v){st.className='err';st.textContent='Write a note first.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:[{item:'Island House website architecture — feedback',business:'Island House',type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved to the tracker.';document.getElementById('note').value='';}else{st.className='err';st.textContent='Couldn’t reach the tracker — use Copy.';}})
+      .catch(function(){st.className='err';st.textContent='Couldn’t reach the tracker — use Copy.';});};
+  window.copyNote=function(){var v=val();navigator.clipboard.writeText(v).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied.';},function(){prompt('Copy:',v);});};
+})();
+</script>
+</body></html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Island House — The Wider Field · Connections &amp; Diagnoses</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;--cream:#f4efe6;
+        --serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost","Helvetica Neue",Arial,sans-serif;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px 120px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:44px 24px 40px;}
+  header .inner{max-width:940px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;gap:10px;flex-wrap:wrap;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:16px;}
+  h1{font-family:var(--serif);font-weight:500;font-size:40px;line-height:1.05;margin:10px 0 12px;}
+  header p{max-width:660px;color:#e6dcc8;font-size:16px;margin:0;font-weight:300;}
+  hr.r{width:54px;height:3px;background:var(--gold);border:0;margin:18px 0 0;}
+  h2{font-family:var(--serif);color:var(--dark);font-weight:600;font-size:27px;margin:44px 0 4px;}
+  .sub{color:var(--muted);font-size:13.5px;margin:0 0 16px;}
+  .lead{background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:0 2px 10px rgba(20,50,45,.05);}
+  .lead .big{font-family:var(--serif);font-size:22px;color:var(--dark);line-height:1.35;}
+  .lead p{font-size:14px;color:#3a4a47;margin:8px 0 0;}
+
+  /* concentric rings diagram */
+  .ringwrap{display:flex;justify-content:center;margin:20px 0 6px;}
+  .ringwrap svg{max-width:100%;height:auto;}
+
+  /* rings list */
+  .rings{margin:14px 0;}
+  .ring{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px 14px 64px;margin:0 0 11px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .ring .n{position:absolute;left:14px;top:14px;width:34px;height:34px;border-radius:50%;background:#eef4f0;color:var(--green);
+           font-family:var(--serif);font-weight:600;font-size:18px;display:flex;align-items:center;justify-content:center;border:1.5px solid #cfe0d6;}
+  .ring .sc{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+  .ring h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:2px 0 5px;color:var(--dark);}
+  .ring p{font-size:13.6px;color:#3a4a47;margin:0 0 6px;}
+  .ring .so{font-size:13px;color:var(--green);border-top:1px dashed #e2ebe6;padding-top:6px;margin-top:2px;}
+  .ring .so b{color:var(--dark);}
+
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0;}
+  @media(max-width:640px){.cards{grid-template-columns:1fr;}}
+  .diag{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .diag .k{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+  .diag .h{font-family:var(--serif);font-size:18px;color:var(--dark);font-weight:600;margin:1px 0 4px;}
+  .diag p{font-size:13px;color:#3a4a47;margin:0;}
+  .diag .read{font-size:12.6px;color:var(--green);margin-top:7px;border-top:1px dashed #e2ebe6;padding-top:6px;}
+  .diag .read b{color:var(--dark);}
+
+  .conn{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 18px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .conn div{padding:12px 0;border-bottom:1px solid #eef2ef;font-size:13.8px;} .conn div:last-child{border-bottom:0;}
+  .conn b{color:var(--dark);} .conn .tag{display:inline-block;font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:600;
+    padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;background:#eef4f0;color:#1f7a4d;}
+
+  .qs{background:#fff;border:1px dashed #cfe0d6;border-radius:10px;padding:8px 18px;margin:12px 0;}
+  .qs div{padding:11px 0;border-bottom:1px solid #eef2ef;font-size:13.6px;color:#3a4a47;} .qs div:last-child{border-bottom:0;}
+  .qs b{color:var(--dark);} .qs .st{display:inline-block;font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:600;
+    padding:2px 8px;border-radius:20px;margin-left:6px;background:#eef2f7;color:#2b4a6b;}
+
+  .src{font-size:11.5px;color:#9aa8a2;margin-top:18px;line-height:1.5;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="island-house-story.html">← The Architecture of the Story</a><a href="index.html">Dashboard →</a></div>
+  <div class="kicker">Island House · The Flagship</div>
+  <h1>The Wider Field</h1>
+  <p>The story doesn't stop at the front door. This is the same evidence read outward — the connections that place one house inside the story of a whole coast, what the finds actually let us <em>argue</em>, and the open questions the next phase should settle.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="lead">
+    <div class="big">Three moves: read it <b>outward</b> (the rings), read it <b>deeper</b> (the diagnoses), and know exactly what's still <b>open</b>.</div>
+    <p>The story page is the spine — what happened, layer by layer. This page is the field around it: how Island House connects to Laugharne, the estuary and the nation; what the physical evidence lets us conclude rather than just describe; and the honest list of what remains to be proved. It's what turns a good story into original work.</p>
+  </div>
+
+  <h2>1 · The concentric rings — reading it outward</h2>
+  <p class="sub">One quay, six scales. Each ring widens the audience and the significance — and every one is anchored to something we can point at.</p>
+
+  <div class="ringwrap"><svg width="300" height="300" viewBox="0 0 300 300" role="img" aria-label="Six concentric rings from the house outward">
+    <circle cx="150" cy="150" r="146" fill="none" stroke="#cfe0d6" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="120" fill="none" stroke="#cfe0d6" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="94" fill="none" stroke="#cfe0d6" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="68" fill="none" stroke="#bcd3c8" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="42" fill="none" stroke="#bcd3c8" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="17" fill="#1f5c4d"/>
+    <text x="150" y="154" text-anchor="middle" fill="#fff" font-family="Cormorant Garamond,serif" font-size="15">1</text>
+    <text x="150" y="122" text-anchor="middle" fill="#6a7b76" font-family="Jost,sans-serif" font-size="10">2 · keyside</text>
+    <text x="150" y="96" text-anchor="middle" fill="#6a7b76" font-family="Jost,sans-serif" font-size="10">3 · town</text>
+    <text x="150" y="70" text-anchor="middle" fill="#6a7b76" font-family="Jost,sans-serif" font-size="10">4 · estuary</text>
+    <text x="150" y="44" text-anchor="middle" fill="#8a6a2b" font-family="Jost,sans-serif" font-size="10">5 · Wales</text>
+    <text x="150" y="18" text-anchor="middle" fill="#8a6a2b" font-family="Jost,sans-serif" font-size="10">6 · Atlantic</text>
+  </svg></div>
+
+  <div class="rings">
+    <div class="ring"><div class="n">1</div><div class="sc">The house</div><h3>The buried river</h3>
+      <p>Island House sits on a tidal inlet with a river channel still running beneath it. The same fact explains why a port grew here (sheltered, tidal access right at the town) and why the building is unstable and floods today.</p>
+      <div class="so"><b>The connection:</b> the geology is the whole plot — it made the port, and it's the reason the restoration exists.</div></div>
+
+    <div class="ring"><div class="n">2</div><div class="sc">The keyside</div><h3>A merchant's waterfront</h3>
+      <p>The quays, the stone steps and jetty, and the high-status hall houses with their garderobe — plus pottery traded from Bristol, France and Spain. This wasn't a jetty for locals; it was a working commercial frontage owned by people with money and reach.</p>
+      <div class="so"><b>The connection:</b> the finds put a wealthy, outward-facing merchant class on this exact spot.</div></div>
+
+    <div class="ring"><div class="n">3</div><div class="sc">The town</div><h3>Laugharne, still medieval</h3>
+      <p>The quay sat just outside the walls of a chartered borough that has never stopped being one. Laugharne is one of only two functioning medieval corporations left in the UK — a Portreeve in a gold cockle-shell chain, a court leet, and a 25-mile Common Walk beaten every three years.</p>
+      <div class="so"><b>The connection:</b> the living town <em>is</em> the context — the medieval structure the quay served is still visibly running.</div></div>
+
+    <div class="ring"><div class="n">4</div><div class="sc">The estuary</div><h3>The Three Rivers &amp; the cockle coast</h3>
+      <p>The Taf is one of three rivers (with the Tywi and Gwendraeth) draining into Carmarthen Bay — silting, mud-laden estuaries. This is the cockle coast: Laugharne's "Cocklemen," the gatherers of Ferryside and Penclawdd, an industry old enough to be woven into the town's own regalia.</p>
+      <div class="so"><b>The connection:</b> the quay's rise and fall is a chapter in the estuary's own story of silt and shellfish.</div></div>
+
+    <div class="ring"><div class="n">5</div><div class="sc">Wales</div><h3>A national first</h3>
+      <p>These are the first medieval quays excavated in Wales. They join a tiny canon of Welsh medieval maritime archaeology — the Newport Ship (built c.1449), the Magor Pill boat (c.1194) — evidence that had, until now, come mostly from big English ports like Bristol and London.</p>
+      <div class="so"><b>The connection:</b> this is the reason a university, Cadw and the national press should care — it fills a genuine gap.</div></div>
+
+    <div class="ring"><div class="n">6</div><div class="sc">The Atlantic world</div><h3>The wine-and-wool sea</h3>
+      <p>Medieval West Wales sat on the edge of a busy Atlantic economy — Gascon wine up from Bordeaux, wool and cloth out, salt and iron across from France, Spain and Ireland. The Bristol/French/Spanish pottery here is a thread of that whole trading sea, landed at one small Welsh quay.</p>
+      <div class="so"><b>The connection:</b> the outermost ring — a local dig that touches a Europe-wide trade network.</div></div>
+  </div>
+
+  <h2>2 · The diagnoses — what the evidence lets us argue</h2>
+  <p class="sub">Not description, but reading. Each find is a symptom; here's the diagnosis it points to — the interpretive backbone of the book and the research.</p>
+  <div class="cards">
+    <div class="diag"><div class="k">Symptom</div><div class="h">Successive quays, pushed ever outward</div>
+      <p>A run of stone quays, each built further into the estuary and infilled behind, rebuilt until the 1600s.</p>
+      <div class="read"><b>Diagnosis:</b> a 400-year losing battle against silt — the slow, managed death of a port, caught in stone. Kidwelly did the same, moving its quays out to Frankland and Muddlescwm.</div></div>
+
+    <div class="diag"><div class="k">Symptom</div><div class="h">Cockle shells packed behind the walls</div>
+      <p>Each quay was backfilled with cockle shells from the estuary beds.</p>
+      <div class="read"><b>Diagnosis:</b> the town's staple economy is literally built into its harbour — the same cockles that feed the "Cocklemen" and the Portreeve's chain are the rubble holding the quay up.</div></div>
+
+    <div class="diag"><div class="k">Symptom</div><div class="h">1437 timbers in a house built c.1610–1630</div>
+      <p>Roof timbers felled in 1437, reused in a house whose truss style is early-1600s.</p>
+      <div class="read"><b>Diagnosis:</b> a salvage economy and continuous elite occupation — there was a high-status medieval building here first, and its timber was too good to waste when the present house went up.</div></div>
+
+    <div class="diag"><div class="k">Symptom</div><div class="h">Hall house · garderobe · imported pottery</div>
+      <p>A central-hearth hall house, a first-floor toilet, and ceramics from Bristol, France and Spain.</p>
+      <div class="read"><b>Diagnosis:</b> not a fishing hamlet — a genuinely wealthy merchant household plugged into Atlantic trade, on a par with Tenby's merchant houses.</div></div>
+
+    <div class="diag"><div class="k">Symptom</div><div class="h">A 3m clay-sealed wall, later breached</div>
+      <p>A massive garden wall, waterproofed with clay to hold the tide back — now broken.</p>
+      <div class="read"><b>Diagnosis:</b> the site was always engineered against the water; today's flooding is that engineering failing, not a new problem. It frames the restoration as continuity, not novelty.</div></div>
+
+    <div class="diag"><div class="k">Symptom</div><div class="h">"Island" at high tide</div>
+      <p>The inlet all but cut the spot off from land when the tide was in.</p>
+      <div class="read"><b>Diagnosis:</b> the name isn't decorative — it records a real tidal geography, and doubles as the perfect title-metaphor for the whole work: a place apart, made by water.</div></div>
+  </div>
+
+  <h2>3 · The outer connections — the hooks that travel</h2>
+  <p class="sub">The threads that lift this beyond a local restoration and give the press, a publisher and a funder a reason to lean in.</p>
+  <div class="conn">
+    <div><b>The living medieval town.</b> Laugharne's surviving corporation — Portreeve, court leet, the triennial Common Walk, burgage-strip land still allotted to senior burgesses — is a national rarity. The dig has a living stage set around it. <span class="tag">Documented</span></div>
+    <div><b>The Admiral's name.</b> The de Brian lords of Laugharne produced Sir Guy Brian KG — Admiral of the West, Garter knight, standard-bearer to Edward III at Calais. A national-history name hangs over this lordship (though the town's charter was granted by an earlier de Brian, not the Admiral). <span class="tag">Documented</span></div>
+    <div><b>The national first.</b> "The first medieval quays excavated in Wales" is a headline in its own right, and slots into the story of the Newport Ship and the Magor Pill boat — Wales's small, prized maritime canon. <span class="tag">Documented</span></div>
+    <div><b>Dylan's town.</b> Laugharne is already a place people travel to — the Boathouse, the writing shed, the model for <em>Under Milk Wood</em>'s Llareggub, his grave at St Martin's. Island House adds a deeper, older layer under the literary one. <span class="tag">Documented</span></div>
+    <div><b>Deep time.</b> A mile away, Coygan gives Neanderthal handaxes from an Ice-Age cave and an Iron-Age/Roman hillfort — the long backdrop against which the medieval port is only the most recent chapter. <span class="tag">Documented</span></div>
+  </div>
+
+  <h2>4 · What's still open — the diagnostic questions</h2>
+  <p class="sub">The honest to-test list. Settling these is exactly what makes the work original rather than a retelling — and the science is already on its way.</p>
+  <div class="qs">
+    <div><b>The charter date.</b> 1247 is when the de Brians got Laugharne; the borough charter is undated (c.1290–1307 in the sources). The Corporation's own records could pin it. <span class="st">To settle · archives</span></div>
+    <div><b>What the port actually shipped.</b> Wine, wool and cloth are the regional norm, but not yet proved for Laugharne itself — the customs accounts and port books would be the first synthesis of its real trade. <span class="st">To settle · archives</span></div>
+    <div><b>The Admiral and the harbour.</b> Did Sir Guy Brian's naval role ever touch Laugharne as a working harbour or muster point? A great hook, but inference until a record turns up. <span class="st">To test · unproven</span></div>
+    <div><b>Is the inlet the River Corran?</b> Locally the watercourse is named the Corran; the dig reports just say "a small tidal inlet." Worth tying down before it's printed as fact. <span class="st">To confirm</span></div>
+    <div><b>The scientific dating.</b> The post-excavation dating from the dig is due just after Christmas — it will firm up the quay sequence and the earliest date on the site. <span class="st">Incoming · this winter</span></div>
+  </div>
+
+  <p class="src">Sources for this page: Heneb — the Trust for Welsh Archaeology (Ken Murphy, 2025 excavation &amp; talk); Laugharne Corporation; Cadw &amp; Coflein/RCAHMW; National Museum Wales (Newport Ship, Magor Pill boat); National Trust (Tenby merchant trade); Visit Wales (Dylan Thomas). Facts are tagged the way the story page is — documented, or flagged as to-test. Corrections carried in from the research: the 1247 date is the de Brian lordship, not the charter; Sir Guy Brian was an early Garter knight and standard-bearer at Calais (not a Garter founder); the Admiral↔harbour link and the port's specific cargoes are not yet proven.</p>
+
+</div>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var p=location.pathname.toLowerCase(), biz='General';
+  if(p.indexOf('bakery')>=0||p.indexOf('globe')>=0) biz='Bakery';
+  else if(p.indexOf('sancler')>=0) biz='Sancler Property';
+  else if(p.indexOf('island')>=0) biz='Island House';
+  var who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body></html>

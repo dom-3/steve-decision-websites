@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Island House — The Architecture of the Story</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;--cream:#f4efe6;
+        --serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost","Helvetica Neue",Arial,sans-serif;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px 120px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:44px 24px 40px;}
+  header .inner{max-width:940px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:16px;}
+  h1{font-family:var(--serif);font-weight:500;font-size:40px;line-height:1.05;margin:10px 0 12px;}
+  header p{max-width:640px;color:#e6dcc8;font-size:16px;margin:0;font-weight:300;}
+  hr.r{width:54px;height:3px;background:var(--gold);border:0;margin:18px 0 0;}
+  h2{font-family:var(--serif);color:var(--dark);font-weight:600;font-size:27px;margin:40px 0 4px;}
+  .sub{color:var(--muted);font-size:13.5px;margin:0 0 16px;}
+  .lead{background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:0 2px 10px rgba(20,50,45,.05);}
+  .lead .big{font-family:var(--serif);font-size:22px;color:var(--dark);line-height:1.35;}
+  .lead p{font-size:14px;color:#3a4a47;margin:8px 0 0;}
+
+  /* strata / layers */
+  .strata{position:relative;margin:16px 0;padding-left:26px;}
+  .strata:before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:#d7e0db;}
+  .layer{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 16px;margin:0 0 12px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .layer:before{content:"";position:absolute;left:-22px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid #fff;box-shadow:0 0 0 2px #d7e0db;}
+  .layer .era{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+  .layer h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:2px 0 5px;color:var(--dark);}
+  .layer p{font-size:13.6px;color:#3a4a47;margin:0;}
+  .ev{display:inline-block;font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:8px;}
+  .ev.fact{background:#eef4f0;color:#1f7a4d;} .ev.trad{background:#fbf3e0;color:#8a6a2b;} .ev.test{background:#eef2f7;color:#2b4a6b;}
+
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0;}
+  @media(max-width:640px){.cards{grid-template-columns:1fr;}}
+  .c{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .c .h{font-family:var(--serif);font-size:18px;color:var(--dark);font-weight:600;}
+  .c .k{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:2px;}
+  .c p{font-size:13px;color:#3a4a47;margin:5px 0 0;}
+
+  .flow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+  .fstep{flex:1 1 150px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .fstep .fn{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);}
+  .fstep b{display:block;font-family:var(--serif);font-size:16px;color:var(--dark);margin:2px 0;} .fstep span{font-size:12.3px;color:var(--muted);}
+
+  .princ{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 18px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .princ div{padding:11px 0;border-bottom:1px solid #eef2ef;font-size:13.8px;} .princ div:last-child{border-bottom:0;} .princ b{color:var(--dark);}
+  .need{background:#fff;border:1px dashed #cfe0d6;border-radius:10px;padding:12px 16px;} .need ul{margin:0;padding-left:18px;} .need li{font-size:13.5px;margin:5px 0;color:#3a4a47;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Dashboard</a><a href="island-house-field.html">The wider field · connections &amp; diagnoses →</a></div>
+  <div class="kicker">Island House · The Flagship</div>
+  <h1>The Architecture of the Story</h1>
+  <p>The blueprint for turning Island House into a full published work — a book, an art-and-history piece, and a living record of the restoration. One building that holds the whole story of a Welsh medieval port — and a dig uncovering national history as it happens.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="lead">
+    <div class="big">The idea: not a brochure, but a <b>body of work</b> — history and art combined, told evidence-true, with the restoration as its living present tense.</div>
+    <p>Island House isn't three paragraphs on an “about” page. It's a subject worthy of a book, an exhibition and original research. The 2025 excavation — funded by the owners and led by Ken Murphy of Heneb — uncovered the <b>first medieval quays ever excavated in Wales</b>, buried under the house. That is primary evidence no one else has, so we're not re-tellers, we're contributors. This page is how all of it is structured into something lasting and publishable.</p>
+  </div>
+
+  <h2>1 · The spine — the layers of the story</h2>
+  <p class="sub">The chapters of the book, read like strata — from the ground up to today. Each carries an honest evidence tag.</p>
+  <div class="strata">
+    <div class="layer"><div class="era">The setting</div><h3>The tidal inlet — why there's an “island”</h3><p>The house sits on what was a tidal inlet at the mouth of the River Coran, with a river channel still running beneath it (the reason the building is structurally unstable). At high tide the spot was all but an island — which is how <b>Island House</b> got its name.</p><span class="ev fact">Fact — excavated</span></div>
+    <div class="layer"><div class="era">13th century</div><h3>The charter &amp; the medieval town</h3><p>The de Brian family held Laugharne from 1247, and under them it became a chartered borough — burgesses, a weekly market and burgage plots let at 12d a year. (The charter itself is undated; historians place it later in the 1200s.) This is where the working port begins, on the record.</p><span class="ev fact">Fact — documented</span></div>
+    <div class="layer"><div class="era">13th–16th century</div><h3>The quays — the first found in Wales</h3><p>Under the house lay a run of successive stone quays: an “arms race” pushed further out as the estuary silted, each one infilled behind with <b>cockle shells</b> (Laugharne's “Cocklemen”; the mayor's gold cockle-shell chain, c.1740). A jetty and a surviving flight of stone steps ran down onto the keyside. The <b>first medieval quays ever excavated in Wales</b> — parallels only at Bristol's Redcliffe and in London.</p><span class="ev fact">Fact — excavated</span></div>
+    <div class="layer"><div class="era">Late medieval</div><h3>The merchants' hall houses</h3><p>High-status hall houses stood on the keyside — central hearths, clay floors, first floors added later, and a <b>garderobe</b> (a first-floor toilet): the homes of merchants and gentry grown wealthy on the port. The pottery among the finds points to trade with <b>Bristol, France and Spain</b> — this small quay reached out into the medieval Atlantic economy.</p><span class="ev fact">Fact — excavated</span></div>
+    <div class="layer"><div class="era">c.1610–1630</div><h3>Island House is built</h3><p>The house itself was built around 1630. Its roof timbers dendro-date to a 1437 felling — but the truss style is c.1610–1620, so the medieval timbers were <b>reused</b>. A massive garden wall (~3m, clay-waterproofed) held the water back; its later breach is why the site floods today.</p><span class="ev fact">Fact — dated</span></div>
+    <div class="layer"><div class="era">14th century</div><h3>The Admiral — Sir Guy Bryan</h3><p>A later Guy Bryan (c.1311–1390) — Admiral, Knight of the Garter, standard-bearer to Edward III — carried the family name into national history. Was the port a muster point for royal fleets? The hook to test against the archives.</p><span class="ev test">To test — archives</span></div>
+    <div class="layer"><div class="era">1949–1953</div><h3>Dylan Thomas's Laugharne</h3><p>The town Dylan made famous. A small, marketable thread: did his world touch Island House itself? (A resident overlapped with him.)</p><span class="ev test">To test — literary archive</span></div>
+    <div class="layer"><div class="era">Now</div><h3>The restoration — the living chapter</h3><p>Bought in 2018 by Steven Kirkwood and Philip Bond to become a small hotel, the house is being saved: after the dig a 1.5m-thick wall collapsed and has been stabilised, with an interior fit-out and two new wings (kitchen/restaurant and bedrooms) to come — roughly five years to opening. Scientific dating from the excavation is due just after Christmas.</p><span class="ev fact">Fact — happening now</span></div>
+  </div>
+
+  <div class="lead" style="border-left-color:var(--green);">
+    <div class="big" style="font-size:18px;">The source under the “facts”</div>
+    <p>The excavated evidence on this page comes from the 2025 dig led by <b>Ken Murphy</b> of <b>Heneb — the Trust for Welsh Archaeology</b> (formerly Dyfed Archaeological Trust), presented at Archaeology Day 2025, and from the accompanying dendrochronology and historical research — all funded by the owners. Post-excavation <b>scientific dating results are expected just after Christmas</b> and will firm up several dates further. Two ideas Steven has raised for the finished hotel: rebuild the open medieval hall as a reproduction reception, or trace the quay and building lines as features in the garden.</p>
+  </div>
+
+  <h2>2 · What makes it original (not a retelling)</h2>
+  <p class="sub">The research angles that could add genuinely new knowledge — and attract a university, grants and national press. (Full detail in research doc 24.)</p>
+  <div class="cards">
+    <div class="c"><div class="k">Flagship</div><div class="h">The quays ↔ the cargoes</div><p>Tie the excavated quays to the surviving customs accounts &amp; port books — the first synthesis of the port's real trade. The physical evidence is now in hand; the archives are mostly desk work, highest impact.</p></div>
+    <div class="c"><div class="k">Reconstruction</div><div class="h">The lost waterfront</div><p>Maps + LiDAR + the dig → a dated animation of Laugharne's waterfront over 800 years, and why the port died. A killer “then vs now”.</p></div>
+    <div class="c"><div class="k">National hook</div><div class="h">The Admiral's fleet</div><p>Cross-reference Sir Guy Bryan's naval career with Laugharne as a working harbour — a national-history lift.</p></div>
+    <div class="c"><div class="k">Desk archaeology</div><div class="h">LiDAR &amp; map-regression</div><p>Overlay historic maps + open LiDAR to detect lost features without digging — new archaeology from data alone, plus a beautiful interactive map.</p></div>
+  </div>
+
+  <h2>3 · The forms the work takes</h2>
+  <p class="sub">One body of research and capture — published in several forms. Capture once, use everywhere.</p>
+  <div class="cards">
+    <div class="c"><div class="k">The definitive record</div><div class="h">📖 The Book</div><p>The evidence-true story of the house, the port and the restoration — the lasting artefact. Chapters = the layers above.</p></div>
+    <div class="c"><div class="k">Serialised, live</div><div class="h">📓 The Living Journal</div><p>The website — the book unfolding chapter by chapter as the restoration and research progress. The audience engine.</p></div>
+    <div class="c"><div class="k">History as art</div><div class="h">🖼️ The Art &amp; Exhibition</div><p>Photography, the waterfront reconstructions, the finds — an exhibition/art piece where history and place are felt, not just read.</p></div>
+    <div class="c"><div class="k">The moving record</div><div class="h">🎬 The Film</div><p>A documentary of the restoration + the discovery — the craft, the dig, the reveal.</p></div>
+    <div class="c"><div class="k">New knowledge</div><div class="h">🎓 The Research</div><p>Academic partnership + publishable findings — what makes it scholarship, and unlocks grants.</p></div>
+    <div class="c"><div class="k">The reveals</div><div class="h">📣 The Press</div><p>“Island House rewrites the story of a Welsh medieval port” — national PR at each milestone.</p></div>
+  </div>
+
+  <h2>4 · The pipeline</h2>
+  <p class="sub">How raw digging and archives become a published work.</p>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1 · Research</div><b>Verify</b><span>Archives, the dig, cross-referenced — fact / tradition / to-test kept honest.</span></div>
+    <div class="fstep"><div class="fn">2 · Story</div><b>Shape</b><span>The verified material written into chapters (the spine).</span></div>
+    <div class="fstep"><div class="fn">3 · Capture</div><b>Make</b><span>Photography, film, the reconstructions, the art.</span></div>
+    <div class="fstep"><div class="fn">4 · Publish</div><b>Release</b><span>Book · journal · exhibition · film · research.</span></div>
+  </div>
+
+  <h2>5 · The principles that keep it real</h2>
+  <div class="princ">
+    <div><b>Evidence-true.</b> Everything tagged — <b>fact</b>, <b>tradition</b>, or <b>to-test</b>. The credibility that lets it be taken seriously (and published).</div>
+    <div><b>History and art as equals.</b> Not a dry record and not empty prettiness — the two carry the work together.</div>
+    <div><b>The restoration is the present tense.</b> The live saving of the building is the spine that makes an 800-year story urgent now.</div>
+    <div><b>Rooted in Laugharne.</b> This is one specific place — that specificity is what makes it unrepeatable.</div>
+  </div>
+
+  <h2>6 · To make it real — what it needs</h2>
+  <div class="need"><ul>
+    <li>Keep <b>Heneb / Ken Murphy</b> close as the excavation partner; add a <b>university</b> (maritime history) + an archivist to lead the documentary research.</li>
+    <li>A <b>publisher or agent</b> for the book; an <b>artist</b> and the photographer/filmmaker for the art &amp; film.</li>
+    <li><b>Heritage Fund / Cadw</b> grant leverage off the discovery (Ffion's remit).</li>
+    <li>The <b>ongoing archive</b> from the dig + restoration, captured to standard from day one (the documentation system).</li>
+    <li>Steve's steer on <b>how far to push the discovery/research play</b> (it's the engine of the “published work” ambition).</li>
+  </ul></div>
+
+</div>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var p=location.pathname.toLowerCase(), biz='General';
+  if(p.indexOf('bakery')>=0||p.indexOf('globe')>=0) biz='Bakery';
+  else if(p.indexOf('sancler')>=0) biz='Sancler Property';
+  else if(p.indexOf('island')>=0) biz='Island House';
+  var who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body></html>

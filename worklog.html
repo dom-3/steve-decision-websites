@@ -1,75 +1,90 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Work Log — Steve Kirkwood Build Project</title>
+<title>Work & Reports — Steve Kirkwood Build Project</title>
 <style>
-  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;}
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;--warm:#8a5a2b;--blue:#2b4a6b;}
   *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
-  .wrap{max-width:940px;margin:0 auto;padding:0 22px 90px;}
-  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:38px 22px 32px;}
-  header .inner{max-width:940px;margin:0 auto;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px 90px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:38px 22px 30px;}
+  header .inner{max-width:900px;margin:0 auto;}
   .top{display:flex;justify-content:space-between;font-size:12px;}
   .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
   .top a:hover{background:rgba(255,255,255,.12);}
   .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:14px;}
-  h1{font-family:Georgia,serif;font-weight:400;font-size:29px;margin:8px 0 6px;}
-  header p{max-width:640px;color:#e6dcc8;font-size:14.5px;margin:0;}
-  .stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 6px;}
-  .stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 18px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
-  .stat b{display:block;font-family:Georgia,serif;font-size:24px;color:var(--green);}
-  .stat span{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
-  h2{font-family:Georgia,serif;color:var(--dark);font-size:19px;margin:28px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
-  .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:28px;margin:8px 0 6px;}
+  header p{max-width:600px;color:#e6dcc8;font-size:14px;margin:0;}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 2px;}
+  .chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#f0e8d8;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:20px;cursor:pointer;}
+  .chip.on{background:#f4efe6;color:var(--dark);border-color:#f4efe6;}
+
+  .ctx{color:var(--muted);font-size:13px;margin:22px 0 12px;}
+  .ctx b{color:var(--dark);}
   .state{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:20px;text-align:center;color:var(--muted);font-size:14px;}
 
-  .entry{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 10px rgba(20,50,45,.05);margin:12px 0;overflow:hidden;}
-  .eh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:13px 18px;border-bottom:1px solid #eef2ef;}
-  .eh b{font-family:Georgia,serif;font-size:16.5px;color:var(--dark);}
-  .eh .hrs{margin-left:auto;font-size:12px;color:var(--gold);font-weight:700;}
-  .eh .by{font-size:11px;color:var(--muted);}
-  .eb{padding:12px 18px 15px;}
-  .eb .sm{font-size:13.5px;color:#3a4a47;font-style:italic;margin:0 0 9px;}
-  .eb ul{margin:0;padding-left:18px;} .eb li{font-size:13.6px;margin:4px 0;color:#33403d;}
+  .day{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 10px rgba(20,50,45,.05);margin:11px 0;overflow:hidden;}
+  .dh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 18px;cursor:pointer;}
+  .dh:hover{background:#f8faf8;}
+  .dh .cal{width:36px;height:36px;border-radius:8px;background:#eef4f0;color:var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;line-height:1;flex:0 0 auto;}
+  .dh .cal b{font-size:15px;font-family:Georgia,serif;}
+  .dh .t b{font-family:Georgia,serif;font-size:16px;color:var(--dark);display:block;}
+  .dh .t span{font-size:12.5px;color:var(--muted);}
+  .dh .meta{margin-left:auto;display:flex;align-items:center;gap:10px;}
+  .dh .hrs{font-size:12px;color:var(--gold);font-weight:700;}
+  .dh .caret{color:var(--muted);font-size:13px;transition:transform .2s;}
+  .day.open .caret{transform:rotate(90deg);}
+  .db{display:none;padding:2px 18px 16px;border-top:1px solid #eef2ef;}
+  .day.open .db{display:block;}
+  .db .report{font-size:14px;color:#33403d;line-height:1.7;margin:12px 0 10px;white-space:pre-wrap;}
+  .db .lbl{font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--green);margin:12px 0 4px;}
+  .db ul{margin:0;padding-left:18px;} .db li{font-size:13.4px;margin:3px 0;color:#3a4a47;}
   .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
-  .tag{font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:#eef4f0;color:var(--green);}
-  .tag.bk{background:#f6efe5;color:#8a5a2b;} .tag.sc{background:#eef2f7;color:#2b4a6b;} .tag.ih{background:#eef4ec;color:#1f5c4d;}
+  .tag{font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:#eef4f0;color:var(--green);}
+  .tag.bk{background:#f6efe5;color:var(--warm);} .tag.sc{background:#eef2f7;color:var(--blue);}
 
-  .add{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .add{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .add h2{font-family:Georgia,serif;color:var(--dark);font-size:18px;margin:0 0 4px;}
   .add label{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:10px 0 4px;}
-  .add input,.add textarea,.add select{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;}
+  .add input,.add textarea{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:560px){.row2{grid-template-columns:1fr;}}
   .chks{display:flex;gap:8px;flex-wrap:wrap;} .chk{display:flex;align-items:center;gap:5px;font-size:13px;color:#3a4a47;border:1px solid var(--line);border-radius:7px;padding:6px 10px;cursor:pointer;}
   .btn{background:var(--green);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;margin-top:14px;}
-  .btn:hover{background:var(--dark);} .btn.alt{background:#fff;color:var(--green);border:2px solid var(--green);}
-  #addStatus{font-size:13px;font-weight:600;margin-top:8px;} #addStatus.ok{color:#1f7a4d;} #addStatus.err{color:#b0472b;}
+  .btn:hover{background:var(--dark);}
   .seg{background:#f2f5f3;border:1.5px solid var(--line);color:#3a4a47;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:7px;cursor:pointer;}
   .seg.on{background:var(--green);border-color:var(--green);color:#fff;}
+  #addStatus{font-size:13px;font-weight:600;margin-top:8px;} #addStatus.ok{color:#1f7a4d;} #addStatus.err{color:#b0472b;}
 </style></head><body>
 <header><div class="inner">
   <div class="top"><a href="index.html">← Dashboard</a><a href="business.html">Business →</a></div>
-  <div class="kicker">Private · Steve Kirkwood Build Project</div>
-  <h1>Work Log</h1>
-  <p>The back-trail of days worked and what was achieved — a live record to show Steve. Newest first. Add today's round-up at the bottom.</p>
-  <div class="stats" id="stats"></div>
+  <div class="kicker">Private · Pullen Marketing × Steve Kirkwood</div>
+  <h1>Work &amp; Reports</h1>
+  <p>Day by day, by business. Pick a business, then open any day to read the full report of what was done.</p>
+  <div class="chips" id="chips">
+    <span class="chip on" data-b="all">All work</span>
+    <span class="chip" data-b="Bakery">The Globe Bakery</span>
+    <span class="chip" data-b="Island House">Island House</span>
+    <span class="chip" data-b="Sancler Property">Sancler Property</span>
+    <span class="chip" data-b="Setup / Cross">Setup / Cross</span>
+  </div>
 </div></header>
 <div class="wrap">
 
-  <h2>The log</h2>
-  <p class="sub" id="sub">Loading from the tracker…</p>
-  <div id="log"><div class="state">Loading…</div></div>
+  <div class="ctx" id="ctx">Loading the work…</div>
+  <div id="list"><div class="state">Loading…</div></div>
 
   <div class="add">
-    <h2 style="margin-top:2px;">Add a day's round-up</h2>
-    <p class="sub">Logs straight to the tracker, timestamped.</p>
+    <h2>Add a day's report</h2>
     <div class="row2">
-      <div><label>Title</label><input id="f_title" placeholder="e.g. Tue 14 Jul 2026 — bakery brand"></div>
+      <div><label>Title</label><input id="f_title" placeholder="e.g. Wed 15 Jul 2026 — bakery brand"></div>
       <div><label>Date</label><input id="f_date" type="date"></div>
     </div>
     <label>One-line summary</label>
     <input id="f_summary" placeholder="What the day was about…">
-    <label>What was achieved (one per line)</label>
-    <textarea id="f_ach" rows="4" placeholder="• …&#10;• …"></textarea>
+    <label>The report (the detail — exactly what you did)</label>
+    <textarea id="f_report" rows="4" placeholder="A few honest sentences on the day's work…"></textarea>
+    <label>Key achievements (one per line, optional)</label>
+    <textarea id="f_ach" rows="3" placeholder="• …&#10;• …"></textarea>
     <div class="row2">
-      <div><label>Projects</label>
+      <div><label>Businesses</label>
         <div class="chks" id="f_projects">
           <label class="chk"><input type="checkbox" value="Bakery"> Bakery</label>
           <label class="chk"><input type="checkbox" value="Island House"> Island House</label>
@@ -77,67 +92,76 @@
           <label class="chk"><input type="checkbox" value="Setup / Cross"> Setup / Cross</label>
         </div>
       </div>
-      <div><label>Hours</label><input id="f_hours" type="number" step="0.5" placeholder="e.g. 4">
+      <div><label>Hours</label><input id="f_hours" type="number" step="0.5" placeholder="e.g. 6">
         <label>By</label>
         <span class="seg on" data-r="Dominic" onclick="setWho('Dominic')">Dominic</span>
         <span class="seg" data-r="Steve" onclick="setWho('Steve')">Steve</span>
       </div>
     </div>
-    <button class="btn" onclick="addEntry()">Add to the log</button>
+    <button class="btn" onclick="addEntry()">Add the day</button>
     <div id="addStatus"></div>
   </div>
 
 </div>
 <script>
 (function(){
-  var who="Dominic";
-  window.setWho=function(v){who=v;document.querySelectorAll('.seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  var who="Dominic", filter="all", all=[];
   var tcls={"Bakery":"bk","Sancler Property":"sc","Island House":"ih"};
   function esc(s){return (s==null?"":String(s)).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  window.setWho=function(v){who=v;document.querySelectorAll('.seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
 
-  function render(items){
-    var log=document.getElementById('log');
-    if(!items.length){log.innerHTML='<div class="state">No entries yet — add the first below.</div>';document.getElementById('sub').textContent='';return;}
-    document.getElementById('sub').textContent=items.length+' day'+(items.length===1?'':'s')+' logged.';
-    // stats
-    var hrs=items.reduce(function(a,b){return a+(+b.Hours||0);},0);
-    document.getElementById('stats').innerHTML=
-      '<div class="stat"><b>'+items.length+'</b><span>days logged</span></div>'+
-      '<div class="stat"><b>'+hrs+'</b><span>hours</span></div>';
-    log.innerHTML=items.map(function(it){
-      var ach=(it.Achievements||'').split('\n').filter(Boolean).map(function(l){return '<li>'+esc(l.replace(/^[•\-\s]+/,''))+'</li>';}).join('');
-      var tags=(it.Projects||[]).map(function(p){return '<span class="tag '+(tcls[p]||'')+'">'+esc(p)+'</span>';}).join('');
-      return '<div class="entry"><div class="eh"><b>'+esc(it.Title||it.Date||'Entry')+'</b>'+
-        (it.Hours?'<span class="hrs">'+it.Hours+'h</span>':'')+
-        (it.By?'<span class="by" style="margin-left:'+(it.Hours?'10px':'auto')+'">'+esc(it.By)+'</span>':'')+
-        '</div><div class="eb">'+(it.Summary?'<p class="sm">'+esc(it.Summary)+'</p>':'')+
-        (ach?'<ul>'+ach+'</ul>':'')+(tags?'<div class="tags">'+tags+'</div>':'')+'</div></div>';
+  function dayparts(it){
+    var d=it.Date?new Date(it.Date+'T00:00:00'):null;
+    var mon=d?d.toLocaleString('en-GB',{month:'short'}):'';
+    var day=d?d.getDate():'';
+    return {mon:mon,day:day};
+  }
+  function draw(){
+    var items=filter==='all'?all:all.filter(function(it){return (it.Projects||[]).indexOf(filter)>=0;});
+    var ctx=document.getElementById('ctx');
+    var label=filter==='all'?'all work':filter.replace('Bakery','The Globe Bakery');
+    ctx.innerHTML=items.length?('<b>'+items.length+'</b> day'+(items.length===1?'':'s')+' logged on <b>'+esc(label)+'</b> — open any to read the report.'):'';
+    var list=document.getElementById('list');
+    if(!items.length){list.innerHTML='<div class="state">No days logged here yet.</div>';return;}
+    list.innerHTML=items.map(function(it,ix){
+      var p=dayparts(it);
+      var ach=(it.Achievements||'').split('\n').filter(function(l){return l.trim();}).map(function(l){return '<li>'+esc(l.replace(/^[•\-\s]+/,''))+'</li>';}).join('');
+      var tags=(it.Projects||[]).map(function(t){return '<span class="tag '+(tcls[t]||'')+'">'+esc(t)+'</span>';}).join('');
+      var rep=it.Report?'<div class="report">'+esc(it.Report)+'</div>':'';
+      return '<div class="day" id="day'+ix+'"><div class="dh" onclick="tog('+ix+')">'+
+        '<div class="cal"><span>'+esc(p.mon)+'</span><b>'+esc(p.day)+'</b></div>'+
+        '<div class="t"><b>'+esc((it.Title||'').replace(/^\w+ \d+ \w+ \d+ — /,'')||it.Title||'Entry')+'</b><span>'+esc(it.Summary||'')+'</span></div>'+
+        '<div class="meta">'+(it.Hours?'<span class="hrs">'+it.Hours+'h</span>':'')+'<span class="caret">▶</span></div>'+
+        '</div><div class="db">'+rep+(ach?'<div class="lbl">Key achievements</div><ul>'+ach+'</ul>':'')+
+        (tags?'<div class="tags">'+tags+'</div>':'')+'</div></div>';
     }).join('');
   }
+  window.tog=function(ix){document.getElementById('day'+ix).classList.toggle('open');};
+  document.querySelectorAll('#chips .chip').forEach(function(c){c.onclick=function(){filter=c.getAttribute('data-b');document.querySelectorAll('#chips .chip').forEach(function(x){x.classList.toggle('on',x===c);});draw();};});
+
   function load(){
     fetch('/api/worklog').then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,st:r.status,j:j};});})
       .then(function(res){
-        if(res.ok&&res.j&&res.j.ok){render(res.j.items||[]);}
-        else if(res.st===403){document.getElementById('log').innerHTML='<div class="state">The tracker token needs <b>read</b> access. In Airtable, edit the token to add the <b>data.records:read</b> scope, then reload.</div>';}
-        else if(res.j&&res.j.error==='not_configured'){document.getElementById('log').innerHTML='<div class="state">Add <b>AIRTABLE_TOKEN</b> in Vercel to switch the log on (see CONNECT-AIRTABLE).</div>';}
-        else {document.getElementById('log').innerHTML='<div class="state">Couldn’t load the log right now. (Works once deployed with the token.)</div>';}
+        if(res.ok&&res.j&&res.j.ok){all=res.j.items||[];draw();}
+        else if(res.st===403){document.getElementById('list').innerHTML='<div class="state">The tracker token needs <b>data.records:read</b> access — add it to the Airtable token, then reload.</div>';document.getElementById('ctx').textContent='';}
+        else if(res.j&&res.j.error==='not_configured'){document.getElementById('list').innerHTML='<div class="state">Add <b>AIRTABLE_TOKEN</b> in Vercel to switch this on.</div>';document.getElementById('ctx').textContent='';}
+        else {document.getElementById('list').innerHTML='<div class="state">Couldn’t load — this reads live once deployed.</div>';document.getElementById('ctx').textContent='';}
       })
-      .catch(function(){document.getElementById('log').innerHTML='<div class="state">Couldn’t load the log — this page reads live once it’s deployed.</div>';});
+      .catch(function(){document.getElementById('list').innerHTML='<div class="state">Couldn’t load — this page reads live once it’s deployed.</div>';document.getElementById('ctx').textContent='';});
   }
   window.addEntry=function(){
     var st=document.getElementById('addStatus');
     var projects=[].slice.call(document.querySelectorAll('#f_projects input:checked')).map(function(c){return c.value;});
     var payload={title:document.getElementById('f_title').value,date:document.getElementById('f_date').value,
-      summary:document.getElementById('f_summary').value,achievements:document.getElementById('f_ach').value,
-      projects:projects,hours:document.getElementById('f_hours').value,by:who};
-    if(!payload.title&&!payload.summary&&!payload.achievements){st.className='err';st.textContent='Add a title, summary or some achievements first.';return;}
+      summary:document.getElementById('f_summary').value,report:document.getElementById('f_report').value,
+      achievements:document.getElementById('f_ach').value,projects:projects,hours:document.getElementById('f_hours').value,by:who};
+    if(!payload.title&&!payload.summary&&!payload.report){st.className='err';st.textContent='Add a title, summary or report first.';return;}
     st.className='';st.textContent='Saving…';
     fetch('/api/worklog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
       .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
-      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Added to the log.';['f_title','f_summary','f_ach','f_hours'].forEach(function(id){document.getElementById(id).value='';});document.querySelectorAll('#f_projects input:checked').forEach(function(c){c.checked=false;});load();}else{st.className='err';st.textContent='Couldn’t save — is the token set (with write)?';}})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Added to the log.';['f_title','f_summary','f_report','f_ach','f_hours'].forEach(function(id){document.getElementById(id).value='';});document.querySelectorAll('#f_projects input:checked').forEach(function(c){c.checked=false;});load();}else{st.className='err';st.textContent='Couldn’t save — is the token set (with write)?';}})
       .catch(function(){st.className='err';st.textContent='Couldn’t reach the tracker.';});
   };
-  // default date = today
   try{document.getElementById('f_date').valueAsDate=new Date();}catch(e){}
   load();
 })();

@@ -29,6 +29,7 @@ export default async function handler(req, res) {
       if (clean(b.date))         fields["Date"]         = clean(b.date, 30);
       if (clean(b.summary))      fields["Summary"]      = clean(b.summary, 400);
       if (clean(b.achievements)) fields["Achievements"] = clean(b.achievements, 8000);
+      if (clean(b.report))       fields["Report"]       = clean(b.report, 20000);
       if (Array.isArray(b.projects) && b.projects.length) fields["Projects"] = b.projects;
       if (b.hours != null && b.hours !== "") fields["Hours"] = Number(b.hours) || 0;
       if (clean(b.by))           fields["By"]           = clean(b.by, 40);

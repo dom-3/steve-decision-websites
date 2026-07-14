@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Business — Direction & the Brief</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;--warm:#8a5a2b;--blue:#2b4a6b;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px 90px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:38px 22px 30px;}
+  header .inner{max-width:960px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;gap:10px;flex-wrap:wrap;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:31px;margin:8px 0 6px;}
+  header p{max-width:660px;color:#e6dcc8;font-size:14.5px;margin:0;}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+
+  /* brief hero */
+  .hero{background:#fff;border:1px solid var(--line);border-left:6px solid var(--gold);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,50,45,.07);margin-top:16px;}
+  .hero h3{font-family:Georgia,serif;font-size:22px;margin:0 0 6px;color:var(--dark);}
+  .hero p{font-size:14px;color:#3a4a47;margin:0 0 14px;}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;}
+  .btn{text-decoration:none;font-size:13.5px;font-weight:700;padding:11px 18px;border-radius:9px;border:1px solid var(--gold);color:var(--gold);background:#fff;}
+  .btn:hover{background:var(--gold);color:#fff;} .btn.solid{background:var(--gold);color:#fff;}
+  .btn.solid:hover{background:#946722;}
+
+  /* three at a glance */
+  .glance{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 0;}
+  @media(max-width:680px){.glance{grid-template-columns:1fr;}}
+  .g{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .g .k{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .g b{display:block;font-family:Georgia,serif;font-size:17px;color:var(--dark);margin:2px 0 4px;}
+  .g p{font-size:12.5px;color:#3a4a47;margin:0;}
+  .g a{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--green);text-decoration:none;}
+
+  /* decisions */
+  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(20,50,45,.05);margin-top:14px;}
+  .panel p{font-size:13.5px;color:#3a4a47;margin:0 0 10px;}
+  .steer .row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .steer .row:last-child{border-bottom:0;} .steer a{color:var(--green);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap;}
+  .notecta{display:inline-block;margin-top:6px;background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:9px 15px;border-radius:9px;cursor:pointer;border:0;}
+  .notecta:hover{background:var(--dark);}
+
+  /* admin tools */
+  .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+  @media(max-width:640px){.tools{grid-template-columns:1fr 1fr;}}
+  .tool{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .tool:hover{border-color:var(--green);}
+  .tool b{display:block;font-size:14.5px;color:var(--dark);} .tool span{font-size:12px;color:var(--muted);}
+
+  /* process */
+  .proc{background:#fff;border:1px dashed #d8c9a8;border-radius:12px;padding:8px 18px;margin-top:14px;}
+  .proc div{padding:11px 0;border-bottom:1px solid #f0ece3;font-size:13.6px;} .proc div:last-child{border-bottom:0;}
+  .proc b{color:var(--dark);} .proc .n{display:inline-block;width:22px;color:var(--gold);font-weight:700;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Dashboard</a><a href="worklog.html">Work log &amp; hours →</a></div>
+  <div class="kicker">The Business · Direction, work &amp; decisions</div>
+  <h1>Direction &amp; the Brief</h1>
+  <p>Where we're heading, and how we work together. This is the home for the written brief, your decisions and steers, the work behind it, and the business admin — the one area that isn't a single business, but the relationship itself.</p>
+</div></header>
+<div class="wrap">
+
+  <h2>The brief — the direction, written down</h2>
+  <p class="sub">The single reference for all three businesses: what each is, where it's going, and how we deliver.</p>
+  <div class="hero">
+    <h3>Project Brief — Marketing, Content &amp; Restoration Programme</h3>
+    <p>Prepared for Steve &amp; Phil by CCP Project Enablement. A working document — the overview, the operating architecture (how it all fits together), and a chapter for each business: Island House, The Globe Bakery and Sancler Property. Read it, and leave anything you want changed as a note.</p>
+    <div class="cta">
+      <a class="btn solid" href="project-brief.pdf" target="_blank">📄 Open the brief (PDF)</a>
+      <a class="btn" href="project-brief.pdf" download>Download</a>
+    </div>
+  </div>
+
+  <div class="glance">
+    <div class="g"><div class="k">Flagship</div><b>Island House</b><p>Listed-building restoration → hotel, bar &amp; restaurant, with the medieval-port story.</p><a href="island-house-plan.html">The plan →</a></div>
+    <div class="g"><div class="k">Priority</div><b>The Globe Bakery</b><p>Artisan, bread-led bakery — pre-order website first, subscription to follow.</p><a href="bakery-plan.html">The plan →</a></div>
+    <div class="g"><div class="k">Refresh</div><b>Sancler Property</b><p>Real photo &amp; video over CGI, plus the online sell strategy.</p><a href="sancler-plan.html">The plan →</a></div>
+  </div>
+
+  <h2>How this works — your first point of contact</h2>
+  <p class="sub">One live place the whole engagement runs from. What that means in practice:</p>
+  <div class="proc">
+    <div><b>Your first point of contact.</b> Jump on any time to see what's happening, steer direction, or reach me — updated live, every working day, so checking in never means chasing.</div>
+    <div><b>Decision-oriented.</b> Everything is logged and tracked; anything that needs your call is put to you as a recommendation plus options — a quick pick, captured and dated on the spot.</div>
+    <div><b>A daily record, done automatically.</b> Each day shows what was done and the window it was worked across — generated from the work itself, not written up after. It stays objective, and only real work is logged, never padding. The times are the span I work within on the day (often a long spread, not a fixed nine-to-five) — what matters is the output, dated and there to see.</div>
+    <div><b>Reach me two ways.</b> Leave a note on any page, or email me directly — both come straight to me to action.</div>
+  </div>
+
+  <h2>Your decisions &amp; discussion</h2>
+  <p class="sub">This is where direction gets agreed. Every steer is captured and reaches Dominic to action.</p>
+  <div class="panel steer">
+    <p><b>Open calls awaiting your steer:</b></p>
+    <div class="row"><span>🧭 Read &amp; approve the project brief (or flag changes)</span><a href="project-brief.pdf" target="_blank">Open the brief →</a></div>
+    <div class="row"><span>🥖 Bakery — brand direction, pricing sign-off, opening date</span><a href="bakery-concepts.html">Open →</a></div>
+    <div class="row"><span>🏡 Sancler — website scope, houses to shoot, site access</span><a href="sancler-plan.html">Open →</a></div>
+    <div class="row"><span>🏰 Island House — recording standard, Conservation Plan, publishing sensitivities</span><a href="island-house-plan.html">Open →</a></div>
+    <p style="margin-top:12px;">To weigh in on anything — the brief, a decision, or a new idea — use the <b>✍ Note</b> button (bottom-right of any page). It saves to the tracker and emails Dominic the detail.</p>
+    <button class="notecta" onclick="(function(){var b=document.getElementById('gnwBtn');if(b)b.click();})()">✍ Leave a note now</button>
+    <a class="notecta" style="background:var(--gold);margin-left:8px;" href="mailto:pullenmarketing@gmail.com?subject=Steve%20%E2%86%92%20Dominic%20(direction)">✉ Email Dominic</a>
+  </div>
+
+  <h2>The work &amp; the admin</h2>
+  <p class="sub">Everything to do with the work itself — the log, the hours, the money and the record.</p>
+  <div class="tools">
+    <a class="tool" href="worklog.html"><b>📓 Work log &amp; hours</b><span>Day-by-day, by business</span></a>
+    <a class="tool" href="commercials.html"><b>💷 Money</b><span>Rate, retainer &amp; returns</span></a>
+    <a class="tool" href="business.html"><b>💼 Contracts</b><span>Contracts &amp; agreements</span></a>
+    <a class="tool" href="meeting-notes.html"><b>📝 Meeting notes</b><span>The running record</span></a>
+    <a class="tool" href="roadmap.html"><b>🗺️ Roadmap</b><span>What happens, and when</span></a>
+    <a class="tool" href="index.html"><b>🏠 Dashboard</b><span>Back to the four areas</span></a>
+  </div>
+
+  <h2>How we develop the process</h2>
+  <p class="sub">The brief isn't the end — it's the start. Here's the loop we run from it.</p>
+  <div class="proc">
+    <div><span class="n">1</span><b>Direct.</b> You read the brief and steer — approve it, or flag what to change.</div>
+    <div><span class="n">2</span><b>Decide.</b> Each open call is put to you as a clear choice; your pick is logged here.</div>
+    <div><span class="n">3</span><b>Do.</b> The work happens, captured once and used across compliance, story and marketing.</div>
+    <div><span class="n">4</span><b>Show.</b> It lands on the work log and the business pages, dated and timestamped.</div>
+    <div><span class="n">5</span><b>Refine.</b> We review, update the brief, and the process compounds across all three businesses.</div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:26px;">CCP Project Enablement · the brief is a living document — updated as decisions are made.</p>
+
+</div>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var p=location.pathname.toLowerCase(), biz='General';
+  if(p.indexOf('bakery')>=0||p.indexOf('globe')>=0) biz='Bakery';
+  else if(p.indexOf('sancler')>=0) biz='Sancler Property';
+  else if(p.indexOf('island')>=0) biz='Island House';
+  var who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body></html>

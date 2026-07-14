@@ -27,10 +27,14 @@
   .biz{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px;}
   .bc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:14px;padding:18px 20px;box-shadow:0 3px 12px rgba(20,50,45,.06);}
   .bc.bk{border-left-color:var(--warm);} .bc.sc{border-left-color:var(--blue);} .bc.ih{border-left-color:var(--green);}
+  .bc.bs{border-left-color:var(--gold);background:#fffdf8;}
   .bc .h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
   .bc h3{font-family:Georgia,serif;font-size:22px;margin:0;color:var(--dark);}
   .bc .tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:#eef4f0;color:var(--green);}
   .bc.bk .tag{background:#f6efe5;color:var(--warm);} .bc.sc .tag{background:#eef2f7;color:var(--blue);}
+  .bc.bs .tag{background:#f7f0e1;color:var(--gold);}
+  .bc.bs .lk{color:var(--gold);} .bc.bs .lk:hover{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .bc.bs .lk.solid{background:var(--gold);border-color:var(--gold);color:#fff;}
   .bc .status{font-size:14px;color:#3a4a47;margin:8px 0 6px;}
   .bc .status b{color:var(--dark);}
   .logged{font-size:12px;color:var(--muted);margin:0 0 12px;} .logged a{color:inherit;text-decoration:underline;}
@@ -63,14 +67,14 @@
   .await .row:last-child{border-bottom:0;} .await a{color:var(--green);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap;}
 </style></head><body>
 <header><div class="inner">
-  <div class="kicker">Private &middot; Pullen Marketing × Steve Kirkwood</div>
-  <h1>Build Dashboard</h1>
-  <p>Everything in one place — the three businesses, where each is up to, and the work behind it. Click any business to go deeper, or open the work log for the day-by-day reports.</p>
+  <div class="kicker">Private &middot; CCP Project Enablement × Steve Kirkwood</div>
+  <h1>Working Dashboard</h1>
+  <p>Everything in one place — the four areas: your three businesses, plus <b>The Business</b>, where the direction, decisions, work log and hours all live. Click any area to go deeper.</p>
 </div></header>
 <div class="wrap">
 
-  <h2>The three businesses</h2>
-  <p class="sub">Where each one is up to, and the pages behind it.</p>
+  <h2>Your four areas</h2>
+  <p class="sub">The three businesses — and The Business, where the direction, decisions and work all live.</p>
   <div class="biz">
 
     <!-- BAKERY -->
@@ -133,28 +137,33 @@
       </div>
     </div>
 
-  </div>
+    <!-- THE BUSINESS -->
+    <div class="bc bs">
+      <div class="h"><h3>The Business</h3><span class="tag">You, work &amp; decisions</span></div>
+      <div class="status"><b>Direction &amp; the working relationship.</b> The written brief and where we're heading, your decisions and steers, the day-by-day work log and hours, and the business admin — all in one place.</div>
+      <div class="logged" data-b="General"></div>
+      <div class="links">
+        <a class="lk solid" href="direction.html">Direction &amp; the brief</a>
+        <a class="lk" href="worklog.html">Work log &amp; hours</a>
+        <a class="lk" href="business.html">Contracts &amp; agreements</a>
+        <a class="lk" href="commercials.html">Money</a>
+        <a class="lk" href="meeting-notes.html">Meeting notes</a>
+        <a class="lk" href="roadmap.html">Roadmap</a>
+      </div>
+    </div>
 
-  <h2>The whole picture</h2>
-  <p class="sub">The cross-project views.</p>
-  <div class="tools">
-    <a class="tool" href="roadmap.html"><b>🗺️ Roadmap</b><span>What happens, and when</span></a>
-    <a class="tool" href="commercials.html"><b>💷 Money</b><span>Costs &amp; returns framework</span></a>
-    <a class="tool" href="meeting-notes.html"><b>📝 Meeting notes</b><span>The running record</span></a>
-    <a class="tool" href="worklog.html"><b>📓 Work &amp; reports</b><span>Day-by-day, by business</span></a>
-    <a class="tool" href="business.html"><b>💼 Business</b><span>Contracts &amp; agreements</span></a>
-    <a class="tool" href="the-plan.pdf" target="_blank"><b>📄 Full plan (PDF)</b><span>The written plan</span></a>
   </div>
 
   <h2>Awaiting your steer, Steve</h2>
-  <p class="sub">The live calls that unblock the next step — answer inside each plan.</p>
+  <p class="sub">The live calls that unblock the next step — answer inside each plan, or leave a note on any page.</p>
   <div class="await">
     <div class="row"><span>🥖 <b>Bakery</b> — brand direction, pricing sign-off, opening date</span><a href="bakery-concepts.html">Open →</a></div>
     <div class="row"><span>🏡 <b>Sancler</b> — website scope, houses to shoot, site access</span><a href="sancler-plan.html">Open →</a></div>
-    <div class="row"><span>🏰 <b>Island House</b> — recording standard, Conservation Plan, discovery/grants</span><a href="island-house-plan.html">Open →</a></div>
+    <div class="row"><span>🏰 <b>Island House</b> — recording standard, Conservation Plan, publishing sensitivities</span><a href="island-house-plan.html">Open →</a></div>
+    <div class="row"><span>🧭 <b>The Business</b> — read &amp; approve the project brief</span><a href="direction.html">Open →</a></div>
   </div>
 
-  <p class="sub" style="text-align:center;margin-top:26px;">Pullen Marketing · a live dashboard — everything logged and timestamped.</p>
+  <p class="sub" style="text-align:center;margin-top:26px;">CCP Project Enablement · a live dashboard — everything logged and timestamped.</p>
 
 </div>
 <script>

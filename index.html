@@ -1,183 +1,175 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Steve Kirkwood — The Plan & Your Direction</title>
+<title>Steve Kirkwood — Build Dashboard</title>
 <style>
-  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--blue:#2b4a6b;--warm:#8a5a2b;}
-  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
-  .wrap{max-width:980px;margin:0 auto;padding:0 22px 70px;}
-  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:44px 22px 36px;}
-  header .inner{max-width:980px;margin:0 auto;}
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;
+        --warm:#8a5a2b;--blue:#2b4a6b;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 30px;}
+  header .inner{max-width:1040px;margin:0 auto;}
   .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
-  h1{font-family:Georgia,serif;font-weight:400;font-size:32px;margin:10px 0 8px;}
-  header p{max-width:670px;color:#e6dcc8;font-size:15px;margin:0;}
-  hr.r{width:60mm;max-width:220px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
-  h2{font-family:Georgia,serif;color:var(--dark);font-size:21px;margin:38px 0 6px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
-  .sub{color:#6a7b76;font-size:13px;margin:0 0 14px;}
-  .planbtns{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px;}
-  .pbtn{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--green);color:var(--green);
-        text-decoration:none;font-size:13px;font-weight:700;padding:9px 15px;border-radius:8px;}
-  .pbtn:hover{background:var(--green);color:#fff;}
-  .pbtn.gold{border-color:var(--gold);color:#8a5a12;} .pbtn.gold:hover{background:var(--gold);color:#fff;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:32px;margin:8px 0 6px;}
+  header p{max-width:640px;color:#e6dcc8;font-size:14.5px;margin:0;}
 
-  .arch{background:#fff;border:1px solid #dfe6e2;border-radius:12px;padding:16px 18px;margin:12px 0 6px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
-  .stages{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:6px 0 4px;}
-  .stage{position:relative;background:#f4f7f5;border:1px solid #e2e8e4;border-radius:8px;padding:9px 8px;font-size:11.5px;text-align:center;color:#5a6b66;}
-  .stage b{display:block;font-size:12.5px;color:var(--dark);}
-  .stage.on{background:#eef4ec;border-color:var(--green);}
-  .stage.now{background:var(--green);border-color:var(--green);color:#eaf3ef;}
-  .stage.now b{color:#fff;} .stage .st{font-size:9px;letter-spacing:1px;text-transform:uppercase;opacity:.8;}
-  .archnote{font-size:12px;color:#6a7b76;margin-top:8px;}
-  @media(max-width:640px){.stages{grid-template-columns:repeat(2,1fr);} }
+  /* output strip */
+  .out{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 2px;}
+  .ot{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 16px;}
+  .ot b{display:block;font-family:Georgia,serif;font-size:30px;color:#fff;line-height:1.1;}
+  .ot span{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:#d8c9a8;}
+  .out .note{grid-column:1/-1;font-size:11.5px;color:#bcd0c7;margin-top:-2px;}
+  @media(max-width:640px){.out{grid-template-columns:repeat(2,1fr);}}
 
-  .plan{display:grid;grid-template-columns:1fr;gap:14px;margin:14px 0;}
-  .pc{background:#fff;border:1px solid #dfe6e2;border-left:5px solid var(--green);border-radius:10px;padding:16px 18px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
-  .pc.bk{border-left-color:var(--warm);} .pc.sc{border-left-color:var(--blue);} .pc.ih{border-left-color:var(--green);}
-  .pc h3{font-family:Georgia,serif;font-size:19px;margin:0 0 2px;color:var(--dark);}
-  .pc .tagline{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
-  .pc p{font-size:13.7px;color:#33403d;margin:0 0 10px;}
-  .miniflow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;}
-  .mf{flex:1 1 auto;min-width:150px;background:#f5f8f6;border:1px solid #e2e8e4;border-radius:7px;padding:7px 10px;font-size:11.7px;color:#40514c;}
-  .mf b{display:block;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--green);margin-bottom:1px;}
-  .pc.bk .mf b{color:var(--warm);} .pc.sc .mf b{color:var(--blue);}
-  .settledline{font-size:12.5px;color:#1f7a4d;background:#eef4f0;border-radius:6px;padding:6px 10px;margin:0 0 12px;}
-  .go{display:inline-flex;align-items:center;gap:7px;color:#fff;background:var(--green);text-decoration:none;font-size:13px;font-weight:700;padding:9px 16px;border-radius:8px;}
-  .pc.bk .go{background:var(--warm);} .pc.sc .go{background:var(--blue);}
-  .go:hover{filter:brightness(.92);}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
 
-  .look{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:14px 0;}
-  .lk{display:block;background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(20,50,45,.06);}
-  .lk:hover{border-color:var(--green);}
-  .lk b{display:block;font-family:Georgia,serif;font-size:17px;color:var(--green);}
-  .lk span{font-size:12.5px;color:#6a7b76;}
-  .lk .goarrow{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--gold);}
+  /* business cards */
+  .biz{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px;}
+  .bc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:14px;padding:18px 20px;box-shadow:0 3px 12px rgba(20,50,45,.06);}
+  .bc.bk{border-left-color:var(--warm);} .bc.sc{border-left-color:var(--blue);} .bc.ih{border-left-color:var(--green);}
+  .bc .h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .bc h3{font-family:Georgia,serif;font-size:22px;margin:0;color:var(--dark);}
+  .bc .tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:#eef4f0;color:var(--green);}
+  .bc.bk .tag{background:#f6efe5;color:var(--warm);} .bc.sc .tag{background:#eef2f7;color:var(--blue);}
+  .bc .status{font-size:14px;color:#3a4a47;margin:8px 0 12px;}
+  .bc .status b{color:var(--dark);}
+  /* stage bar */
+  .stage{display:flex;gap:6px;align-items:center;margin:0 0 14px;flex-wrap:wrap;}
+  .stage .seg{display:flex;align-items:center;gap:6px;}
+  .dot{width:11px;height:11px;border-radius:50%;background:#dfe6e2;border:2px solid #dfe6e2;}
+  .dot.done{background:var(--green);border-color:var(--green);} .dot.now{background:#fff;border-color:var(--green);box-shadow:0 0 0 3px rgba(31,92,77,.15);}
+  .bc.bk .dot.done{background:var(--warm);border-color:var(--warm);} .bc.bk .dot.now{border-color:var(--warm);box-shadow:0 0 0 3px rgba(138,90,43,.15);}
+  .bc.sc .dot.done{background:var(--blue);border-color:var(--blue);} .bc.sc .dot.now{border-color:var(--blue);box-shadow:0 0 0 3px rgba(43,74,107,.15);}
+  .slab{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
+  .slab.on{color:var(--dark);font-weight:700;}
+  .links{display:flex;gap:8px;flex-wrap:wrap;}
+  .lk{text-decoration:none;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:8px;background:#f3f6f4;color:var(--green);border:1px solid var(--line);}
+  .lk:hover{background:var(--green);color:#fff;border-color:var(--green);}
+  .bc.bk .lk{color:var(--warm);} .bc.bk .lk:hover{background:var(--warm);color:#fff;border-color:var(--warm);}
+  .bc.sc .lk{color:var(--blue);} .bc.sc .lk:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .lk.solid{background:var(--green);color:#fff;border-color:var(--green);}
+  .bc.bk .lk.solid{background:var(--warm);border-color:var(--warm);color:#fff;}
+  .bc.sc .lk.solid{background:var(--blue);border-color:var(--blue);color:#fff;}
 
-  .need{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
-  .need h4{margin:0 0 6px;font-size:14.5px;}
-  .need ul{margin:0 0 10px;padding-left:18px;} .need li{font-size:13.3px;margin:3px 0;color:#33403d;}
-  .need.bk{border-left:4px solid var(--warm);} .need.sc{border-left:4px solid var(--blue);} .need.ih{border-left:4px solid var(--green);}
-  .answer{display:inline-block;font-size:12.5px;font-weight:700;color:var(--green);text-decoration:none;}
-  .need.bk .answer{color:var(--warm);} .need.sc .answer{color:var(--blue);}
+  /* tools + awaiting */
+  .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+  @media(max-width:640px){.tools{grid-template-columns:1fr 1fr;}}
+  .tool{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .tool:hover{border-color:var(--green);}
+  .tool b{display:block;font-size:14.5px;color:var(--dark);} .tool span{font-size:12px;color:var(--muted);}
+  .await{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .await .row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .await .row:last-child{border-bottom:0;} .await a{color:var(--green);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap;}
 </style></head><body>
 <header><div class="inner">
-  <div class="kicker">Private &middot; Steve Kirkwood Build Project</div>
-  <h1>The Plan &amp; Your Direction</h1>
-  <p>What we're going to do across the three businesses, laid out as a clear three-step plan for each — the actions we'll take and who on the team drives them. Then the comparables to react to, and the handful of things we need you to direct. Everything you send saves to our tracker, timestamped.</p>
-  <hr class="r">
+  <div class="kicker">Private &middot; Pullen Marketing × Steve Kirkwood</div>
+  <h1>Build Dashboard</h1>
+  <p>Everything in one place — the three businesses, where each is up to, and the work behind it. Click any business to go deeper.</p>
+  <div class="out" id="out">
+    <div class="ot"><b id="s_days">5</b><span>Days worked</span></div>
+    <div class="ot"><b id="s_hours">38</b><span>Hours in</span></div>
+    <div class="ot"><b id="s_ship">26</b><span>Things shipped</span></div>
+    <div class="ot"><b>3</b><span>Businesses live</span></div>
+    <div class="note" id="s_note">Output so far — updates live from the work log.</div>
+  </div>
 </div></header>
 <div class="wrap">
 
-  <h2>1 · The plan — what we're going to do</h2>
-  <p class="sub">Each business runs as its own three-step workflow. Open the full plan for the detail, the actions, and to give your steer.</p>
-  <div class="planbtns">
-    <a class="pbtn" href="roadmap.html">🗺️ The roadmap — what happens, and when</a>
-    <a class="pbtn" href="commercials.html">💷 The money framework</a>
-    <a class="pbtn" href="meeting-notes.html">📝 Meeting notes &amp; log</a>
-    <a class="pbtn gold" href="the-plan.pdf" target="_blank">📄 Full written plan (PDF)</a>
-    <a class="pbtn gold" href="#need">✅ What we need from you</a>
-  </div>
-  <div class="planbtns" style="margin-top:2px;">
-    <a class="pbtn" href="worklog.html">📓 Work Log — days &amp; achievements</a>
-    <a class="pbtn" href="business.html">💼 Business — contracts &amp; agreements</a>
-  </div>
+  <h2>The three businesses</h2>
+  <p class="sub">Where each one is up to, and the pages behind it.</p>
+  <div class="biz">
 
-  <div class="arch">
-    <div style="font-weight:700;font-size:13px;margin-bottom:6px;">The overarching direction — every project runs the same five stages, so all three stay comparable and trackable.</div>
-    <div class="stages">
-      <div class="stage on"><span class="st">Stage 1</span><b>Discovery &amp; Research</b>Comparables, standards, assets</div>
-      <div class="stage now"><span class="st">Stage 2 · we are here</span><b>Strategy &amp; Architecture</b>Sign off the plan &amp; direction</div>
-      <div class="stage"><span class="st">Stage 3</span><b>Design &amp; Build</b>Sites, content, capture</div>
-      <div class="stage"><span class="st">Stage 4</span><b>Launch</b>Go-live &amp; announce</div>
-      <div class="stage"><span class="st">Stage 5</span><b>Operate &amp; Grow</b>Content, reporting, marketing</div>
-    </div>
-    <div class="archnote">Three separate projects — <b>The Globe Bakery</b>, <b>Sancler Property</b> and <b>Island House</b> — each with its own team, sharing one method. We just need your steer to move from Stage 2 into build.</div>
-  </div>
-
-  <div class="plan">
-    <div class="pc bk">
-      <h3>The Globe Bakery <span style="font-size:11px;color:#1f7a4d;font-weight:700;">— live first</span></h3>
-      <div class="tagline">Premium organic · own the weekly habit</div>
-      <p>A premium organic bakery that leads with one thing — <b>selling great bread</b>. Simple, focused, Welsh, built around the loaf (Alex Gooch is our reference). The weekly box gives it recurring revenue; patisserie comes later.</p>
-      <div class="miniflow">
-        <div class="mf"><b>Step 1</b>The bread &amp; the price</div>
-        <div class="mf"><b>Step 2</b>Build shop + subscription</div>
-        <div class="mf"><b>Step 3</b>Launch &amp; grow</div>
+    <!-- BAKERY -->
+    <div class="bc bk">
+      <div class="h"><h3>The Globe Bakery</h3><span class="tag">Live first</span></div>
+      <div class="status"><b>In build.</b> Bread-first plan set, meeting logged, prototype built — now choosing the authentic brand direction. Opening late July; pricing to confirm.</div>
+      <div class="stage">
+        <div class="seg"><span class="dot done"></span><span class="slab">Research</span></div>
+        <div class="seg"><span class="dot done"></span><span class="slab">Strategy</span></div>
+        <div class="seg"><span class="dot now"></span><span class="slab on">Build</span></div>
+        <div class="seg"><span class="dot"></span><span class="slab">Launch</span></div>
+        <div class="seg"><span class="dot"></span><span class="slab">Grow</span></div>
       </div>
-      <div class="settledline">✓ Settled: <b>The Globe Bakery</b> · loaf + pastry box · <b>bread-first, simple, Alex Gooch look</b></div>
-      <a class="go" href="bakery-plan.html">Open the full Bakery plan →</a>
-      <a class="go" href="bakery-architecture.html" style="background:#5c3a17;margin-left:8px;">Website architecture →</a>
-      <a class="go" href="bakery-prototype.html" style="background:#b07d2b;margin-left:8px;">▶ Live prototype →</a>
-      <a class="go" href="bakery-concepts.html" style="background:#4a5c4f;margin-left:8px;">◆ 3 brand directions →</a>
-    </div>
-
-    <div class="pc sc">
-      <h3>Sancler Property</h3>
-      <div class="tagline">Real photos + video · sell on trust</div>
-      <p>Sell the homes on real photography and video instead of CGI, fix what's costing sales today, and drive every enquiry through the website — organic-first, no portals or paid ads until you say so.</p>
-      <div class="miniflow">
-        <div class="mf"><b>Step 1</b>Fix now &amp; plan the shoot</div>
-        <div class="mf"><b>Step 2</b>Shoot &amp; rebuild the site</div>
-        <div class="mf"><b>Step 3</b>Publish &amp; keep current</div>
+      <div class="links">
+        <a class="lk solid" href="bakery-plan.html">The plan</a>
+        <a class="lk" href="bakery-concepts.html">Brand directions</a>
+        <a class="lk" href="bakery-prototype.html">Prototype</a>
+        <a class="lk" href="bakery-architecture.html">Architecture</a>
+        <a class="lk" href="bakery.html">Comparables</a>
       </div>
-      <div class="settledline">✓ Settled: <b>organic first, website only</b> · no portals · paid ads paused</div>
-      <a class="go" href="sancler-plan.html">Open the full Sancler plan →</a>
     </div>
 
-    <div class="pc ih">
-      <h3>Island House <span style="font-size:11px;color:var(--gold);font-weight:700;">— the flagship</span></h3>
-      <div class="tagline">Sell the restoration · tell the story</div>
-      <p>Tell the story of Britain's medieval port as it's brought back to life, and set up the rigorous documentation a Grade II* listed building deserves. The dig here found the first medieval quay ever excavated in Wales — a grant + PR hook in one.</p>
-      <div class="miniflow">
-        <div class="mf"><b>Step 1</b>Secure assets &amp; set standard</div>
-        <div class="mf"><b>Step 2</b>Build site &amp; documentation</div>
-        <div class="mf"><b>Step 3</b>Launch story &amp; pursue funding</div>
+    <!-- ISLAND HOUSE -->
+    <div class="bc ih">
+      <div class="h"><h3>Island House</h3><span class="tag">The flagship</span></div>
+      <div class="status"><b>Strategy.</b> History done &amp; fact-checked; plan &amp; documentation system designed. Awaiting your steer on the standards, and the photo archive to sort.</div>
+      <div class="stage">
+        <div class="seg"><span class="dot done"></span><span class="slab">Research</span></div>
+        <div class="seg"><span class="dot now"></span><span class="slab on">Strategy</span></div>
+        <div class="seg"><span class="dot"></span><span class="slab">Build</span></div>
+        <div class="seg"><span class="dot"></span><span class="slab">Launch</span></div>
+        <div class="seg"><span class="dot"></span><span class="slab">Grow</span></div>
       </div>
-      <div class="settledline">✓ Settled: history <b>done &amp; fact-checked</b> · standards ready for your tick</div>
-      <a class="go" href="island-house-plan.html">Open the full Island House plan →</a>
+      <div class="links">
+        <a class="lk solid" href="island-house-plan.html">The plan</a>
+        <a class="lk" href="island-house.html">Comparables</a>
+      </div>
     </div>
+
+    <!-- SANCLER -->
+    <div class="bc sc">
+      <div class="h"><h3>Sancler Property</h3><span class="tag">Refresh</span></div>
+      <div class="status"><b>Strategy.</b> Direction set — real photos over CGI, website-only, organic-first. Awaiting scope, the houses to shoot, and site access.</div>
+      <div class="stage">
+        <div class="seg"><span class="dot done"></span><span class="slab">Research</span></div>
+        <div class="seg"><span class="dot now"></span><span class="slab on">Strategy</span></div>
+        <div class="seg"><span class="dot"></span><span class="slab">Build</span></div>
+        <div class="seg"><span class="dot"></span><span class="slab">Launch</span></div>
+        <div class="seg"><span class="dot"></span><span class="slab">Grow</span></div>
+      </div>
+      <div class="links">
+        <a class="lk solid" href="sancler-plan.html">The plan</a>
+        <a class="lk" href="sancler.html">Comparables</a>
+      </div>
+    </div>
+
   </div>
 
-  <h2 id="lookbooks">2 · The comparables — react to them</h2>
-  <p class="sub">Open each, look through the competitors and the best in the field — and hit <b>✎ My notes</b> on any card. What you like, what to borrow, what to avoid — it all saves to our tracker.</p>
-  <div class="look">
-    <a class="lk" href="bakery.html" target="_blank"><b>The Bakery</b><span>Local rivals + national models</span><span class="goarrow">Open →</span></a>
-    <a class="lk" href="sancler.html" target="_blank"><b>Sancler Property</b><span>House-builder sites to beat</span><span class="goarrow">Open →</span></a>
-    <a class="lk" href="island-house.html" target="_blank"><b>Island House</b><span>Heritage &amp; story comparables</span><span class="goarrow">Open →</span></a>
+  <h2>The whole picture</h2>
+  <p class="sub">The cross-project views.</p>
+  <div class="tools">
+    <a class="tool" href="roadmap.html"><b>🗺️ Roadmap</b><span>What happens, and when</span></a>
+    <a class="tool" href="commercials.html"><b>💷 Money</b><span>Costs &amp; returns framework</span></a>
+    <a class="tool" href="meeting-notes.html"><b>📝 Meeting notes</b><span>The running record</span></a>
+    <a class="tool" href="worklog.html"><b>📓 Work Log</b><span>Days &amp; what got done</span></a>
+    <a class="tool" href="business.html"><b>💼 Business</b><span>Contracts &amp; agreements</span></a>
+    <a class="tool" href="the-plan.pdf" target="_blank"><b>📄 Full plan (PDF)</b><span>The written plan</span></a>
   </div>
 
-  <h2 id="need">3 · What we need you to direct</h2>
-  <p class="sub">The already-answered questions are gone — these are the live ones that unblock the build. Give your steer inside each plan (it saves as you go).</p>
-
-  <div class="need bk">
-    <h4>🥖 The Globe Bakery</h4>
-    <ul>
-      <li>Your product list + prices + rough weekly capacity</li>
-      <li>How people order today, and your delivery reach (own driver / courier / collection)</li>
-      <li>A rough budget steer for the build</li>
-    </ul>
-    <a class="answer" href="bakery-plan.html">Answer on the Bakery plan →</a>
+  <h2>Awaiting your steer, Steve</h2>
+  <p class="sub">The live calls that unblock the next step — answer inside each plan.</p>
+  <div class="await">
+    <div class="row"><span>🥖 <b>Bakery</b> — brand direction, pricing sign-off, opening date</span><a href="bakery-concepts.html">Open →</a></div>
+    <div class="row"><span>🏡 <b>Sancler</b> — website scope, houses to shoot, site access</span><a href="sancler-plan.html">Open →</a></div>
+    <div class="row"><span>🏰 <b>Island House</b> — recording standard, Conservation Plan, discovery/grants</span><a href="island-house-plan.html">Open →</a></div>
   </div>
 
-  <div class="need sc">
-    <h4>🏡 Sancler Property</h4>
-    <ul>
-      <li><b>How much of the site to change</b> — light trust-fixes, refresh, or full rebuild</li>
-      <li>Which houses are for sale / which to photograph first, and shoot access</li>
-      <li>Who holds the website login, and a walkthrough of each house with Carl (kitchen &amp; design options)</li>
-    </ul>
-    <a class="answer" href="sancler-plan.html">Answer on the Sancler plan →</a>
-  </div>
-
-  <div class="need ih">
-    <h4>🏰 Island House</h4>
-    <ul>
-      <li>Tick the three recommendations: <b>analytical</b> record · <b>formal</b> Conservation Plan · <b>pursue</b> the discovery/grants</li>
-      <li>The existing photo library, the listed-building consent status, and the restoration timeline</li>
-      <li>Which professionals are already engaged, so we plug in rather than duplicate</li>
-    </ul>
-    <a class="answer" href="island-house-plan.html">Answer on the Island House plan →</a>
-  </div>
-
-  <p class="sub" style="margin-top:26px;text-align:center;">Prepared by Dominic, Pullen Marketing · everything you send is timestamped to our tracker.</p>
+  <p class="sub" style="text-align:center;margin-top:26px;">Pullen Marketing · a live dashboard — everything logged and timestamped.</p>
 
 </div>
+<script>
+(function(){
+  // Live output stats from the Work Log
+  fetch('/api/worklog').then(function(r){return r.ok?r.json():null;}).then(function(j){
+    if(!j||!j.ok||!j.items)return;
+    var items=j.items;
+    var hours=items.reduce(function(a,b){return a+(+b.Hours||0);},0);
+    var ship=items.reduce(function(a,b){return a+((b.Achievements||'').split('\n').filter(function(l){return l.trim();}).length);},0);
+    document.getElementById('s_days').textContent=items.length;
+    document.getElementById('s_hours').textContent=hours;
+    document.getElementById('s_ship').textContent=ship;
+    document.getElementById('s_note').textContent='Output so far — live from the work log ('+items.length+' days logged).';
+  }).catch(function(){});
+})();
+</script>
 </body></html>

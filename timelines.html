@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timelines & Targets</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--blue:#2b4a6b;--warm:#8a5a2b;--muted:#6a7b76;--line:#dfe6e2;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px 110px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:940px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;gap:10px;flex-wrap:wrap;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  header p{max-width:690px;color:#e6dcc8;font-size:15px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:22px;margin:36px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  h2.bk{border-color:var(--warm);} h2.sc{border-color:var(--blue);}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 12px;}
+  .method{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;padding:13px 16px;font-size:13.6px;margin:12px 0;}
+  .method b{color:var(--dark);}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 2px;}
+  .win{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:11px;}
+  .win.now{background:#fbe7e2;color:#b0472b;} .win.soon{background:#fbf3e0;color:#8a6a2b;}
+  .win.mo{background:#eef2f7;color:#2b4a6b;} .win.ong{background:#eef4f0;color:#1f7a4d;}
+
+  .tl{position:relative;margin:12px 0 0;padding-left:26px;}
+  .tl:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:#d7e0db;}
+  .ph{position:relative;margin:0 0 12px;}
+  .ph:before{content:"";position:absolute;left:-22px;top:18px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid #fff;box-shadow:0 0 0 2px #d7e0db;}
+  .ph.sc:before{background:var(--blue);} .ph.bk:before{background:var(--warm);}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 10px rgba(20,50,45,.06);padding:12px 16px 13px;}
+  .rowh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:5px;}
+  .rowh b{font-family:Georgia,serif;font-weight:600;font-size:16.5px;color:var(--dark);}
+  .card p{font-size:13.5px;color:#33403d;margin:2px 0 6px;}
+  .tgt{font-size:12.5px;color:var(--green);border-top:1px dashed #e2ebe6;padding-top:6px;margin-top:2px;}
+  .sc .tgt{color:var(--blue);} .bk .tgt{color:var(--warm);} .tgt b{color:var(--dark);}
+  .who{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .chip{background:#f2f5f3;border:1px solid #e0e7e3;border-radius:20px;padding:3px 10px;font-size:11px;color:#40514c;}
+
+  .book{background:#fff;border:1px dashed #cfe0d6;border-radius:12px;padding:8px 18px;margin-top:14px;}
+  .book div{padding:11px 0;border-bottom:1px solid #eef2ef;font-size:13.6px;} .book div:last-child{border-bottom:0;}
+  .book b{color:var(--dark);} .book .n{display:inline-block;width:20px;color:var(--gold);font-weight:700;}
+  .notecta{display:inline-block;margin-top:12px;background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:9px 15px;border-radius:9px;cursor:pointer;border:0;}
+  .notecta:hover{background:var(--dark);}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Dashboard</a><a href="direction.html">Direction & the brief →</a></div>
+  <div class="kicker">The Business · Timelines & Targets</div>
+  <h1>Timelines &amp; Targets</h1>
+  <p>Targets, not a clock. Each business has its own line of targets with a rough window — so there's real accountability on my side, without anyone chasing hours. Hit the target, it lands on the dashboard.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="method">
+    <b>How to read this:</b> every target carries a window — <span class="win now">This week</span> <span class="win soon">~2 weeks</span> <span class="win mo">This month</span> <span class="win ong">Ongoing</span>. The <b>windows flex</b> with reality (weather, access, your steer); the <b>targets don't</b>. Progress is tracked here and on the work log, dated as it's done.
+  </div>
+
+  <!-- SANCLER -->
+  <h2 class="sc" id="sancler">Sancler Property — Clôs Hugdon</h2>
+  <p class="sub">A genuine two-week push — Clôs already has a two-week window, so we move now.</p>
+  <div class="tl">
+    <div class="ph sc"><div class="card sc">
+      <div class="rowh"><b>Book &amp; shoot the first capture</b><span class="win now">This week · weather permitting</span></div>
+      <p>While the weather's good this end of the week: drone + establishing / scenario shots of the development and its setting, and start capturing the homes. Book the window in now.</p>
+      <div class="tgt"><b>Target:</b> first real imagery of Clôs Hugdon in the bag.</div>
+      <div class="who"><span class="chip">Visual · Dominic/Cass</span></div>
+    </div></div>
+    <div class="ph sc"><div class="card sc">
+      <div class="rowh"><b>First real shots live + trust fixes</b><span class="win now">Week 1</span></div>
+      <p>Swap the highest-impact CGI on the live site for real exterior / setting imagery, and clean up any quick trust issues so the site improves immediately.</p>
+      <div class="tgt"><b>Target:</b> real photography replacing CGI on the key pages.</div>
+    </div></div>
+    <div class="ph sc"><div class="card sc">
+      <div class="rowh"><b>Interior shoot + first walkthrough video</b><span class="win soon">~2 weeks</span></div>
+      <p>Shoot inside a show / finished home; first cut of the walkthrough video (home + village), with the video style set from the comparables research (below).</p>
+      <div class="tgt"><b>Target:</b> a home + village walkthrough people can watch.</div>
+    </div></div>
+    <div class="ph sc"><div class="card sc">
+      <div class="rowh"><b>Refresh &amp; sell</b><span class="win ong">Then · ongoing</span></div>
+      <p>Full site refresh, listings kept current (sold / new phases), and the online sell strategy — organic SEO, social, lead capture. Repeat the capture template on the next development.</p>
+      <div class="tgt"><b>Target:</b> a live, real, enquiry-generating site.</div>
+    </div></div>
+  </div>
+
+  <!-- BAKERY -->
+  <h2 class="bk" id="bakery">The Globe Bakery</h2>
+  <p class="sub">An opening sprint — bread and the pre-order site first, subscription later.</p>
+  <div class="tl">
+    <div class="ph bk"><div class="card bk">
+      <div class="rowh"><b>Open &amp; price</b><span class="win now">Now</span></div>
+      <p>Trial bakes and photography done; the shop is opening. Sign off the launch pricing (Alice's costed list) and the opening range.</p>
+      <div class="tgt"><b>Target:</b> pricing locked, doors open.</div>
+    </div></div>
+    <div class="ph bk"><div class="card bk">
+      <div class="rowh"><b>Pre-order website live + content engine</b><span class="win now">This week / next</span></div>
+      <p>The pre-order site — bread range, collection, bake-to-demand — plus the content engine started (photography + the baker-snap-to-auto-post workflow).</p>
+      <div class="tgt"><b>Target:</b> customers pre-ordering online; content flowing.</div>
+    </div></div>
+    <div class="ph bk"><div class="card bk">
+      <div class="rowh"><b>Cadence + reach</b><span class="win mo">Weeks 2–4</span></div>
+      <p>A steady content rhythm, local + organic SEO, and testimonials gathered (including gluten-sensitive customers who can eat it).</p>
+      <div class="tgt"><b>Target:</b> a repeatable weekly content + ordering habit.</div>
+    </div></div>
+    <div class="ph bk"><div class="card bk">
+      <div class="rowh"><b>Subscription &amp; delivery</b><span class="win ong">Phase 2 · month 2+</span></div>
+      <p>Weekly box with pause/skip and the automated order-to-bake-to-fulfil flow; piggyback delivery on local rounds — once launch is steady.</p>
+      <div class="tgt"><b>Target:</b> recurring subscribers, delivered.</div>
+    </div></div>
+  </div>
+
+  <!-- ISLAND HOUSE -->
+  <h2 id="island-house">Island House</h2>
+  <p class="sub">The ongoing flagship — first we get the catch-up work organised, then it runs.</p>
+  <div class="tl">
+    <div class="ph"><div class="card">
+      <div class="rowh"><b>Phase A — Catch-up: organise the backlog</b><span class="win soon">Next few weeks</span></div>
+      <p>Categorise and organise the entirety of the catch-up work: triage the photo archive, lock the history and story (done and fact-checked), and stand up the documentation system so everything from here is captured to standard.</p>
+      <div class="tgt"><b>Target:</b> the backlog structured and under control — a clean base to build from.</div>
+      <div class="who"><span class="chip">Heritage · Compliance · Data</span></div>
+    </div></div>
+    <div class="ph"><div class="card">
+      <div class="rowh"><b>Phase B — Build</b><span class="win mo">Following</span></div>
+      <p>New website (the story / living journal + restoration progress) and the documentation / inspection engine live; publish the first chapter.</p>
+      <div class="tgt"><b>Target:</b> a living site and a working record.</div>
+    </div></div>
+    <div class="ph"><div class="card">
+      <div class="rowh"><b>Phase C — Run it, to opening</b><span class="win ong">Ongoing</span></div>
+      <p>Monthly reporting, the journal chapter by chapter, and the restoration reveals captured — through to opening. A long run, tracked by milestone, not by clock.</p>
+      <div class="tgt"><b>Target:</b> a followed story and a milestone hit every month.</div>
+    </div></div>
+  </div>
+
+  <h2>To book &amp; decide now</h2>
+  <p class="sub">The near-term calls that set these timelines running.</p>
+  <div class="book">
+    <div><span class="n">1</span><b>Book the Sancler shoot</b> — a window this week while the weather holds (drone + scenario shots at Clôs Hugdon).</div>
+    <div><span class="n">2</span><b>Green-light the video research</b> — I'll pull comparable property / development videos so you can tell me what looks good, what doesn't, and what you're into before we film.</div>
+    <div><span class="n">3</span><b>Island House catch-up</b> — a nod to start categorising and organising the backlog now.</div>
+  </div>
+  <button class="notecta" onclick="(function(){var b=document.getElementById('gnwBtn');if(b)b.click();})()">✍ Leave a note or steer</button>
+
+  <p class="sub" style="text-align:center;margin-top:26px;">CCP Project Enablement · targets tracked live — hit it, and it lands on the dashboard.</p>
+
+</div>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var p=location.pathname.toLowerCase(), biz='General';
+  if(p.indexOf('bakery')>=0||p.indexOf('globe')>=0) biz='Bakery';
+  else if(p.indexOf('sancler')>=0) biz='Sancler Property';
+  else if(p.indexOf('island')>=0) biz='Island House';
+  var who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body></html>

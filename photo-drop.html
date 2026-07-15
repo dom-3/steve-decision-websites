@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>The Globe — Photo Drop</title>
+<style>
+  :root{--warm:#8a5a2b;--deep:#5c3a17;--cream:#f6efe4;--ink:#33271b;--muted:#8a7c6b;--line:#e7dcc9;--gold:#b07d2b;--ok:#1f7a4d;}
+  *{box-sizing:border-box;} body{margin:0;background:#efe7d8;color:var(--ink);font-family:"Jost","Helvetica Neue",Arial,sans-serif;font-weight:300;line-height:1.5;}
+  .wrap{max-width:600px;margin:0 auto;padding:0 18px 60px;}
+  header{background:linear-gradient(160deg,var(--warm),var(--deep));color:#f6efe4;padding:30px 18px 26px;text-align:center;}
+  header .inner{max-width:600px;margin:0 auto;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e8d6b8;}
+  h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:34px;margin:6px 0 6px;}
+  header p{color:#efdfc6;font-size:14.5px;margin:0 auto;max-width:440px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 18px 20px;margin-top:18px;box-shadow:0 3px 14px rgba(92,58,23,.08);}
+  .step{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:4px;}
+  h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:21px;margin:0 0 10px;color:var(--deep);}
+  label.name{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
+  input#who{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:15px;}
+  .cats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:2px;}
+  .cat{display:flex;align-items:center;gap:9px;border:1.5px solid var(--line);background:#fdfaf4;border-radius:12px;padding:13px 12px;cursor:pointer;font-size:15px;font-weight:400;transition:.12s;}
+  .cat .em{font-size:20px;}
+  .cat:hover{border-color:var(--warm);}
+  .cat.on{background:var(--warm);border-color:var(--warm);color:#fff;}
+  .add{width:100%;margin-top:16px;background:var(--warm);color:#fff;border:0;font-family:inherit;font-size:17px;font-weight:500;
+       padding:16px;border-radius:13px;cursor:pointer;box-shadow:0 4px 14px rgba(138,90,43,.28);}
+  .add:hover{background:var(--deep);}
+  .add:disabled{background:#d9ccb6;opacity:.7;cursor:not-allowed;box-shadow:none;}
+  .hint{font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px;}
+  .done{margin-top:16px;}
+  .done h3{font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--ok);margin:0 0 8px;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;}
+  .grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;border:1px solid var(--line);}
+  .count{background:#eef4f0;color:var(--ok);border-radius:10px;padding:9px 12px;font-size:13.5px;font-weight:500;text-align:center;margin-bottom:10px;}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="kicker">The Globe · Bakery</div>
+  <h1>Photo Drop</h1>
+  <p>Snap it, tap what it is, and send. Your photos go straight to our shared library — no app, no login, as many as you like.</p>
+</div></header>
+<div class="wrap">
+
+  <div class="card">
+    <div class="step">Step 1</div>
+    <h2>Your name (optional)</h2>
+    <label class="name">So we know who to thank for the good ones.</label>
+    <input id="who" type="text" placeholder="e.g. Fred" autocomplete="name">
+  </div>
+
+  <div class="card">
+    <div class="step">Step 2</div>
+    <h2>What is it?</h2>
+    <div class="cats" id="cats">
+      <div class="cat" data-folder="the-globe/bakery/bread" data-tag="bread"><span class="em">🍞</span> Bread</div>
+      <div class="cat" data-folder="the-globe/bakery/pastries" data-tag="pastry"><span class="em">🥐</span> Pastries</div>
+      <div class="cat" data-folder="the-globe/bakery/shop" data-tag="shop"><span class="em">🏪</span> Shop &amp; counter</div>
+      <div class="cat" data-folder="the-globe/bakery/team" data-tag="team"><span class="em">👩‍🍳</span> The team</div>
+      <div class="cat" data-folder="the-globe/bakery/ingredients" data-tag="ingredients"><span class="em">🌾</span> Ingredients</div>
+      <div class="cat" data-folder="the-globe/bakery/_incoming" data-tag="other"><span class="em">📷</span> Something else</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="step">Step 3</div>
+    <h2>Add your photos</h2>
+    <button class="add" id="add" disabled>Pick a category first ↑</button>
+    <div class="hint">You can add lots at once, or take a new photo right here.</div>
+    <div class="done" id="done" style="display:none;">
+      <div class="count" id="count"></div>
+      <h3>Sent to the library ✓</h3>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <footer>The Globe · shared photo library — sorted &amp; ready for the website and socials.</footer>
+</div>
+
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+<script>
+(function(){
+  var CLOUD='fpuv0xud', PRESET='globe_unsigned';
+  var sel=null, count=0;
+  var addBtn=document.getElementById('add');
+  document.querySelectorAll('#cats .cat').forEach(function(c){
+    c.onclick=function(){
+      document.querySelectorAll('#cats .cat').forEach(function(x){x.classList.remove('on');});
+      c.classList.add('on'); sel={folder:c.getAttribute('data-folder'),tag:c.getAttribute('data-tag'),label:c.textContent.trim()};
+      addBtn.disabled=false; addBtn.textContent='➕ Add '+sel.label.toLowerCase()+' photos';
+    };
+  });
+  addBtn.onclick=function(){
+    if(!sel) return;
+    var who=(document.getElementById('who').value||'').trim();
+    var opts={
+      cloudName:CLOUD, uploadPreset:PRESET,
+      sources:['local','camera'], multiple:true, maxFiles:50,
+      folder:sel.folder, tags:['staff-drop', sel.tag],
+      clientAllowedFormats:['image','video'],
+      maxImageFileSize:52428800, maxVideoFileSize:262144000,
+      styles:{palette:{window:"#FFFFFF",sourceBg:"#F6EFE4",windowBorder:"#8A5A2B",tabIcon:"#8A5A2B",inactiveTabIcon:"#B9A98F",menuIcons:"#8A5A2B",link:"#8A5A2B",action:"#8A5A2B",inProgress:"#B07D2B",complete:"#1F7A4D",error:"#B0472B",textDark:"#33271B",textLight:"#FFFFFF"}}
+    };
+    if(who) opts.context={uploader:who};
+    var widget=cloudinary.createUploadWidget(opts,function(error,result){
+      if(!error && result && result.event==='success'){
+        count++;
+        document.getElementById('done').style.display='block';
+        document.getElementById('count').textContent=count+' photo'+(count===1?'':'s')+' sent — thank you'+(who?(', '+who):'')+'!';
+        var url=result.info.secure_url, rt=result.info.resource_type;
+        var thumb=(rt==='video')
+          ? url.replace('/video/upload/','/video/upload/w_200,h_200,c_fill,so_0/').replace(/\.[a-z0-9]+$/i,'.jpg')
+          : url.replace('/upload/','/upload/w_200,h_200,c_fill,q_auto,f_auto/');
+        var img=document.createElement('img'); img.src=thumb; img.alt='';
+        document.getElementById('grid').prepend(img);
+      }
+    });
+    widget.open();
+  };
+})();
+</script>
+</body></html>

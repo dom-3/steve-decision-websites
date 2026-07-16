@@ -181,11 +181,11 @@ var S = [
     lede:"The house that gives the trail its name — raised on the old quayside as Laugharne's merchant town matured.",
     fact:[
       ["A dated doorway of <b>1658</b> survives (recorded by Curtis and in the Cadw listing).","t2"],
-      ["It stands on the <b>medieval port site</b> — the hall house and quay beneath it are the archaeology (see The Quay).","t1"]
+      ["It stands on the <b>medieval port site</b> — the hall house and quay beneath it are the archaeology (see The Quay).","t1"],
+      ["Its <b>roof timbers have been dendro-dated to 1437</b> — older than the standing house, confirming a medieval building phase on the site (Heneb).","t1"]
     ],
     legend:[
-      ["“Cromwell's cannonballs” — the tradition that half the house was destroyed by cannon fire in the <b>1644 siege</b>, a ball kept until 1823. In fact the siege was led by <b>Rowland Laugharne</b>, not Cromwell — tell it carefully.","trad"],
-      ["A reused set of <b>1437 roof timbers</b> in a c.1610–30 house is an intriguing anomaly, not yet resolved by fabric dating.","open"]
+      ["“Cromwell's cannonballs” — the tradition that half the house was destroyed by cannon fire in the <b>1644 siege</b>, a ball kept until 1823. In fact the siege was led by <b>Rowland Laugharne</b>, not Cromwell — tell it carefully.","trad"]
     ],
     connects:["quay","skyrme","garden"], src:"Doc 22 dossier; Doc 32 (Architecture of the Story)."
   },
@@ -323,10 +323,9 @@ var S = [
       ["Their figures are national: John, 1st Earl (MP for Carmarthen); Richard, 2nd Earl (Royalist commander); John, 3rd Earl — President of the Royal Society and Governor of Jamaica.","t2"]
     ],
     legend:[
-      ["The oft-repeated claim that the <b>Lordship of Laugharne was sold to Sir William Russell</b> does <b>not</b> check out — Russell's authoritative biography names no Welsh property. Unconfirmed until the real lordship descent is read.","open"],
-      ["<b>Mansel of Margam</b> and <b>Evan Thomas of Tremoilett</b> are named as holders but not yet verified.","open"]
+      ["Stress-tested: of the three 'grandee' names in the owner-story, only <b>Vaughan survives</b>. <b>Mansel of Margam</b> were a Glamorgan dynasty with no Laugharne interest — the link <b>fails</b>; and the '<b>sold to Sir William Russell</b>' claim stays uncorroborated (probable misattribution).","open"]
     ],
-    connects:["debryan","islandhouse","siege1644"], src:"Doc 53 (Mererid Thread 12), via the Dictionary of Welsh Biography."
+    connects:["debryan","islandhouse","siege1644","perrot"], src:"Docs 53/64 (Mererid Threads 12/21)."
   },
   {
     id:"siege1644", type:"person", year:1644, yr:"1644", name:"The 1644 Siege — Rowland Laugharne",
@@ -420,6 +419,20 @@ var S = [
       ["Morris himself had no Island House connection — the tie is through his great-grandson; the exact descent step is still to be pinned in the census.","open"]
     ],
     connects:["caleb_rees"], src:"Doc 59 (Mererid Thread 15), via the Dictionary of Welsh Biography."
+  },
+  {
+    id:"perrot", type:"person", year:1584, yr:"1584", name:"The Lordship & Sir John Perrot",
+    role:"Untangling the lordship of Laugharne from the house itself",
+    lede:"A crucial correction: who held the lordship of Laugharne is a separate story from who owned the house.",
+    fact:[
+      ["The <b>lordship of Laugharne</b> (the manorial title) descended de Brian → Crown, and in <b>1584 was granted to Sir John Perrot</b> — a line quite separate from Island House's own freehold, which ran White → … → Skyrme.","t2"],
+      ["<b>Sir John Perrot (c.1528–1592)</b> of Pembrokeshire was Lord Deputy of Ireland; he fell from favour and died a prisoner in the Tower of London in 1592.","t2"]
+    ],
+    legend:[
+      ["Popular tradition holds Perrot was an <b>illegitimate son of Henry VIII</b> — a colourful claim, never proven.","trad"],
+      ["The old line that the lordship was later 'sold to <b>Sir William Russell</b>' remains <b>uncorroborated</b> — likely a misattribution.","open"]
+    ],
+    connects:["debryan","grandees","town"], src:"Doc 63 (Mererid Thread 19), via the Dictionary of Welsh Biography."
   }
 ];
 

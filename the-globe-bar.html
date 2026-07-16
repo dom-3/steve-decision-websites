@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Globe Bar — Section (Steve's dashboard)</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;--band:#12312a;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  a{color:var(--green);}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px 90px;}
+  header{background:linear-gradient(160deg,var(--green),var(--band));color:#f4efe6;padding:34px 20px 30px;}
+  header .inner{max-width:1040px;margin:0 auto;}
+  .back{display:inline-block;margin-bottom:6px;color:#cfe0d8;text-decoration:none;font-size:12.5px;}
+  .back:hover{color:#fff;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
+  header h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(28px,4vw,38px);margin:8px 0 8px;}
+  header p{max-width:680px;color:#e6dcc8;font-size:15px;margin:0;}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:21px;margin:36px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  /* decision options */
+  .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:820px){.opts{grid-template-columns:1fr;}}
+  .opt{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(20,50,45,.06);display:flex;flex-direction:column;}
+  .opt.rec{border:2px solid var(--gold);}
+  .mock{height:150px;padding:16px 16px 14px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;}
+  .mock .nav{position:absolute;top:11px;left:16px;right:16px;display:flex;justify-content:space-between;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;opacity:.8;}
+  .mock .kick{font-size:8px;letter-spacing:2px;text-transform:uppercase;opacity:.75;margin-bottom:5px;}
+  .mock .hh{font-size:23px;line-height:1.05;margin:0;}
+  .mock .hh em{font-style:italic;}
+  .mock .btns{margin-top:9px;display:flex;gap:6px;}
+  .mock .b1,.mock .b2{font-size:8px;padding:4px 8px;border-radius:4px;font-weight:700;}
+  /* palette-specific mocks */
+  .m-steve{background:#F6F2E9;color:#3a352c;} .m-steve .hh{font-family:Georgia,serif;color:#171310;}
+  .m-steve .b1{background:#171310;color:#F6F2E9;} .m-steve .b2{border:1px solid #171310;color:#171310;}
+  .m-alys{background:#100d0a;color:#c9bfa8;} .m-alys .hh{font-family:Georgia,serif;color:#f4ecda;}
+  .m-alys .hh em{color:#caa257;} .m-alys .b1{background:#caa257;color:#100d0a;} .m-alys .b2{border:1px solid #8a7a52;color:#e7ddc7;}
+  .m-wild{background:#F4EEE2;color:#2b271f;} .m-wild .hh{font-family:Georgia,serif;font-weight:600;color:#120f0b;}
+  .m-wild .b1{background:#120f0b;color:#F4EEE2;} .m-wild .b2{border:1px solid #120f0b;color:#120f0b;}
+  .opt .body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;}
+  .opt .nm{font-family:Georgia,serif;font-size:18px;color:var(--dark);margin:0;display:flex;align-items:center;gap:8px;}
+  .recbadge{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:#f7f0e1;color:var(--gold);padding:3px 8px;border-radius:20px;}
+  .opt .ds{font-size:12.5px;color:var(--muted);margin:6px 0 10px;}
+  .swatches{display:flex;gap:5px;margin:0 0 12px;}
+  .sw{width:20px;height:20px;border-radius:5px;border:1px solid rgba(0,0,0,.12);}
+  .opt .act{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;}
+  .lk{text-decoration:none;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#f3f6f4;color:var(--green);border:1px solid var(--line);cursor:pointer;}
+  .lk:hover{background:var(--green);color:#fff;border-color:var(--green);}
+  .lk.choose{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .lk.choose:hover{background:#946a22;}
+  #decMsg{font-size:13px;font-weight:600;margin:12px 0 0;min-height:18px;}
+  #decMsg.ok{color:#1f7a4d;} #decMsg.err{color:#b0472b;}
+  .callout{background:#fffdf8;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:14px 18px;margin:14px 0 0;font-size:13.5px;}
+  /* data-point map */
+  .map{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px;}
+  @media(max-width:760px){.map{grid-template-columns:1fr;}}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 3px 12px rgba(20,50,45,.06);}
+  .panel h3{font-family:Georgia,serif;font-size:17px;color:var(--dark);margin:0 0 3px;display:flex;align-items:center;gap:8px;}
+  .panel .pd{font-size:12px;color:var(--muted);margin:0 0 12px;}
+  .li{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px;}
+  .li:last-child{border-bottom:0;}
+  .st{flex:none;font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:3px 7px;border-radius:5px;margin-top:1px;}
+  .st.todo{background:#f3e8e0;color:#b0472b;} .st.wip{background:#f7f0e1;color:var(--gold);} .st.live{background:#eaf4ee;color:#1f7a4d;}
+  .li b{color:var(--dark);}
+  .li .sm{color:var(--muted);font-size:11.5px;display:block;margin-top:1px;}
+  .metrics{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+  .mt{background:#eef4f0;color:var(--green);font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;}
+  .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .lk.solid{background:var(--green);color:#fff;border-color:var(--green);}
+  .lk.solid:hover{background:var(--dark);}
+</style></head><body>
+
+<header><div class="inner">
+  <a class="back" href="index.html">← Steve's dashboard</a>
+  <div class="kicker">The Globe · Bar · Restaurant · Bakery · Laugharne</div>
+  <h1>The Globe Bar</h1>
+  <p>Everything for the Globe in one place — the look you choose for the website, and the plan for getting found: search, AI answers, Instagram &amp; Facebook, and the local groups where Laugharne actually talks. Your pick and any notes here are logged and emailed straight to Dominic.</p>
+</div></header>
+
+<div class="wrap">
+
+  <h2>1 · Choose the website look</h2>
+  <p class="sub">Same content, same brand — three directions for the homepage. Have a look at each full preview, then pick the one that feels like the Globe. You can change your mind; nothing's built until you choose.</p>
+
+  <div class="opts">
+    <!-- STEVE -->
+    <div class="opt">
+      <div class="mock m-steve">
+        <div class="nav"><span>THE GLOBE</span><span>BOOK</span></div>
+        <div class="kick">Laugharne · Bar &amp; Restaurant</div>
+        <p class="hh">The hidden gem<br>of Laugharne.</p>
+        <div class="btns"><span class="b1">Book a table</span><span class="b2">See the menu</span></div>
+      </div>
+      <div class="body">
+        <p class="nm">Steve</p>
+        <p class="ds">Warm &amp; clear. Light, bright and easy to read — “see exactly who we are” at a glance.</p>
+        <div class="swatches"><span class="sw" style="background:#F6F2E9"></span><span class="sw" style="background:#3a352c"></span><span class="sw" style="background:#b07d2b"></span></div>
+        <div class="act">
+          <a class="lk" href="globe-directions.html#steve" target="_blank">Full preview →</a>
+          <span class="lk choose" data-v="steve" data-label="Steve — warm &amp; clear">✓ Choose</span>
+        </div>
+      </div>
+    </div>
+    <!-- ALYS (rec) -->
+    <div class="opt rec">
+      <div class="mock m-alys">
+        <div class="nav"><span>THE GLOBE</span><span>BOOK</span></div>
+        <div class="kick">Laugharne · Bar &amp; Restaurant</div>
+        <p class="hh">The hidden gem<br>of <em>Laugharne.</em></p>
+        <div class="btns"><span class="b1">Book a table</span><span class="b2">See the menu</span></div>
+      </div>
+      <div class="body">
+        <p class="nm">Alys <span class="recbadge">Our rec</span></p>
+        <p class="ds">Dark &amp; sleek. The premium, Gordon-Ramsay evening look — atmosphere up front, clear content underneath.</p>
+        <div class="swatches"><span class="sw" style="background:#100d0a"></span><span class="sw" style="background:#caa257"></span><span class="sw" style="background:#f4ecda"></span></div>
+        <div class="act">
+          <a class="lk" href="globe-directions.html#alys" target="_blank">Full preview →</a>
+          <span class="lk choose" data-v="alys" data-label="Alys — dark &amp; sleek">✓ Choose</span>
+        </div>
+      </div>
+    </div>
+    <!-- WILD -->
+    <div class="opt">
+      <div class="mock m-wild">
+        <div class="nav"><span>THE GLOBE</span><span>BOOK</span></div>
+        <div class="kick">Laugharne · Bar &amp; Restaurant</div>
+        <p class="hh">The hidden gem<br>of Laugharne.</p>
+        <div class="btns"><span class="b1">Book a table</span><span class="b2">See the menu</span></div>
+      </div>
+      <div class="body">
+        <p class="nm">Wild card</p>
+        <p class="ds">Bold editorial. A braver, magazine-style personality with a more characterful serif.</p>
+        <div class="swatches"><span class="sw" style="background:#F4EEE2"></span><span class="sw" style="background:#120f0b"></span><span class="sw" style="background:#141210"></span></div>
+        <div class="act">
+          <a class="lk" href="globe-directions.html#wild" target="_blank">Full preview →</a>
+          <span class="lk choose" data-v="wild" data-label="Wild card — bold editorial">✓ Choose</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p id="decMsg"></p>
+  <div class="callout"><b>Why we lean to Alys.</b> The brief was to reconcile “dark like Gordon Ramsay” (Alys) with “easy to read” (Steve) — a dark, premium <i>look</i> wrapped around clear, high-contrast <i>content</i>. Alys delivers both; Wild is the one to keep in your pocket if you want more personality later. It's your call — pick whichever feels right.</p>
+
+  <h2>2 · Getting found — the plan</h2>
+  <p class="sub">A starter map of the data points and jobs that bring the Weekend Explorer to the door. Statuses are where we are now; we'll turn each one on.</p>
+
+  <div class="map">
+
+    <!-- SEO -->
+    <div class="panel">
+      <h3>🔍 Local SEO</h3>
+      <p class="pd">Show up when someone Googles “wine bar / restaurant Laugharne.”</p>
+      <div class="li"><span class="st todo">To set up</span><span><b>Google Business Profile</b> — hours, category, menu link, photos, weekly posts. <span class="sm">The single biggest local-search lever.</span></span></div>
+      <div class="li"><span class="st wip">In build</span><span><b>Real text menus</b> (not image menus) with prices, so pages are readable and indexable.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>NAP consistency</b> — same name, address, phone everywhere; pick one email (hello@ vs gmail).</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>LocalBusiness / Restaurant schema</b> + clear page titles for hours, menu, book.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>Review engine</b> — a simple “leave us a review” nudge after bookings.</span></div>
+      <div class="metrics"><span class="mt">Local pack rank</span><span class="mt">GBP views</span><span class="mt">Direction taps</span><span class="mt">Website clicks</span></div>
+    </div>
+
+    <!-- AIO -->
+    <div class="panel">
+      <h3>🤖 AIO — AI answers</h3>
+      <p class="pd">Be the answer when someone asks ChatGPT / Google AI “where to eat in Laugharne.”</p>
+      <div class="li"><span class="st todo">To set up</span><span><b>Clear factual answers on-page</b> — who we are, where, hours, what we serve, in plain sentences an AI can quote.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>An FAQ block</b> (parking, dogs, dietary, booking, happy hour) — the exact questions people ask assistants.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>Entity clarity</b> — “The Globe, Laugharne = bar + restaurant + bakery,” stated consistently so it's understood as one place.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>Presence in trusted local sources</b> (Visit Wales, Discover Carmarthenshire, Dylan Thomas trails) that AIs read.</span></div>
+      <div class="metrics"><span class="mt">AI mentions</span><span class="mt">Cited facts</span><span class="mt">“Near me” capture</span></div>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="panel">
+      <h3>📸 Instagram &amp; Facebook</h3>
+      <p class="pd">@globebarlaugharne — the atmosphere reel that wins the visitor deciding tonight.</p>
+      <div class="li"><span class="st wip">In build</span><span><b>Content pillars</b> — the room &amp; garden, food &amp; the £8.50 cocktails, what's on, the story, the offers, the bakery by day.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>Cadence</b> — 3–4 posts/week + stories; one push per event; monthly “what's on” round-up.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>Booking link with tracking</b> in bio &amp; posts, so we can see what converts.</span></div>
+      <div class="metrics"><span class="mt">Followers</span><span class="mt">Reach</span><span class="mt">Engagement</span><span class="mt">Saves</span><span class="mt">Story views</span><span class="mt">Event RSVPs</span><span class="mt">DMs → bookings</span></div>
+    </div>
+
+    <!-- LOCAL SHARING -->
+    <div class="panel">
+      <h3>📢 Local group sharing</h3>
+      <p class="pd">Where Laugharne actually talks — the free reach the locals live in.</p>
+      <div class="li"><span class="st todo">To set up</span><span><b>Community Facebook groups</b> — Laugharne &amp; district, Carmarthenshire what's-on, “things to do West Wales.”</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>Visitor &amp; heritage groups</b> — Dylan Thomas / Boathouse audiences, coast-path &amp; staycation groups.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>Event cross-posting</b> — every event (Summer Sessions, choir, Wine Down Wednesdays) shared out on a simple rota.</span></div>
+      <div class="li"><span class="st todo">To set up</span><span><b>Local partnerships</b> — Browns, the Boathouse, the castle, nearby stays; notice boards &amp; WhatsApp.</span></div>
+      <div class="metrics"><span class="mt">Shares</span><span class="mt">Group reach</span><span class="mt">Referral clicks</span><span class="mt">Event attendance</span></div>
+    </div>
+
+  </div>
+
+  <h2>3 · The working pages</h2>
+  <p class="sub">The build in progress — react on any page with the ✍ Note button.</p>
+  <div class="links">
+    <a class="lk solid" href="globe-directions.html" target="_blank">The three homepage options →</a>
+    <a class="lk" href="globe-winebar.html" target="_blank">Current wine-bar page</a>
+    <a class="lk" href="globe-plan.html">The Globe · one-brand plan</a>
+    <a class="lk" href="bakery-plan.html">The bakery plan</a>
+  </div>
+
+</div>
+
+<script>
+/* choose-direction buttons → /api/decision */
+(function(){
+  var msg=document.getElementById('decMsg');
+  document.querySelectorAll('.lk.choose').forEach(function(b){
+    b.onclick=function(){
+      var label=(b.getAttribute('data-label')||'').replace('&amp;','&');
+      msg.className='';msg.textContent='Saving your choice…';
+      fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({reviewer:'Steve',items:[{item:'The Globe — homepage direction',business:'The Globe',type:'Decision',answer:'Chosen: '+label}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){msg.className='ok';msg.textContent='✓ Locked in: '+label+'. Dominic will be emailed — we’ll build it out.';}
+        else{fb(label);}}).catch(function(){fb(label);});
+    };
+  });
+  function fb(label){msg.className='err';msg.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Globe homepage direction')+'&body='+encodeURIComponent('Steve chose: '+label);}
+})();
+</script>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var biz='Bakery', who='Steve';
+  var css='#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;font-family:Arial,sans-serif;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;font-family:Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;display:flex;justify-content:space-between;align-items:center;}#gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}#gnwP .b{padding:13px 15px 15px;}#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;padding:11px;border-radius:9px;cursor:pointer;}#gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;}#gnwS.ok{color:#1f7a4d;}#gnwS.err{color:#b0472b;}#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style><button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span> <span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise…"></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'),T=document.getElementById('gnwT'),Sx=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  document.getElementById('gnwSave').onclick=function(){
+    var v=(T.value||'').trim(); if(!v){Sx.className='err';Sx.textContent='Write a note first.';return;}
+    Sx.className='';Sx.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){Sx.className='ok';Sx.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');Sx.textContent='';},1400);}else{fb2(v);}})
+      .catch(function(){fb2(v);});
+  };
+  function fb2(v){Sx.className='err';Sx.textContent='Tracker offline — opening email…';window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+</body></html>

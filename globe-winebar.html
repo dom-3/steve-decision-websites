@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Globe · Wine Bar & Restaurant — Laugharne</title>
+<meta name="description" content="The Globe — the hidden gem of Laugharne. A bar and restaurant with a secret garden on Duncan Street. Good wine, honest food, cocktails and live music. Open Wed–Sat till late.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111111; --ink-2:#171512; --charcoal:#2A2A2A; --paper:#F5F1E8; --cream:#EFE9DC;
+    --gold:#B08D4C; --gold-lt:#cBA968; --gold-deep:#8f6f39; --muted:#9a917c; --line:rgba(240,233,218,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;font-weight:500;color:#efe7d5;background:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 30px}
+  a{color:inherit;text-decoration:none}
+  .poi{font-family:'Poiret One',sans-serif}
+  .play{font-family:'Playfair Display',serif}
+
+  /* prototype flag */
+  .proto{background:#000;color:#b9ad93;font-family:'Poiret One',sans-serif;font-size:12px;letter-spacing:.06em;text-align:center;padding:7px 16px;border-bottom:1px solid var(--line)}
+  .proto b{color:var(--gold-lt)}
+
+  /* family strip */
+  .fam{background:#000;color:var(--gold);font-family:'Poiret One',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;text-align:center;padding:8px 16px}
+  .fam span{color:#7a7263;margin:0 8px}
+
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:30;background:rgba(17,17,17,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 30px}
+  .brand{display:flex;flex-direction:column;align-items:center;line-height:1}
+  .brand .globe{width:46px;height:20px;margin-bottom:2px}
+  .brand .nm{font-family:'Poiret One',sans-serif;font-size:20px;letter-spacing:.22em;color:#f4ecda}
+  .brand .sub{font-family:'Poiret One',sans-serif;font-size:8.5px;letter-spacing:.34em;color:var(--gold);margin-top:2px}
+  nav.lk{display:flex;gap:28px;align-items:center;font-family:'Poiret One',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  nav.lk a{color:#d7cdb6} nav.lk a:hover{color:var(--gold)}
+  .book{background:var(--gold);color:var(--ink)!important;padding:9px 18px;border-radius:2px;letter-spacing:.12em}
+  .book:hover{background:var(--gold-lt)}
+
+  /* hero */
+  .hero{padding:76px 0 60px;border-bottom:1px solid var(--line)}
+  .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+  .eyebrow{font-family:'Poiret One',sans-serif;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+  h1.hero-h{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(40px,5.4vw,68px);line-height:1.03;letter-spacing:-.015em;color:#f6efe0}
+  .lede{font-size:20px;color:#cfc7b3;max-width:30em;margin:24px 0 30px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-g{background:var(--gold);color:var(--ink);font-family:'Poiret One',sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:15px 26px;border-radius:2px}
+  .btn-g:hover{background:var(--gold-lt)}
+  .btn-o{border:1px solid var(--gold);color:var(--gold);font-family:'Poiret One',sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:14px 24px;border-radius:2px}
+  .btn-o:hover{background:var(--gold);color:var(--ink)}
+
+  .photo{position:relative;border-radius:4px;overflow:hidden;background:linear-gradient(150deg,#231f18,#0c0b08);display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line)}
+  .photo .tag{position:absolute;top:12px;left:12px;font-family:'Poiret One',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:rgba(0,0,0,.5);color:var(--gold-lt);padding:4px 10px;border-radius:2px}
+  .photo .mid{font-size:15px;color:#9a8f76;padding:0 26px;font-style:italic}
+  .hero .photo{aspect-ratio:4/5}
+
+  /* tonight strip */
+  .tonight{background:var(--charcoal);border-bottom:1px solid var(--line)}
+  .tonight .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .tcell{padding:26px 24px;border-right:1px solid var(--line)}
+  .tonight .tcell:last-child{border-right:none}
+  .tcell .k{font-family:'Poiret One',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .tcell .v{font-family:'Playfair Display',serif;font-size:19px;color:#f2ead9;line-height:1.35}
+  .tcell .v small{display:block;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--muted);font-weight:500;margin-top:3px}
+
+  /* section */
+  section.blk{padding:70px 0;border-bottom:1px solid var(--line)}
+  .kick{font-family:'Poiret One',sans-serif;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h2{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.01em;line-height:1.08;color:#f4ecda}
+  .lead{color:#c8c0ac;max-width:40em;margin-top:14px;font-size:18.5px}
+
+  /* dark board — cocktails */
+  .board{background:#0b0a08;border:1px solid var(--line);border-radius:6px;padding:38px clamp(24px,4vw,50px);margin-top:30px}
+  .board .bh{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;border-bottom:1px dashed rgba(240,233,218,.22);padding-bottom:18px}
+  .board .bh .t{font-family:'Playfair Display',serif;font-weight:600;font-size:24px;color:#f4ecda}
+  .board .bh .n{font-family:'Poiret One',sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .drink{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline;padding:15px 0;border-bottom:1px solid rgba(240,233,218,.09)}
+  .drink:last-child{border-bottom:none}
+  .drink .dn{font-family:'Playfair Display',serif;font-weight:600;font-size:19px;color:#efe7d5}
+  .drink .dd{font-size:15.5px;color:var(--muted);margin-top:2px}
+  .drink .dp{font-family:'Poiret One',sans-serif;font-size:17px;color:var(--gold-lt)}
+  .board .foot{margin-top:18px;font-size:15.5px;color:var(--muted)}
+  .board .foot b{color:var(--gold-lt);font-family:'Poiret One',sans-serif;font-size:13px;letter-spacing:.06em}
+
+  /* story */
+  .story .grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+  .story .photo{aspect-ratio:5/4}
+  .story p{color:#c8c0ac;margin-top:14px;font-size:18.5px}
+  .story .sig{font-family:'Playfair Display';font-style:italic;color:var(--gold-lt);margin-top:16px;font-size:18px}
+
+  /* events */
+  .events .row{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+  .events .row:last-child{border-bottom:none}
+  .events .dte{font-family:'Poiret One',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);min-width:120px}
+  .events .en{font-family:'Playfair Display',serif;font-weight:600;font-size:20px;color:#efe7d5}
+  .events .ed{font-size:15.5px;color:var(--muted);margin-top:2px}
+  .events .go{font-family:'Poiret One',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+
+  /* bakery family band */
+  .fband{background:var(--paper);color:#23211c}
+  .fband .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:34px 30px;flex-wrap:wrap}
+  .fband .k{font-family:'Poiret One',sans-serif;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+  .fband h3{font-family:'Playfair Display',serif;font-weight:600;font-size:26px;color:#1a1813;margin-top:5px}
+  .fband p{color:#5f5849;font-size:17px;margin-top:4px;max-width:34em}
+  .fband a.b{background:var(--ink);color:var(--paper);font-family:'Poiret One',sans-serif;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;padding:14px 22px;border-radius:2px;white-space:nowrap}
+
+  /* visit / footer */
+  .visit{background:#0b0a08}
+  .visit .grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+  .visit .photo{aspect-ratio:4/3}
+  .visit .info{font-size:17px;line-height:1.95;color:#c8c0ac;margin-top:16px}
+  .visit .info b{color:#f2ead9}
+  .hrs{margin-top:14px;font-size:16px;color:#c8c0ac}
+  .hrs div{display:flex;justify-content:space-between;max-width:320px;padding:5px 0;border-bottom:1px solid var(--line)}
+  .hrs .d{color:var(--muted);font-family:'Poiret One',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+  footer{background:#000;text-align:center;padding:46px 0 56px}
+  footer .lk{font-family:'Poiret One',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#f4ecda;font-size:18px}
+  footer .lk span{color:var(--gold)}
+  footer .sm{color:var(--muted);font-size:15px;margin-top:12px}
+  footer .sm a{color:var(--gold-lt)}
+
+  @media(max-width:880px){
+    .hero .grid,.story .grid,.visit .grid{grid-template-columns:1fr;gap:34px}
+    .tonight .wrap{grid-template-columns:1fr}
+    .tcell{border-right:none;border-bottom:1px solid var(--line)}
+    nav.lk{display:none}
+    .events .row{grid-template-columns:1fr;gap:4px}
+    .events .go{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="proto">🔧 <b>Prototype — Globe Wine Bar homepage</b> · dark register, built on the locked Globe design system. Photography placeholder (real Globe shots drop into the dark panels). Headline in Playfair — Fraunces pilot pending Steve.</div>
+
+<div class="fam">The Globe <span>·</span> Wine Bar &amp; Bakery <span>·</span> Laugharne</div>
+
+<header class="nav"><div class="wrap">
+  <a href="#" class="brand">
+    <svg class="globe" viewBox="0 0 90 34" fill="none" stroke="#B08D4C" stroke-width="1.1" stroke-linecap="round">
+      <path d="M6 30 A40 40 0 0 1 84 30"/>
+      <path d="M20 24 q6 -5 12 -1 q5 3 10 -1 q6 -4 12 0 q5 3 10 -1"/>
+      <path d="M30 30 q3 -4 7 -3 M52 30 q4 -3 8 -1"/>
+    </svg>
+    <span class="nm">THE GLOBE</span>
+    <span class="sub">BAR &amp; RESTAURANT</span>
+  </a>
+  <nav class="lk">
+    <a href="#cocktails">Menus</a>
+    <a href="#story">The Globe</a>
+    <a href="#events">Events</a>
+    <a href="globe-bakery.html">Bakery</a>
+    <a href="#visit" class="book">Book</a>
+  </nav>
+</div></header>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap"><div class="grid">
+  <div>
+    <div class="eyebrow">Laugharne · open Wed–Sat till late</div>
+    <h1 class="hero-h">The hidden gem<br>of Laugharne.</h1>
+    <p class="lede">Good wine, honest food, and a secret garden — no passport required. A bar and restaurant on Duncan Street, in a building with a hundred lives.</p>
+    <div class="cta">
+      <a href="#visit" class="btn-g">Book a table</a>
+      <a href="#cocktails" class="btn-o">See the menu</a>
+    </div>
+  </div>
+  <div class="photo">
+    <div class="tag">Photo · the doorway at night</div>
+    <div class="mid">The lit arched stone doorway after dark —<br>the moody hero shot from your own materials</div>
+  </div>
+</div></div></section>
+
+<!-- TONIGHT AT A GLANCE -->
+<div class="tonight"><div class="wrap">
+  <div class="tcell"><div class="k">Open</div><div class="v">Wed – Sat, 12pm till late<small>Mon &amp; Sun 12–5 · closed Tuesday</small></div></div>
+  <div class="tcell"><div class="k">Happy Hour</div><div class="v">2 cocktails for £12<small>3pm – 5pm, every day</small></div></div>
+  <div class="tcell"><div class="k">Find us</div><div class="v">Duncan Street, Laugharne<small>SA33 4SA · 01994 427546</small></div></div>
+</div></div>
+
+<!-- COCKTAILS BOARD -->
+<section class="blk" id="cocktails"><div class="wrap">
+  <div class="kick">From the bar</div>
+  <h2>Signature cocktails</h2>
+  <p class="lead">All £8.50 — and two for £12 at happy hour, 3–5 every day. Wine, small plates and the full menu at your table.</p>
+  <div class="board">
+    <div class="bh"><div class="t">The cocktail list</div><div class="n">All £8.50 · Mocktail £5</div></div>
+    <div class="drink"><div><div class="dn">The Globe Signature</div><div class="dd">Vodka, Cointreau, cranberry, sugar syrup &amp; lemon</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Dark 'n Stormy</div><div class="dd">Kraken rum, lime, sugar syrup &amp; ginger beer</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Espresso Martini</div><div class="dd">Vodka, Merlyn liqueur, sugar syrup &amp; coffee</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Passionfruit Twist</div><div class="dd">Vodka, Cointreau, passionfruit, lime &amp; orange</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Mojito</div><div class="dd">White rum, soda, lime, sugar &amp; mint</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Strawberry Daiquiri</div><div class="dd">White rum, strawberry purée, lime &amp; syrup</div></div><div class="dp">£8.50</div></div>
+    <div class="foot"><b>At the table —</b> small plates, sharing mains and a considered wine list. Full food menu to load here as text (fixes the image-menu gap from the audit).</div>
+  </div>
+</div></section>
+
+<!-- STORY -->
+<section class="blk story" id="story"><div class="wrap"><div class="grid">
+  <div class="photo"><div class="tag">Photo · the room &amp; garden</div><div class="mid">The bar interior by candle &amp; fire light,<br>and the secret garden — real, not stock</div></div>
+  <div>
+    <div class="kick">A building with a hundred lives</div>
+    <h2>Care — for ingredients, for people, for the land</h2>
+    <p>The Globe has been a hotel, a coach station, a butcher's and more across its long life on Duncan Street — and it's appeared on screen in the BBC's <i>Dylan in New York</i> and <i>Keeping Faith</i>. Today it's Laugharne's hidden gem: a bar, a kitchen and a secret garden.</p>
+    <p>The kitchen starts where good food should — with care for the ingredients, the people, and the land that grows what we serve. By day, the same building becomes the bakery.</p>
+    <div class="sig">— The Globe, Duncan Street, Laugharne</div>
+  </div>
+</div></div></section>
+
+<!-- EVENTS -->
+<section class="blk events" id="events"><div class="wrap">
+  <div class="kick">What's on</div>
+  <h2>Live at The Globe</h2>
+  <p class="lead">Live music, DJs and seasonal nights in the bar and the garden. A few of what's coming up.</p>
+  <div style="margin-top:26px">
+    <div class="row"><div class="dte">Summer</div><div><div class="en">Summer Sessions — Mammoth DJ x BBQ</div><div class="ed">Sizzling BBQ, great drinks, feel-good music in the garden</div></div><div class="go">Book →</div></div>
+    <div class="row"><div class="dte">Live music</div><div><div class="en">Acoustic nights</div><div class="ed">Intimate live sets — food, a delicious wine list and good company</div></div><div class="go">Book →</div></div>
+    <div class="row"><div class="dte">Seasonal</div><div><div class="en">Afternoon Tea &amp; celebrations</div><div class="ed">£25pp with a glass of prosecco — Mother's Day, gatherings &amp; private hire</div></div><div class="go">Enquire →</div></div>
+  </div>
+</div></section>
+
+<!-- BAKERY FAMILY BAND -->
+<div class="fband"><div class="wrap">
+  <div>
+    <div class="k">By day · the same building</div>
+    <h3>The Globe Bakery</h3>
+    <p>Honest, organic bread — flour, water, salt, time. Baked each morning at The Globe, reserved online and collected warm.</p>
+  </div>
+  <a class="b" href="globe-bakery.html">Visit the bakery →</a>
+</div></div>
+
+<!-- VISIT -->
+<section class="blk visit" id="visit"><div class="wrap"><div class="grid">
+  <div>
+    <div class="kick">Find us &amp; book</div>
+    <h2>Visit The Globe</h2>
+    <div class="info"><b>The Globe — Bar &amp; Restaurant</b><br>Duncan Street, Laugharne, SA33 4SA<br>01994 427546 · <a href="mailto:hello@globewinebar.co.uk" style="color:var(--gold-lt)">hello@globewinebar.co.uk</a></div>
+    <div class="hrs">
+      <div><span class="d">Mon</span><span>12 – 5</span></div>
+      <div><span class="d">Tue</span><span>Closed</span></div>
+      <div><span class="d">Wed – Sat</span><span>12 – late</span></div>
+      <div><span class="d">Sun</span><span>12 – 5</span></div>
+    </div>
+    <div class="cta" style="margin-top:24px"><a href="#" class="btn-g">Book a table</a></div>
+  </div>
+  <div class="photo"><div class="tag">Photo · the garden</div><div class="mid">The secret garden in the evening light —<br>the "no passport required" shot</div></div>
+</div></div></section>
+
+<footer>
+  <div class="lk">The Globe <span>·</span> Wine Bar &amp; Bakery</div>
+  <div class="sm">Duncan Street, Laugharne, SA33 4SA &nbsp;·&nbsp; 01994 427546 &nbsp;·&nbsp; <a href="https://www.instagram.com/globebarlaugharne/" target="_blank" rel="noopener">@globebarlaugharne</a></div>
+</footer>
+
+</body>
+</html>

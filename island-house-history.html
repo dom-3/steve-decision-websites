@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Island House — The History · A Living Library</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;--cream:#f4efe6;
+        --serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost","Helvetica Neue",Arial,sans-serif;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px 120px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:44px 24px 40px;}
+  header .inner{max-width:960px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;font-size:12px;gap:10px;flex-wrap:wrap;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;margin-top:16px;}
+  h1{font-family:var(--serif);font-weight:500;font-size:42px;line-height:1.03;margin:10px 0 12px;}
+  header p{max-width:660px;color:#e6dcc8;font-size:16px;margin:0;font-weight:300;}
+  hr.r{width:54px;height:3px;background:var(--gold);border:0;margin:18px 0 0;}
+  h2{font-family:var(--serif);color:var(--dark);font-weight:600;font-size:27px;margin:44px 0 3px;}
+  .sub{color:var(--muted);font-size:13.5px;margin:0 0 16px;}
+  .lead{background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:0 2px 10px rgba(20,50,45,.05);}
+  .lead .big{font-family:var(--serif);font-size:22px;color:var(--dark);line-height:1.35;}
+  .lead p{font-size:14px;color:#3a4a47;margin:8px 0 0;}
+
+  /* evidence tags */
+  .ev{display:inline-block;font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:9px;}
+  .ev.verified{background:#eef4f0;color:#1f7a4d;} .ev.trad{background:#fbf3e0;color:#8a6a2b;} .ev.test{background:#eef2f7;color:#2b4a6b;}
+
+  /* new-since-the-film band */
+  .band{background:linear-gradient(160deg,#faf5ea,#f3ead6);border:1px solid #e7d9bd;border-radius:14px;padding:20px 22px;margin:16px 0;}
+  .band .bh{font-family:var(--serif);font-size:23px;color:var(--dark);font-weight:600;}
+  .band .bs{font-size:13px;color:#8a6a2b;margin:2px 0 14px;}
+  .ncards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  @media(max-width:640px){.ncards{grid-template-columns:1fr;}}
+  .nc{background:#fff;border:1px solid #ecdfc6;border-radius:10px;padding:13px 15px;box-shadow:0 2px 8px rgba(120,90,30,.06);}
+  .nc h4{font-family:var(--serif);font-weight:600;font-size:17.5px;color:var(--dark);margin:0 0 4px;}
+  .nc p{font-size:13px;color:#3a4a47;margin:0;} .nc .src{font-size:10.5px;color:#9aa8a2;margin-top:7px;}
+
+  /* library collections */
+  .lib{display:grid;grid-template-columns:1fr;gap:11px;margin:12px 0;}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 16px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .fact h3{font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 4px;color:var(--dark);}
+  .fact p{font-size:13.6px;color:#3a4a47;margin:0;}
+  .fact .src{font-size:10.5px;color:#9aa8a2;margin-top:7px;}
+  .cnum{font-family:var(--serif);color:var(--gold);font-weight:600;font-size:15px;margin-right:6px;}
+
+  /* research programme */
+  .prog{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+  @media(max-width:680px){.prog{grid-template-columns:1fr;}}
+  .pcol{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .pcol h3{font-family:var(--serif);font-size:19px;color:var(--dark);font-weight:600;margin:0 0 4px;}
+  .pcol .pk{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:8px;}
+  .pcol ul{margin:0;padding-left:0;list-style:none;}
+  .pcol li{font-size:13px;color:#3a4a47;padding:7px 0;border-bottom:1px solid #eef2ef;}
+  .pcol li:last-child{border-bottom:0;} .pcol li b{color:var(--dark);}
+  .pcol a{color:var(--green);text-decoration:none;} .pcol a:hover{text-decoration:underline;}
+  .fl{font-size:10px;color:#b0472b;font-weight:600;}
+
+  .grows{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 18px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .grows div{padding:11px 0;border-bottom:1px solid #eef2ef;font-size:13.8px;} .grows div:last-child{border-bottom:0;} .grows b{color:var(--dark);}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Dashboard</a><a href="island-house-story.html">The Architecture of the Story →</a></div>
+  <div class="kicker">Island House · The History</div>
+  <h1>A Living Library</h1>
+  <p>For Steve. A growing library of <b>verifiable</b> history — Island House, the village of Laugharne, Welsh trade and Welsh heritage. Every fact is tagged for how sure we are, sourced, and added to over time. This is where the real story is kept honest — and where the new discoveries land.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+  <div class="lead">
+    <div class="big">Not a brochure — a <b>library</b>. Evidence-true, growing, and honest about what's proven, what's tradition, and what's still to chase.</div>
+    <p>It works in rings — the <b>house</b>, the <b>port</b>, the <b>town</b>, the <b>people</b>, and the <b>wider sea</b>. Each entry carries a tag: <span class="ev verified">Verified</span> documented &amp; sourced · <span class="ev trad">Tradition</span> repeated locally, not yet evidenced · <span class="ev test">To verify</span> a lead we're chasing. As the dig, the archives and the families give up more, this grows.</p>
+  </div>
+
+  <div class="band">
+    <div class="bh">New since the film</div>
+    <div class="bs">Things beyond the archaeology talk — most people, and most books, don't have these.</div>
+    <div class="ncards">
+      <div class="nc"><h4>800 years of one shell</h4><p>The quays were infilled with <b>cockle shells</b>; the same cockle economy fed Laugharne's Victorian "cockle-women" and still runs today. One shell, threaded from the medieval quay to now.<div class="src">Heneb excavation · Mary Curtis (1855)</div></p></div>
+      <div class="nc"><h4>Mary Curtis — the lost historian</h4><p>A former governess and painter who moved to Laugharne in 1855 and wrote the first real history of the town — including the cockle-women no one else recorded. Her book is free to read online.<div class="src">Narberth Museum · archive.org</div></p></div>
+      <div class="nc"><h4>Your house was a chandlery</h4><p>The <b>Skyrme family</b> — three generations of ship's-chandlers (marine suppliers) — lived at Island House <b>1742–1823</b>. A maritime through-line running straight through the building.<div class="src">Wikipedia, citing Francis Jones / Curtis</div></p></div>
+      <div class="nc"><h4>Two medieval survivals, one town</h4><p>Laugharne is the <b>only</b> excavated medieval Welsh port <b>and</b> one of Britain's last two working medieval corporations (with the City of London). No other UK town pairs the two.<div class="src">Heneb · Laugharne Corporation</div></p></div>
+      <div class="nc"><h4>The 1658 door</h4><p>A date carved on the yard door marks the rebuild after the house was damaged in the <b>1644 Civil War siege</b> of the castle — a scar you can put a finger on.<div class="src">Wikipedia, "Island House, Laugharne"</div></p></div>
+      <div class="nc"><h4>The quay reached Spain</h4><p>Pottery from the dig links this small quay to <b>Bristol, France and Spain</b> — proof it plugged into the medieval Atlantic economy, not just local trade.<div class="src">Heneb / Ken Murphy</div></p></div>
+    </div>
+  </div>
+
+  <h2>The Library</h2>
+  <p class="sub">Five collections, from the house outward. Each entry tagged and sourced.</p>
+
+  <h2 style="font-size:22px;margin-top:26px;"><span class="cnum">I</span>The House</h2>
+  <div class="lib">
+    <div class="fact"><h3>Built c.1610–1630, on older bones</h3><p>The roof timbers dendro-date to a <b>1437</b> felling, but the truss style is early-1600s — so medieval timber was <b>reused</b> when the present house went up. There was a high-status building here before.<span class="ev verified">Verified</span><div class="src">Excavation dendrochronology (Heneb)</div></p></div>
+    <div class="fact"><h3>Why it's called Island House</h3><p>It sits on a tidal inlet with a river channel still running beneath it — near-cut-off at high tide (the name), and the reason the building is structurally unstable and floods.<span class="ev verified">Verified</span><div class="src">Heneb desk assessment / excavation</div></p></div>
+    <div class="fact"><h3>A cast of owners</h3><p>Possibly built by the <b>White family</b> (14th c.); later <b>Vaughan of Golden Grove</b>, <b>Mansel of Margam</b>, <b>Rhys Prydderch</b> (High Sheriff 1608), the <b>Skyrme ship-chandlers</b> (1742–1823), then Major Claude Congreve and the writer Caleb Rees; acquired for restoration in <b>2020</b> by Steven Kirkwood &amp; Philip Bond.<span class="ev verified">Verified</span><div class="src">Wikipedia, citing Curtis / Francis Jones</div></p></div>
+    <div class="fact"><h3>The 3-metre garden wall</h3><p>A massive clay-waterproofed wall held the tide back; its later breach is why the site floods today. Engineering against the water is the house's whole story.<span class="ev verified">Verified</span><div class="src">Excavation (Heneb)</div></p></div>
+  </div>
+
+  <h2 style="font-size:22px;"><span class="cnum">II</span>The Port &amp; Trade</h2>
+  <div class="lib">
+    <div class="fact"><h3>The first medieval quays found in Wales</h3><p>Under the house: a run of stone quays — the first medieval quays ever excavated in Wales. Ken Murphy (Heneb): parallels only in the big ports, London and Bristol.<span class="ev verified">Verified</span><div class="src">Heneb, 2025; Nation.Cymru</div></p></div>
+    <div class="fact"><h3>The silting "arms race"</h3><p>Successive quays were pushed further out as the inlet silted, each infilled behind with cockle shells — a 400-year losing battle until boats could no longer reach by the 1600s.<span class="ev verified">Verified</span><div class="src">Excavation (Heneb)</div></p></div>
+    <div class="fact"><h3>A harbour for 350-ton ships</h3><p>Before siltation, the adjacent Gosport Harbour could shelter vessels of ~350 tons — this was a real working port, not a landing beach.<span class="ev verified">Verified</span><div class="src">Wikipedia, "Island House, Laugharne"</div></p></div>
+    <div class="fact"><h3>Where the trade is written down</h3><p>The port's real cargoes would sit in the customs <b>particular accounts (E 122)</b> and <b>port books (E 190)</b> at The National Archives, Kew — Laugharne likely a "creek" under the head port of Carmarthen. A desk-research goldmine to open.<span class="ev test">To verify</span><div class="src">TNA research guides</div></p></div>
+  </div>
+
+  <h2 style="font-size:22px;"><span class="cnum">III</span>The Town</h2>
+  <div class="lib">
+    <div class="fact"><h3>A living medieval corporation</h3><p>Laugharne Corporation — with the City of London, <b>one of the last two working medieval corporations in Britain</b>. Established <b>1291</b> by Sir Guy de Brian; abolished on paper (1886) yet still operating under its original charter.<span class="ev verified">Verified</span><div class="src">Wikipedia / Laugharne Corporation</div></p></div>
+    <div class="fact"><h3>The Portreeve &amp; the cockle-shell chain</h3><p>Headed by a <b>Portreeve</b> in a gold chain of cockle shells — each holder adds an engraved shell. Two surviving courts (Leet &amp; Baron); the 76 senior burgesses still hold life strips on <b>Hugden</b> — one of only two working open-field survivals in Britain.<span class="ev verified">Verified</span><div class="src">Wikipedia / WikiShire</div></p></div>
+    <div class="fact"><h3>The Common Walk</h3><p>Every three years, a ~<b>25-mile</b> Whit-Monday perambulation of the bounds; at set landmarks a walker who can't name the spot is hoisted <b>upside-down and beaten three times</b>. Genuinely still done.<span class="ev verified">Verified</span><div class="src">WikiShire</div></p></div>
+    <div class="fact"><h3>The de Brian lords</h3><p>The French-origin de Brian family held Laugharne from <b>1247</b>; one Guy was captured in Llywelyn ap Gruffudd's 1257–58 attacks on the castle. The charter that made the town survives (translations at the National Library of Wales).<span class="ev verified">Verified</span><div class="src">Laugharne Township CC · NLW</div></p></div>
+  </div>
+
+  <h2 style="font-size:22px;"><span class="cnum">IV</span>The People</h2>
+  <div class="lib">
+    <div class="fact"><h3>Sir Guy Bryan KG — the Admiral</h3><p>A de Brian carried the name into national history: <b>Admiral of the West</b>, <b>Knight of the Garter</b>, bearer of the King's Standard against the French at Calais (1350); his tomb is at Tewkesbury Abbey.<span class="ev verified">Verified</span> <span class="ev test">identity vs the Laugharne Guys to confirm</span><div class="src">Wikipedia; medievalist check advised</div></p></div>
+    <div class="fact"><h3>A reputed son of Henry VIII</h3><p>Laugharne later passed (1575) to <b>Sir John Perrot</b> — reputed illegitimate son of Henry VIII, later Lord Deputy of Ireland — granted it by Elizabeth I.<span class="ev verified">Verified</span><div class="src">Laugharne Township CC</div></p></div>
+    <div class="fact"><h3>Mary Curtis, the town's first historian</h3><p>The Victorian incomer who wrote it all down first — the Corporation, the port, the cockle-women — pioneering social history a woman of her time wasn't expected to.<span class="ev verified">Verified</span><div class="src">Narberth Museum</div></p></div>
+    <div class="fact"><h3>Under Dylan's Laugharne</h3><p>Dylan Thomas made the town famous (the Boathouse, <em>Under Milk Wood</em>). Island House is the <b>deep-time Laugharne beneath the poet's Laugharne</b> — the medieval port under the town he immortalised. (No direct house link is claimed.)<span class="ev verified">Verified</span> <span class="ev trad">house link: none found</span><div class="src">Dylan Thomas Boathouse</div></p></div>
+  </div>
+
+  <h2 style="font-size:22px;"><span class="cnum">V</span>The Wider Sea</h2>
+  <div class="lib">
+    <div class="fact"><h3>The quay vs the ships</h3><p>The <b>Newport Ship</b> (c.1450) and <b>Magor Pill boat</b> (1239/40) are Wales's famous medieval vessels. Island House is different and complementary — the first medieval <b>port infrastructure</b> excavated in Wales. The place the ships came to.<span class="ev verified">Verified</span><div class="src">Museum Wales · Newport Ship</div></p></div>
+    <div class="fact"><h3>The Atlantic economy</h3><p>Medieval West Wales sat on the edge of a busy Atlantic trade — Gascon wine, wool and cloth, salt and iron across from France, Spain and Ireland. The Bristol/French/Spanish pottery here is a thread of that whole sea.<span class="ev verified">Verified (context)</span><div class="src">Bristol Channel trade scholarship</div></p></div>
+  </div>
+
+  <h2>The living research programme</h2>
+  <p class="sub">This library grows by asking the people who hold the evidence and reading the sources that survive. Who to talk to, and what to read.</p>
+  <div class="prog">
+    <div class="pcol">
+      <div class="pk">Who to talk to</div>
+      <h3>People &amp; archives</h3>
+      <ul>
+        <li><b>Heneb (Ken Murphy)</b> — the dig team &amp; site archive. <a href="https://heneb.org.uk/contact/" target="_blank">heneb.org.uk</a> · 01558 823121</li>
+        <li><b>Laugharne Corporation</b> — living medieval governance. <a href="https://www.laugharnecorporation.wales/" target="_blank">laugharnecorporation.wales</a> <span class="fl">(local intro best)</span></li>
+        <li><b>Carmarthenshire Archives</b> — the Corporation records (GB 211 OBB1, c.1283–1900s). <a href="https://archiveshub.jisc.ac.uk/search/archives/bdf3beaf-6a0b-3bff-983e-7886e94ba911" target="_blank">catalogue</a></li>
+        <li><b>Carmarthenshire Antiquarian Society</b> — county history &amp; the <em>Antiquary</em> journal. <a href="https://www.carmants.org.uk/" target="_blank">carmants.org.uk</a></li>
+        <li><b>National Library of Wales</b> — manuscripts, maps, the charter, free Welsh newspapers. <a href="https://www.library.wales/enquiries" target="_blank">library.wales</a></li>
+        <li><b>The National Archives, Kew</b> — the port &amp; customs records (E 122 / E 190). <a href="https://www.nationalarchives.gov.uk/" target="_blank">nationalarchives.gov.uk</a></li>
+        <li><b>RCAHMW — Dr Toby Driver</b> — the buried inlet, LiDAR, the coast. <a href="https://coflein.gov.uk/" target="_blank">coflein.gov.uk</a></li>
+        <li><b>Newport Ship (Dr Toby Jones) · UWTSD (Prof Nigel Nayling)</b> — maritime + timber dating. <a href="https://www.newportship.org/" target="_blank">newportship.org</a></li>
+      </ul>
+    </div>
+    <div class="pcol">
+      <div class="pk">What to read</div>
+      <h3>Books &amp; sources</h3>
+      <ul>
+        <li><b>Mary Curtis — <em>The Antiquities of Laugharne</em></b> — the foundational account. <a href="https://archive.org/details/antiquitiesoflau00curt" target="_blank">free full text (archive.org)</a></li>
+        <li><b>Francis Jones — <em>Historic Carmarthenshire Homes &amp; their Families</em></b> — the ownership chain. <span class="fl">(secondhand / NLW)</span></li>
+        <li><b>Laugharne Corporation records</b> — the primary manuscript trail (Carmarthenshire Archives).</li>
+        <li><b><em>The World of the Newport Medieval Ship</em></b> (Nayling &amp; Jones) — the maritime-trade context.</li>
+        <li><b>Dictionary of Welsh Biography</b> — de Brian, Perrot, Vaughan, Curtis. <a href="https://biography.wales/" target="_blank">biography.wales</a></li>
+        <li><b>People's Collection Wales</b> — free digitised images, maps, documents. <a href="https://www.peoplescollection.wales/" target="_blank">peoplescollection.wales</a></li>
+        <li><b>Coflein (RCAHMW)</b> — the monuments record. <a href="https://coflein.gov.uk/" target="_blank">coflein.gov.uk</a></li>
+        <li><b>Welsh Newspapers Online</b> (NLW) — free, searchable historic press.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How this library grows</h2>
+  <div class="grows">
+    <div><b>Evidence-true, always.</b> Nothing is printed as fact until it's sourced. Tradition and to-verify leads are labelled as such, honestly.</div>
+    <div><b>It compounds.</b> Every dig result, archive visit and conversation adds entries. The post-excavation scientific dating (due after Christmas) will firm up more.</div>
+    <div><b>We chase the leads.</b> Each <span class="ev test">To verify</span> tag has a home in the research programme above — a person to ask or a record to read.</div>
+    <div><b>Steve steers it.</b> Anything you want dug into, corrected, or added — hit the ✍ Note button and it comes straight to Dominic.</div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:26px;">Island House · a living history library — evidence-true, and growing.</p>
+
+</div>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var p=location.pathname.toLowerCase(), biz='General';
+  if(p.indexOf('bakery')>=0||p.indexOf('globe')>=0) biz='Bakery';
+  else if(p.indexOf('sancler')>=0) biz='Sancler Property';
+  else if(p.indexOf('island')>=0) biz='Island House';
+  var who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="A fact to add, a lead to chase, or something to correct… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body></html>

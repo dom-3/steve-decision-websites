@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Globe · Bar · Restaurant · Bakery — Laugharne</title>
+<meta name="description" content="The Globe — the hidden gem of Laugharne. Bar, restaurant and artisan bakery on Duncan Street. Good wine, honest food, signature cocktails, a secret garden and live music. Open Wed–Sat till late.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page:#100d0a; --band:#171310; --deep:#0b0906;
+    --text:#c9bfa8; --head:#f4ecda; --muted:#9a8f76;
+    --gold:#caa257; --gold-lt:#e0c286; --gold-dp:#b08d4c;
+    --line:rgba(216,190,140,.14);
+    --sans:'Helvetica Neue',Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:500;
+        color:var(--text);background:var(--page);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 30px}
+  .play{font-family:'Playfair Display',serif}
+  h1,h2,h3{font-family:'Playfair Display',serif;color:var(--head);font-weight:600;letter-spacing:-.01em;line-height:1.06}
+
+  /* labels */
+  .kick{font-family:var(--sans);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .lead{font-size:20.5px;color:var(--text);max-width:40em;margin-top:14px;opacity:.94}
+
+  /* top strip */
+  .strip{background:var(--deep);color:#c8bda3;font-family:var(--sans);font-size:11px;letter-spacing:.26em;
+         text-transform:uppercase;text-align:center;padding:9px 16px;border-bottom:1px solid var(--line)}
+  .strip span{color:var(--gold);margin:0 9px}
+
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:40;background:rgba(16,13,10,.9);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  header.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 30px}
+  .brand{display:flex;flex-direction:column;align-items:flex-start;line-height:1}
+  .brand .nm{font-family:'Playfair Display',serif;font-size:23px;letter-spacing:.14em;color:var(--head)}
+  .brand .sub{font-family:var(--sans);font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+  nav.links{display:flex;gap:30px;align-items:center;font-family:var(--sans);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase}
+  nav.links a{color:#d7cdb6;transition:color .2s} nav.links a:hover{color:var(--gold)}
+  .book{background:var(--gold);color:var(--page)!important;padding:10px 20px;border-radius:2px;letter-spacing:.14em}
+  .book:hover{background:var(--gold-lt)}
+
+  /* buttons */
+  .bigbtn{font-family:var(--sans);font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:16px 32px;
+          border-radius:2px;background:var(--gold);color:var(--page)!important;display:inline-block;transition:background .2s}
+  .bigbtn:hover{background:var(--gold-lt)}
+  .bigbtn.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold)!important}
+  .bigbtn.ghost:hover{background:var(--gold);color:var(--page)!important}
+  .cta{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* image placeholders (dark gradients — real photography drops in here) */
+  .ph{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--line);
+      display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:0 12px 34px rgba(0,0,0,.45)}
+  .ph .tag{position:absolute;top:12px;left:12px;font-family:var(--sans);font-size:10px;letter-spacing:.16em;
+           text-transform:uppercase;background:rgba(0,0,0,.5);color:var(--gold-lt);padding:4px 11px;border-radius:2px}
+  .ph .mid{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--muted);padding:0 26px}
+  .g-doorway{background:radial-gradient(120% 120% at 50% 20%,#2a2318,#0c0b08)}
+  .g-room{background:linear-gradient(150deg,#241d13,#0b0a07)}
+  .g-garden{background:linear-gradient(160deg,#1a2116,#0a0d08)}
+  .g-plate{background:linear-gradient(150deg,#25190f,#0c0906)}
+  .g-bakery{background:linear-gradient(150deg,#2b2015,#100c07)}
+
+  /* HERO */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+  .hero .bg{position:absolute;inset:0;background:radial-gradient(130% 100% at 50% 30%,#2a2115,#0a0806);filter:brightness(.9)}
+  .hero .vg{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(12,9,6,.25),rgba(8,6,4,.9))}
+  .hero .in{position:relative;z-index:2;padding:48px 30px}
+  .hero .eyebrow{font-family:var(--sans);font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:26px}
+  .hero h1{font-size:clamp(40px,6.4vw,84px);color:#f7f0e1}
+  .hero h1 i{font-style:italic;color:var(--gold-lt)}
+  .hero .tl{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(19px,2.4vw,27px);color:#d9ccb2;margin-top:22px;max-width:24em;margin-left:auto;margin-right:auto}
+  .hero .rule{width:64px;height:1px;background:var(--gold);margin:32px auto}
+  .hero .cta{justify-content:center}
+
+  /* section base */
+  section.blk{padding:78px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(30px,4.2vw,50px)}
+  h2 i{font-style:italic;color:var(--gold-lt)}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+
+  /* tonight strip */
+  .tonight{background:var(--band);border-bottom:1px solid var(--line)}
+  .tonight .wrap{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:0;align-items:stretch}
+  .tcell{padding:30px 26px;border-right:1px solid var(--line)}
+  .tcell .k{font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+  .tcell .v{font-family:'Playfair Display',serif;font-size:20px;color:var(--head);line-height:1.35}
+  .tcell .v small{display:block;font-family:'Cormorant Garamond',serif;font-size:16.5px;color:var(--muted);font-weight:500;margin-top:4px}
+  .tcell.act{display:flex;align-items:center;justify-content:center;border-right:none}
+
+  /* menu / cocktail board */
+  .board{background:var(--deep);border:1px solid var(--line);border-radius:6px;padding:38px clamp(24px,4vw,50px);margin-top:32px}
+  .board .bh{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;
+             border-bottom:1px dashed rgba(216,190,140,.22);padding-bottom:18px;margin-bottom:6px}
+  .board .bh .t{font-family:'Playfair Display',serif;font-size:24px;color:var(--head)}
+  .board .bh .n{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .drink{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline;padding:15px 0;border-bottom:1px solid rgba(216,190,140,.09)}
+  .drink:last-child{border-bottom:none}
+  .drink .dn{font-family:'Playfair Display',serif;font-size:19px;color:#efe7d5}
+  .drink .dd{font-size:16px;color:var(--muted);margin-top:2px}
+  .drink .dp{font-family:var(--sans);font-size:15px;color:var(--gold-lt);letter-spacing:.04em}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px}
+  .card{background:var(--band);border:1px solid var(--line);border-radius:6px;padding:26px 28px}
+  .card h3{font-size:22px;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:17px}
+  .card .p{font-family:var(--sans);font-size:13px;letter-spacing:.08em;color:var(--gold-lt);margin-top:10px;text-transform:uppercase}
+
+  /* story */
+  .story .ph{aspect-ratio:5/4}
+  .story p{margin-top:14px;font-size:19px;color:var(--text)}
+  .story .sig{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold-lt);margin-top:18px;font-size:18px}
+
+  /* garden */
+  .garden{background:var(--deep)}
+  .garden .ph{aspect-ratio:16/10}
+  .garden p{margin-top:14px;font-size:19px}
+
+  /* events */
+  .events .row{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+  .events .row:last-child{border-bottom:none}
+  .events .dte{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);min-width:130px}
+  .events .en{font-family:'Playfair Display',serif;font-size:21px;color:#efe7d5}
+  .events .ed{font-size:16px;color:var(--muted);margin-top:3px}
+  .events .go{font-family:var(--sans);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+
+  /* bakery band */
+  .bakery{background:var(--band)}
+  .bakery .g2{gap:48px}
+  .bakery .ph{aspect-ratio:4/3}
+  .bakery p{margin-top:14px;font-size:19px}
+
+  /* visit */
+  .visit{background:var(--deep)}
+  .visit .info{font-size:18px;line-height:1.95;color:var(--text);margin-top:16px}
+  .visit .info b{color:var(--head)}
+  .visit .info a{color:var(--gold-lt)}
+  .hours-t{border-collapse:collapse;width:100%;max-width:340px;margin-top:10px}
+  .hours-t td{padding:9px 0;border-bottom:1px solid var(--line);font-size:17px}
+  .hours-t td:first-child{color:var(--muted);font-family:var(--sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+  .hours-t td:last-child{text-align:right;color:var(--head)}
+
+  /* footer */
+  footer{background:#000;text-align:center;padding:50px 0 60px}
+  footer .lg{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:.1em;color:var(--head)}
+  footer .lg span{color:var(--gold)}
+  footer .cols{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin:20px 0 14px;
+               font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  footer .cols a{color:#cfc5ae} footer .cols a:hover{color:var(--gold)}
+  footer .fine{color:var(--muted);font-size:15px}
+  footer .fine a{color:var(--gold-lt)}
+
+  @media(max-width:880px){
+    .g2{grid-template-columns:1fr;gap:34px}
+    nav.links{display:none}
+    .tonight .wrap{grid-template-columns:1fr}
+    .tcell{border-right:none;border-bottom:1px solid var(--line)}
+    .tcell.act{padding:24px}
+    .cards{grid-template-columns:1fr}
+    .events .row{grid-template-columns:1fr;gap:5px}
+    .events .go,.events .dte{min-width:0}
+    .story .ph{order:-1}
+  }
+</style>
+</head>
+<body>
+
+<div class="strip">The Globe <span>·</span> Bar <span>·</span> Restaurant <span>·</span> Bakery <span>·</span> Laugharne</div>
+
+<!-- NAV -->
+<header class="nav"><div class="wrap">
+  <a href="#home" class="brand">
+    <span class="nm">THE GLOBE</span>
+    <span class="sub">Bar · Restaurant · Bakery</span>
+  </a>
+  <nav class="links">
+    <a href="#home">Home</a>
+    <a href="#menu">Menus</a>
+    <a href="#story">The Globe</a>
+    <a href="#events">Events</a>
+    <a href="#bakery">Bakery</a>
+    <a href="https://globewinebar.resos.com/booking" target="_blank" rel="noopener" class="book">Book</a>
+  </nav>
+</div></header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="bg"></div><div class="vg"></div>
+  <div class="in">
+    <div class="eyebrow">Laugharne · open Wed–Sat till late</div>
+    <h1>The hidden gem<br>of <i>Laugharne.</i></h1>
+    <p class="tl">Good wine, honest food, signature cocktails and a secret garden — a bar, a kitchen and a bakery in a building with a hundred lives.</p>
+    <div class="rule"></div>
+    <div class="cta">
+      <a class="bigbtn" href="https://globewinebar.resos.com/booking" target="_blank" rel="noopener">Book a table</a>
+      <a class="bigbtn ghost" href="#menu">See the menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- TONIGHT AT A GLANCE -->
+<div class="tonight"><div class="wrap">
+  <div class="tcell"><div class="k">Open</div><div class="v">Wed – Sat, 12 till late<small>Mon &amp; Sun 12–5 · closed Tuesday</small></div></div>
+  <div class="tcell"><div class="k">Happy Hour</div><div class="v">2 cocktails for £12<small>3pm – 5pm, every day</small></div></div>
+  <div class="tcell"><div class="k">Find us</div><div class="v">Duncan Street, Laugharne<small>SA33 4SA · 01994 427546</small></div></div>
+  <div class="tcell act"><a class="bigbtn" href="https://globewinebar.resos.com/booking" target="_blank" rel="noopener">Book a table</a></div>
+</div></div>
+
+<!-- MENU / A TASTE -->
+<section class="blk" id="menu"><div class="wrap">
+  <div class="kick">A taste of the menu</div>
+  <h2>From the bar &amp; the <i>kitchen</i>.</h2>
+  <p class="lead">Signature cocktails all £8.50 — two for £12 at happy hour, 3–5 every day. Seasonal lunch and evening food, a considered wine list, and Wine Down Wednesdays with 15% off every bottle.</p>
+
+  <div class="board">
+    <div class="bh"><div class="t">Signature cocktails</div><div class="n">All £8.50 · 2 for £12 happy hour</div></div>
+    <div class="drink"><div><div class="dn">The Globe Signature</div><div class="dd">Vodka, Cointreau, cranberry, sugar syrup &amp; lemon</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Dark 'n Stormy</div><div class="dd">Kraken rum, lime, sugar syrup &amp; ginger beer</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Passionfruit Twist</div><div class="dd">Vodka, Cointreau, passionfruit, lime &amp; orange</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Espresso Martini</div><div class="dd">Vodka, Merlyn liqueur, sugar syrup &amp; coffee</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Mojito</div><div class="dd">White rum, soda, lime, sugar &amp; mint</div></div><div class="dp">£8.50</div></div>
+    <div class="drink"><div><div class="dn">Strawberry Daiquiri</div><div class="dd">White rum, strawberry purée, lime &amp; syrup</div></div><div class="dp">£8.50</div></div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>At the table</h3>
+      <p>Small plates, sharing mains and honest cooking that starts where good food should — with care for the ingredients, the people, and the land that grows what we serve.</p>
+      <div class="p">Seasonal lunch &amp; evening menu</div>
+    </div>
+    <div class="card">
+      <h3>Afternoon Tea</h3>
+      <p>The full spread — sandwiches, scones and cakes — with a glass of prosecco included. Perfect for celebrations, gatherings and Mother's Day.</p>
+      <div class="p">£25 per person · prosecco included</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- STORY -->
+<section class="blk story" id="story"><div class="wrap"><div class="g2">
+  <div class="ph g-room"><div class="tag">Photo · the room by firelight</div><div class="mid">The bar interior after dark —<br>candlelight, warm timber, the fire lit</div></div>
+  <div>
+    <div class="kick">A building with a hundred lives</div>
+    <h2>Who we <i>are</i>.</h2>
+    <p>Hotel, coach station, butcher's, auction room — even a spot on screen in the BBC's <i>Dylan in New York</i> and <i>Keeping Faith</i>. The Globe has worn many faces across its long life on Duncan Street.</p>
+    <p>Today it's Laugharne's hidden gem: a bar, a kitchen and a secret garden, run on one belief — great food starts with care, for ingredients, for people, and for the land.</p>
+    <div class="sig">— The Globe, Duncan Street, Laugharne</div>
+  </div>
+</div></div></section>
+
+<!-- GARDEN -->
+<section class="blk garden"><div class="wrap"><div class="g2">
+  <div>
+    <div class="kick">Out the back</div>
+    <h2>The secret <i>garden</i>.</h2>
+    <p class="lead">Tucked behind the bar, a walled garden that opens up when the weather's kind — long evenings, a drink in hand, and no passport required. Home to the Summer Sessions, live music and lazy afternoons.</p>
+    <div class="cta" style="margin-top:24px"><a class="bigbtn ghost" href="#events">What's on in the garden</a></div>
+  </div>
+  <div class="ph g-garden"><div class="tag">Photo · the garden at dusk</div><div class="mid">The walled secret garden in evening light —<br>the "no passport required" shot</div></div>
+</div></div></section>
+
+<!-- EVENTS -->
+<section class="blk events" id="events"><div class="wrap">
+  <div class="kick">What's on</div>
+  <h2>Live at <i>The Globe</i>.</h2>
+  <p class="lead">Live music, DJs and seasonal nights in the bar and the garden — a few of what's coming up.</p>
+  <div style="margin-top:28px">
+    <div class="row"><div class="dte">Summer</div><div><div class="en">Summer Sessions — BBQ &amp; DJ</div><div class="ed">Sizzling BBQ, great drinks and feel-good music out in the garden</div></div><div class="go">Enquire →</div></div>
+    <div class="row"><div class="dte">Live music</div><div><div class="en">Acoustic nights</div><div class="ed">Intimate live sets — food, a delicious wine list and good company</div></div><div class="go">Enquire →</div></div>
+    <div class="row"><div class="dte">Voices</div><div><div class="en">The male-voice choir</div><div class="ed">A Laugharne tradition — the choir in full voice, the room at its warmest</div></div><div class="go">Enquire →</div></div>
+    <div class="row"><div class="dte">Every Wed</div><div><div class="en">Wine Down Wednesdays</div><div class="ed">15% off every bottle on the wine list — the quiet midweek treat</div></div><div class="go">Book →</div></div>
+  </div>
+</div></section>
+
+<!-- BAKERY -->
+<section class="blk bakery" id="bakery"><div class="wrap"><div class="g2">
+  <div class="ph g-bakery"><div class="tag">Photo · the morning bake</div><div class="mid">Warm loaves and pastries at first light —<br>the light face of the same family</div></div>
+  <div>
+    <div class="kick">By day · the same building</div>
+    <h2>The Globe <i>Bakery</i>.</h2>
+    <p>When the bar sleeps, the ovens wake. By day the same building becomes the bakery — honest, organic bread and pastries: flour, water, salt, time. The light face of the same family that runs The Globe by night.</p>
+    <p>Baked each morning, ready to collect warm.</p>
+  </div>
+</div></div></section>
+
+<!-- VISIT -->
+<section class="blk visit" id="visit"><div class="wrap"><div class="g2">
+  <div>
+    <div class="kick">Find us &amp; book</div>
+    <h2>Come and <i>see us</i>.</h2>
+    <div class="info">
+      <b>The Globe — Bar · Restaurant · Bakery</b><br>
+      Duncan Street, Laugharne, SA33 4SA<br>
+      01994 427546 · <a href="https://www.instagram.com/globebarlaugharne/" target="_blank" rel="noopener">@globebarlaugharne</a>
+    </div>
+    <table class="hours-t">
+      <tr><td>Monday</td><td>12 – 5</td></tr>
+      <tr><td>Tuesday</td><td>Closed</td></tr>
+      <tr><td>Wed – Sat</td><td>12 – late</td></tr>
+      <tr><td>Sunday</td><td>12 – 5</td></tr>
+      <tr><td>Happy Hour</td><td>3 – 5 daily</td></tr>
+    </table>
+    <div class="cta" style="margin-top:26px">
+      <a class="bigbtn" href="https://globewinebar.resos.com/booking" target="_blank" rel="noopener">Book a table</a>
+      <a class="bigbtn ghost" href="https://maps.google.com/?q=The+Globe+Laugharne+SA33+4SA" target="_blank" rel="noopener">Directions</a>
+    </div>
+  </div>
+  <div class="ph g-doorway"><div class="tag">Photo · the doorway at night</div><div class="mid">The lit arched stone doorway after dark —<br>the moody hero shot from your own materials</div></div>
+</div></div></section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="lg">The Globe <span>·</span> Bar · Restaurant · Bakery</div>
+  <div class="cols">
+    <a href="#home">Home</a><a href="#menu">Menus</a><a href="#story">The Globe</a>
+    <a href="#events">Events</a><a href="#bakery">Bakery</a>
+    <a href="https://globewinebar.resos.com/booking" target="_blank" rel="noopener">Book</a>
+  </div>
+  <div class="fine">Duncan Street, Laugharne SA33 4SA &nbsp;·&nbsp; 01994 427546 &nbsp;·&nbsp; <a href="https://www.instagram.com/globebarlaugharne/" target="_blank" rel="noopener">@globebarlaugharne</a></div>
+</footer>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var p=location.pathname.toLowerCase(), biz='General';
+  if(p.indexOf('bakery')>=0||p.indexOf('globe')>=0) biz='Bakery';
+  else if(p.indexOf('sancler')>=0) biz='Sancler Property';
+  else if(p.indexOf('island')>=0) biz='Island House';
+  var who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body>
+</html>

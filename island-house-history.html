@@ -183,6 +183,24 @@ const S = [
   src: "Doc 23 (castle 1116, originally Abercorran; \"probably the oldest still-inhabited settlement in Wales\"); Doc 62 (the inlet outside the medieval town walls); Doc 48 (Laugharne a creek under Carmarthen, head port of Milford — E. A. Lewis); Docs 63/69 (Perrot's Tudor mansion; the unestablished 15th–16th-c holders)."
 },
 {
+  id: "castle", type: "place", year: 1116, yr: "from c.1116",
+  name: "Laugharne Castle",
+  role: "Ringwork, towered stronghold, Tudor mansion, ruin — the town's anchor",
+  lede: "The castle above the town is the anchor everything else hangs from. It began as an earthwork ringwork, became a great stone castle under the de Brian lords, was recast as a Tudor mansion, and was stormed and slighted in the Civil War.",
+  fact: [
+    ["It began as an <b>Anglo-Norman ringwork of the early 12th century</b> — a small earthwork stronghold on the river cliff above the estuary, probably the castle first noticed in <b>c.1116</b>.", "t2"],
+    ["In the <b>13th century it was rebuilt as a great towered masonry castle</b>: a stoutly-walled inner court with <b>two great circular towers</b>, set within a <b>diamond-plan outer court</b>, with a <b>north gatehouse</b> facing the walled borough. This is the <b>de Brian lords'</b> castle.", "t2"],
+    ["In the <b>late 16th century Sir John Perrot recast it as a renaissance mansion</b> — the fortress turned into a grand Tudor house.", "t2"],
+    ["It was <b>stormed and slighted in the mid-17th-century Civil War</b>, then abandoned as a residence.", "t2"],
+    ["In the early 19th century its ruins became the <b>picturesque garden of Castle House</b> next door — the castle's afterlife as a Georgian pleasure-ground. It is now in <b>Cadw guardianship</b>.", "t2"]
+  ],
+  legend: [
+    ["<b>A second Roman hint.</b> A <b>2017 excavation</b> found <b>abraded Romano-British pottery</b> in a ploughsoil sealed beneath the site, over earlier gullies and postholes — traces of an <b>earlier settlement</b> on the castle rock. It sits alongside the Roman urn reported from under St Martin's: two Roman-period hints at the town core, neither yet a proven Roman Laugharne. Held open.", "open"]
+  ],
+  connects: ["debryan", "perrot", "siege1644", "church", "castle_house"],
+  src: "Doc 97 (Coflein NPRN 95634 / Cadw Guide to Laugharne Castle, 1995, read at source): the early-12th-c ringwork 'probably mentioned in 1116'; the 13th-c towered masonry castle — two circular towers, a diamond outer court, a north gatehouse (NPRN 309113) facing the walled borough (NPRN 33066); Perrot's late-C16 renaissance mansion; 'beleaguered, battered, stormed and slighted' in the mid-17th-c wars; the early-19th-c picturesque garden with Castle House; Cadw guardianship; the 2017 Archaeology Wales evaluation — abraded Romano-British pottery sealed beneath the site (Referenced-pending)."
+},
+{
   id: "quay", type: "place", year: 1150, yr: "12th–13th century",
   name: "The Medieval Quay",
   role: "The first medieval quay ever excavated in Wales",
@@ -208,68 +226,72 @@ const S = [
   src: "Doc 62 (Heneb — Ken Murphy; 12th–13th-c quay; successive walls; hall house with central fireplace; 2020 midden watercourse; Bristol/France/Spain pottery; report pending); Doc 22 (sponsorship; 2020 dig); Doc 48 (Curtis 1880 pp.16–17 verbatim, self-hedged; Rolfe 1611/1613–14; Lewis, Welsh Port Books 1550–1603 — Carmarthen under Milford, the 1603 Samson of Rotterdam; TNA E190/E122; History Points — port to the mid-19th c.)."
 },
 {
-  id: "corporation", type: "story", year: 1291, yr: "founded 1291",
+  id: "corporation", type: "story", year: 1291, yr: "medieval charter, still sitting",
   name: "Laugharne Corporation",
   role: "A medieval town government, still sitting",
-  lede: "Laugharne did not preserve its medieval government. It never stopped using it.",
+  lede: "Laugharne did not preserve its medieval government. It never stopped using it. What it cannot tell you for certain is the year it began.",
   fact: [
-    ["<b>Founded in 1291 by Sir Guy de Brian.</b> With the City of London Corporation, it is one of the <b>last surviving medieval corporations in the United Kingdom</b>.", "t2"],
-    ["It is governed by a <b>Portreeve</b>, sworn in every year on the <b>first Monday after Michaelmas</b>, at the <b>\"Big Court.\"</b>", "t2"],
-    ["The Portreeve wears a <b>golden chain of cockle shells</b>. Each Portreeve <b>adds a shell</b>, engraved with his name — and his dates on the reverse. The chain is the town's office-roll, worn round a neck.", "t2"],
-    ["<b>Two ancient courts still sit under their own names</b>: the <b>Court Leet</b>, half-yearly, and the <b>Court Baron</b>, fortnightly, for land disputes.", "t2"],
-    ["<b>Medieval open-field farming is still practised.</b> <b>76 senior burgesses</b> each hold strips of land on <b>Hugden</b> — for life.", "t2"],
-    ["Every three years the townsfolk walk the parish boundary — the <b>triennial Common Walk</b>, beating the bounds, a day of roughly <b>20 miles</b>, keeping the Corporation's ancient rights alive by using them.", "t2"],
-    ["The feast toast is still <i>\"the immortal memory of Sir Guido de Brian,\"</i> answered by the Recorder's commemorative song. Seven hundred years on, the town still drinks to the man who chartered it.", "t2"]
+    ["Alongside the <b>City of London Corporation</b>, Laugharne is <b>one of the last working medieval corporations in Britain</b> — a chartered municipal body founded by an early lord of Laugharne and <b>still sitting today.</b>", "t2"],
+    ["It is headed by a <b>Portreeve</b>, chosen <b>every year</b> and sworn in at the <b>\"Big Court\"</b> on the <b>first Monday after Michaelmas</b> (the first Monday after 29 September). He reaffirms his oath afterwards in St Martin's Church.", "t2"],
+    ["<b>Two ancient courts still sit under their own names</b>: a <b>Court Leet</b> and a <b>Court Baron</b>.", "t2"],
+    ["The Corporation was the town's <b>municipal authority until 1873</b>. Since then it has continued as a <b>charity</b>, upholding the customs.", "t2"],
+    ["Every three years the townsfolk walk the parish boundary — the <b>triennial Common Walk</b>, beating the bounds across roughly <b>20 miles</b>, keeping the Corporation's ancient rights alive by using them.", "t2"],
+    ["The feast toast is still <i>\"the immortal memory of Sir Guido de Brian,\"</i> answered by the Recorder's commemorative song. The town still drinks to the man who chartered it.", "t2"]
   ],
   legend: [
-    ["<b>The Corporation's own Portreeve roll has never been read for this house.</b> It is the primary record — the one document that would settle whether three men called William Skyrme really held the office in <b>1742, 1775, 1801–2 and 1817</b>. Those years currently rest on a single author, echoed. The roll, and the cockleshell chain itself, would answer it at first hand.", "open"],
+    ["<b>When was it founded? The date is genuinely disputed.</b> Three authorities give three answers. Mary Curtis traces the town's customs to <b>the reign of King John</b> (1199–1216); the standard architectural authority, <i>The Buildings of Wales</i>, dates the borough charter to <b>1278</b>; and popular accounts say <b>1290 or 1291</b>. They agree only on the family — the <b>de Brian lords</b> — and that it pre-dates the famous Knight of the Garter. <b>We will not print a single year as fact until the charter itself is read.</b>", "open"],
+    ["<b>It may be two charters, not one.</b> Curtis, read at source, frames it as a <b>first charter \"in the time of King John\"</b> — preserving the customs Carmarthen's burgesses already held — and a <b>later charter of privileges and incorporation</b> granted by a de Brian lord. That later charter has the burgesses elect a <b>portreeve twice a year, at May and Michaelmas</b>, to keep a court every fortnight. The living practice today is a single annual Portreeve; the medieval charter provided for two.", "open"],
+    ["<b>The golden chain of cockle shells.</b> The Portreeve is said to wear a chain to which each holder adds a shell engraved with his name, his dates on the reverse — a fine emblem of the town's cockle economy. But its antiquity and origin are <b>not yet established from an object</b>, and it sits here as tradition until one dates it.", "open"],
+    ["<b>Medieval open-field farming, still practised.</b> It is reported that the <b>76 most senior burgesses</b> each hold a strip — a <b>\"strang\"</b> — of land on <b>Hugden</b> for life, worked as medieval strip farming. A striking survival, but one that needs the Corporation's own land records to confirm; held open until then.", "open"],
+    ["<b>The Corporation's own Portreeve roll has never been read for this house.</b> The minute books and burgess list (1711–1895) survive at Carmarthenshire Archives (GB 211 OBB1). It is the primary record — the one document that would settle whether three men called William Skyrme really held the office in <b>1742, 1775, 1801–2 and 1817</b>. Those years currently rest on a single author, echoed.", "open"],
     ["The <b>1742 Portreeve</b> does not reconcile cleanly with the family's Pembrokeshire origin — the middle William was only born around 1746, at Llawhaden. Either 1742 is a different Skyrme, or one source's chronology is loose. Unresolved until the roll is read.", "open"]
   ],
-  connects: ["debryan", "town", "islandhouse"],
-  src: "Doc 22 (Corporation 1291, Sir Guy de Brian; one of the last surviving medieval corporations; Portreeve); Doc 23 Part A (Big Court, first Monday after Michaelmas; cockleshell chain engraved with name and dates; Court Leet half-yearly / Court Baron fortnightly; 76 senior burgesses, strips on Hugden for life; triennial Common Walk ~20 miles; the Sir Guido de Brian toast and the Recorder's song); Docs 46/47/76 (the Portreeve roll as the outstanding T1; the 1742 reconciliation gap; the Skyrme Portreeve years down-tiered to single-author)."
+  connects: ["debryan", "town", "islandhouse", "church"],
+  src: "Docs 91/98/99 (Mererid Stream B + T42): laugharnecorporation.wales (annual Portreeve sworn at the Big Court, first Monday after Michaelmas; oath reaffirmed in St Martin's; municipal authority until 1873, now a charity; last medieval corporation alongside the City of London); Coflein NPRN 33066 / Buildings of Wales 2006 (charter 1278, an early Guy de Brian; the twice-yearly/two-Portreeve provision); Mary Curtis, Antiquities of Laugharne (1880) read at object level (two charters — a King John origin + a later incorporation; portreeve elected twice yearly at May & Michaelmas; the date disputed across King John / 1278 / 1290–91; the cockleshell chain and the 76-burgess Hugden 'strang' held Referenced-pending). Doc 23 (the triennial Common Walk ~20 miles; the Sir Guido de Brian toast and the Recorder's song). Docs 46/47/76 (the Portreeve roll GB 211 OBB1 outstanding; the 1742 reconciliation gap; the Skyrme Portreeve years single-author)."
 },
 {
   id: "church", type: "place", year: 1300, yr: "14th century",
   name: "St Martin's Church",
-  role: "Built by de Brian; four monuments, three stories",
-  lede: "The church holds a de Brian tomb, a nameless lady, and a Celtic cross older than both. What it does not hold is Sir Guy.",
+  role: "The town's church, rebuilt by the Admiral — where every story leaves a mark",
+  lede: "St Martin's is where all of Laugharne's histories meet: a Celtic cross older than the town, a lord's rebuilt church, the Corporation's oath, and a poet's plain white cross.",
   fact: [
-    ["<b>St Martin's is 14th-century, built by de Brian.</b>", "t2"],
-    ["It holds a <b>Celtic cross-slab of the 9th or 10th century</b> — older than the church, older than the castle, older than the town.", "t2"],
-    ["In the <b>chancel</b>: a <b>chest tomb bearing the de Brian arms, c.1600</b>.", "t2"],
-    ["In the <b>north transept</b>: a <b>damaged effigy of a lady, c.1400</b>, in a cusped recess.", "t2"],
-    ["<b>Neither is Sir Guy Bryan's tomb.</b> He lies at <b>Tewkesbury Abbey</b>.", "t2"],
+    ["<b>St Martin's was rebuilt by Sir Guy de Bryan KG in the later 14th century</b> — the Admiral and Knight of the Garter, <b>not</b> the earlier Guy who chartered the town. It <b>retains about 75% medieval core fabric</b> and is <b>Grade II* listed</b>.", "t2"],
+    ["Set in the <b>south transept</b> is a <b>carved Celtic cross-slab of the 9th or 10th century</b> — older than the church, older than the castle, older than the town.", "t2"],
+    ["It is <b>the Corporation's church</b>: each year the newly sworn <b>Portreeve reaffirms his oath here</b>, carrying the medieval town government into the building.", "t2"],
+    ["<b>Dylan Thomas is buried in the churchyard, under a plain white cross.</b> His wife <b>Caitlin</b> (d. 1994) lies with him, her name on the reverse of the cross.", "t2"],
     ["The <b>Skyrme grave is a chest tomb in the churchyard</b> — outside the building. Its inscription names the wife as <i>\"Jane Abra his Wife, only Daughter of and Sole Heiress to [—] Hughes of this Town.\"</i>", "t1"]
   ],
   legend: [
-    ["<b>\"The Skyrme tomb sits directly above Sir Gui de Brian's monument.\"</b> A lovely line, and it conflates <b>four separate monuments in three separate places</b>: the Skyrme chest tomb out in the churchyard; the c.1600 de-Brian-arms tomb in the chancel; the c.1400 lady effigy in the transept; and Sir Guy's actual tomb, fifty miles away at Tewkesbury. The churchyard tomb certainly does not sit above anything inside the church.", "trad"],
-    ["<b>The one honest possibility left in the story:</b> whether any <b>internal Skyrme ledger stone</b> sits near the c.1600 de-Brian-arms tomb has never been checked. That needs an on-site survey — photograph and transcribe all three monuments, and look. It is the root of the \"directly above\" tradition, and it is answerable in an afternoon.", "open"]
+    ["<b>Two medieval monuments survive — and we cannot say for certain whose they are.</b> A <b>c.1400 effigy of a lady</b> in a cusped recess, and a <b>c.1600 chest tomb bearing the de Brian arms</b> in the chancel. The barony ended with the KG in 1390, so a c.1600 tomb \"with the de Brian arms\" is the <b>heraldic afterlife of the lordship, not a de Brian burial</b>; and the c.1400 lady is <b>not securely identified</b>. Both stand as objects; their people are open.", "open"],
+    ["<b>A Roman hint under the floor.</b> A <b>Roman cinerary urn</b> is reported to have been found <b>beneath the south transept during the 1873–74 restoration</b>. It is a lead, not a proof — one of two Roman-period hints at the town core (the other is the Romano-British pottery under the castle). Held open until an object confirms it.", "open"],
+    ["<b>\"The Skyrme tomb sits directly above Sir Gui de Brian's monument.\"</b> A lovely line that conflates <b>separate monuments in separate places</b>: the Skyrme chest tomb out in the churchyard; the c.1600 de-Brian-arms tomb in the chancel; the c.1400 lady effigy in a transept; and the KG's actual tomb, fifty miles away at Tewkesbury. The churchyard tomb does not sit above anything inside the church.", "trad"],
+    ["Whether any <b>internal Skyrme ledger stone</b> sits near the c.1600 de-Brian-arms tomb has never been checked. That needs an on-site survey — photograph and transcribe the monuments, and look. It is the root of the \"directly above\" tradition, and it is answerable in an afternoon.", "open"]
   ],
-  connects: ["debryan", "town", "corporation"],
-  src: "Doc 23 (St Martin's 14th-c, built by de Brian; the 9th/10th-c Celtic cross-slab); Doc 46 (Coflein/RCAHMW NPRN 102141 — c.1600 de-Brian-arms chest tomb in the chancel, c.1400 lady effigy in a cusped recess in the north transept; Sir Guy at Tewkesbury; the Skyrme churchyard chest tomb and its inscription via the Skyrme One-Name Study photograph; the three-monument conflation; the unchecked internal ledger)."
+  connects: ["debryan", "town", "corporation", "castle", "dylan"],
+  src: "Doc 96 (Coflein NPRN 102141 / Cadw ID 9623 & 9624, read at source): rebuilt by Sir Guy de Brian (the KG) in the later 14th c.; ~75% medieval fabric; Grade II*; the 9th/10th-c Celtic cross-slab in the south transept; the c.1400 lady effigy and c.1600 de-Brian-arms chest tomb (objects Verified, attribution Referenced-pending); the Roman cinerary urn reportedly found beneath the south transept in the 1873–74 restoration; Dylan Thomas buried under a plain white cross, Caitlin (d.1994) with him. Doc 91 (the Portreeve reaffirms the oath in St Martin's). Doc 46 (the Skyrme churchyard chest tomb and its inscription; the three-monument conflation; the unchecked internal ledger; the KG at Tewkesbury)."
 },
 {
-  id: "debryan", type: "person", year: 1390, yr: "d. 1390",
-  name: "Sir Guy de Bryan",
-  role: "Lord of Laugharne, Admiral, Knight of the Garter",
-  lede: "The de Brians held Laugharne for a century and a half. They built the castle back up, they chartered the town, and the town still drinks their health.",
+  id: "debryan", type: "person", year: 1307, yr: "13th–14th century",
+  name: "The Two Guy de Brians",
+  role: "One name, two men — the charter-grantor and the Admiral, three generations apart",
+  lede: "The trail used to treat Guy de Brian as one man. He was two. An earlier Guy chartered the town under Edward I; a later Guy — Admiral and Knight of the Garter — rebuilt the church and lies at Tewkesbury. Three generations separate them, and fusing them was the trail's own mistake.",
   fact: [
-    ["The <b>lordship of Laugharne was granted to the de Brian family by 1247</b>.", "t2"],
-    ["<b>1257 — Guy de Brian was captured and the castle destroyed.</b>", "t2"],
-    ["<b>1291 — Sir Guy de Brian established Laugharne Corporation</b>, the town government that is still sitting today.", "t2"],
-    ["<b>Sir Guy Bryan KG died on 17 August 1390.</b> The lordship then passed <b>via his co-heiresses</b>.", "t2"],
-    ["He is <b>not buried at Laugharne</b>. He is entombed with his effigy at <b>Tewkesbury Abbey</b>.", "t2"],
-    ["His death inquisition has now been <b>read at source</b> (Calendar of Inquisitions Post Mortem, vol XVI). He is indexed not under Brian or Bryan but under <b>\"BRIENE\"</b> — which is why earlier searches drew blanks. The entry is unmistakably his: <b>Torbryan in Devon, the Slapton chantry, Lundy Island</b>, and his co-heiress <b>Elizabeth</b>.", "t1"],
-    ["<b>Laugharne — Talacharn — appears nowhere in that volume's place index.</b> It is not among the manors listed at his death.", "t1"]
+    ["The <b>de Brian family held Laugharne from 1247</b>, and kept it for roughly a century and a half. They rebuilt the castle in stone, chartered the town, and rebuilt the parish church — <b>but not in one lifetime, and not as one man.</b>", "t2"],
+    ["<b>There are two Guy de Brians in this story, three generations apart</b> — and the trail previously fused them into one person. Separating them is the point of this stop.", "t2"],
+    ["<b>Guy de Bryan \"the elder\"</b> — the Edward-I-era lord, of the line whose inquisition falls in <b>1307</b> — is <b>the charter-grantor</b>, the de Brian who gave the burgesses of Laugharne their liberties. He is <b>not</b> the Admiral.", "t2"],
+    ["<b>Sir Guy de Bryan, Baron Bryan KG</b> (born about <b>1319</b>) is the famous one. He <b>succeeded to the estates in 1349</b>, was <b>summoned to Parliament as a baron in 1350</b>, served as <b>Admiral of the West (1370–72)</b>, and was made a <b>Knight of the Garter</b>. He is <b>the rebuilder of St Martin's</b> in the later 14th century — <b>not the man who granted the charter.</b>", "t2"],
+    ["<b>The KG died on 17 August 1390 and is buried at Tewkesbury Abbey</b>, under his effigy — <b>not at Laugharne.</b>", "t2"],
+    ["<b>He outlived his own heir.</b> His son and heir-apparent, another Sir Guy, <b>died in 1386</b>; the barony then passed to <b>coheiresses</b>, and the lordship did not descend intact.", "t2"],
+    ["<b>His 1390 death inquisition has been read at source</b> (Calendar of Inquisitions Post Mortem, vol. XVI), where he is indexed under <b>\"BRIENE\"</b> — which is why earlier searches drew blanks. It names <b>Torbryan in Devon, the Slapton chantry and Lundy</b>. <b>Laugharne — Talacharn — appears nowhere in it.</b> By 1390 the Welsh lordship had already devolved to the coheiresses.", "t1"]
   ],
   legend: [
-    ["<b>Why is Laugharne missing from his own death inquisition?</b> Probably because the inquisition is the wrong instrument. Laugharne was a <b>Marcher lordship</b>, and Marcher lordships lay outside the ordinary county-escheator machinery — and he may have settled Laugharne before he died, which fits its passing to his co-heiresses. The citation that names Laugharne among de Brian holdings has to come from the <b>borough charter and the Charter, Fine and Patent Rolls</b> instead. That search is written and waiting.", "open"],
-    ["The readable secondary record still foregrounds <b>Devon and Pembrokeshire</b> — Tor Bryan, Walwyn's Castle — and does <b>not crisply name Laugharne</b> among Sir Guy's estates. The Cadw guidebook (Richard Avent, <i>Laugharne Castle</i>, 1995) is print-only and on order; the castle-phasing and the de Brian rebuild attribution live there, not in the online summaries.", "open"],
-    ["A tradition holds that the Skyrmes, Island House's Georgian family, <b>married into the de Brians</b>. It was tested and it fails — <b>no source asserts it</b>. It is a coincidence of name-glamour and tomb placement. The documented marriage that planted the family here was <b>Skyrme × Abra Hughes</b>, a local gentry match.", "trad"],
+    ["<b>Which early Guy, and his number, is not settled.</b> One authority calls the grantor <i>\"Guy de Brian IV, first of the de Brian lords\"</i>; another calls him <i>\"the second of that name,\"</i> the lord who died in 1307. Anchor him to what is fixed — an Edward-I-era lord of Laugharne, before 1307 — and never to a numeral.", "open"],
+    ["<b>Why is Laugharne missing from the KG's death inquisition?</b> Most likely because the inquisition is the wrong instrument. Laugharne was a <b>Marcher lordship</b>, outside the ordinary county-escheator machinery, and the lord had outlived his heir. The document that names Laugharne among de Brian holdings has to come from the <b>borough charter and the Charter, Fine and Patent Rolls</b> instead — not yet read.", "open"],
+    ["A tradition holds that the Skyrmes, Island House's Georgian family, <b>married into the de Brians</b>. It was tested and it fails — <b>no source asserts it</b>. The documented marriage that planted the family here was <b>Skyrme × Abra Hughes</b>, a local gentry match.", "trad"],
     ["Three men in this story are called Guy and three are called William. The sources number them inconsistently, and a numbered claim has already been burned once. The house rule: <b>anchor every person to dates and offices, never to a numeral.</b>", "open"]
   ],
-  connects: ["corporation", "church", "town", "grandees", "perrot"],
-  src: "Doc 63 (1247 grant; 1257 capture; 1390 co-heiresses); Doc 22/23 (Corporation 1291); Doc 46 (Tewkesbury; the de Brian marriage tradition tested and failed; numbering rule); Doc 47 (Avent on order; the estate citation gap); Doc 76 (CIPM vol XVI read at source — \"BRIENE\", entries 959–62, Torbryan/Slapton/Lundy, co-heiress Elizabeth; Laugharne absent from the T and L place indexes; the Marcher-lordship explanation)."
+  connects: ["corporation", "church", "town", "grandees", "perrot", "castle"],
+  src: "Doc 97 (Coflein NPRN 95634 / Cadw Guide to Laugharne Castle, 1995; medievalgenealogy.org.uk / Complete Peerage 'Bryan/Briene' read at source): the two-Guy split — an Edward-I-era grantor (the 1307 line) vs the KG (b. c.1319, succeeded 1349, baron by writ 1350, Admiral of the West 1370–72, KG, d. 17 Aug 1390, Tewkesbury; heir d.1386; barony to coheiresses). Docs 98/99 (the charter grantor is an early de Brian, IV-vs-II numbering unresolved). Doc 96 (the KG rebuilt St Martin's in the later 14th c.). Doc 76 (CIPM vol XVI read at source — indexed 'BRIENE', Torbryan/Slapton/Lundy; Laugharne/Talacharn absent; the Marcher-lordship explanation). Doc 46 (the Skyrme–de Brian marriage tested and failed; the numbering rule); Doc 63 (1247 grant)."
 },
 {
   id: "islandhouse", type: "place", year: 1437, yr: "timbers dated 1437",
@@ -664,6 +686,23 @@ const S = [
   src: "Doc 51 (Mererid Thread 8) — Dictionary of Welsh Biography, REES, CALEB (1883–1970), by Mary Auronwy James. Doc 77 (Thread 14b) for the 1908 Glamorgan school-medical contest read at source in the contemporary press. The interviews detail is a secondary notice, held pending."
 },
 {
+  id: "castle_house", type: "place", year: 1934, yr: "c.1730 → 1946",
+  name: "Castle House & Richard Hughes",
+  role: "The Georgian house that made Laugharne a literary town",
+  lede: "The house beside the castle is where Laugharne's literary story really begins — not with Dylan Thomas, but with the novelist who was already living there when Dylan arrived.",
+  fact: [
+    ["<b>Castle House is a Grade II* Georgian mansion</b> — an early Georgian classical house of about <b>1730</b>, with Regency alterations around <b>1810</b> — standing immediately <b>north of the castle and entered through the same iron gates</b>.", "t2"],
+    ["It stands on the site of the castle's <b>1592 Tudor garden</b>, laid out outside the north wall of the outer court; house and castle <b>came into common ownership in 1798</b>.", "t2"],
+    ["From <b>1934/5 to 1946</b> it was the home of the novelist <b>Richard Hughes</b> — author of <b><i>A High Wind in Jamaica</i></b> (1929) and <i>The Fox in the Attic</i>. The architect of Portmeirion, <b>Clough Williams-Ellis</b>, remodelled its interior for him.", "t2"],
+    ["<b>Richard Hughes has no entry in the Dictionary of Welsh Biography.</b> Laugharne's real literary anchor — the established novelist who drew others to the town — is missing from the Welsh national biography altogether.", "t2"]
+  ],
+  legend: [
+    ["<b>Dylan in the gazebo.</b> Dylan Thomas is said to have stayed with Hughes at Castle House and to have written <i>Portrait of the Artist as a Young Dog</i> in the garden gazebo above the estuary. The detail is attested by the listing; the fuller claim — that it was Hughes who drew Dylan to Laugharne — rests on biographies not yet read at source. A good story, honestly labelled until then.", "open"]
+  ],
+  connects: ["castle", "dylan", "church"],
+  src: "Doc 95 (Cadw listed-building record, Grade II* ID 9657, read at source: c.1730 house, Regency alterations c.1810, internal modifications by Clough Williams-Ellis for the novelist Richard Hughes, occupied 1934/5–1946, N of the castle, entered through the same iron gates; Coflein NPRN 79039 — the 1592 garden survey, common ownership 1798, the gazebo; Encyclopædia Britannica — Hughes b.1900 d.1976, A High Wind in Jamaica 1929, The Fox in the Attic 1961; biography.wales searched — no DWB entry for the 1900–1976 novelist. The Dylan/gazebo/Portrait detail held Referenced-pending)."
+},
+{
   id: "dylan",
   type: "story",
   year: 1949,
@@ -683,7 +722,7 @@ const S = [
     ["<b>Sir Kingsley Amis and Cliff House.</b> Amis is locally associated with Cliff House, Laugharne, and with writing his Booker-winning <i>The Old Devils</i> (1986) in the area. His Welsh connections are real; <b>this precise Laugharne detail is town lore</b> until a biography confirms it.", "open"],
     ["<b>The town is still literary.</b> The annual <b>Laugharne Weekend</b> festival keeps it a living destination — noted here as context rather than as a checked claim.", "open"]
   ],
-  connects: ["caleb_rees", "islandhouse", "rescue"],
+  connects: ["caleb_rees", "islandhouse", "rescue", "castle_house"],
   src: "Docs 60 & 68 (Mererid Threads 16 & 27), with Doc 23's story bank and DylanThomas.com. Doc 22 records the finding plainly: a Dylan Thomas connection to Island House specifically is <i>not established</i>. Stated here as context, never as a claim."
 },
 {

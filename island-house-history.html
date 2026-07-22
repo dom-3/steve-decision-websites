@@ -95,6 +95,12 @@
   .conn .cc:hover{background:#2b4a6b;color:#fff;}
   .foot{color:var(--muted);font-size:12px;margin-top:30px;text-align:center;}
   .srcnote{font-size:11.5px;color:var(--muted);margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px;}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr);}}
+  .stat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:12px 14px;}
+  .stat .n{font-family:Georgia,"Times New Roman",serif;font-size:28px;font-weight:600;line-height:1;color:#fff;}
+  .stat .l{font-size:9.5px;letter-spacing:1.4px;text-transform:uppercase;color:#cfe0d6;margin-top:7px;}
+  .statnote{font-size:12px;color:#d8c9a8;margin-top:13px;max-width:760px;line-height:1.55;}
 </style></head><body>
 
 <header><div class="inner">
@@ -106,6 +112,15 @@
     <span class="k"><span class="pip f"></span> Verified — traced to a record we've read</span>
     <span class="k"><span class="pip l"></span> Legend &amp; myth — told as story, never as fact</span>
   </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">248</div><div class="l">Facts logged</div></div>
+    <div class="stat"><div class="n">128</div><div class="l">Sources</div></div>
+    <div class="stat"><div class="n">304</div><div class="l">Entities</div></div>
+    <div class="stat"><div class="n">32</div><div class="l">Trail stops</div></div>
+    <div class="stat"><div class="n">63%</div><div class="l">Verified</div></div>
+  </div>
+  <p class="statnote">Honest state of play — <b>157 Verified</b>, 74 Referenced-pending, 13 Tradition, 4 Refuted. Every claim here traces to a source we have read, and nothing marked tradition is published as fact. <i>Figures taken from the research register, 22 July 2026.</i></p>
 </div></header>
 
 <div class="controls"><div class="in">

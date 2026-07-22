@@ -69,9 +69,23 @@ Verified identical in both bases at retirement, so nothing to move: Decisions & 
 
 ## OPEN — not yet resolved
 
-1. **Cook Book — Recipe Library (`tblDyNXhcE7PmoLV6`) is the exception.** The **fork holds 36 dishes; the live base holds 1**. The Globe/kitchen desk has been writing the recipe library into the fork. This table has deliberately **not** been renamed, so that desk keeps working — but the 36 recipes must be migrated to the live base and the fork table then retired. Until that is done, the Cook Book is the one place where the fork is authoritative.
+1. ~~**Cook Book — Recipe Library.**~~ **CLOSED 22 July.** The fork held 36 dishes to the live base's 1, and the two schemas had diverged — the fork carried six fields the live table did not have at all (Code, Ease 1-3, Pre-book, Vegetarian, Menu description, and a finer-grained season). Those six fields were built in the live table first, then all 36 dishes migrated with every field intact. Verified: 36 records carrying a complete unique code set, F1-S1 → F4-D3, four fortnights × 3 starters / 3 mains / 3 desserts, no gaps or duplicates. The fork's table is renamed `RETIRED — do not use — Cook Book (migrated 22 Jul)`. Not carried across, as exact duplicates: "Status 2", "Notes 2", "Volume".
 
-2. **Sancler Enquiries (`tblBrgAp7qeA6aTxi`).** A record appeared in the fork at 12:51 on 22 July with every field empty. There is no enquiry endpoint in the `steve-decision-websites` repo, so the Sancler form is deployed from somewhere else and its Airtable target is unconfirmed. This table has **not** been renamed, because breaking it could silently lose a real customer enquiry. Find the Sancler form's base ID and repoint it.
+   *Allergen caution now living in that table:* the Vegetarian flag means "as written". Three dishes carry non-obvious catches — the honey & thyme buttermilk pudding and the honey & lavender pannacotta both contain **gelatine**, and the Welsh rarebit needs **vegetarian Worcestershire** (standard contains anchovy). Do not let menu copy go out calling them vegetarian without the swap.
+
+2. **Sancler Enquiries (`tblBrgAp7qeA6aTxi`) — premise corrected 22 July, and the real hazard is worse than the one we went looking for.**
+
+   **The 12:51 blank record was not a form submission.** `recOFT1vq6rNjFMMR` has `cellValuesByFieldId: {}` — not one field set. Bob's `api/enquiry.js` always writes `Status: 'New'`, `Received` and `Source` server-side, so even an entirely blank form submission arrives with those three populated. It cannot produce an empty record. The fork base's last-viewed timestamp is 12:54:59 — three and a half minutes after the row appeared. That is a human clicking "+" in the Airtable grid, not a webhook.
+
+   **No enquiry form is deployed anywhere.** `api/enquiry.js` exists only locally in `CEO - Sancler Property/site/api/` — never pushed, never deployed, no `AIRTABLE_TOKEN` set. So nothing is currently capturing Sancler enquiries, and **no customer enquiry has been lost, because nothing is listening yet.**
+
+   **⚠️ THE SYSTEMIC HAZARD — read this before deploying anything.** The fork is a base *copy*, so **its tables carry IDENTICAL table IDs**. `Sancler Enquiries` is `tblBrgAp7qeA6aTxi` in *both* bases. **Any endpoint with the correct table ID and a stale base ID writes silently to the dead fork and looks completely successful.** That is exactly how `worklog.js`, `note.js`, `decision.js` and `business.js` wrote to the fork. The fork remains writable, and its copy of this table is a stale snapshot carrying only the original 12 fields (no Chain position, Timescale, Bedrooms wanted or Plot size preference) — it would accept writes without complaint.
+
+   **This qualifies the "404 means a bad pointer" rule.** A 404 only protects you where a table *was* renamed. Where it was not — Sancler Enquiries, and Cook Book before its migration — a wrong base ID does not fail at all. **Never rely on failure to tell you your pointer is wrong. Assert the base ID explicitly.**
+
+   **The job is therefore to deploy safely first time, not to repoint.** Deploy `api/enquiry.js` pinned to base `appnt9vSQKrKyaKiZ` and table `tblBrgAp7qeA6aTxi`. Add a **startup assertion that refuses to run if the base is anything other than `appnt9vSQKrKyaKiZ`**, and log the resolved base on every write. Then submit a dummy enquiry and confirm it lands in the live base with `Status: New` and a `Received` timestamp. Owner: Tech Guy.
+
+   The blank fork row has deliberately been left in place rather than deleted — it is provably empty and sits in a retired base.
 
 3. **The fork still exists and is still writable.** Renaming the base itself needs the Airtable UI — rename `appxcYrYaYy1kwB0m` to `RETIRED — do not use` so it is unmissable in the base picker.
 

@@ -35,6 +35,21 @@ Consumer Protection from Unfair Trading Regs and the **material information** ru
 
 **Group** — the site's privacy notice and cookie position, lawful basis and retention for enquiry data held in Airtable, the engagement/contract position with Steve, and insurance.
 
+## Live files you already hold (as reported by the desks, 22 July)
+Your remit is wider than a claims ceiling. You are currently holding:
+
+1. **The Dylan rights case file.** The researched position (Doc 135) is three layers — David Higham (estate), HarperCollins/Caedmon (recordings), BBC Studios (broadcast); UK works public domain from 1 Jan 2024; pre-1963 recordings PD; **US closed to 2062**. The House of Culture desk has deliberately locked something *stricter*: **Laugharne area only**, a subset of the UK position rather than a test of its edges. **The wrinkle Doc 135 does not cover:** the app ships **offline packs**, and a pack downloaded in Laugharne travels in a pocket to California, where the position is closed. That is a territorial-scope problem, not a rights-clearance problem, and it is yours. Never gate v1 on it — commissioned/synthetic narration is the spine; Dylan audio is a v2 switch-on.
+2. **The data-controller / ICO position for oral history.** This is a **hard stop**: the town-voices recordings cannot proceed against an unnamed data controller. Recording an elderly contributor without a named controller, a lawful basis, a retention position and a consent form is not a thing to tidy up afterwards. Settle it before a single recording is made.
+3. **The Laugharne Corporation consent question** — newly picked up.
+4. **Sancler property marketing** (first brief below).
+5. **Food and menu claims** — including the Cook Book allergen catches logged 22 July: the honey & thyme buttermilk pudding and the honey & lavender pannacotta both contain **gelatine**, and the Welsh rarebit needs **vegetarian Worcestershire** (standard contains anchovy). The Vegetarian flag in that table means "as written". No menu copy calls those dishes vegetarian without the swap.
+
+## Sancler — your first brief (requested by that desk)
+- **Material information** rules for the plot listings (Parts A/B/C).
+- **EPC display in marketing** — the site currently renders **"EPC B (predicted)"**. Confirm whether that phrasing is compliant, and what the requirement is where a property is unbuilt.
+- **ASA/CAP** on the CGI labelling just added — the business is moving from CGI to real photography, so how the remaining CGI is captioned matters.
+- **CAA position on the drone work** now that the footage is going onto a commercial site: operator authorisation, insurance, and flying near people and property.
+
 ## The claims ceiling (load-bearing doctrine)
 Salem describes **what it has done and observed** — statements of fact — never a legal conclusion about compliance or safety.
 

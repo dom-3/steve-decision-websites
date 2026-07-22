@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Globe Bakery · Popty'r Globe — Laugharne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* PLACEHOLDER palette — Globe-family "secret garden" + bakery warmth. Swap for exact Globe tokens. */
+    --ink:#221e18;
+    --paper:#f4efe3;
+    --paper-2:#ece4d3;
+    --garden:#26382f;      /* the Globe's heritage/secret-garden green */
+    --garden-deep:#1b2a22;
+    --crust:#b8722e;       /* baked crust ochre */
+    --brick:#9c4326;       /* warm terracotta */
+    --line:#d8ccb4;
+    --muted:#6b6355;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Work Sans',system-ui,sans-serif;color:var(--ink);
+    background:var(--paper);
+    background-image:radial-gradient(rgba(120,100,70,.05) 1px,transparent 1px);
+    background-size:4px 4px;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Fraunces',Georgia,serif}
+  .cy{font-style:italic;color:var(--crust)} /* Welsh accent */
+
+  /* Honest prototype banner */
+  .proto{background:var(--garden-deep);color:#e9e2d2;font-size:12.5px;text-align:center;padding:7px 16px;letter-spacing:.02em}
+  .proto b{color:#e7b877}
+
+  /* Globe family bar */
+  .familybar{background:var(--garden);color:#eae3d3;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase}
+  .familybar .wrap{display:flex;justify-content:center;align-items:center;gap:10px;padding:8px 28px}
+  .familybar .dot{opacity:.55}
+
+  /* Nav */
+  header.nav{position:sticky;top:0;z-index:20;background:rgba(244,239,227,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  header.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 28px}
+  .brand{display:flex;flex-direction:column;line-height:1.05}
+  .brand .name{font-family:'Fraunces';font-weight:900;font-size:22px;letter-spacing:-.01em}
+  .brand .sub{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  nav.links{display:flex;gap:26px;align-items:center;font-size:14px;font-weight:500}
+  nav.links a:hover{color:var(--crust)}
+  .order-btn{background:var(--garden);color:#f4efe3;padding:10px 18px;border-radius:2px;font-weight:600;font-size:13.5px;letter-spacing:.02em}
+  .order-btn:hover{background:var(--garden-deep)}
+
+  /* Hero — asymmetric, not centred */
+  .hero{padding:70px 0 40px}
+  .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--garden);font-weight:600;margin-bottom:22px}
+  .eyebrow .cy{text-transform:none;letter-spacing:0;font-size:16px}
+  h1.hero-h{font-family:'Fraunces';font-weight:600;font-size:clamp(38px,5.2vw,66px);line-height:1.02;letter-spacing:-.015em}
+  h1.hero-h .u{position:relative;white-space:nowrap}
+  h1.hero-h .u svg{position:absolute;left:0;bottom:-12px;width:100%;height:14px}
+  .lede{font-size:18px;color:#3a352c;max-width:30em;margin:26px 0 30px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-primary{background:var(--brick);color:#f7f1e6;padding:15px 26px;border-radius:2px;font-weight:600;letter-spacing:.02em}
+  .btn-primary:hover{background:#84351d}
+  .btn-ghost{border:1.5px solid var(--garden);color:var(--garden);padding:14px 24px;border-radius:2px;font-weight:600}
+  .btn-ghost:hover{background:var(--garden);color:var(--paper)}
+
+  /* Photo slots — honest placeholders */
+  .photo{position:relative;background:linear-gradient(150deg,#3a2f24,#221a12);border-radius:3px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;color:#cbb48f}
+  .photo .tag{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:rgba(0,0,0,.35);padding:4px 9px;border-radius:2px;color:#e7d3ac}
+  .photo .mid{font-size:12.5px;letter-spacing:.05em;padding:0 20px;opacity:.8}
+  .hero .photo{aspect-ratio:4/5}
+  .hero .photo .glyph{font-family:'Fraunces';font-size:40px;color:#8f7a55;margin-bottom:8px}
+
+  /* Provenance strip */
+  .prov{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-2)}
+  .prov .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .prov .cell{padding:22px 20px;text-align:center;border-right:1px solid var(--line)}
+  .prov .cell:last-child{border-right:none}
+  .prov .cell .t{font-family:'Fraunces';font-weight:600;font-size:18px}
+  .prov .cell .d{font-size:12.5px;color:var(--muted);margin-top:2px}
+
+  /* Section shell */
+  section.blk{padding:74px 0}
+  .kicker{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--crust);font-weight:600;margin-bottom:12px}
+  h2.sec{font-family:'Fraunces';font-weight:600;font-size:clamp(28px,3.4vw,40px);line-height:1.05;letter-spacing:-.01em}
+  .sec-intro{color:#4a4438;max-width:34em;margin-top:14px;font-size:16.5px}
+
+  /* This week's bakes — the board */
+  .board{background:var(--garden-deep);color:#efe7d5;border-radius:4px;padding:40px clamp(24px,4vw,52px);margin-top:34px}
+  .board .head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;border-bottom:1px dashed rgba(233,226,210,.28);padding-bottom:18px;margin-bottom:6px}
+  .board .head .cy{color:#e7b877}
+  .board .head h3{font-family:'Fraunces';font-weight:600;font-size:26px;color:#f4ecda}
+  .board .head .note{font-size:12.5px;color:#b9ad93;letter-spacing:.03em}
+  .bake{display:grid;grid-template-columns:1fr auto auto;gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(233,226,210,.14)}
+  .bake:last-child{border-bottom:none}
+  .bake .n{font-family:'Fraunces';font-weight:600;font-size:19px}
+  .bake .desc{font-size:13px;color:#bcb096;margin-top:3px}
+  .bake .price{font-family:'Fraunces';font-size:18px;color:#e7b877}
+  .bake .add{border:1.4px solid #6f8074;color:#e9e2d2;padding:8px 15px;border-radius:2px;font-size:12.5px;font-weight:600;letter-spacing:.03em}
+  .bake .add:hover{background:#6f8074;color:var(--garden-deep);cursor:pointer}
+
+  /* Weekly box */
+  .boxsec{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .boxsec .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:center}
+  .boxsec .photo{aspect-ratio:5/4}
+  .tiers{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+  .tier{display:flex;justify-content:space-between;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:16px 20px}
+  .tier .l .tt{font-family:'Fraunces';font-weight:600;font-size:17px}
+  .tier .l .dd{font-size:12.5px;color:var(--muted)}
+  .tier .p{font-family:'Fraunces';font-size:17px;color:var(--brick)}
+  .tier.feat{border:1.6px solid var(--crust);box-shadow:0 6px 20px rgba(184,114,46,.12)}
+
+  /* Story */
+  .story .grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+  .story .photo{aspect-ratio:1/1}
+  .story p{font-size:16.5px;color:#433d31;margin-top:14px}
+  .story .sign{font-family:'Fraunces';font-style:italic;color:var(--garden);margin-top:18px;font-size:17px}
+
+  /* Visit / Globe family */
+  .visit{background:var(--garden);color:#eae3d3}
+  .visit .grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+  .visit h2{color:#f4ecda}
+  .visit .kicker{color:#e7b877}
+  .visit p{color:#cfc7b3;margin-top:10px;font-size:16px}
+  .visit .info{margin-top:20px;font-size:15px;line-height:1.9}
+  .visit .info b{color:#f4ecda}
+  .globe-link{display:inline-block;margin-top:22px;border:1.5px solid #7f9083;color:#eae3d3;padding:13px 22px;border-radius:2px;font-weight:600;font-size:14px}
+  .globe-link:hover{background:#7f9083;color:var(--garden-deep)}
+  .visit .photo{aspect-ratio:4/3}
+
+  /* Footer */
+  footer{background:var(--garden-deep);color:#c9bea6;padding:44px 0;text-align:center}
+  footer .lock{font-family:'Fraunces';font-weight:600;color:#efe7d5;font-size:20px}
+  footer .lock .sep{color:#6f8074;margin:0 10px}
+  footer .sm{font-size:12.5px;margin-top:12px;letter-spacing:.03em}
+  footer .sm a{color:#e7b877}
+
+  @media(max-width:860px){
+    .hero .grid,.boxsec .grid,.story .grid,.visit .grid{grid-template-columns:1fr;gap:34px}
+    .prov .wrap{grid-template-columns:1fr 1fr}
+    .prov .cell:nth-child(2){border-right:none}
+    nav.links{display:none}
+    .bake{grid-template-columns:1fr auto}
+    .bake .add{grid-column:1/-1;justify-self:start}
+  }
+</style>
+</head>
+<body>
+
+<div class="proto">🔧 <b>Prototype v3 — people &amp; health direction.</b> Fonts &amp; colours to be swapped for Steve's chosen Canva brand pack. Photography placeholder. Collection only · bread &amp; rolls to begin. Prices indicative.</div>
+
+<div class="familybar"><div class="wrap"><span>The Globe</span><span class="dot">·</span><span>Bar &amp; Bakery</span><span class="dot">·</span><span>Laugharne</span></div></div>
+
+<header class="nav"><div class="wrap">
+  <a href="#" class="brand"><span class="name">The Globe Bakery</span><span class="sub">Popty'r Globe · Laugharne</span></a>
+  <nav class="links">
+    <a href="#week">This week</a>
+    <a href="#box">The weekly box</a>
+    <a href="#story">Our story</a>
+    <a href="#visit">Visit</a>
+    <a href="#week" class="order-btn">Order &nbsp;·&nbsp; 0</a>
+  </nav>
+</div></header>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap"><div class="grid">
+  <div>
+    <div class="eyebrow">Bara <span class="cy">/ bread</span> — baked at The Globe</div>
+    <h1 class="hero-h">Flour, water, salt,
+      <span class="u">time<svg viewBox="0 0 300 14" preserveAspectRatio="none"><path d="M2,9 C60,2 120,12 160,7 C210,1 260,10 298,5" fill="none" stroke="#b8722e" stroke-width="3.4" stroke-linecap="round"/></svg></span>
+      — and the estuary at the door.</h1>
+    <p class="lede">A small artisan bakehouse inside The Globe on Duncan Street. Real organic bread that helps you eat well — no additives, nothing your gut has to argue with. Reserve this week's loaves and collect them warm.</p>
+    <div class="cta-row">
+      <a href="#week" class="btn-primary">Order this week's bake</a>
+      <a href="#box" class="btn-ghost">The weekly box</a>
+    </div>
+  </div>
+  <div class="photo">
+    <div class="tag">Photo · hero loaf</div>
+    <div><div class="glyph">✻</div><div class="mid">Real bread photograph goes here —<br>a scored organic loaf, shot on the bench</div></div>
+  </div>
+</div></div></section>
+
+<!-- PROVENANCE -->
+<div class="prov"><div class="wrap">
+  <div class="cell"><div class="t">Organic</div><div class="d">stone-ground flour</div></div>
+  <div class="cell"><div class="t">No additives</div><div class="d">flour, water, salt, time</div></div>
+  <div class="cell"><div class="t">Baked to order</div><div class="d">reserve &amp; collect warm</div></div>
+  <div class="cell"><div class="t">Laugharne</div><div class="d">at The Globe, Duncan St</div></div>
+</div></div>
+
+<!-- THIS WEEK'S BAKES -->
+<section class="blk" id="week"><div class="wrap">
+  <div class="kicker">Heddiw &amp; this week</div>
+  <h2 class="sec">Reserve this week's bake</h2>
+  <p class="sec-intro">We bake in small batches so nothing's wasted. Order by <b>Thursday 6pm</b> for weekend collection at The Globe.</p>
+  <div class="board">
+    <div class="head">
+      <h3>This week's loaves <span class="cy">— torth yr wythnos</span></h3>
+      <div class="note">Collection: Fri–Sun · Duncan St, Laugharne</div>
+    </div>
+    <div class="bake"><div><div class="n">The Corran Sourdough</div><div class="desc">Our signature — 48-hour slow ferment, stone-ground organic wheat</div></div><div class="price">£4.20</div><div class="add">Reserve</div></div>
+    <div class="bake"><div><div class="n">Seeded Rye</div><div class="desc">Dense, malty, cut-and-come-again — good all week</div></div><div class="price">£4.80</div><div class="add">Reserve</div></div>
+    <div class="bake"><div><div class="n">The Everyday Loaf</div><div class="desc">Soft organic white tin — the household staple, ~£3</div></div><div class="price">£3.00</div><div class="add">Reserve</div></div>
+    <div class="bake"><div><div class="n">Morning Rolls (bag of 6)</div><div class="desc">Soft organic rolls — the everyday basic, baked fresh</div></div><div class="price">£3.60</div><div class="add">Reserve</div></div>
+  </div>
+</div></section>
+
+<!-- WEEKLY BOX -->
+<section class="boxsec" id="box"><section class="blk" style="padding:70px 0"><div class="wrap"><div class="grid">
+  <div class="photo">
+    <div class="tag">Photo · the box</div>
+    <div class="mid">The weekly box, packed —<br>kraft paper, ink-stamped Globe band</div>
+  </div>
+  <div>
+    <div class="kicker">The weekly habit</div>
+    <h2 class="sec">A box of good bread, every week</h2>
+    <p class="sec-intro">The thing no one else round here does: subscribe once and your organic loaf is sorted. Pause or skip any week. Collect at The Globe — we're keeping it simple to start, bread only.</p>
+    <div class="tiers">
+      <div class="tier"><div class="l"><div class="tt">The Loaf</div><div class="dd">One signature sourdough, weekly</div></div><div class="p">£4/wk</div></div>
+      <div class="tier feat"><div class="l"><div class="tt">Loaf + Rolls</div><div class="dd">A loaf and a bag of rolls — our most popular</div></div><div class="p">£7/wk</div></div>
+      <div class="tier"><div class="l"><div class="tt">The Household</div><div class="dd">Two loaves a week for a full table</div></div><div class="p">£8/wk</div></div>
+    </div>
+  </div>
+</div></div></section></section>
+
+<!-- STORY -->
+<section class="blk story" id="story"><div class="wrap"><div class="grid">
+  <div class="photo">
+    <div class="tag">Photo · the bench</div>
+    <div class="mid">Documentary shot — hands shaping dough,<br>flour on the bench, real baker</div>
+  </div>
+  <div>
+    <div class="kicker">People &amp; health</div>
+    <h2 class="sec">Honest bread that helps people eat well</h2>
+    <p>Real organic flour, wild ferment, and the time it actually takes — no improvers, no softeners, nothing your gut has to fight. The kind of bread people who'd given up on bread can eat again.</p>
+    <p>It's part of The Globe, Laugharne's hidden gem on Duncan Street: the same building and the same care, turned to flour and fire. We bake what we can sell fresh and we'd rather run out than waste it.</p>
+    <div class="sign" style="border-left:3px solid var(--crust);padding-left:16px;font-style:normal">“<span style="font-style:italic">[real customer quote goes here — e.g. the gluten-sensitive regular who can eat this bread]</span>”<br><span style="font-size:13px;color:var(--muted)">— a Laugharne regular</span></div>
+  </div>
+</div></div></section>
+
+<!-- VISIT -->
+<section class="visit" id="visit"><section class="blk"><div class="wrap"><div class="grid">
+  <div>
+    <div class="kicker">Find us</div>
+    <h2 class="sec">Part of The Globe, Laugharne</h2>
+    <p>Order ahead and collect warm from the bar on Duncan Street — then stay for a glass in the garden.</p>
+    <div class="info">
+      <b>The Globe Bakery</b> — at The Globe Bar &amp; Restaurant<br>
+      Duncan Street, Laugharne, SA33 4SA<br>
+      Collection: Friday – Sunday · order by Thu 6pm
+    </div>
+    <a class="globe-link" href="https://www.globewinebar.co.uk/" target="_blank" rel="noopener">Visit The Globe →</a>
+  </div>
+  <div class="photo"><div class="tag">Photo · The Globe</div><div class="mid">The Globe frontage / secret garden —<br>tie the family together visually</div></div>
+</div></div></section></section>
+
+<footer>
+  <div class="lock">The Globe <span class="sep">·</span> Bakery</div>
+  <div class="sm">Duncan Street, Laugharne, SA33 4SA &nbsp;·&nbsp; Popty'r Globe &nbsp;·&nbsp; <a href="https://www.instagram.com/globebarlaugharne/" target="_blank" rel="noopener">@globebarlaugharne</a></div>
+</footer>
+
+</body>
+</html>

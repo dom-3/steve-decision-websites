@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Globe — One Place, One Brand</title>
+<style>
+  :root{--ac:#2f5d4a;--acd:#1f3f32;--gold:#b07d2b;--ink:#22302e;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px 130px;}
+  header{background:linear-gradient(160deg,var(--ac),var(--acd));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:920px;margin:0 auto;}
+  .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;}
+  .top a{color:#e9e0cf;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:5px 11px;border-radius:20px;}
+  .top a:hover{background:rgba(255,255,255,.12);}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e8dcc4;margin-top:14px;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0 8px;}
+  .direction{max-width:700px;color:#f0e7d5;font-size:15.5px;margin:0;}
+  hr.r{width:60px;height:3px;background:var(--gold);border:0;margin:16px 0 0;}
+  h2{font-family:Georgia,serif;color:var(--acd);font-size:21px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:#6a7b76;font-size:13px;margin:0 0 10px;}
+  p.body{font-size:14.6px;color:#33403d;margin:10px 0;}
+  .lead{background:#fff;border:1px solid #dfe6e2;border-left:5px solid var(--ac);border-radius:10px;padding:14px 18px;margin:14px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);font-size:15px;color:#2c3a37;}
+  .lead b{color:var(--acd);}
+  .quote{font-family:Georgia,serif;font-style:italic;font-size:17px;color:var(--acd);border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin:14px 0;}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+  .card{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:13px 15px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .card .ch{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ac);margin-bottom:5px;}
+  .card ul{margin:0;padding-left:16px;} .card li{font-size:13.2px;margin:4px 0;color:#33403d;}
+  @media(max-width:620px){.cards{grid-template-columns:1fr;}}
+
+  .issue{background:#fff;border:1px solid #f0dcc9;border-left:4px solid #c9772f;border-radius:9px;padding:11px 15px;margin:10px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .issue .it{font-weight:700;font-size:14px;color:#a85a1f;} .issue .id{font-size:13px;color:#4a4438;margin-top:2px;}
+  .good{background:#eef4f0;border:1px solid #cfe3d9;border-left:4px solid #1f7a4d;border-radius:9px;padding:11px 15px;margin:10px 0;font-size:13.6px;}
+  .good b{color:#1f7a4d;}
+
+  .flow{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0;}
+  .step{background:#fff;border:1px solid #dfe6e2;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(20,50,45,.06);}
+  .step .sh{display:flex;align-items:center;gap:12px;padding:12px 16px;background:linear-gradient(90deg,var(--ac),var(--acd));color:#fff;}
+  .step .num{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+  .step .sh b{font-family:Georgia,serif;font-weight:600;font-size:16px;}
+  .step .sb{padding:12px 16px 14px;} .step ul{margin:0;padding-left:18px;} .step li{font-size:13.4px;margin:4px 0;color:#33403d;}
+
+  .need{background:#fff;border:1px solid #dfe6e2;border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .need .q{font-weight:700;font-size:14px;margin-bottom:3px;} .need .why{font-size:12.3px;color:#6a7b76;margin-bottom:8px;}
+  .opts label{display:block;padding:9px 11px;border:1px solid #e2e8e4;border-radius:8px;margin:6px 0;font-size:13.4px;cursor:pointer;}
+  .opts label:hover{background:#f5f8f6;} .opts input{margin-right:8px;}
+  .opts .od{display:block;margin:3px 0 0 24px;font-size:12.2px;color:#66756f;}
+  textarea{width:100%;padding:9px 11px;border:1px solid #cfd8d4;border-radius:7px;font-size:13.5px;font-family:inherit;margin-top:4px;resize:vertical;}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe6e2;padding:11px 18px;box-shadow:0 -2px 12px rgba(20,50,45,.1);z-index:50;}
+  .barin{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+  .who{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5a6b66;}
+  .seg{background:#f2f5f3;border:1.5px solid #dfe6e2;color:#3a4a47;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:7px;cursor:pointer;}
+  .seg.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+  .btns{display:flex;gap:8px;}
+  .btn{background:var(--ac);color:#fff;border:0;font-size:14px;font-weight:700;padding:11px 20px;border-radius:8px;cursor:pointer;}
+  .btn:hover{background:var(--acd);} .btn.alt{background:#fff;color:var(--ac);border:2px solid var(--ac);padding:9px 16px;}
+  #status{font-size:13px;font-weight:600;text-align:center;padding:6px 0 0;} #status.ok{color:#1f7a4d;} #status.err{color:#b0472b;}
+  #fallback{display:none;justify-content:center;gap:8px;margin-top:6px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="top"><a href="index.html">← Back to the dashboard</a><a href="https://www.globewinebar.co.uk/" target="_blank">See the current site →</a></div>
+  <div class="kicker">The Globe · Laugharne · for Alice &amp; Steve</div>
+  <h1>The Globe &amp; The Globe Bakery — one place, one brand</h1>
+  <p class="direction">The idea in a line: the bar and the bakery are the <b>same place, the same story, the same care</b> — so they should look and feel like <b>one brand</b>, not two. This page explains why, what we found on the current website, and what we'd do together to bring it up. Have a read and tell us if you're happy — you can leave notes right on the page.</p>
+  <hr class="r">
+</div></header>
+<div class="wrap">
+
+<h2>The idea — it all comes off the same thing</h2>
+<p class="body">The Globe is Laugharne's hidden gem: a bar, a kitchen and a secret garden in a building full of history on Duncan Street. The bakery isn't a separate business bolted on — it's <b>the daytime half of the same place</b>. Same door, same people, same care, turned to flour in the morning and wine in the evening.</p>
+<div class="lead">Everything runs off <b>one promise</b> — the kitchen already says it best: <b>“care — for ingredients, for people, and for the land that grows what we serve.”</b> That's the Globe by night and the bakery by day. If we build both on that one idea, they reinforce each other: a customer who buys their weekly bread becomes an evening regular, and vice versa.</p>
+<p class="body">So the goal isn't two websites competing — it's <b>one Globe family</b>, consistent in look, voice and story, with two front doors.</p>
+
+<h2>What's already great about the Globe</h2>
+<p class="sub">We build on these — they're real and they're yours.</p>
+<div class="good"><b>A genuinely rare story.</b> The building has been a hotel, a coach station, a butcher's &amp; abattoir (the Gleed family until 1991) and more — and it's been on screen in the BBC's <i>Dylan in New York</i> and <i>Keeping Faith</i>. Few venues have anything like it.</div>
+<div class="good"><b>A memorable line.</b> “The Hidden Gem of Laugharne · escape to our secret garden, no passport required.”</div>
+<div class="good"><b>The right values, already written.</b> The care-for-ingredients-people-and-land ethos is exactly what a premium organic bakery stands for too.</div>
+<div class="good"><b>The basics work.</b> Online table booking is easy, and the events (live music, DJs, the choir) are kept current.</div>
+
+<h2>What we found — the issues on the current site</h2>
+<p class="sub">Said plainly and constructively — the site is young (opened Oct 2024) and under-selling a strong venue. Fixable, mostly quickly.</p>
+<div class="issue"><div class="it">The menu is pictures, not words.</div><div class="id">Menus are uploaded as screenshots, so there are no readable dishes or prices, no food photos, and Google can't see any of it. This is the single biggest miss — and the easiest big win.</div></div>
+<div class="issue"><div class="it">Opening hours appear nowhere.</div><div class="id">The most-searched fact about any bar or restaurant isn't on the site — visitors have to call or guess.</div></div>
+<div class="issue"><div class="it">The brand is pulling apart.</div><div class="id">“Wine Bar” vs “Bar &amp; Restaurant”, and the Instagram handle shows up two different ways across pages. Small things, but they read as not-quite-looked-after.</div></div>
+<div class="issue"><div class="it">The great story is buried.</div><div class="id">The heritage and the current owners' story barely feature — the thing that makes the Globe special is hardest to find.</div></div>
+<div class="issue"><div class="it">No brand pack.</div><div class="id">There's a lovely feel, but no written colours, fonts or logo spec to keep the bar, bakery, menus and social all consistent.</div></div>
+
+<h2>What we'd do — together</h2>
+<p class="sub">In order, quickest wins first. Nothing here is a big rebuild — it's surfacing what's already true.</p>
+<div class="flow">
+  <div class="step"><div class="sh"><div class="num">1</div><b>Quick fixes (days)</b></div><div class="sb"><ul>
+    <li>Put <b>opening hours</b> on the homepage, contact page and footer.</li>
+    <li>Turn the <b>menu into real text</b> — dishes, short mouth-watering descriptions, prices — so it reads on a phone and shows up on Google.</li>
+    <li><b>Unify the name and the Instagram handle</b> everywhere.</li>
+    <li>Add page titles + descriptions so search can find you.</li>
+  </ul></div></div>
+  <div class="step"><div class="sh"><div class="num">2</div><b>The brand pack &amp; story (1–2 weeks)</b></div><div class="sb"><ul>
+    <li>Write up the <b>Globe brand pack</b> — colours, fonts, logo, voice — so everything stays consistent (this also governs the bakery).</li>
+    <li>Rewrite <b>About</b> around the real story: the building's history, the garden, and you.</li>
+    <li>Add <b>real photography</b> — the food, the interiors, the garden.</li>
+  </ul></div></div>
+  <div class="step"><div class="sh"><div class="num">3</div><b>One family, then launch the bakery (ongoing)</b></div><div class="sb"><ul>
+    <li>Bring the <b>bakery online as part of the Globe</b> — “by day, the bakery; by night, the bar.”</li>
+    <li>Cross-promote both audiences and run one simple content + events rhythm on social.</li>
+    <li>Local SEO so people nearby actually find you.</li>
+  </ul></div></div>
+</div>
+
+<h2>What we'd need from you</h2>
+<p class="sub">Two small things unblock all of it — then a quick yes.</p>
+<div class="need">
+  <div class="q">Can you share the Globe's logo files + its colours and fonts?</div>
+  <div class="why">So we can lock the bakery to match the bar exactly and write the brand pack. If there isn't a formal set, no problem — we'll capture it from the signage/menus and write it up.</div>
+  <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Globe — logo/colours/fonts" data-business="Bakery" placeholder="Where the logo/brand files are, or 'we don't have a set — please make one'…"></textarea>
+</div>
+<div class="need">
+  <div class="q">The name — which do we standardise on?</div>
+  <div class="why">We'll use it consistently everywhere (site, menus, socials).</div>
+  <div class="opts">
+    <label><input type="radio" name="Globe_name" value="A) The Globe, Bar & Restaurant"> A) The Globe — Bar &amp; Restaurant</label>
+    <label><input type="radio" name="Globe_name" value="B) The Globe Wine Bar"> B) The Globe Wine Bar</label>
+    <label><input type="radio" name="Globe_name" value="C) The Globe (simple)"> C) Just “The Globe”<span class="od">with “Bar · Bakery · Laugharne” underneath</span></label>
+  </div>
+</div>
+<div class="need" data-kind="dec" data-item="Globe — proceed with the one-brand plan" data-business="Bakery">
+  <div class="q">Happy for us to go ahead on this — the Globe and the bakery as one brand?</div>
+  <div class="why">Just a steer so we know we're building the right thing.</div>
+  <div class="opts">
+    <label><input type="radio" name="Globe_proceed" value="A) Yes, go ahead"> A) Yes — love it, go ahead</label>
+    <label><input type="radio" name="Globe_proceed" value="B) Yes, with tweaks"> B) Yes, with a few tweaks (note below)</label>
+    <label><input type="radio" name="Globe_proceed" value="C) Let's talk first"> C) Let's have a chat before we start</label>
+  </div>
+</div>
+<div class="need">
+  <div class="q">Anything to add or change?</div>
+  <textarea rows="2" data-kind="field" data-type="Discussion" data-item="Globe — Alice & Steve notes" data-business="Bakery" placeholder="Any thoughts, tweaks or things we've missed…"></textarea>
+</div>
+
+</div>
+
+<div class="bar"><div class="barin">
+  <div class="who">Sending as:
+    <button type="button" class="seg on" data-r="Steve" onclick="setWho('Steve')">Steve</button>
+    <button type="button" class="seg" data-r="Alice" onclick="setWho('Alice')">Alice</button>
+    <button type="button" class="seg" data-r="Dominic" onclick="setWho('Dominic')">Dominic</button>
+  </div>
+  <div class="btns">
+    <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+    <button class="btn" type="button" onclick="sendAll()">Send to Dominic</button>
+  </div>
+</div>
+  <div id="status"></div>
+  <div id="fallback">
+    <button class="btn alt" type="button" onclick="copyAll()">Copy</button>
+    <button class="btn alt" type="button" onclick="emailAll()">Email to Dominic</button>
+  </div>
+</div>
+<script>
+(function(){
+  var who="Steve";
+  window.setWho=function(v){who=v;document.querySelectorAll('.who .seg').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-r')===v);});};
+  function collect(){
+    var items=[];
+    document.querySelectorAll('[data-kind="dec"]').forEach(function(el){
+      var c=el.querySelector('input[type=radio]:checked');
+      if(c) items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:'Decision',answer:c.value});
+    });
+    // standalone radio groups not wrapped as dec
+    var nameSel=document.querySelector('input[name="Globe_name"]:checked');
+    if(nameSel) items.push({item:'Globe — standardised name',business:'Bakery',type:'Decision',answer:nameSel.value});
+    document.querySelectorAll('[data-kind="field"]').forEach(function(el){
+      var v=(el.value||'').trim();
+      if(v) items.push({item:el.getAttribute('data-item'),business:el.getAttribute('data-business'),type:el.getAttribute('data-type')||'Discussion',answer:v});
+    });
+    return items;
+  }
+  function asText(items){
+    var L=["The Globe — one place, one brand", "Sent by: "+who, ""];
+    items.forEach(function(it){ L.push((it.type==='Discussion'?'? ':'• ')+it.item+": "+it.answer); });
+    return L.join("\n");
+  }
+  window.sendAll=function(){
+    var items=collect(),st=document.getElementById('status');
+    if(!items.length){st.className='err';st.textContent='Nothing to send yet — make a pick or write a note.';return;}
+    st.className='';st.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewer:who,items:items})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){ if(res.ok&&res.j&&res.j.ok){st.className='ok';st.textContent='✓ Saved to the tracker ('+res.j.created+' item'+(res.j.created===1?'':'s')+'). Dominic has it.';document.getElementById('fallback').style.display='none';} else {fail(res.j,items);} })
+      .catch(function(){fail(null,items);});
+  };
+  function fail(j,items){var st=document.getElementById('status');st.className='err';
+    st.textContent=(j&&j.error==='not_configured')?'Tracker isn’t connected yet — your answers are safe, use Copy or Email below.':'Couldn’t reach the tracker — your answers are safe, use Copy or Email below.';
+    window.__t=asText(items);document.getElementById('fallback').style.display='flex';}
+  window.copyAll=function(){var t=window.__t||asText(collect());navigator.clipboard.writeText(t).then(function(){var st=document.getElementById('status');st.className='ok';st.textContent='Copied — paste it to Dominic.';},function(){prompt('Copy this:',t);});};
+  window.emailAll=function(){var t=window.__t||asText(collect());window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('The Globe — one place, one brand')+'&body='+encodeURIComponent(t);};
+})();
+</script>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var biz='Bakery', who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:74px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:122px;z-index:9999;width:320px;max-width:92vw;background:#fff;border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;} #gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Alice">Alice</span><span class="seg" data-r="Dominic">Dominic</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  document.getElementById('gnwSave').onclick=function(){
+    var v=(T.value||'').trim(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+')\n\n'+v);}
+})();</script>
+</body></html>

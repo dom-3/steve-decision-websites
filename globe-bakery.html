@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Globe Bakery — Laugharne</title>
+<meta name="description" content="A small bakery on the estuary at Laugharne. Bread baked fresh each morning, sold the day it's made.">
+<link rel="canonical" href="https://www.globewinebar.co.uk/globe-bakery.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Globe, Laugharne">
+<meta property="og:title" content="The Globe Bakery — Laugharne">
+<meta property="og:description" content="A small bakery on the estuary at Laugharne. Bread baked fresh each morning, sold the day it's made.">
+<meta property="og:url" content="https://www.globewinebar.co.uk/globe-bakery.html">
+<meta property="og:image" content="https://www.globewinebar.co.uk/images/bakery/heroes/bakery-display-hero.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:image:alt" content="The Globe Bakery's daily range in tiered baskets — loaves, baguettes and rolls">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F4ECD8">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="images/bakery/heroes/bakery-display-m.jpg" media="(max-width:760px)">
+<link rel="preload" as="image" href="images/bakery/heroes/bakery-display-hero.jpg" media="(min-width:761px)">
+<style>
+  /* ===== The Globe — Bakery. Brand pack v1, warm daylight register.
+     Morning to the restaurant's evening: same system, same lockup,
+     same typefaces — cream and daylight instead of ink and candle. ===== */
+  :root{
+    --cream:#F4ECD8;      /* page — morning paper */
+    --cream-dp:#EBE0C7;   /* bands */
+    --wheat:#E3C98F;      /* warm structure */
+    --green:#7D8A4F;      /* decorative accent ONLY — 3.17:1, never for text */
+    --green-dk:#545E33;   /* the text-safe green — 5.89:1 on cream (WCAG AA) */
+    --scrim:rgba(244,236,216,.90); /* cream scrim for copy over photography */
+    --green-dp:#67734073;
+    --crust:#6E4A29;      /* headings, crust brown */
+    --crust-dp:#523618;
+    --gold:#C9A24B;       /* the Globe gold thread — present, in daylight */
+    --ink:#2E2419;        /* body text */
+    --muted:#8A7B66;
+    --line:rgba(110,74,41,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);
+       font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.62;
+       -webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:600;color:var(--crust);
+           letter-spacing:-.01em;line-height:1.12}
+  .eyebrow{font-family:'Poiret One',sans-serif;font-size:11px;letter-spacing:.30em;
+           text-transform:uppercase;color:var(--green-dk)}
+  .lede{font-size:20px;color:#4A3E2E;max-width:34em}
+
+  /* ---- family strip (globe-family.js) ---- */
+  .fam{background:var(--crust);}
+  .fam .in{max-width:1120px;margin:0 auto;padding:6px 20px;display:flex;justify-content:center}
+  .rbswap{display:flex;border:1px solid rgba(244,236,216,.4);border-radius:24px;overflow:hidden;
+          font-family:'Poiret One',sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase}
+  .rbswap a{padding:6px 15px;color:#EFE4CC;white-space:nowrap;transition:.2s}
+  .rbswap a.on{background:var(--cream);color:var(--crust)}
+  .rbswap a:not(.on):hover{background:rgba(244,236,216,.16)}
+  .rbswap .soon{padding:6px 15px;color:#EFE4CC;opacity:.45;white-space:nowrap}
+
+  /* ---- header: Globe-first lockup ---- */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(244,236,216,.94);
+             backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header.nav .in{max-width:1120px;margin:0 auto;padding:11px 20px;
+                 display:flex;align-items:center;justify-content:space-between;gap:14px}
+  /* ---- LOCKUP: the REAL mark. Never redraw or approximate it — the drawn
+     placeholder was an error on 22 Jul and every affected piece was rebuilt.
+     globe-logo-gold-mark.png has the strapline removed, for branch lockups:
+     BAKERY beneath in Helvetica caps, letterspaced, green #7D8A4F family.
+     Source of rules: globe-brand-tokens.md ---- */
+  .lockup{display:block;line-height:1}
+  .lockup img{display:block;height:34px;width:auto}
+  .lockup .b{display:block;font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;
+             font-size:9.5px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;
+             color:var(--green-dk);margin-top:5px;text-indent:.34em}
+  @media(max-width:520px){.lockup img{height:27px}.lockup .b{font-size:8.5px}}
+  nav.links{display:none;gap:22px;font-family:'Poiret One',sans-serif;font-size:11.5px;
+            letter-spacing:.14em;text-transform:uppercase;color:var(--crust)}
+  nav.links a:hover{color:var(--green)}
+  .callbtn{font-family:'Poiret One',sans-serif;font-size:11px;letter-spacing:.14em;
+           text-transform:uppercase;background:var(--green-dk);color:var(--cream);
+           padding:9px 16px;border-radius:2px;white-space:nowrap}
+  .callbtn:hover{background:#6B7743}
+  @media(min-width:820px){nav.links{display:flex}}
+
+  /* ---- hero ----------------------------------------------------------
+     ACCESSIBILITY: the display photo is busy (tiered baskets, high tonal
+     variation), so per the brand rule "legible first, decorative second"
+     the copy sits BELOW it on a solid cream band rather than over it.
+     Crust #6E4A29 on solid cream #F4ECD8 = 6.67:1 (WCAG AA needs 4.5:1).
+     The previous treatment measured 1.21:1 where the gradient faded. ---- */
+  .hero{position:relative;background:var(--crust)}
+  .hero img{width:100%;height:clamp(240px,48vh,470px);object-fit:cover}
+  .herocap{background:var(--cream);border-bottom:1px solid var(--line);
+           padding:clamp(26px,4.5vw,44px) 0 clamp(24px,4vw,38px)}
+  .herocap .inner{max-width:1120px;margin:0 auto;padding:0 20px}
+  .herocap .lk img{display:block;height:clamp(38px,7vw,56px);width:auto}
+  .herocap .lk .b{font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;
+     font-size:clamp(10px,1.7vw,12.5px);font-weight:700;letter-spacing:.36em;
+     text-transform:uppercase;color:var(--green-dk);display:block;margin-top:8px;
+     text-indent:.36em}
+  .herocap .rule{width:38px;height:1px;background:var(--gold);margin:15px 0}
+  .herocap h1{color:var(--crust);font-size:clamp(26px,5.4vw,44px);max-width:15em;font-weight:600}
+
+  /* ---- the bread: the story, green thread ---- */
+  .bread{padding:clamp(44px,7vw,78px) 0}
+  .bread .lede{font-size:clamp(20px,2.6vw,25px);color:#3F3527;max-width:19em;
+               font-family:'Playfair Display',serif;line-height:1.3}
+  .bread .body{margin-top:18px;max-width:34em;color:#4A3E2E}
+  .four{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:34px;
+        background:var(--line);border:1px solid var(--line)}
+  .four div{background:var(--cream);padding:18px 16px}
+  .four b{display:block;font-family:'Poiret One',sans-serif;font-size:10.5px;letter-spacing:.22em;
+          text-transform:uppercase;color:var(--green-dk);margin-bottom:5px;font-weight:400}
+  .four span{font-family:'Playfair Display',serif;font-size:17px;color:var(--crust)}
+  @media(min-width:760px){.four{grid-template-columns:repeat(4,1fr)}}
+
+  /* ---- image bands ---- */
+  .band{position:relative;background:var(--crust)}
+  .band img{width:100%;height:clamp(240px,46vh,460px);object-fit:cover}
+  /* Captions sit on a translucent CREAM scrim with crust type — keeps the
+     morning light and measures 5.2:1 worst-case over any photo pixel.
+     Never text-shadow alone: it fails over busy photography. */
+  .band .cap{position:absolute;inset:auto 0 0 0;padding:0 20px 20px}
+  .band .cap .in{max-width:1120px;margin:0 auto}
+  .band .cap .panel{display:inline-block;max-width:32em;background:var(--scrim);
+    border-left:3px solid var(--gold);padding:15px 20px;
+    -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+  .band .cap .e{font-family:'Poiret One',sans-serif;font-size:10.5px;letter-spacing:.28em;
+                text-transform:uppercase;color:var(--green-dk)}
+  .band .cap p{color:var(--crust);font-size:clamp(16.5px,2.1vw,21px);margin-top:5px;
+               font-family:'Playfair Display',serif;font-weight:600;line-height:1.28}
+  @media(max-width:560px){.band .cap .panel{display:block;padding:13px 15px}}
+
+  /* ---- the range ---- */
+  .range{padding:clamp(44px,7vw,78px) 0}
+  .range .head{max-width:34em;margin-bottom:28px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(min-width:720px){.grid{grid-template-columns:repeat(4,1fr);gap:18px}}
+  .card{background:var(--cream-dp);border:1px solid var(--line);overflow:hidden}
+  .card .ph{aspect-ratio:1/1;background:#E0D5BC}
+  .card .ph img{width:100%;height:100%;object-fit:cover}
+  .card .t{padding:12px 13px 14px}
+  .card h3{font-size:17px;font-weight:600}
+  /* Ingredients + allergen, verbatim from the printed poster and shelf cards.
+     The allergen line is a safety statement, so it is set solid and dark
+     (crust on the card ground = 6.0:1), never a faint caption. */
+  .card .ing{font-size:14px;color:#5E5142;margin-top:3px;line-height:1.4}
+  .card .allerg{margin-top:7px;font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;
+                font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--crust);
+                line-height:1.35}
+  .card .sulph{display:block;font-weight:400;color:#5E5142;letter-spacing:0;
+               font-size:11.5px;margin-top:3px}
+  /* price slot — intentionally empty until the list is confirmed */
+  /* Prices: set large and solid. Customers read these before anything else,
+     and the clientele are older — same reasoning as the print menu. */
+  .card .price{margin-top:9px;font-family:'Playfair Display',Georgia,serif;
+               font-size:19px;font-weight:600;color:var(--crust);min-height:1px;
+               letter-spacing:0}
+  .card .price:empty{display:none}
+
+  /* ---- ALLERGEN INFORMATION ------------------------------------------
+     Wording is VERBATIM from "The Globe Bakery — Bread Poster (A3) PRINT.pdf",
+     which matches the A5 shelf cards. This is a regulated safety statement:
+     do not reword, soften or summarise it. If the print pieces change, change
+     this at the same time. ------------------------------------------------ */
+  .allergen{background:var(--cream-dp);border:1px solid var(--line);
+            border-left:4px solid var(--crust);padding:clamp(20px,3.5vw,30px);
+            margin-top:clamp(28px,4vw,40px)}
+  .allergen h3{font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;font-size:12px;
+               font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+               color:var(--crust);margin-bottom:12px}
+  .allergen p{font-size:16.5px;color:#3F3527;max-width:46em;line-height:1.55}
+  .allergen p + p{margin-top:9px}
+  .allergen strong{font-weight:700;color:var(--crust)}
+
+  /* feature row */
+  /* No image? The feature collapses to a clean single-column text panel —
+     deliberate-looking, not a hole. Add the file and it becomes image + text. */
+  .feature.nofile img{display:none}
+  .feature.nofile{grid-template-columns:1fr;background:var(--cream-dp)}
+  .feature.nofile .t{padding:clamp(24px,4vw,34px) clamp(20px,3.5vw,32px)}
+  .feature .credit{margin-top:14px;font-family:'Poiret One',sans-serif;font-size:10.5px;
+                   letter-spacing:.16em;text-transform:uppercase;color:#6B5D4B}
+  .feature{margin-top:22px;display:grid;grid-template-columns:1fr;gap:0;
+           border:1px solid var(--line);background:var(--cream-dp);overflow:hidden}
+  .feature img{width:100%;aspect-ratio:3/2;object-fit:cover}
+  .feature .t{padding:22px 20px}
+  .feature h3{font-size:clamp(21px,3vw,27px)}
+  .feature p{margin-top:8px;color:#4A3E2E;max-width:32em}
+  @media(min-width:820px){
+    .feature{grid-template-columns:1.15fr .85fr;align-items:stretch}
+    .feature img{height:100%;aspect-ratio:auto}
+    .feature .t{padding:34px 32px;align-self:center}
+  }
+
+  /* ---- ordering ---- */
+  .order{background:var(--cream-dp);border-top:1px solid var(--line);
+         border-bottom:1px solid var(--line);padding:clamp(44px,7vw,74px) 0}
+  .ocols{display:grid;grid-template-columns:1fr;gap:16px;margin-top:26px}
+  @media(min-width:820px){.ocols{grid-template-columns:repeat(3,1fr);gap:18px}}
+  .obox{background:var(--cream);border:1px solid var(--line);padding:22px 20px}
+  .obox h3{font-family:'Poiret One',sans-serif;font-size:10.5px;letter-spacing:.24em;
+           text-transform:uppercase;color:var(--green-dk);font-weight:400;margin-bottom:11px}
+  .obox .big{font-family:'Playfair Display',serif;font-size:23px;color:var(--crust);display:block}
+  .obox p{font-size:16.5px;color:#4A3E2E;margin-top:5px}
+  .steps{counter-reset:s;margin-top:4px}
+  .steps li{list-style:none;counter-increment:s;position:relative;padding-left:30px;
+            margin-bottom:11px;font-size:16.5px;color:#4A3E2E}
+  .steps li:last-child{margin-bottom:0}
+  .steps li:before{content:counter(s);position:absolute;left:0;top:1px;width:20px;height:20px;
+    border:1px solid var(--green-dk);border-radius:50%;color:var(--green-dk);
+    font-family:'Poiret One',sans-serif;font-size:11px;display:flex;align-items:center;
+    justify-content:center;line-height:1}
+  .soonbox{margin-top:18px;border:1px dashed rgba(125,138,79,.55);background:rgba(125,138,79,.07);
+           padding:15px 17px;font-size:16px;color:#4A3E2E}
+  .soonbox b{font-family:'Poiret One',sans-serif;font-size:10.5px;letter-spacing:.2em;
+             text-transform:uppercase;color:var(--green-dk);display:block;margin-bottom:5px;font-weight:400}
+
+  /* ---- footer ---- */
+  footer{background:var(--crust);color:#E6D9BF;padding:44px 0 34px;text-align:center}
+  footer .lk img{display:block;height:40px;width:auto;margin:0 auto}
+  footer .lk .b{font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;font-size:9.5px;
+                font-weight:700;letter-spacing:.34em;text-transform:uppercase;
+                color:var(--wheat);display:block;margin-top:7px;text-indent:.34em}
+  footer .rule{width:38px;height:1px;background:var(--gold);margin:16px auto}
+  footer p{font-size:16px;color:#D6C6A8}
+  footer a{color:var(--wheat)}
+  footer .cols{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:14px;
+    font-family:'Poiret One',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+
+  /* ---- sticky mobile call bar ---- */
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;
+        border-top:1px solid rgba(110,74,41,.28);background:rgba(244,236,216,.97);
+        backdrop-filter:blur(8px)}
+  .mbar a{flex:1;text-align:center;padding:14px 8px;font-family:'Poiret One',sans-serif;
+          font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
+  .mbar a.p{background:var(--green);color:var(--cream)}
+  .mbar a.s{color:var(--crust)}
+  body{padding-bottom:52px}
+  @media(min-width:820px){.mbar{display:none} body{padding-bottom:0}}
+</style>
+</head>
+<body>
+
+<!-- family strip — rendered by globe-family.js; static links are the no-JS fallback -->
+<div class="fam"><div class="in">
+  <div class="rbswap" data-globe-family>
+    <a href="globe.html">Restaurant</a>
+    <a href="globe-bakery.html" class="on" aria-current="page">Bakery</a>
+  </div>
+</div></div>
+
+<header class="nav"><div class="in">
+  <a class="lockup" href="globe-bakery.html">
+    <img src="images/brand/globe-logo-gold-mark.png" alt="The Globe" width="600" height="236">
+    <span class="b">Bakery</span>
+  </a>
+  <nav class="links">
+    <a href="#bread">The bread</a>
+    <a href="#range">The range</a>
+    <a href="#order">How to order</a>
+    <a href="#find">Find us</a>
+  </nav>
+  <a class="callbtn" href="tel:+441994427546">Call to order</a>
+</div></header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <picture>
+    <source media="(max-width:760px)" srcset="images/bakery/heroes/bakery-display-m.jpg">
+    <img src="images/bakery/heroes/bakery-display-hero.jpg"
+         alt="The Globe Bakery's daily range in tiered baskets — loaves, baguettes and rolls"
+         width="1920" height="1080" fetchpriority="high" decoding="async">
+  </picture>
+</section>
+
+<section class="herocap"><div class="inner">
+  <span class="lk">
+    <img src="images/brand/globe-logo-gold-mark.png" alt="The Globe" width="600" height="236">
+    <span class="b">Bakery</span>
+  </span>
+  <div class="rule"></div>
+  <h1>Bread baked in Laugharne, every morning.</h1>
+</div></section>
+
+<!-- ============ THE BREAD ============ -->
+<section class="bread" id="bread"><div class="wrap">
+  <div class="eyebrow">The bread</div>
+  <p class="lede">A small bakery on the estuary at Laugharne.</p>
+  <p class="body">Bread baked fresh each morning in the bakehouse behind The Globe on Duncan
+    Street, and sold the day it's made.</p>
+
+  <!-- Spec panel. Approved wording is "Flour: stoneground, from [mill name]" —
+       name the mill, NO quality claim (Karen, 22 Jul; see globe-brand-tokens.md).
+       The mill is now named, so the row is reinstated.
+       ⚠️ "stoneground" is NOT yet on the page: it's a claim about the specific
+       product we buy, and Cotswold mill both stoneground and roller-milled
+       flours. Add the word only once the actual product/spec is confirmed.
+       The ingredient line ("flour, water, salt, time") stays OFF pending
+       per-product verification — it may be five things, not four (yeast). -->
+  <div class="four" style="grid-template-columns:1fr;max-width:34em">
+    <div><b>Flour</b><span>From Cotswold Flour</span></div>
+  </div>
+</div></section>
+
+<!-- ============ PROVENANCE BAND ============ -->
+<section class="band">
+  <picture>
+    <source media="(max-width:760px)" srcset="images/bakery/heroes/bakery-courtyard-m.jpg">
+    <img src="images/bakery/heroes/bakery-courtyard-hero.jpg"
+         alt="Fresh bread laid out in the stone courtyard at The Globe, Laugharne"
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="cap"><div class="in"><div class="panel">
+    <div class="e">Duncan Street, Laugharne</div>
+    <p>Here's where it's made — the courtyard behind the bar, most mornings before eight.</p>
+  </div></div></div>
+</section>
+
+<!-- ============ THE RANGE ============ -->
+<section class="range" id="range"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">The range</div>
+    <h2 style="font-size:clamp(26px,4vw,38px);margin-top:8px">What we bake.</h2>
+    <p class="lede" style="margin-top:12px;font-size:18.5px">A short list, baked fresh each morning.
+      When it's gone, it's gone — so it's worth ordering ahead.</p>
+  </div>
+
+  <div class="grid">
+    <!-- ===================== PRICES =====================
+         INTERIM figures, confirmed 22 Jul, pending Alice's costed list.
+         THE POSTER AND SHELF CARDS ARE ALREADY PRINTED WITH THESE — the page
+         must match them exactly. Do not change one without changing those.
+
+         To change a price: search this file for  PRICE   — eight hits, one per
+         loaf, each tagged with its product slug. Edit the figure on that single
+         line. Nothing else needs touching.
+
+         The figures are deliberately NOT repeated here. Each card is the only
+         place its price lives, so this comment can never fall out of step with
+         the page. Check against the poster, not against a copy.
+         ================================================== -->
+    <article class="card">
+      <div class="ph"><picture>
+        <source media="(max-width:719px)" srcset="images/bakery/products/white-tin-square-m.jpg">
+        <img src="images/bakery/products/white-tin-square.jpg" alt="A white tin loaf from The Globe Bakery" width="900" height="900" loading="lazy" decoding="async"></picture></div>
+      <div class="t"><h3>White Tin</h3><div class="ing">Wheat flour, water, salt, yeast</div><div class="allerg">CONTAINS WHEAT (GLUTEN)</div><div class="price">£4.20</div><!-- PRICE white-tin --></div>
+    </article>
+
+    <article class="card">
+      <div class="ph"><picture>
+        <source media="(max-width:719px)" srcset="images/bakery/products/8-grain-square-m.jpg">
+        <img src="images/bakery/products/8-grain-square.jpg" alt="An 8-grain loaf, split to show the seeded crumb" width="900" height="900" loading="lazy" decoding="async"></picture></div>
+      <div class="t"><h3>8 Grain</h3><div class="ing">Wheat flour, water, salt, yeast, grains & seeds</div><div class="allerg">CONTAINS WHEAT (GLUTEN)</div><div class="price">£4.20</div><!-- PRICE 8-grain --></div>
+    </article>
+
+    <article class="card">
+      <div class="ph"><picture>
+        <source media="(max-width:719px)" srcset="images/bakery/products/sourdough-square-m.jpg">
+        <img src="images/bakery/products/sourdough-square.jpg" alt="A scored sourdough loaf on slate — the strongest frame of the shoot" width="900" height="900" loading="lazy" decoding="async"></picture></div>
+      <div class="t"><h3>Sourdough</h3><div class="ing">Wheat flour, water, salt</div><div class="allerg">CONTAINS WHEAT (GLUTEN)</div><div class="price">£4.20</div><!-- PRICE sourdough --></div>
+    </article>
+
+    <article class="card">
+      <div class="ph"><picture>
+        <source media="(max-width:719px)" srcset="images/bakery/products/light-crunch-square-m.jpg">
+        <img src="images/bakery/products/light-crunch-square.jpg" alt="A Light Crunch loaf on slate" width="900" height="900" loading="lazy" decoding="async"></picture></div>
+      <div class="t"><h3>Light Crunch</h3><div class="ing">Wheat flour, water, salt, yeast, grains</div><div class="allerg">CONTAINS WHEAT (GLUTEN)<span class="sulph">May contain naturally occurring sulphites</span></div><div class="price">£4.20</div><!-- PRICE light-crunch --></div>
+    </article>
+
+    <article class="card">
+      <div class="ph"><picture>
+        <source media="(max-width:719px)" srcset="images/bakery/products/dark-crunch-square-m.jpg">
+        <img src="images/bakery/products/dark-crunch-square.jpg" alt="A Dark Crunch loaf with a well-opened ear" width="900" height="900" loading="lazy" decoding="async"></picture></div>
+      <div class="t"><h3>Dark Crunch</h3><div class="ing">Wheat flour, water, salt, yeast, grains</div><div class="allerg">CONTAINS WHEAT (GLUTEN)<span class="sulph">May contain naturally occurring sulphites</span></div><div class="price">£4.20</div><!-- PRICE dark-crunch --></div>
+    </article>
+
+    <article class="card">
+      <div class="ph"><picture>
+        <source media="(max-width:719px)" srcset="images/bakery/products/crusty-roll-square-m.jpg">
+        <img src="images/bakery/products/crusty-roll-square.jpg" alt="A crusty bread roll from The Globe Bakery" width="900" height="900" loading="lazy" decoding="async"></picture></div>
+      <div class="t"><h3>Crusty Roll</h3><div class="ing">Wheat flour, water, salt, yeast</div><div class="allerg">CONTAINS WHEAT (GLUTEN)</div><div class="price">£0.80</div><!-- PRICE crusty-roll --></div>
+    </article>
+
+    <article class="card">
+      <div class="ph"><picture>
+        <source media="(max-width:719px)" srcset="images/bakery/products/baguette-square-m.jpg">
+        <img src="images/bakery/products/baguette-square.jpg" alt="A full-length baguette on slate" width="900" height="900" loading="lazy" decoding="async"></picture></div>
+      <div class="t"><h3>Baguette</h3><div class="ing">Wheat flour, water, salt, yeast</div><div class="allerg">CONTAINS WHEAT (GLUTEN)</div><div class="price">£2.80</div><!-- PRICE baguette --></div>
+    </article>
+
+    <article class="card">
+      <div class="ph"><picture>
+        <source media="(max-width:719px)" srcset="images/bakery/products/half-baguette-square-m.jpg">
+        <img src="images/bakery/products/half-baguette-square.jpg" alt="A half baguette on slate" width="900" height="900" loading="lazy" decoding="async"></picture></div>
+      <div class="t"><h3>Half Baguette</h3><div class="ing">Wheat flour, water, salt, yeast</div><div class="allerg">CONTAINS WHEAT (GLUTEN)</div><div class="price">£1.90</div><!-- PRICE half-baguette --></div>
+    </article>
+  </div>
+
+  <!-- ===================== ALLERGEN INFORMATION =====================
+       VERBATIM from the printed A3 poster; identical on the A5 shelf cards.
+       Regulated safety wording — do not reword or shorten. If the print
+       pieces are reprinted, this must be updated in the same pass.
+       ================================================================ -->
+  <section class="allergen" id="allergens" aria-labelledby="allergen-h">
+    <h3 id="allergen-h">Allergen information</h3>
+    <p><strong>All bread baked here contains WHEAT (GLUTEN).</strong></p>
+    <p>Our flour is milled in a plant where cross-contamination may occur — we cannot
+       guarantee any loaf is free from other allergens.</p>
+    <p>Please ask a member of staff before you buy — we have the full ingredient list
+       for every loaf.</p>
+  </section>
+
+  <!-- feature row — THE FLOUR.
+       OPTIONAL IMAGE. Drop a wheat-field photo in as:
+           images/bakery/wheat-field.jpg   (1400px wide, under ~300 KB)
+       With no file the block renders as a clean single-column text panel, so the
+       page is complete either way — nothing to fix before launch.
+       ⚠️ If you add one, keep the alt text generic. Do NOT write anything that
+       implies the field is ours or our mill's — it's atmosphere, not provenance.
+       Do NOT add "stoneground" or any quality claim (Karen's ruling). -->
+  <figure class="feature nofile" data-file="wheat-field.jpg">
+    <img src="images/bakery/wheat-field.jpg"
+         alt="A field of ripe wheat"
+         width="1400" height="934" loading="lazy" decoding="async"
+         onerror="this.closest('.feature').classList.add('nofile')"
+         onload="this.closest('.feature').classList.remove('nofile')">
+    <div class="t">
+      <div class="eyebrow">The flour</div>
+      <h3 style="margin-top:8px">Where our flour comes from.</h3>
+      <p>We bake with flour from Cotswold Flour. It's the one thing in the loaf we don't
+        make ourselves, so it matters who mills it.</p>
+    </div>
+  </figure>
+</div></section>
+
+<!-- ============ SECTION BREAK ============ -->
+<section class="band">
+  <picture>
+    <source media="(max-width:760px)" srcset="images/bakery/heroes/bakery-overhead-m.jpg">
+    <img src="images/bakery/heroes/bakery-overhead-hero.jpg"
+         alt="Overhead view of the day's bread at The Globe Bakery"
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="cap"><div class="in"><div class="panel">
+    <div class="e">One morning's bake</div>
+    <p>Everything, laid out. When it's gone, it's gone.</p>
+  </div></div></div>
+</section>
+
+<!-- ============ HOW TO ORDER ============ -->
+<section class="order" id="order"><div class="wrap">
+  <div class="eyebrow">How to order</div>
+  <h2 style="font-size:clamp(26px,4vw,38px);margin-top:8px">Order ahead, collect from the bakery.</h2>
+  <p class="lede" style="margin-top:12px;font-size:18.5px">Collection only for now. Give us a ring
+    and we'll put your order aside under a number.</p>
+
+  <div class="ocols">
+    <div class="obox">
+      <h3>Ordering</h3>
+      <ol class="steps">
+        <li>Call <a href="tel:+441994427546" style="color:var(--green-dk);border-bottom:1px solid rgba(84,94,51,.45)">01994&nbsp;427546</a> and tell us what you'd like.</li>
+        <li>We give you an <b style="font-weight:600">order number</b>.</li>
+        <li>Collect from the bakery and quote the number.</li>
+      </ol>
+    </div>
+
+    <div class="obox">
+      <h3>Opening</h3>
+      <span class="big">8:30 – 2:00</span>
+      <p>Baked fresh each morning. Once the day's bake is sold, that's it until tomorrow — so
+        ordering ahead is the surest way to get what you want.</p>
+    </div>
+
+    <div class="obox">
+      <h3>Collection</h3>
+      <span class="big">The bakery</span>
+      <p>Duncan Street, Laugharne, SA33&nbsp;4SA — the courtyard behind The Globe.</p>
+      <p style="margin-top:9px"><a href="https://maps.google.com/?q=The+Globe+Laugharne+SA33+4SA" target="_blank" rel="noopener" style="color:var(--green-dk);border-bottom:1px solid rgba(84,94,51,.45)">Directions →</a></p>
+    </div>
+  </div>
+
+  <!-- Switch this on when card payments / online ordering go live. -->
+  <div class="soonbox">
+    <b>Coming soon</b>
+    Card payments and online ordering. For now it's a phone call and cash or card on collection —
+    we'll turn the online side on here as soon as it's ready.
+  </div>
+</div></section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="find">
+  <span class="lk">
+    <img src="images/brand/globe-logo-white-mark.png" alt="The Globe" width="600" height="236">
+    <span class="b">Bakery</span>
+  </span>
+  <div class="rule"></div>
+  <p>Duncan Street, Laugharne, SA33 4SA<br>
+     <a href="tel:+441994427546">01994 427546</a> · 8:30 – 2:00</p>
+  <div class="cols">
+    <a href="globe.html">The Globe — Bar &amp; Restaurant</a>
+    <a href="https://www.instagram.com/globebarlaugharne/" target="_blank" rel="noopener">@globebarlaugharne</a>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a class="p" href="tel:+441994427546">Call to order</a>
+  <a class="s" href="#range">See the range</a>
+</div>
+
+<script src="globe-family.js" defer></script>
+</body>
+</html>

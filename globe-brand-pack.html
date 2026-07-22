@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Globe — Brand & Marketing Pack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Poiret+One&display=swap');
+:root{
+  --ink:#14110d; --ink2:#1c1a17; --paper:#f4efe4; --gold:#c9a24b; --gold-d:#a5813a;
+  --muted:#8a8577; --line:#e3ded2; --card:#ffffff; --bg:#efe9dd;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:#efe9dd;color:#2a2620;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.6;}
+.serif{font-family:"Playfair Display",Georgia,serif;}
+.disp{font-family:"Poiret One","Playfair Display",Georgia,serif;}
+.wrap{max-width:940px;margin:0 auto;padding:0 22px 90px;}
+
+/* Masthead */
+header{background:var(--ink);color:var(--paper);border-bottom:3px solid var(--gold);}
+.head-in{max-width:940px;margin:0 auto;padding:46px 22px 38px;}
+.globe-mark{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gold);position:relative;display:inline-block;vertical-align:middle;margin-right:12px;}
+.globe-mark::before,.globe-mark::after{content:"";position:absolute;inset:0;border-radius:50%;border:0.75px solid var(--gold);}
+.globe-mark::before{transform:scaleX(.45);} .globe-mark::after{transform:scaleY(.5);}
+.brandline{display:flex;align-items:center;}
+.wordmark{font-family:"Poiret One",Georgia,serif;font-size:30px;letter-spacing:7px;color:var(--paper);}
+.kick{letter-spacing:5px;text-transform:uppercase;font-size:11px;color:var(--gold);margin-top:26px;}
+h1{font-family:"Playfair Display",Georgia,serif;font-weight:400;font-size:38px;line-height:1.15;margin:8px 0 12px;color:#fff;}
+.lede{max-width:640px;color:#e7dcc4;font-size:16px;margin:0;}
+.meta{margin-top:20px;font-size:12px;color:#b6a882;letter-spacing:.5px;}
+
+/* Sections */
+section{margin-top:44px;}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:6px;}
+.eyebrow .n{font-family:"Playfair Display",serif;font-style:italic;font-weight:400;color:var(--muted);letter-spacing:0;text-transform:none;}
+h2{font-family:"Playfair Display",Georgia,serif;font-weight:400;font-size:26px;margin:2px 0 14px;color:#241f18;}
+h3{font-size:14px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;font-weight:700;}
+p{margin:0 0 12px;} .lead{font-size:17px;color:#332e26;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;box-shadow:0 3px 14px rgba(20,17,13,.05);}
+
+/* Values */
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;}
+.val{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px;}
+.val b{font-family:"Playfair Display",serif;font-weight:500;font-size:16px;color:#241f18;display:block;margin-bottom:3px;}
+.val span{font-size:13px;color:#5f5a50;}
+
+/* Architecture */
+.tierlbl{font-size:12px;color:#6a6558;margin:18px 2px 8px;} .tierlbl b{color:#2a2620;}
+.arch{display:flex;gap:10px;flex-wrap:wrap;}
+.mini{flex:1 1 150px;min-width:145px;border-radius:11px;padding:14px 14px 13px;font-family:"Playfair Display",Georgia,serif;font-size:17px;line-height:1.12;box-shadow:0 2px 8px rgba(20,17,13,.06);}
+.mini small{display:block;font-family:-apple-system,sans-serif;font-size:9px;letter-spacing:2.5px;margin-bottom:6px;font-weight:400;}
+.mini em{display:block;font-family:-apple-system,sans-serif;font-size:10.5px;font-style:normal;opacity:.78;margin-top:7px;}
+.mini.gh{border:1px dashed #c3c0b6;opacity:.92;}
+.culture{margin-top:10px;background:#2f3b40;border-left:5px solid var(--gold);border-radius:12px;padding:16px 20px;color:#e8e0cd;}
+.culture .ck{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+.culture .cn{font-family:"Playfair Display",serif;font-size:22px;color:#f2ede0;margin-top:3px;}
+.culture .cm{font-size:12.5px;color:#b9c2c0;margin-top:3px;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+.chips span{font-size:11.5px;color:#eae2cd;background:rgba(232,224,205,.1);border:1px solid #5b6b6e;border-radius:20px;padding:4px 11px;}
+.funnel{margin-top:11px;background:#f6efdf;border:1px solid #ece0c6;border-radius:10px;padding:11px 16px;text-align:center;font-size:13px;color:#4a4335;}
+.funnel b{color:#2f3b40;}
+
+/* Constants grid */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:680px){.two{grid-template-columns:1fr;}}
+.lockup{background:var(--ink);color:var(--paper);border-radius:12px;padding:20px;text-align:center;}
+.lockup .lw{font-family:"Poiret One",serif;letter-spacing:6px;font-size:20px;color:#fff;}
+.lockup .lb{font-family:"Playfair Display",serif;font-size:22px;color:var(--gold);margin-top:2px;}
+.lockup small{display:block;margin-top:12px;color:#b6a882;font-size:11px;letter-spacing:1px;}
+
+/* Type specimen */
+.spec b{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+.spec .pf{font-family:"Playfair Display",serif;font-size:27px;color:#241f18;line-height:1.1;}
+.spec .cg{font-family:"Cormorant Garamond",serif;font-size:19px;color:#3a352c;}
+.spec .po{font-family:"Poiret One",serif;font-size:22px;letter-spacing:4px;color:#241f18;}
+.spec .ss{font-size:14px;color:#3a352c;}
+.spec .row{padding:12px 0;border-bottom:1px solid var(--line);} .spec .row:last-child{border:0;}
+
+/* Colour system */
+.pal{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;}
+.pal + .pal{margin-top:12px;}
+.pal-h{display:flex;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);}
+.pal-h b{font-family:"Playfair Display",serif;font-size:17px;color:#241f18;font-weight:500;}
+.pal-h span{font-size:12px;color:var(--muted);}
+.sw{display:flex;flex-wrap:wrap;}
+.sw i{flex:1 1 90px;min-width:80px;height:64px;position:relative;color:#fff;}
+.sw i s{position:absolute;left:8px;bottom:6px;font-size:10px;font-style:normal;letter-spacing:.3px;font-family:ui-monospace,Menlo,monospace;text-shadow:0 1px 2px rgba(0,0,0,.35);}
+.sw i.dark s{color:#fff;} .sw i.lite s{color:#2a2620;text-shadow:none;}
+
+/* Voice */
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:680px){.dodont{grid-template-columns:1fr;}}
+.do,.dont{border-radius:12px;padding:16px 18px;font-size:14px;}
+.do{background:#eef3e8;border:1px solid #d5e3c6;} .dont{background:#f6ece9;border:1px solid #e8cfc8;}
+.do b,.dont b{display:block;margin-bottom:6px;} .do b{color:#4a6a2f;} .dont b{color:#9a4a3a;}
+.do ul,.dont ul{margin:0;padding-left:18px;} .do li,.dont li{margin-bottom:5px;}
+.quote{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:18px;color:#3a352c;border-left:3px solid var(--gold);padding:2px 0 2px 14px;margin:6px 0;}
+
+/* Tokens */
+.tokens{background:var(--ink);color:#e7dcc4;border-radius:14px;padding:22px 24px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.9;}
+.tokens .k{color:var(--gold);} .tokens h3{color:#b6a882;margin-top:0;}
+.pending{background:#fbf3e0;border:1px solid #ecdcb0;border-radius:10px;padding:12px 16px;font-size:13px;color:#6b5a2e;margin-top:14px;}
+.pending b{color:#8a6d2f;}
+footer{margin-top:50px;text-align:center;color:var(--muted);font-size:12px;}
+</style></head>
+<body>
+<header><div class="head-in">
+  <div class="brandline"><span class="globe-mark"></span><span class="wordmark">THE GLOBE</span></div>
+  <div class="kick">Brand &amp; Marketing Pack · v1</div>
+  <h1>One house. Many lights.<br>All of it, unmistakably The Globe.</h1>
+  <p class="lede">The single reference for how we speak, how we show up and how we look — so every page, post, menu, sign, package and automation reads as one brand: sophisticated, cultural, a place of natural quality. Everything Steve is, this is.</p>
+  <div class="meta">Laugharne · Wine Bar &amp; Restaurant · Bakery · Butchery · House of Culture — the source of truth for Brush, Bob, Nia &amp; every automation.</div>
+</div></header>
+
+<div class="wrap">
+
+  <!-- 1 ESSENCE -->
+  <section>
+    <div class="eyebrow">01 · What the Globe is <span class="n">the essence</span></div>
+    <h2>Laugharne's house of natural quality.</h2>
+    <p class="lead">The Globe is a family of good things made and shared in one town — grown, baked, reared and poured within a few miles of where you're standing. Quietly sophisticated, rooted in Laugharne's culture, and generous to the town it belongs to. Never showy; always real.</p>
+    <div class="values" style="margin-top:16px;">
+      <div class="val"><b>Natural quality</b><span>Provenance-led, no shortcuts. The product is the point.</span></div>
+      <div class="val"><b>Sophisticated, not stiff</b><span>Premium and considered, warmed by the Globe's humour. Never pretentious.</span></div>
+      <div class="val"><b>Cultural &amp; rooted</b><span>Of Laugharne — its history, its estuary, its story. We belong here.</span></div>
+      <div class="val"><b>Generous</b><span>We give the town something, not just sell to it. Community first.</span></div>
+      <div class="val"><b>Honest &amp; named</b><span>We name our suppliers and our place. Few words, well chosen.</span></div>
+      <div class="val"><b>Quietly premium</b><span>Better than everybody — and we let the work say it, not the volume.</span></div>
+    </div>
+    <p style="margin-top:14px;" class="quote">Grown, caught, reared, baked and poured in Laugharne.</p>
+  </section>
+
+  <!-- 2 ARCHITECTURE -->
+  <section>
+    <div class="eyebrow">02 · Brand architecture <span class="n">two tiers, one house</span></div>
+    <h2>The Globe is the house. Each branch gets its own light.</h2>
+    <p>One master identity that never changes; a distinct palette, mood and time-of-day for each branch. Two kinds of member: the things we <b>sell</b> (Globe-first), and the things we <b>give the town</b> (civic, Globe-championed).</p>
+
+    <div class="tierlbl"><b>Tier 1 — what we sell</b> · Globe-first, each its own light</div>
+    <div class="arch">
+      <div class="mini" style="background:#100d0a;color:#f4efe4"><small style="color:#c9a24b">THE GLOBE</small>Wine Bar &amp; Restaurant<em>evening · sleek · candlelit</em></div>
+      <div class="mini" style="background:#f4ecd8;color:#6e4a29;outline:2px solid #7d8a4f;outline-offset:1px"><small style="color:#8a7a3c">THE GLOBE</small>Bakery<em style="color:#7d8a4f;opacity:1">morning · honest · warm</em></div>
+      <div class="mini" style="background:#efe9e0;color:#2c2622"><small style="color:#6b2b2b">THE GLOBE</small>Butchery<em>craft · reared here</em></div>
+      <div class="mini gh" style="background:#ecebe6;color:#6f6a5c"><small style="color:#9a927f">THE GLOBE</small>Deli · Coffee…<em>room to grow</em></div>
+    </div>
+
+    <div class="tierlbl" style="margin-top:16px;"><b>Tier 2 — what we give the town</b> · civic, Globe-championed (softer endorsement)</div>
+    <div class="culture">
+      <div class="ck">brought to you by The Globe</div>
+      <div class="cn">House of Culture</div>
+      <div class="cm">heritage · story · place — for the town &amp; its visitors</div>
+      <div class="chips"><span>Dylan Thomas walks</span><span>Laugharne history</span><span>Interactive town app</span></div>
+    </div>
+    <div class="funnel"><b>The town app is the funnel:</b> walk &amp; discover the town → eat, drink &amp; buy bread at The Globe — how we catch the ~15k Boathouse visitors a year.</div>
+  </section>
+
+  <!-- 3 CONSTANTS -->
+  <section>
+    <div class="eyebrow">03 · The constants <span class="n">what makes it family</span></div>
+    <h2>Five things every branch holds onto.</h2>
+    <div class="two">
+      <div class="card">
+        <h3 style="margin-top:0;">Lockup — Globe first, always</h3>
+        <div class="lockup">
+          <div class="lw">THE GLOBE</div>
+          <div class="lb serif">Bakery</div>
+          <small>THE GLOBE · [BRANCH] — never the branch alone</small>
+        </div>
+        <p style="font-size:13px;color:#5f5a50;margin-top:12px;margin-bottom:0;">The single-line globe mark + wordmark leads everything — page, sign, packaging, van, app. The branch name sits beneath. This is non-negotiable (Phil's rule): the Globe features first on every piece.</p>
+      </div>
+      <div class="card spec">
+        <h3 style="margin-top:0;">Typography — one type family</h3>
+        <div class="row"><b>Display / wordmark — Poiret One</b><div class="po">THE GLOBE</div></div>
+        <div class="row"><b>Headlines — Playfair Display</b><div class="pf">A place of natural quality</div></div>
+        <div class="row"><b>Editorial / menu — Cormorant Garamond</b><div class="cg">Soused Carmarthen Bay mackerel, garden dill</div></div>
+        <div class="row"><b>Body / UI — clean sans</b><div class="ss">Clear, legible, quiet. Never set long copy in hairline weights or all-caps.</div></div>
+      </div>
+    </div>
+    <div class="two" style="margin-top:14px;">
+      <div class="card">
+        <h3 style="margin-top:0;">The gold thread</h3>
+        <p style="font-size:14px;">One warm gold runs through everything — used <b>sparingly</b> as the accent (wordmark, rules, dividers), expressed in each branch's own light (deep on the dark restaurant, wheaten on the bakery). It's the visual signature that ties the family together.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;">Provenance voice &amp; real photography</h3>
+        <p style="font-size:14px;">We speak with named provenance and few, well-chosen words. We show real photographs — one hero, never a collage, natural light, the product and the place doing the talking. <b>Real text, never image-only menus.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 COLOUR -->
+  <section>
+    <div class="eyebrow">04 · Colour system <span class="n">the palettes you approved</span></div>
+    <h2>Master neutrals + a light for each branch.</h2>
+
+    <div class="pal">
+      <div class="pal-h"><b>Master</b><span>the constants — neutrals + the gold thread</span></div>
+      <div class="sw">
+        <i class="dark" style="background:#14110d"><s>#14110D · Ink</s></i>
+        <i class="dark" style="background:#26221c"><s>#26221C · Charcoal</s></i>
+        <i class="lite" style="background:#c9a24b"><s>#C9A24B · Gold*</s></i>
+        <i class="lite" style="background:#f4efe4"><s>#F4EFE4 · Paper</s></i>
+      </div>
+    </div>
+
+    <div class="pal">
+      <div class="pal-h"><b>Wine Bar &amp; Restaurant</b><span>evening · sleek · candlelit</span></div>
+      <div class="sw">
+        <i class="dark" style="background:#100d0a"><s>#100D0A</s></i>
+        <i class="dark" style="background:#26221c"><s>#26221C</s></i>
+        <i class="lite" style="background:#c9a24b"><s>#C9A24B</s></i>
+        <i class="lite" style="background:#f4efe4"><s>#F4EFE4</s></i>
+      </div>
+    </div>
+
+    <div class="pal">
+      <div class="pal-h"><b>Bakery</b><span>morning · honest · warm — daylight palette with a green accent</span></div>
+      <div class="sw">
+        <i class="lite" style="background:#f4ecd8"><s>#F4ECD8 · Cream</s></i>
+        <i class="lite" style="background:#e3c98f"><s>#E3C98F · Wheat</s></i>
+        <i class="dark" style="background:#7d8a4f"><s>#7D8A4F · Green</s></i>
+        <i class="dark" style="background:#6e4a29"><s>#6E4A29 · Crust</s></i>
+      </div>
+    </div>
+
+    <div class="pal">
+      <div class="pal-h"><b>Butchery</b><span>craft · reared here</span></div>
+      <div class="sw">
+        <i class="dark" style="background:#6b2b2b"><s>#6B2B2B · Oxblood</s></i>
+        <i class="lite" style="background:#efe9e0"><s>#EFE9E0 · Marble</s></i>
+        <i class="dark" style="background:#2c2622"><s>#2C2622 · Charcoal</s></i>
+        <i class="lite" style="background:#b08a3e"><s>#B08A3E · Brass</s></i>
+      </div>
+    </div>
+
+    <div class="pal">
+      <div class="pal-h"><b>House of Culture</b><span>heritage · story · place</span></div>
+      <div class="sw">
+        <i class="dark" style="background:#2f3b40"><s>#2F3B40 · Slate</s></i>
+        <i class="dark" style="background:#5b6b6e"><s>#5B6B6E · Estuary</s></i>
+        <i class="lite" style="background:#e8e0cd"><s>#E8E0CD · Aged paper</s></i>
+        <i class="lite" style="background:#c9a24b"><s>#C9A24B · Gold</s></i>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px;">* Globe Gold is the working value pending the final hex from the master brand file — see the note at the foot.</p>
+  </section>
+
+  <!-- 5 VOICE -->
+  <section>
+    <div class="eyebrow">05 · How we speak <span class="n">voice &amp; tone</span></div>
+    <h2>Understated, provenance-led, warm.</h2>
+    <p>Say less, name more. Let the supplier, the place and the dish carry it. Confident without shouting; warm without waffle. The humour of the Globe is welcome; hype never is.</p>
+    <div class="dodont" style="margin-top:12px;">
+      <div class="do"><b>Do</b><ul>
+        <li>Name it — suppliers, town, the maker.</li>
+        <li>Few words, well chosen.</li>
+        <li>Speak of the season and the tide.</li>
+        <li>Be generous and human.</li>
+        <li>Let the photo and the dish talk.</li>
+      </ul></div>
+      <div class="dont"><b>Don't</b><ul>
+        <li>Hype, superlatives or exclamation marks.</li>
+        <li>Corporate or salesy phrasing.</li>
+        <li>Invented heritage or claims we can't prove.</li>
+        <li>Long, hedged sentences.</li>
+        <li>Branch name without "The Globe".</li>
+      </ul></div>
+    </div>
+    <h3>How it sounds in each light</h3>
+    <p class="quote">Restaurant — "Whole Towy sewin, brown butter &amp; cockles. A few weeks each summer. Booked, small, exact."</p>
+    <p class="quote">Bakery — "Bread baked in Laugharne, every morning."</p>
+    <p class="quote">House of Culture — "Walk Dylan's Laugharne. The real places, the real story — with the town as your guide."</p>
+  </section>
+
+  <!-- 6 SHOW UP -->
+  <section>
+    <div class="eyebrow">06 · How we show up <span class="n">photography &amp; feel</span></div>
+    <h2>Real, natural, one hero at a time.</h2>
+    <p>Every branch is shot in its own light and time of day. Real photographs, natural light, texture and provenance — a single hero, never a collage. People and craft where they lift it. No stock, no gloss.</p>
+    <div class="values" style="margin-top:14px;">
+      <div class="val"><b>Restaurant</b><span>Candlelight, evening, the plated dish, the poured glass, wood &amp; low light.</span></div>
+      <div class="val"><b>Bakery</b><span>Morning light, flour, hands, an open crumb, the loaf on linen — warmth &amp; honesty.</span></div>
+      <div class="val"><b>Butchery</b><span>The block, marble, craft at work, provenance — earthy and skilled.</span></div>
+      <div class="val"><b>House of Culture</b><span>Estuary, castle, old map, the walk — Laugharne as place and story.</span></div>
+    </div>
+  </section>
+
+  <!-- 7 LOOK -->
+  <section>
+    <div class="eyebrow">07 · How we look <span class="n">layout &amp; usage rules</span></div>
+    <h2>Legible first, decorative second.</h2>
+    <div class="card">
+      <ul style="margin:0;padding-left:20px;font-size:14px;line-height:1.9;">
+        <li>Globe-first lockup on every piece. The branch name never stands alone.</li>
+        <li>Gold used sparingly — accent, rules, wordmark — not fills.</li>
+        <li>One hero image per piece; generous space; everything on a grid.</li>
+        <li>Real, selectable text for menus and prices — never an image-only menu.</li>
+        <li>Each branch uses its own palette from §04; the master neutrals + gold tie them.</li>
+        <li>Images embedded, not linked (Cloudinary isn't serving publicly yet).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8 USING IT -->
+  <section>
+    <div class="eyebrow">08 · Using this pack <span class="n">marketing plan + automations</span></div>
+    <h2>The source of truth everything references.</h2>
+    <p>This pack sets <b>how we look and sound</b>; the marketing plan sets <b>what we say and when</b>. Every output — post, page, menu, sign, packaging, email, ad — is built to this. Automations pull the brand tokens below (colours, fonts, lockup, voice rules) so templated content stays on-brand without a human re-checking each time.</p>
+    <div class="two" style="margin-top:12px;">
+      <div class="card"><h3 style="margin-top:0;">Who builds to it</h3><p style="font-size:14px;margin-bottom:0;">The desk sets the system. <b>Brush</b> designs pieces to it. <b>Bob</b> builds web to it. <b>Nia</b> posts &amp; advertises to it. <b>Mererid</b> keeps the culture layer true. Nobody invents a new look — they express this one.</p></div>
+      <div class="card"><h3 style="margin-top:0;">The automation rule</h3><p style="font-size:14px;margin-bottom:0;">Any automated output loads the tokens + the branch's palette + the voice do/don'ts, applies the Globe-first lockup, and references the marketing plan for timing &amp; message. On-brand by default.</p></div>
+    </div>
+
+    <h3>Brand tokens — quick reference</h3>
+    <div class="tokens">
+      <h3>COLOUR</h3>
+      <div><span class="k">master</span> ink #14110D · charcoal #26221C · gold #C9A24B* · paper #F4EFE4</div>
+      <div><span class="k">restaurant</span> #100D0A · #26221C · #C9A24B · #F4EFE4</div>
+      <div><span class="k">bakery</span> cream #F4ECD8 · wheat #E3C98F · green #7D8A4F · crust #6E4A29</div>
+      <div><span class="k">butchery</span> oxblood #6B2B2B · marble #EFE9E0 · charcoal #2C2622 · brass #B08A3E</div>
+      <div><span class="k">culture</span> slate #2F3B40 · estuary #5B6B6E · aged #E8E0CD · gold #C9A24B</div>
+      <h3 style="margin-top:14px;">TYPE</h3>
+      <div><span class="k">display</span> Poiret One &nbsp; <span class="k">headline</span> Playfair Display &nbsp; <span class="k">editorial</span> Cormorant Garamond &nbsp; <span class="k">body</span> system sans</div>
+      <h3 style="margin-top:14px;">RULES</h3>
+      <div><span class="k">lockup</span> "THE GLOBE" first, branch name beneath — always</div>
+      <div><span class="k">gold</span> accent only, sparingly &nbsp; <span class="k">images</span> embedded, one hero, real</div>
+      <div><span class="k">voice</span> named provenance · few words · no hype · no invented heritage</div>
+    </div>
+
+    <div class="pending"><b>Pending — confirm before final master:</b> the exact <b>Globe Gold hex</b> (working value #C9A24B) and the <b>master logo files</b>. Once confirmed, re-master pixel-exact. The bakery product photography (Lowri) and a warm evening interior + garden shoot are the outstanding image gaps.</div>
+  </section>
+
+  <footer>The Globe — Brand &amp; Marketing Pack · v1 · the source of truth for how we speak, show up &amp; look.</footer>
+</div>
+</body></html>

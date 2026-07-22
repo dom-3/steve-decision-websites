@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Globe — Operating Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;
+        --warm:#8a5a2b;--blue:#2b4a6b;--red:#a8412f;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 30px;}
+  header .inner{max-width:1040px;margin:0 auto;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:32px;margin:8px 0 6px;}
+  header p{max-width:680px;color:#e6dcc8;font-size:14.5px;margin:0;}
+  .back{display:inline-block;margin:16px 0 0;color:#d8c9a8;font-size:12.5px;text-decoration:none;}
+  .back:hover{color:#fff;}
+  .out{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 2px;}
+  .ot{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 16px;}
+  .ot b{display:block;font-family:Georgia,serif;font-size:26px;color:#fff;line-height:1.1;}
+  .ot .r{color:#f0c9ba;} .ot span{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#d8c9a8;}
+  @media(max-width:640px){.out{grid-template-columns:repeat(2,1fr);}}
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  h2 .z{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;text-align:center;line-height:22px;margin-right:8px;font-family:"Helvetica Neue",Arial,sans-serif;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 3px 12px rgba(20,50,45,.06);}
+  .grid{display:grid;gap:14px;} .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));} .g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));} .g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+  /* unit tiles */
+  .units{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:16px;}
+  .unit{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:12px;padding:15px 16px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .unit:hover{border-color:var(--green);} .unit.bk{border-left-color:var(--warm);} .unit.pl{border-left-color:var(--line);opacity:.85;}
+  .unit b{display:block;font-family:Georgia,serif;font-size:17px;color:var(--dark);} .unit span{font-size:12px;color:var(--muted);}
+  .utag{font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#eef4f0;color:var(--green);}
+  .utag.warm{background:#f6efe5;color:var(--warm);} .utag.plan{background:#eef1ee;color:var(--muted);}
+  .ucard{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:14px;padding:18px 20px;box-shadow:0 3px 12px rgba(20,50,45,.06);margin-top:14px;}
+  .ucard.bk{border-left-color:var(--warm);}
+  .ucard .uh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;} .ucard h3{font-family:Georgia,serif;font-size:20px;margin:0;color:var(--dark);}
+  .ucard .ust{font-size:13.5px;color:#3a4a47;margin:8px 0 6px;} .ucard .ust b{color:var(--dark);}
+  .stage{display:flex;gap:6px;align-items:center;margin:8px 0 14px;flex-wrap:wrap;} .stage .seg{display:flex;align-items:center;gap:6px;}
+  .sdot{width:11px;height:11px;border-radius:50%;background:#dfe6e2;border:2px solid #dfe6e2;}
+  .sdot.done{background:var(--green);border-color:var(--green);} .sdot.now{background:#fff;border-color:var(--green);box-shadow:0 0 0 3px rgba(31,92,77,.15);}
+  .ucard.bk .sdot.done{background:var(--warm);border-color:var(--warm);} .ucard.bk .sdot.now{border-color:var(--warm);box-shadow:0 0 0 3px rgba(138,90,43,.15);}
+  .slab{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);} .slab.on{color:var(--dark);font-weight:700;}
+  .links{display:flex;gap:8px;flex-wrap:wrap;}
+  .lk{text-decoration:none;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:8px;background:#f3f6f4;color:var(--green);border:1px solid var(--line);}
+  .lk:hover{background:var(--green);color:#fff;border-color:var(--green);} .lk.solid{background:var(--green);color:#fff;border-color:var(--green);}
+  .ucard.bk .lk{color:var(--warm);} .ucard.bk .lk:hover{background:var(--warm);color:#fff;border-color:var(--warm);} .ucard.bk .lk.solid{background:var(--warm);border-color:var(--warm);color:#fff;}
+  /* kpi */
+  .kpi .lab{font-size:12px;color:var(--muted);margin-bottom:7px;} .kpi .val{font-family:Georgia,serif;font-size:24px;color:var(--dark);} .kpi .foot{font-size:11.5px;color:var(--muted);margin-top:6px;}
+  .pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:20px;}
+  .pill.red{background:#f6e4de;color:var(--red);} .pill.grn{background:#e4efe8;color:var(--green);} .pill.amb{background:#f6efe0;color:var(--warm);}
+  .connect{font-size:10px;color:#9aa8a2;border:1px dashed #cfd8d4;border-radius:6px;padding:1px 6px;}
+  .meter{position:relative;height:15px;background:#eef1ee;border:1px solid var(--line);border-radius:9px;margin:14px 0 8px;}
+  .meter .fill{position:absolute;left:0;top:0;height:100%;background:var(--green);border-radius:9px 0 0 9px;}
+  .meter .mk{position:absolute;top:-6px;height:27px;width:2px;}
+  .mrow{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);}
+  .chip{background:#f7faf8;border:1px solid var(--line);border-radius:9px;padding:9px 12px;text-align:center;}
+  .chip .cl{font-size:10.5px;color:var(--muted);} .chip .cv{font-family:Georgia,serif;font-size:18px;color:var(--dark);margin-top:2px;}
+  .bar-row{display:flex;align-items:center;gap:10px;margin:7px 0;} .bar-row .nm{width:120px;font-size:13px;}
+  .bar-row .tr{flex:1;height:13px;background:#eef1ee;border-radius:4px;overflow:hidden;} .bar-row .fl{height:100%;background:var(--gold);} .bar-row .vl{width:54px;text-align:right;font-size:12px;color:var(--muted);}
+  table{width:100%;border-collapse:collapse;font-size:13px;} td,th{text-align:left;padding:7px 4px;border-bottom:1px solid var(--line);} th{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);} .rt{text-align:right;}
+  .act{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);} .act:last-child{border-bottom:0;}
+  .who{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:6px;white-space:nowrap;height:fit-content;}
+  .who.steve{background:#eef4f0;color:var(--green);} .who.alys{background:#f6efe5;color:var(--warm);} .who.dom{background:#eef2f7;color:var(--blue);}
+  .act .txt{font-size:13px;} .act .txt small{color:var(--muted);display:block;font-size:11.5px;}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-bottom:8px;} .legend span{display:flex;align-items:center;gap:5px;} .sw{width:11px;height:11px;border-radius:3px;}
+  /* ---- Finances panel ---- */
+  :root{--rag-grn:#1f5c4d;--rag-amb:#c98a2b;--rag-red:#a8412f;}
+  .fin-note{font-size:11.5px;color:var(--muted);background:#f7faf8;border:1px dashed #cfd8d4;border-radius:8px;padding:8px 12px;margin-top:10px;}
+  .gauges{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
+  .gauge{text-align:center;}
+  .gauge .gwrap{position:relative;width:180px;height:104px;margin:2px auto 0;}
+  .gauge .gval{font-family:Georgia,serif;font-size:30px;line-height:1;margin-top:-6px;}
+  .gauge .glab{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .gauge .gtar{font-size:11px;color:var(--muted);margin-top:3px;}
+  .ragpill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 9px;border-radius:20px;margin-top:6px;}
+  .ragpill.grn{background:#e4efe8;color:var(--rag-grn);} .ragpill.amb{background:#f6efdf;color:var(--rag-amb);} .ragpill.red{background:#f6e4de;color:var(--rag-red);}
+  .be-meter{position:relative;height:20px;background:#eef1ee;border:1px solid var(--line);border-radius:11px;margin:16px 0 8px;overflow:visible;}
+  .be-meter .fill{position:absolute;left:0;top:0;height:100%;border-radius:11px 0 0 11px;}
+  .be-meter .goal{position:absolute;top:-7px;height:34px;width:2px;background:var(--dark);}
+  .be-meter .goal b{position:absolute;top:-17px;left:50%;transform:translateX(-50%);white-space:nowrap;font-family:"Helvetica Neue",Arial,sans-serif;font-size:10px;font-weight:700;color:var(--dark);}
+  .imp{margin-top:14px;}
+  .imp textarea{width:100%;min-height:82px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink);resize:vertical;background:#fcfdfc;}
+  .imp .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px;align-items:center;}
+  .btn{cursor:pointer;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:#f3f6f4;color:var(--green);}
+  .btn:hover{background:var(--green);color:#fff;border-color:var(--green);}
+  .btn.solid{background:var(--green);color:#fff;border-color:var(--green);} .btn.solid:hover{background:var(--dark);}
+  .btn.ghost{background:#fff;color:var(--muted);} .btn.ghost:hover{background:#f6e4de;color:var(--red);border-color:#e6cabf;}
+  .imp .msg{font-size:12px;margin-left:2px;} .imp .msg.ok{color:var(--green);} .imp .msg.err{color:var(--red);}
+  .imp details{margin-top:10px;} .imp summary{cursor:pointer;font-size:12px;color:var(--green);font-weight:700;}
+  .imp code{background:#eef4f0;border-radius:4px;padding:1px 5px;font-size:12px;}
+  .fin-tbl td.rt,.fin-tbl th.rt{text-align:right;} .fin-tbl .neg{color:var(--red);} .fin-tbl .pos{color:var(--green);}
+  /* ---- Compliance panel ---- */
+  .src{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid var(--line);}
+  .src .dot{width:8px;height:8px;border-radius:50%;} .src.live{background:#e4efe8;color:var(--green);} .src.live .dot{background:var(--green);}
+  .src.samp{background:#f6efe0;color:var(--warm);} .src.samp .dot{background:var(--warm);border:1px solid #fff;box-shadow:0 0 0 1px var(--warm);}
+  .redband{background:#fbeee9;border:1px solid #e6c3b8;border-left:6px solid var(--red);border-radius:14px;padding:16px 18px;margin-top:6px;}
+  .redband .rh{display:flex;align-items:center;gap:9px;font-family:Georgia,serif;font-size:17px;color:var(--red);margin-bottom:3px;}
+  .redband .rh .ico{font-size:18px;} .redband .rsub{font-size:12px;color:#8a4a3a;margin-bottom:12px;}
+  .flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;}
+  .flag-c{background:#fff;border:1px solid #e6c3b8;border-radius:11px;padding:12px 14px;}
+  .flag-c b{display:block;font-family:Georgia,serif;font-size:14.5px;color:var(--dark);line-height:1.25;}
+  .flag-c .why{font-size:11.5px;color:#7a5248;margin:5px 0 8px;}
+  .flag-c .mt{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+  .rag3{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:4px;}
+  @media(max-width:640px){.rag3{grid-template-columns:repeat(2,1fr);}}
+  .ragc{border-radius:12px;padding:14px 16px;border:1px solid var(--line);background:#fff;}
+  .ragc b{display:block;font-family:Georgia,serif;font-size:30px;line-height:1;} .ragc span{font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);}
+  .ragc.g{border-top:4px solid var(--green);} .ragc.g b{color:var(--green);}
+  .ragc.a{border-top:4px solid var(--warm);} .ragc.a b{color:var(--warm);}
+  .ragc.r{border-top:4px solid var(--red);} .ragc.r b{color:var(--red);}
+  .ragc.n{border-top:4px solid #b9c3bf;} .ragc.n b{color:var(--muted);}
+  .ragbar{display:flex;height:14px;border-radius:7px;overflow:hidden;border:1px solid var(--line);margin:14px 0 4px;}
+  .ragbar i{display:block;height:100%;}
+  .cst{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.3px;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+  .cst.g{background:#e4efe8;color:var(--green);} .cst.a{background:#f6efe0;color:var(--warm);} .cst.r{background:#f6e4de;color:var(--red);} .cst.n{background:#eef1ee;color:var(--muted);}
+  .risk{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 7px;border-radius:5px;white-space:nowrap;}
+  .risk.C{background:#f6e0d9;color:var(--red);} .risk.H{background:#f6ece0;color:#9a5a26;} .risk.M{background:#eef1ee;color:var(--muted);}
+  .ctag{font-size:9.5px;font-weight:700;letter-spacing:.3px;padding:2px 8px;border-radius:20px;background:#eef4f0;color:var(--green);white-space:nowrap;}
+  .cwrap{max-height:430px;overflow:auto;border:1px solid var(--line);border-radius:12px;}
+  .ctbl{width:100%;border-collapse:collapse;font-size:12.5px;} .ctbl th,.ctbl td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .ctbl th{position:sticky;top:0;background:#f3f6f4;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);z-index:1;}
+  .ctbl tr:hover td{background:#f9fbfa;} .ctbl .ob{font-weight:700;color:var(--dark);} .ctbl .ev{color:#4a5a56;font-size:11.5px;}
+  .ctbl .due{white-space:nowrap;} .ctbl .due.over{color:var(--red);font-weight:700;} .ctbl .due.soon{color:var(--warm);font-weight:700;} .ctbl .due.none{color:#9aa8a2;}
+  .filt{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 12px;}
+  .filt button{cursor:pointer;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:20px;border:1px solid var(--line);background:#fff;color:var(--muted);}
+  .filt button.on{background:var(--green);color:#fff;border-color:var(--green);}
+</style></head><body>
+<header><div class="inner">
+  <div class="kicker">Private &middot; The Globe — Operating Platform</div>
+  <h1>The Globe · Operating Dashboard</h1>
+  <p>One building, one system. The wine bar and a short, seasonal menu — a couple of things done brilliantly, driven by what's ready that week — with the bakery, deli, butcher and coffee shop growing in behind it. This is the CEO view: the numbers, the model, the message and the moves, on one screen.</p>
+  <a class="back" href="index.html">← Back to the Working Dashboard</a>
+  <div class="out">
+    <div class="ot"><b>£17,609</b><span>June revenue</span></div>
+    <div class="ot"><b>51% · 49%</b><span>Bar · Food</span></div>
+    <div class="ot"><b>~13</b><span>Covers / night</span></div>
+    <div class="ot"><b class="r">~124%</b><span>Labour % of sales</span></div>
+  </div>
+</div></header>
+<div class="wrap">
+
+  <h2>The units — one operation, many doors</h2>
+  <p class="sub">The two parts are now one operation, but the work on each is kept intact — right here behind its own buttons.</p>
+
+  <div class="ucard">
+    <div class="uh"><h3>Globe bar &amp; kitchen</h3><span class="utag">Live</span></div>
+    <div class="ust"><b>Choose the look, then go live.</b> Wine-led, with a short seasonal menu — a couple of things done brilliantly. Build ready; awaiting sign-off, then the domain flip.</div>
+    <div class="stage">
+      <div class="seg"><span class="sdot done"></span><span class="slab">Research</span></div>
+      <div class="seg"><span class="sdot done"></span><span class="slab">Strategy</span></div>
+      <div class="seg"><span class="sdot now"></span><span class="slab on">Build</span></div>
+      <div class="seg"><span class="sdot"></span><span class="slab">Launch</span></div>
+      <div class="seg"><span class="sdot"></span><span class="slab">Grow</span></div>
+    </div>
+    <div class="links">
+      <a class="lk solid" href="globe-plan.html">The Globe · one-brand plan</a>
+      <a class="lk" href="timelines.html">Timeline</a>
+    </div>
+  </div>
+
+  <div class="ucard bk">
+    <div class="uh"><h3>The Globe Bakery</h3><span class="utag warm">Live first</span></div>
+    <div class="ust"><b>In build.</b> Bread-first plan set, meeting logged, prototype built, brand direction chosen (Honest Loaf). Opening late July; pricing to confirm.</div>
+    <div class="stage">
+      <div class="seg"><span class="sdot done"></span><span class="slab">Research</span></div>
+      <div class="seg"><span class="sdot done"></span><span class="slab">Strategy</span></div>
+      <div class="seg"><span class="sdot now"></span><span class="slab on">Build</span></div>
+      <div class="seg"><span class="sdot"></span><span class="slab">Launch</span></div>
+      <div class="seg"><span class="sdot"></span><span class="slab">Grow</span></div>
+    </div>
+    <div class="links">
+      <a class="lk solid" href="bakery-plan.html">The plan</a>
+      <a class="lk" href="bakery-concepts.html">Brand directions</a>
+      <a class="lk" href="bakery-prototype.html">Prototype</a>
+      <a class="lk" href="bakery-architecture.html">Architecture</a>
+      <a class="lk" href="bakery.html">Comparables</a>
+      <a class="lk" href="timelines.html#bakery">Timeline</a>
+      <a class="lk" href="photo-drop.html">📸 Photo drop</a>
+    </div>
+  </div>
+
+  <p class="sub" style="margin-top:22px;margin-bottom:0">Growing in behind:</p>
+  <div class="units">
+    <div class="unit pl"><b>Deli &amp; delicacies</b><span>Local produce to take home</span><br><span class="utag plan">Planned</span></div>
+    <div class="unit pl"><b>Butcher</b><span>Welsh meat, named farms</span><br><span class="utag plan">Planned</span></div>
+    <div class="unit pl"><b>Coffee shop</b><span>Day trade · the front door</span><br><span class="utag plan">Planned</span></div>
+  </div>
+
+  <h2><span class="z">1</span>Trading — the money at a glance</h2>
+  <p class="sub">Last full month: June 2026 · from the itemised till reports (May–Jul).</p>
+  <div class="grid g4">
+    <div class="card kpi"><div class="lab">Monthly revenue (inc VAT)</div><div class="val">£17,609</div><div class="foot">May £18,321 · Jul £10.1k (to 20th)</div></div>
+    <div class="card kpi"><div class="lab">Avg spend / head <span class="connect">est</span></div><div class="val">~£38</div><div class="foot">target £75+</div></div>
+    <div class="card kpi"><div class="lab">Dining covers / night</div><div class="val">~13</div><div class="foot">tiny volume = the opportunity</div></div>
+    <div class="card kpi"><div class="lab">Labour % of sales</div><div class="val" style="color:var(--red)">~124%</div><div class="foot"><span class="pill red">healthy &lt;35%</span></div></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <div class="legend"><span><span class="sw" style="background:#1f5c4d"></span>Bar</span><span><span class="sw" style="background:#b07d2b"></span>Food</span></div>
+    <div style="position:relative;height:210px"><canvas id="rev"></canvas></div>
+  </div>
+
+  <h2>Finances — monthly management accounts</h2>
+  <p class="sub">Reads the month's figures from the management accounts (the <b>Monthly Accounts</b> tab of <i>The Globe — Financial Model &amp; Targets</i>, filled by the accounts team). Corrected cost base: rent £0, electricity ~£14k/yr, insurance ~£1.9k, rates provision ~£6k. All figures ex-VAT. <b>Latest month: <span id="finLatest">—</span>.</b></p>
+
+  <div class="grid g3">
+    <div class="card gauge">
+      <div class="glab">Cost of goods (COGS)</div>
+      <div class="gwrap"><canvas id="gCogs" width="180" height="104"></canvas></div>
+      <div class="gval" id="cogsVal">—</div>
+      <div class="gtar">Target ≤ 30% of net sales</div>
+      <div id="cogsPill" class="ragpill">—</div>
+    </div>
+    <div class="card gauge">
+      <div class="glab">Labour</div>
+      <div class="gwrap"><canvas id="gLab" width="180" height="104"></canvas></div>
+      <div class="gval" id="labVal">—</div>
+      <div class="gtar">Target ≤ 32% of net sales</div>
+      <div id="labPill" class="ragpill">—</div>
+    </div>
+    <div class="card">
+      <div style="font-size:12.5px;color:var(--muted)">Break-even vs run-rate <span style="font-size:11px">(annualised, ex VAT)</span></div>
+      <div class="be-meter">
+        <div class="fill" id="beFill" style="width:0%;background:var(--gold)"></div>
+        <div class="goal" id="beGoal" style="left:100%"><b>Break-even £236k</b></div>
+      </div>
+      <div class="mrow"><span>Run-rate <b id="beRun" style="color:var(--dark)">—</b></span><span id="beGap" style="color:var(--red)">—</span></div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:10px">Run-rate = last 3 months' net sales, annualised. Close the gap with covers &amp; average spend — the model on the right.</div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card">
+      <div class="legend"><span><span class="sw" style="background:#1f5c4d"></span>Income</span><span><span class="sw" style="background:#b07d2b"></span>Total costs</span><span><span class="sw" style="background:#a8412f"></span>Net</span></div>
+      <div style="position:relative;height:220px"><canvas id="finBars"></canvas></div>
+    </div>
+    <div class="card">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:6px">Loss-closing trend — net profit / (loss) by month</div>
+      <div style="position:relative;height:220px"><canvas id="finTrend"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <table class="fin-tbl"><thead><tr>
+      <th>Month</th><th class="rt">Net sales</th><th class="rt">COGS</th><th class="rt">Labour</th><th class="rt">Overheads</th><th class="rt">Total costs</th><th class="rt">Net</th><th class="rt">COGS%</th><th class="rt">Labour%</th>
+    </tr></thead><tbody id="finRows"></tbody></table>
+  </div>
+
+  <div class="card imp" style="margin-top:14px">
+    <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px"><b style="color:var(--dark)">Drop in the month's figures.</b> Paste one line per month — copy the row straight from the Monthly Accounts tab, or type CSV. Existing months with the same label are updated.</div>
+    <textarea id="finPaste" placeholder="month, net_sales, cogs, labour, overheads
+2026-07, 12250, 3800, 15100, 2050"></textarea>
+    <div class="btns">
+      <button class="btn solid" id="finImport">Import / update months</button>
+      <button class="btn" id="finCopy">Copy all as CSV</button>
+      <button class="btn ghost" id="finReset">Reset to accounts</button>
+      <span class="msg" id="finMsg"></span>
+    </div>
+    <details>
+      <summary>Format &amp; how the auto-pull will work</summary>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6">
+        Columns: <code>month, net_sales, cogs, labour, overheads</code> — all ex-VAT in £ (commas, £ signs and a header row are ignored; tab-separated paste from Excel works too). <code>month</code> can be <code>2026-07</code> or <code>Jul 2026</code>. Overheads = everything below the line (electricity, insurance, rates, R&amp;M, marketing, etc.). Net and the % gauges are worked out for you.<br><br>
+        <b>Later, automatic:</b> the data loads through one function, <code>loadMonths()</code>. Today it returns the accounts baked in here plus anything pasted (kept in this browser). To pull live, point it at <code>/api/finance</code> (a serverless function reading the Monthly Accounts tab) — the panel below doesn't change.
+      </div>
+    </details>
+  </div>
+
+  <h2><span class="z">2</span>The model &amp; targets — low volume, high value</h2>
+  <p class="sub">The Paternoster discipline: fewer covers, higher value, seasonal, award-standard.</p>
+  <div class="grid g2">
+    <div class="card">
+      <div style="font-size:12.5px;color:var(--muted)">Covers per night — you don't need many</div>
+      <div class="meter"><div class="fill" style="width:37%"></div><div class="mk" style="left:48%;background:var(--dark)"></div><div class="mk" style="left:57%;background:var(--gold)"></div></div>
+      <div class="mrow"><span>Now ~13</span><span style="color:var(--dark)">Break-even 17</span><span style="color:var(--gold)">Target 20</span></div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:10px">At £75/head &amp; lean staffing. Higher spend = lower break-even. Add ~7 covers a night and reprice — that's the whole gap.</div>
+    </div>
+    <div class="card">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">Target model KPIs</div>
+      <div class="grid" style="grid-template-columns:repeat(2,1fr);gap:10px">
+        <div class="chip"><div class="cl">Covers / night</div><div class="cv">20</div></div>
+        <div class="chip"><div class="cl">Avg spend / head</div><div class="cv">£75</div></div>
+        <div class="chip"><div class="cl">Gross margin</div><div class="cv">68%+</div></div>
+        <div class="chip"><div class="cl">Local / organic</div><div class="cv">60%+</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <div style="font-size:12.5px;color:var(--muted);margin-bottom:12px">Turnaround position (annual, ex VAT)</div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px">
+      <div class="chip" style="border-color:#e6cabf"><div class="cl">Now</div><div class="cv" style="color:var(--red)">−£156k</div></div>
+      <div class="chip"><div class="cl">Break-even at</div><div class="cv">~£308k rev</div></div>
+      <div class="chip" style="border-color:#cfe0d5"><div class="cl">Target (20 @ £75)</div><div class="cv" style="color:var(--green)">+£37k</div></div>
+    </div>
+  </div>
+
+  <h2><span class="z">3</span>Menu &amp; product — what sells</h2>
+  <p class="sub">Keep the proven winners, cut the tail, elevate with local sourcing.</p>
+  <div class="grid g2">
+    <div class="card">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">Top dishes by revenue (May–Jul)</div>
+      <div id="dishes"></div>
+    </div>
+    <div class="card">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">Food category mix (3-month £)</div>
+      <div id="cats"></div>
+      <div style="margin-top:14px;border-top:1px solid var(--line);padding-top:12px">
+        <span class="pill amb">Wine &amp; drinks = 50% of all sales</span>
+        <div style="color:var(--muted);font-size:11.5px;margin-top:8px">Your strongest, highest-margin lane. Build the identity here.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="z">4</span>Reputation &amp; reach — where marketing ties in</h2>
+  <p class="sub">One message, every channel: real, seasonal, from Laugharne.</p>
+  <div class="grid g4">
+    <div class="card kpi"><div class="lab">Dexter's (Brown's) rating</div><div class="val">4.7 ★</div><div class="foot">249 reviews — the one to beat</div></div>
+    <div class="card kpi"><div class="lab">The Globe rating <span class="connect">connect</span></div><div class="val" style="color:var(--muted)">—</div><div class="foot">pull Google/TripAdvisor live</div></div>
+    <div class="card kpi"><div class="lab">Website visitors <span class="connect">connect</span></div><div class="val" style="color:var(--muted)">—</div><div class="foot">once live + analytics</div></div>
+    <div class="card kpi"><div class="lab">Social following <span class="connect">connect</span></div><div class="val" style="color:var(--muted)">—</div><div class="foot">IG + FB combined</div></div>
+  </div>
+  <div class="card" style="margin-top:14px;font-size:12.5px;color:var(--muted)">
+    The gap you own: nobody in Laugharne offers wine-led, seasonal, local-organic dining. Marketing points every channel at one message — <b style="color:var(--ink)">"The Globe — Laugharne's wine bar &amp; seasonal table."</b>
+    <div style="margin-top:12px"><a href="globe-customers.html" style="display:inline-block;background:var(--gold);color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:8px;">👥 See the four customer profiles →</a></div>
+  </div>
+
+  <h2><span class="z">5</span>Sourcing — the provenance story, measured</h2>
+  <p class="sub">Off Castell Howell and onto named west Wales producers.</p>
+  <div class="card">
+    <div style="font-size:12.5px;color:var(--muted)">Local / organic sourcing — target 60%+</div>
+    <div class="meter"><div class="fill" style="width:8%;background:var(--gold)"></div></div>
+    <div class="mrow"><span>Now: mostly Castell Howell (broadline)</span><span style="color:var(--gold)">Target 60%+ local/organic</span></div>
+    <table style="margin-top:14px">
+      <tr><th>Priority supplier</th><th>Supplies</th><th>Dist</th><th class="rt">Status</th></tr>
+      <tr><td>Eynon's of St Clears</td><td>Welsh beef, lamb, pork</td><td>3 mi</td><td class="rt"><span class="pill amb">to approach</span></td></tr>
+      <tr><td>C&amp;M Organics</td><td>Organic veg (wholesale)</td><td>7 mi</td><td class="rt"><span class="pill amb">to approach</span></td></tr>
+      <tr><td>Albatross Fisheries</td><td>Fish &amp; shellfish</td><td>14 mi</td><td class="rt"><span class="pill amb">to approach</span></td></tr>
+      <tr><td>Penclawdd Shellfish</td><td>Mussels, cockles, laver</td><td>35 mi</td><td class="rt"><span class="pill amb">to approach</span></td></tr>
+    </table>
+  </div>
+
+  <h2><span class="z">6</span>Decisions &amp; actions — what's waiting on who</h2>
+  <p class="sub">The live calls that unblock the next step.</p>
+  <div class="card">
+    <div class="act"><span class="who steve">Steve</span><div class="txt">Bakery payments processor + which bank account<small>Gates the bakery pre-order going live</small></div></div>
+    <div class="act"><span class="who steve">Steve</span><div class="txt">Sign-off + Globe Gold hex + Alice's prices<small>Last placeholders before publish</small></div></div>
+    <div class="act"><span class="who steve">Steve</span><div class="txt">Domain access (IONOS) to flip the site<small>The literal last step to go live</small></div></div>
+    <div class="act"><span class="who alys">Alys</span><div class="txt">Menu costings + supplier list<small>Unlocks true dish margins here</small></div></div>
+    <div class="act"><span class="who dom">Dominic</span><div class="txt">Approve low-volume/high-value model + book supplier calls<small>Eynon's, C&amp;M, Albatross</small></div></div>
+  </div>
+
+  <h2 id="compliance"><span class="z">7</span>Compliance — Karen's register, in the operating view</h2>
+  <p class="sub">Karen keeps the full legal &amp; safety register in a separate base (<b>The Globe — Compliance Register</b>). This surfaces it here so management sees the risk in one place — what's covered, what's due, who owns it, and the checks logged. <span id="compSrc" class="src samp"><span class="dot"></span>loading…</span></p>
+
+  <div class="redband">
+    <div class="rh"><span class="ico">⚠️</span> Prosecutable / insurance-invalidating — fix these first</div>
+    <div class="rsub">Trading without any of these can mean prosecution or a voided insurance claim. Gas CP42, the hygiene-rating display and Employers' Liability sit here by law.</div>
+    <div class="flags" id="compFlags"></div>
+  </div>
+
+  <h2 style="font-size:16px;border:0;margin:24px 0 2px;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:.3px;text-transform:uppercase">At a glance</h2>
+  <div class="rag3">
+    <div class="ragc g"><b id="ragG">–</b><span>Have — verified</span></div>
+    <div class="ragc a"><b id="ragA">–</b><span>Confirm w/ Steve/Alys</span></div>
+    <div class="ragc r"><b id="ragR">–</b><span>Gap — action needed</span></div>
+    <div class="ragc n"><b id="ragN">–</b><span>N/A · uncategorised</span></div>
+  </div>
+  <div class="ragbar" id="ragBar"></div>
+  <div class="mrow" style="font-size:11.5px"><span id="ragTotal">–</span><span id="ragCrit" style="color:var(--red)">–</span></div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px">What's due next <span style="font-size:11px">· soonest first</span></div>
+      <div class="cwrap" style="max-height:340px"><table class="ctbl"><thead><tr>
+        <th>Obligation</th><th>Cadence</th><th>Next due</th><th>Owner</th><th>Status</th></tr></thead>
+        <tbody id="compDue"></tbody></table></div>
+    </div>
+    <div class="card">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px">Audit trail — checks logged <span id="logBadge" class="src samp" style="font-size:10px;padding:2px 8px"><span class="dot"></span>sample</span></div>
+      <div class="cwrap" style="max-height:340px"><table class="ctbl"><thead><tr>
+        <th>Date</th><th>Check</th><th>By</th><th>Result</th></tr></thead>
+        <tbody id="compLog"></tbody></table></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px">Logs Karen's dated checks (fire tests, temperature diaries, certificate renewals). Live once the <code style="background:#eef4f0;border-radius:4px;padding:1px 5px">Check Log</code> table is connected.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div style="font-size:12.5px;color:var(--muted)">Full register — owner &amp; evidence <span id="regCount" style="font-size:11px"></span></div>
+    </div>
+    <div class="filt" id="compFilt">
+      <button data-f="all" class="on">All</button>
+      <button data-f="critical">Critical only</button>
+      <button data-f="Food Safety">Food Safety</button>
+      <button data-f="Alcohol Licensing">Alcohol</button>
+      <button data-f="Fire Safety">Fire</button>
+      <button data-f="Gas &amp; Electrical">Gas &amp; Elec</button>
+      <button data-f="Employment">Employment</button>
+      <button data-f="Insurance">Insurance</button>
+    </div>
+    <div class="cwrap"><table class="ctbl"><thead><tr>
+      <th>Obligation</th><th>Category</th><th>Risk</th><th>Owner</th><th>Evidence required</th><th>Status</th></tr></thead>
+      <tbody id="compReg"></tbody></table></div>
+  </div>
+
+  <p class="sub" style="margin-top:14px;font-size:11.5px">Source of truth stays in Karen's Airtable base — this is a read-only mirror. Set <code style="background:#eef4f0;border-radius:4px;padding:1px 5px">COMPLIANCE_BASE</code> + <code style="background:#eef4f0;border-radius:4px;padding:1px 5px">AIRTABLE_TOKEN</code> in Vercel to switch the badge above to live.</p>
+
+  <h2>The full operating manual — everything to run the bar</h2>
+  <p class="sub">The platform grows to cover the lot, from takings to rotas to tax. Green = started, the rest build in from here.</p>
+  <div class="units">
+    <div class="unit"><b>Sales &amp; finance</b><span>Takings, break-even, P&amp;L</span><br><span class="utag">Started</span></div>
+    <div class="unit"><b>Menu &amp; recipes</b><span>Dishes, costs, margins</span><br><span class="utag">Started</span></div>
+    <div class="unit"><b>Suppliers &amp; sourcing</b><span>Local/organic, ordering</span><br><span class="utag">Started</span></div>
+    <div class="unit"><b>Marketing &amp; audience</b><span>Who we're for, the message</span><br><span class="utag">Started</span></div>
+    <div class="unit"><b>Website &amp; SEO</b><span>The sites, getting found</span><br><span class="utag">Started</span></div>
+    <div class="unit"><b>Reviews &amp; reputation</b><span>Google, TripAdvisor</span><br><span class="utag">Started</span></div>
+    <div class="unit pl"><b>Socials &amp; content</b><span>Posts, calendar, reach</span><br><span class="utag plan">Planned</span></div>
+    <div class="unit pl"><b>Bookings &amp; covers</b><span>ResOS, table management</span><br><span class="utag plan">Planned</span></div>
+    <div class="unit pl"><b>Stock &amp; ordering</b><span>Levels, waste, GP control</span><br><span class="utag plan">Planned</span></div>
+    <div class="unit pl"><b>Staff &amp; rota</b><span>Shifts, hours, labour %</span><br><span class="utag plan">Planned</span></div>
+    <div class="unit pl"><b>Payroll &amp; HR</b><span>Contracts, training, holiday</span><br><span class="utag plan">Planned</span></div>
+    <div class="unit pl"><b>Tax &amp; accounts</b><span>VAT, bookkeeping, year-end</span><br><span class="utag plan">Planned</span></div>
+    <a class="unit" href="#compliance"><b>Compliance &amp; food safety</b><span>EHO, allergens, HACCP</span><br><span class="utag">Started</span></a>
+    <div class="unit pl"><b>SOPs &amp; operating manual</b><span>How we do everything</span><br><span class="utag plan">Planned</span></div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:26px;">The Globe · operating dashboard — v1, static May–Jul actuals · live feeds to connect.</p>
+
+</div>
+<script>
+new Chart(document.getElementById('rev'),{type:'bar',
+  data:{labels:['May','June','Jul (to 20th)'],datasets:[
+    {label:'Bar',data:[9172,8958,5172],backgroundColor:'#1f5c4d',borderRadius:4,maxBarThickness:60},
+    {label:'Food',data:[9111,8634,4898],backgroundColor:'#b07d2b',borderRadius:4,maxBarThickness:60}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': £'+c.raw.toLocaleString()}}},
+    scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:v=>'£'+(v/1000)+'k'},grid:{color:'#e4e9e6'}}}}});
+var dishes=[['Moules',1584],['Beef burger',1060],['Carbonara',1045],['Thai green curry',924],['Lamb korma',855],['Prawns',765]],dmax=1584;
+document.getElementById('dishes').innerHTML=dishes.map(function(d){return '<div class="bar-row"><div class="nm">'+d[0]+'</div><div class="tr"><div class="fl" style="width:'+Math.round(d[1]/dmax*100)+'%"></div></div><div class="vl">£'+d[1].toLocaleString()+'</div></div>';}).join('');
+var cats=[['Mains',10105],['Small plates',4651],['Open food',2871],['Flatbreads/salads',2041],['Starters',1149],['Sides',925],['Desserts',594]],cmax=10105;
+document.getElementById('cats').innerHTML=cats.map(function(d){return '<div class="bar-row"><div class="nm">'+d[0]+'</div><div class="tr"><div class="fl" style="width:'+Math.round(d[1]/cmax*100)+'%;background:#6f8a5a"></div></div><div class="vl">£'+(d[1]/1000).toFixed(1)+'k</div></div>';}).join('');
+</script>
+
+<!-- ============ Finances panel ============ -->
+<script>
+(function(){
+  "use strict";
+  // Targets & RAG bands. Green ≤ target · amber ≤ target+BAND · red beyond.
+  var COGS_TARGET=30, LAB_TARGET=32, BAND=6;
+  var BREAKEVEN=236000;               // net sales, ex VAT — corrected cost base
+  var LS_KEY='globe-fin-months-v1';
+  var C={grn:'#1f5c4d',amb:'#c98a2b',red:'#a8412f',gold:'#b07d2b',dark:'#153f35',line:'#dfe6e2',muted:'#6a7b76'};
+
+  // Baseline management-accounts figures (ex VAT, £). Net sales are the real
+  // May–Jun till actuals net of 20% VAT; cost splits are provisional until the
+  // accounts team's Monthly Accounts figures are pasted in / auto-pulled.
+  var SEED=[
+    {month:'2026-05', net:15268, cogs:4580, labour:18900, overheads:2350},
+    {month:'2026-06', net:14674, cogs:4400, labour:18200, overheads:2350}
+  ];
+
+  // -- data access (the one auto-pull seam) --------------------------------
+  // AUTO-PULL HOOK: to go live, make this async and `return await
+  // fetch('/api/finance').then(r=>r.json())` — same {month,net,cogs,labour,
+  // overheads} shape — and nothing else on the panel needs to change.
+  function loadMonths(){
+    try{var s=JSON.parse(localStorage.getItem(LS_KEY)); if(Array.isArray(s)&&s.length) return s;}catch(e){}
+    return SEED.map(function(m){return Object.assign({},m);});
+  }
+  function saveMonths(a){ try{localStorage.setItem(LS_KEY,JSON.stringify(a));}catch(e){} }
+
+  var MONTHS=loadMonths();
+  var barsChart=null, trendChart=null;
+
+  // -- helpers -------------------------------------------------------------
+  var NAMES=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+  function cap(s){return s.charAt(0).toUpperCase()+s.slice(1).toLowerCase();}
+  function num(x){var n=parseFloat(String(x).replace(/[£,\s]/g,''));return isNaN(n)?0:n;}
+  function fmtK(v){return (v<0?'-£':'£')+Math.round(Math.abs(v)/1000)+'k';}
+  function fmt0(v){return (v<0?'-£':'£')+Math.round(Math.abs(v)).toLocaleString();}
+  function pct(v){return v.toFixed(1)+'%';}
+  function rag(v,t){return v<=t?'grn':v<=t+BAND?'amb':'red';}
+  function ragText(k){return k==='grn'?'On target':k==='amb'?'Watch':'Over target';}
+
+  function meta(raw){
+    raw=String(raw).trim();
+    var m=raw.match(/^(\d{4})[-\/ ](\d{1,2})$/);
+    if(m){var mo=+m[2];return{key:m[1]+'-'+String(mo).padStart(2,'0'),label:(NAMES[mo-1]?cap(NAMES[mo-1]):mo)+' '+m[1]};}
+    var m2=raw.match(/^([A-Za-z]{3,})[ -]?(\d{4})$/);
+    if(m2){var i=NAMES.indexOf(m2[1].slice(0,3).toLowerCase()); if(i>=0) return{key:m2[2]+'-'+String(i+1).padStart(2,'0'),label:cap(m2[1].slice(0,3))+' '+m2[2]};}
+    return{key:raw,label:raw};
+  }
+
+  function computed(){
+    var a=MONTHS.map(function(m){
+      var mt=meta(m.month), net=num(m.net), cogs=num(m.cogs), lab=num(m.labour), ov=num(m.overheads);
+      var tot=cogs+lab+ov;
+      return{key:mt.key,label:mt.label,net:net,cogs:cogs,labour:lab,overheads:ov,total:tot,
+             profit:net-tot,cogsp:net?cogs/net*100:0,labp:net?lab/net*100:0};
+    });
+    a.sort(function(x,y){return x.key<y.key?-1:x.key>y.key?1:0;});
+    return a;
+  }
+
+  // -- semicircular gauge --------------------------------------------------
+  function gauge(id,value,target){
+    var cv=document.getElementById(id); if(!cv||!cv.getContext) return;
+    var ctx=cv.getContext('2d'), w=cv.width, h=cv.height, cx=w/2, cy=h-6, r=76, lw=15;
+    ctx.clearRect(0,0,w,h);
+    var scale=Math.max(target*2, value*1.12, target+BAND+4);
+    var A0=Math.PI, A1=2*Math.PI;
+    ctx.lineCap='round';
+    ctx.beginPath();ctx.lineWidth=lw;ctx.strokeStyle='#e9eeeb';ctx.arc(cx,cy,r,A0,A1);ctx.stroke();
+    var frac=Math.max(0,Math.min(1,value/scale));
+    ctx.beginPath();ctx.lineWidth=lw;ctx.strokeStyle=C[rag(value,target)];ctx.arc(cx,cy,r,A0,A0+frac*(A1-A0));ctx.stroke();
+    // target tick
+    var ta=A0+Math.min(1,target/scale)*(A1-A0);
+    ctx.beginPath();ctx.lineWidth=2;ctx.strokeStyle=C.dark;
+    ctx.moveTo(cx+Math.cos(ta)*(r-lw/2-2),cy+Math.sin(ta)*(r-lw/2-2));
+    ctx.lineTo(cx+Math.cos(ta)*(r+lw/2+2),cy+Math.sin(ta)*(r+lw/2+2));ctx.stroke();
+  }
+
+  // -- render --------------------------------------------------------------
+  function render(){
+    var d=computed(), latest=d[d.length-1];
+    document.getElementById('finLatest').textContent=latest?latest.label:'—';
+
+    // gauges
+    if(latest){
+      gauge('gCogs',latest.cogsp,COGS_TARGET); gauge('gLab',latest.labp,LAB_TARGET);
+      var ck=rag(latest.cogsp,COGS_TARGET), lk=rag(latest.labp,LAB_TARGET);
+      var cV=document.getElementById('cogsVal'),lV=document.getElementById('labVal');
+      cV.textContent=pct(latest.cogsp); cV.style.color=C[ck];
+      lV.textContent=pct(latest.labp); lV.style.color=C[lk];
+      var cP=document.getElementById('cogsPill'); cP.className='ragpill '+ck; cP.textContent=ragText(ck);
+      var lP=document.getElementById('labPill'); lP.className='ragpill '+lk; lP.textContent=ragText(lk);
+    }
+
+    // break-even vs run-rate
+    var last=d.slice(-3), avg=last.length?last.reduce(function(s,m){return s+m.net;},0)/last.length:0, run=avg*12;
+    document.getElementById('beRun').textContent=fmtK(run)+'/yr';
+    document.getElementById('beFill').style.width=Math.min(100,run/BREAKEVEN*100)+'%';
+    document.getElementById('beFill').style.background=run>=BREAKEVEN?C.grn:C.gold;
+    var gap=BREAKEVEN-run, gEl=document.getElementById('beGap');
+    if(gap>0){gEl.textContent=fmtK(gap)+' to break-even';gEl.style.color=C.red;}
+    else{gEl.textContent=fmtK(-gap)+' clear';gEl.style.color=C.grn;}
+
+    // table
+    document.getElementById('finRows').innerHTML=d.map(function(m){
+      return '<tr><td>'+m.label+'</td>'+
+        '<td class="rt">'+fmt0(m.net)+'</td><td class="rt">'+fmt0(m.cogs)+'</td>'+
+        '<td class="rt">'+fmt0(m.labour)+'</td><td class="rt">'+fmt0(m.overheads)+'</td>'+
+        '<td class="rt">'+fmt0(m.total)+'</td>'+
+        '<td class="rt '+(m.profit<0?'neg':'pos')+'">'+fmt0(m.profit)+'</td>'+
+        '<td class="rt" style="color:'+C[rag(m.cogsp,COGS_TARGET)]+'">'+pct(m.cogsp)+'</td>'+
+        '<td class="rt" style="color:'+C[rag(m.labp,LAB_TARGET)]+'">'+pct(m.labp)+'</td></tr>';
+    }).join('');
+
+    // charts
+    var labels=d.map(function(m){return m.label;});
+    if(barsChart) barsChart.destroy();
+    barsChart=new Chart(document.getElementById('finBars'),{type:'bar',
+      data:{labels:labels,datasets:[
+        {label:'Income',data:d.map(function(m){return m.net;}),backgroundColor:C.grn,borderRadius:3,maxBarThickness:34},
+        {label:'Total costs',data:d.map(function(m){return m.total;}),backgroundColor:C.gold,borderRadius:3,maxBarThickness:34},
+        {label:'Net',data:d.map(function(m){return m.profit;}),backgroundColor:d.map(function(m){return m.profit<0?C.red:C.grn;}),borderRadius:3,maxBarThickness:34}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+fmt0(c.raw);}}}},
+        scales:{x:{grid:{display:false}},y:{ticks:{callback:function(v){return fmtK(v);}},grid:{color:'#e4e9e6'}}}}});
+
+    if(trendChart) trendChart.destroy();
+    trendChart=new Chart(document.getElementById('finTrend'),{type:'line',
+      data:{labels:labels,datasets:[{data:d.map(function(m){return m.profit;}),
+        borderColor:C.red,backgroundColor:'rgba(168,65,47,.10)',fill:true,tension:.25,pointRadius:4,
+        pointBackgroundColor:d.map(function(m){return m.profit<0?C.red:C.grn;})}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return 'Net: '+fmt0(c.raw);}}}},
+        scales:{x:{grid:{display:false}},y:{ticks:{callback:function(v){return fmtK(v);}},
+          grid:{color:function(c){return c.tick.value===0?'#9aa8a2':'#e4e9e6';}}}}}});
+  }
+
+  // -- import / paste ------------------------------------------------------
+  function msg(t,ok){var e=document.getElementById('finMsg');e.textContent=t;e.className='msg '+(ok?'ok':'err');}
+  // Split a line into cells. Tab paste (Excel) → split on tabs. CSV → month is
+  // the first cell, then pull the numeric groups so thousands commas inside a
+  // number (e.g. £12,250) don't get mistaken for field separators.
+  function tokens(line){
+    if(line.indexOf('\t')>=0) return line.split('\t').map(function(s){return s.trim();});
+    // drop thousands separators (comma between digits, followed by exactly 3
+    // digits then a non-digit/end) so they aren't read as field separators
+    line=line.replace(/(\d),(?=\d{3}(?:\D|$))/g,'$1');
+    return line.split(',').map(function(s){return s.trim();});
+  }
+  function importPaste(){
+    var raw=document.getElementById('finPaste').value.trim();
+    if(!raw){msg('Nothing to import.',false);return;}
+    var added=0, bad=0;
+    raw.split(/\r?\n/).forEach(function(line){
+      line=line.trim(); if(!line) return;
+      var f=tokens(line);
+      if(f.length<5){bad++;return;}
+      if(/month/i.test(f[0]) && isNaN(num(f[1]))) return; // header row
+      var rec={month:f[0],net:num(f[1]),cogs:num(f[2]),labour:num(f[3]),overheads:num(f[4])};
+      if(!rec.month || rec.net<=0){bad++;return;}
+      var k=meta(rec.month).key, i=-1;
+      MONTHS.forEach(function(m,ix){if(meta(m.month).key===k)i=ix;});
+      if(i>=0) MONTHS[i]=rec; else MONTHS.push(rec);
+      added++;
+    });
+    if(added){saveMonths(MONTHS);render();document.getElementById('finPaste').value='';
+      msg(added+' month'+(added>1?'s':'')+' updated'+(bad?' · '+bad+' line(s) skipped':'')+'.',true);}
+    else msg('No valid rows found — expected: month, net_sales, cogs, labour, overheads.',false);
+  }
+  function copyCSV(){
+    var d=computed();
+    var out='month,net_sales,cogs,labour,overheads\n'+d.map(function(m){
+      return m.label+','+m.net+','+m.cogs+','+m.labour+','+m.overheads;}).join('\n');
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(out).then(function(){msg('Copied '+d.length+' months to clipboard.',true);},function(){document.getElementById('finPaste').value=out;msg('Copied into the box above.',true);});}
+    else{document.getElementById('finPaste').value=out;msg('Copied into the box above.',true);}
+  }
+  function reset(){localStorage.removeItem(LS_KEY);MONTHS=loadMonths();render();msg('Reset to the baseline accounts.',true);}
+
+  document.getElementById('finImport').addEventListener('click',importPaste);
+  document.getElementById('finCopy').addEventListener('click',copyCSV);
+  document.getElementById('finReset').addEventListener('click',reset);
+
+  render();
+})();
+</script>
+
+<!-- ============ Compliance panel ============ -->
+<script>
+(function(){
+  "use strict";
+  // Owner/risk codes keep the seed compact. tuple = [obligation, category,
+  // ownerCode, riskCode, cadence, evidence, notes]. Status starts at "Confirm
+  // with Steve/Alys" for every row — the register's real current state.
+  var OWN={O:"Owner (licence holder)",Mg:"Manager (operational)",Ex:"External provider",Sh:"Shared"};
+  var RISK={C:"CRITICAL – prosecutable / invalidates insurance",H:"High",M:"Medium"};
+  var STATUS_DEFAULT="Confirm with Steve/Alys";
+  var T=[
+    ["Gas Safety catering certificate (CP42)","Gas & Electrical","Ex","C","Annual","Annual CP42 commercial catering gas safety certificate from a Gas Safe registered engineer (commercial catering ticket).","Faulty commercial gas = explosion/CO risk. Insurers void claims without a current cert. Book before expiry."],
+    ["Food Hygiene Rating displayed","Food Safety","Mg","H","As required","FHRS sticker shown at entrance/window AND on website. In WALES this display is a LEGAL requirement (unlike England).","Fixed penalty for non-display. Rating set by EHO inspection."],
+    ["Employers' Liability Insurance","Insurance","O","C","Annual","Valid EL certificate (min £5m) from an authorised insurer; certificate displayed/accessible to staff.","Legally compulsory once you employ anyone. Fine up to £2,500 for EACH day uninsured."],
+    ["Premises Licence","Alcohol Licensing","O","C","One-off / on change","Valid premises licence; summary displayed; operating within permitted hours and all conditions.","Selling alcohol without/outside licence is a criminal offence. Check conditions actually being met."],
+    ["Designated Premises Supervisor (DPS)","Alcohol Licensing","O","C","One-off / on change","A named DPS on the licence who holds a valid Personal Licence; every alcohol sale authorised by them.","No valid DPS = no lawful alcohol sales. Notify council if DPS changes/leaves."],
+    ["Food safety management system (SFBB/HACCP)","Food Safety","Mg","C","As required","Completed Safer Food Better Business (or equivalent HACCP) pack, kept on site, reviewed and signed.","Legally required. First thing an EHO asks to see."],
+    ["14-allergen matrix (all menu items)","Allergens","Mg","C","As required","Written allergen matrix covering the 14 regulated allergens for every dish, updated when a recipe/supplier changes.","Wrong allergen info can be fatal + is prosecutable. Verify against ingredient labels."],
+    ["Natasha's Law PPDS labelling (bakery)","Allergens","Mg","C","As required","Pre-packed-for-direct-sale bakery items labelled with full name + full ingredient list, 14 allergens emphasised.","Applies to grab-and-go items packed on site before ordering. Key risk for a bakery."],
+    ["Food business registration (Carmarthenshire CC)","Food Safety","O","C","One-off / on change","Confirmation of registration with the local authority (required 28+ days before trading; free, cannot be refused).","Must re-notify on change of operator/premises. Foundation for everything else."],
+    ["Right to Work checks","Employment","O","C","As required","Compliant right-to-work check completed and evidenced BEFORE each employee starts.","Illegal working civil penalty up to £60,000 per worker. Keep dated copies for all staff."],
+    ["Minimum/Living Wage compliance (Apr 2026)","Employment","O","C","As required","All staff paid at/above Apr 2026 rates: £12.71 (21+), £10.85 (18–20), £8.00 (16–17 & apprentices).","HMRC enforce arrears + up to 200% penalty + public naming. Re-check every April uplift."],
+    ["Fire Risk Assessment (RRO 2005)","Fire Safety","O","C","Annual","Written fire risk assessment (mandatory to record with 5+ employees); reviewed regularly and after changes.","The 'responsible person' is legally liable. Serious breaches carry unlimited fines/imprisonment."],
+    ["Annual alcohol licence fee","Alcohol Licensing","O","H","Annual","Annual maintenance fee paid to Carmarthenshire CC to keep the premises licence live.","Non-payment can suspend the licence. Note the renewal date once known."],
+    ["Food handler hygiene training (Level 2)","Food Safety","Mg","H","As required","Level 2 Food Hygiene certificates for all food handlers; supervisors Level 3. Induction training recorded.","Refresh ~every 3 years. Keep certificates on file per staff member."],
+    ["Pest control contract & reports","Food Safety","Ex","H","Quarterly","Contract with pest controller; visit reports and any recommendations actioned.","Bakery/wine bar = high risk. EHO expects a proactive contract, not reactive."],
+    ["Daily opening & closing checks","Food Safety","Mg","H","Daily","Signed daily diary: fridge/freezer temps, probe checks, cleaning done, issues + corrective action.","Fridge ≤5°C, freezer ≤-18°C. Cook/reheat 75°C+. Evidence of due-diligence defence."],
+    ["Challenge 25 & refusals log","Alcohol Licensing","Mg","H","As required","Challenge 25 policy, till prompts, staff trained; refusals register and ID-check records maintained.","Underage sale = fine + licence review. Refusals log is key due-diligence evidence."],
+    ["Public Liability Insurance","Insurance","O","H","Annual","PL cover appropriate to a public-facing restaurant/bar; policy schedule on file and in date.","Often required by landlord/licence. Confirm sum insured adequate."],
+    ["Allergen staff training & signage","Allergens","Mg","H","As required","Staff trained on allergen handling; 'ask about allergens' signage; process for allergen orders.","FSA free allergen training available. Record completion."],
+    ["Personal Licence(s) current","Alcohol Licensing","O","H","As required","Personal Licence held by DPS (and ideally a second keyholder), based on accredited licensing qualification.","A backup personal-licence holder avoids being unable to trade if DPS is off."],
+    ["Fixed wiring inspection (EICR)","Gas & Electrical","Ex","H","Every 5 years","Electrical Installation Condition Report by a qualified electrician; any C1/C2 remedials completed.","Typically every 5 years for commercial premises (or per report recommendation)."],
+    ["Tips Act 2024 (fair tips)","Employment","O","H","As required","Written tipping policy; 100% of tips passed to staff fairly, paid by end of following month; records 3 yrs.","Now in force. Staff can take a tips dispute to tribunal. Written policy must be available."],
+    ["Fire extinguishers serviced","Fire Safety","Ex","H","Annual","Correct extinguishers/fire blanket for a kitchen; annual service by competent engineer; monthly visual check.","Kitchen needs a fire blanket + appropriate class extinguishers (F for fat fryers)."],
+    ["Commercial waste duty of care","Environment (Wales)","O","H","Annual","Contract with a licensed waste carrier; transfer notes retained; waste cooking oil collected by registered carrier.","Keep transfer notes. Fly-tipped trade waste traces back to you."],
+    ["Legionella risk assessment","Health & Safety","Ex","H","Every 2 years","Legionella risk assessment of water systems; control scheme (temperature checks, flushing of little-used outlets).","Review every ~2 years or on change. Monthly outlet flushing may follow."],
+    ["Working Time Regulations","Employment","Mg","H","As required","Rest breaks, weekly rest, 5.6 weeks paid holiday, 48-hr average opt-out signed where relevant; young-worker limits.","Hospitality often trips on breaks and holiday pay for variable-hours staff."],
+    ["Workplace Recycling (Wales) 2024","Environment (Wales)","Mg","H","As required","Separate food waste, glass, paper/card, metal/plastic/cartons for recycling; no recyclables to general waste.","In force since April 2024. Food-waste separation is mandatory; civil penalties."],
+    ["ICO data protection fee","Data Protection","O","H","Annual","Registration/annual fee paid to the ICO (Tier 1 £52, or £47 by direct debit for most small businesses).","Required if you hold staff/customer data or CCTV. Non-payment = ICO penalty."],
+    ["Fire drills, training & clear exits","Fire Safety","Mg","H","As required","Staff fire training/induction; recorded fire drills; escape routes and fire doors kept clear and functional.","Blocked exits are a common enforcement finding. Daily visual check by manager."],
+    ["Written statement of terms (contracts)","Employment","O","H","As required","Written statement of main terms given to every employee/worker on or before day one; signed copies retained.","Day-one legal right. Include hours, pay, holiday, notice."],
+    ["Fire alarm & emergency lighting servicing","Fire Safety","Sh","H","Weekly","Weekly alarm call-point test (logged); periodic professional service of alarm and emergency lighting.","Weekly test in-house; 6-monthly/annual service by contractor. Keep a fire logbook."],
+    ["Health & Safety law poster / risk assessments","Health & Safety","O","H","Annual","HSE law poster displayed (or leaflet issued); written general risk assessment (5+ staff), reviewed annually.","Covers kitchen, bar, cellar, front of house. Include young workers if any."],
+    ["Accident book & RIDDOR reporting","Health & Safety","Mg","H","As required","GDPR-compliant accident book; process to report RIDDOR-reportable injuries/incidents to HSE.","Certain injuries/diseases must be reported to HSE within set timescales."],
+    ["Workplace pension (auto-enrolment)","Employment","O","H","Every 2 years","Eligible jobholders auto-enrolled; contributions paid; declaration of compliance; re-enrolment every 3 years.","Re-enrolment + re-declaration to TPR roughly every 3 years. Penalties for non-compliance."],
+    ["Buildings / contents / business interruption","Insurance","O","M","Annual","Property, stock, contents and business-interruption cover; sums insured reviewed for underinsurance.","Check wine stock and bakery equipment values are properly declared."],
+    ["PAT testing (portable appliances)","Gas & Electrical","Ex","M","Annual","Risk-based inspection/testing of portable electrical equipment; register of items and results.","Frequency is risk-based; kitchen equipment usually annual."],
+    ["First aid provision","Health & Safety","Mg","M","Monthly","Stocked first aid kit(s); appointed person or trained first aider; kit checked and restocked.","Kitchen adds burns/cuts risk. Consider a trained first aider on shift."],
+    ["Music licence (TheMusicLicence – PPL PRS)","Music Licensing","O","M","Annual","TheMusicLicence covering recorded/live/radio/TV music played in public areas; correct tariff for the space.","Needed for background music, live sessions or radio/TV. Copyright infringement if unlicensed."],
+    ["Single-use plastics ban (Wales)","Environment (Wales)","Mg","M","As required","No supply of banned single-use plastics (straws/stirrers/cutlery/plates, polystyrene food/drink containers).","Check takeaway/bar disposables against the Welsh banned list."],
+    ["UK GDPR basics (privacy notice, CCTV)","Data Protection","O","M","Annual","Privacy notice for staff/customers; lawful basis for marketing; CCTV signage & retention; secure data handling.","Especially bookings, mailing lists and any CCTV. Review annually."],
+    ["COSHH assessments (cleaning chemicals)","Health & Safety","Mg","M","Annual","COSHH assessments for hazardous substances (sanitisers, degreasers, glasswash chemicals); safety data sheets on file.","Keep SDS from suppliers; train staff on safe use/PPE."]
+  ];
+  var SEED=T.map(function(r){return{obligation:r[0],category:r[1],owner:OWN[r[2]],legalRisk:RISK[r[3]],status:STATUS_DEFAULT,cadence:r[4],evidence:r[5],nextDue:"",notes:r[6]};});
+  // Illustrative audit trail — shape Karen's "Check Log" table matches. Shown as
+  // a sample until that table is connected.
+  var SEED_LOG=[
+    {date:"2026-07-21",obligation:"Compliance register",action:"Register built & reviewed — 41 obligations catalogued",by:"Karen",result:"Logged"},
+    {date:"2026-07-20",obligation:"Fire alarm & emergency lighting",action:"Weekly call-point test",by:"Manager",result:"Pass"},
+    {date:"2026-07-20",obligation:"Daily opening & closing checks",action:"Fridge/freezer temps + probe check",by:"Manager",result:"Pass"}
+  ];
+
+  // --- helpers ---
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function shortOwner(o){return String(o||"").replace(/\s*\(.*\)/,"");}
+  function riskCode(item){var s=(item.legalRisk||"").toLowerCase();return /^critical/.test(s)?"C":/high/.test(s)?"H":"M";}
+  function ragKey(s){s=(s||"").toLowerCase();
+    if(/have|verified|compliant|in place|complete|done/.test(s))return"g";
+    if(/gap|action|overdue|missing|fail|not in place/.test(s))return"r";
+    if(/^n\/?a|not applicable/.test(s))return"n";
+    return"a";}
+  var RAGLBL={g:"g",a:"a",r:"r",n:"n"};
+  var STLBL={g:"Have – verified",a:"Confirm w/ Steve/Alys",r:"Gap – action",n:"N/A"};
+  function prosecutable(item){
+    var s=(item.legalRisk||"").toLowerCase(), o=(item.obligation||"").toLowerCase();
+    return /^critical/.test(s) || /hygiene rating/.test(o) || /employers.{0,3}liability/.test(o) || /cp42|gas safety catering/.test(o);
+  }
+  function today(){var d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
+  function dueMeta(v){
+    if(!v){return{cls:"none",txt:"date to set",t:Infinity};}
+    var d=new Date(v); if(isNaN(d)){return{cls:"none",txt:esc(v),t:Infinity};}
+    var days=Math.round((d-today())/86400000);
+    var txt=d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+    if(days<0)return{cls:"over",txt:txt+" · overdue",t:d.getTime()};
+    if(days<=30)return{cls:"soon",txt:txt+" · "+days+"d",t:d.getTime()};
+    return{cls:"",txt:txt,t:d.getTime()};
+  }
+  function stPill(status){var k=ragKey(status);return '<span class="cst '+k+'">'+esc(STLBL[k]||status)+'</span>';}
+
+  var CURRENT=[]; // register in view (for filtering)
+
+  function render(register, log, isLive){
+    CURRENT=register;
+    // source badges
+    var sc=$("compSrc");
+    sc.className="src "+(isLive?"live":"samp");
+    sc.innerHTML='<span class="dot"></span>'+(isLive?"Live from Airtable":"Sample — live once connected");
+    var lb=$("logBadge"), logLive=isLive && log && log.length;
+    lb.className="src "+(logLive?"live":"samp"); lb.innerHTML='<span class="dot"></span>'+(logLive?"live":"sample");
+
+    // red flags
+    var flags=register.filter(prosecutable);
+    $("compFlags").innerHTML=flags.map(function(m){
+      return '<div class="flag-c"><b>'+esc(m.obligation)+'</b><div class="why">'+esc(m.notes||m.evidence)+'</div>'+
+        '<div class="mt"><span class="risk '+riskCode(m)+'">'+(riskCode(m)==="C"?"Critical":"Prosecutable")+'</span>'+
+        '<span class="ctag" style="background:#eef1ee;color:#6a7b76">'+esc(shortOwner(m.owner))+'</span>'+stPill(m.status)+'</div></div>';
+    }).join("")||'<div style="font-size:12.5px;color:#7a5248">No critical items in the register.</div>';
+
+    // RAG summary
+    var c={g:0,a:0,r:0,n:0};
+    register.forEach(function(m){c[ragKey(m.status)]++;});
+    $("ragG").textContent=c.g; $("ragA").textContent=c.a; $("ragR").textContent=c.r; $("ragN").textContent=c.n;
+    var tot=register.length, rated=c.g+c.a+c.r+c.n||1;
+    var seg=function(n,col){return n?'<i style="width:'+(n/rated*100)+'%;background:'+col+'"></i>':"";};
+    $("ragBar").innerHTML=seg(c.g,"#1f5c4d")+seg(c.a,"#b07d2b")+seg(c.r,"#a8412f")+seg(c.n,"#b9c3bf");
+    $("ragTotal").textContent=tot+" obligations tracked";
+    $("ragCrit").textContent=flags.length+" prosecutable / insurance-invalidating";
+
+    // what's due next (sorted by date, empties last)
+    var due=register.slice().sort(function(a,b){return dueMeta(a.nextDue).t-dueMeta(b.nextDue).t;});
+    $("compDue").innerHTML=due.map(function(m){var d=dueMeta(m.nextDue);
+      return '<tr><td class="ob">'+esc(m.obligation)+'</td><td>'+esc(m.cadence)+'</td>'+
+        '<td class="due '+d.cls+'">'+d.txt+'</td><td>'+esc(shortOwner(m.owner))+'</td><td>'+stPill(m.status)+'</td></tr>';
+    }).join("");
+
+    // audit trail
+    var rows=(log&&log.length?log:[]);
+    $("compLog").innerHTML=rows.length?rows.map(function(l){
+      return '<tr><td class="due" style="white-space:nowrap">'+esc(l.date)+'</td><td class="ob" style="font-weight:400">'+esc(l.action||l.obligation)+
+        (l.obligation&&l.action?'<br><span class="ev">'+esc(l.obligation)+'</span>':"")+'</td><td>'+esc(l.by)+'</td>'+
+        '<td><span class="cst '+(/pass|logged|ok|done/i.test(l.result)?"g":/fail|gap/i.test(l.result)?"r":"n")+'">'+esc(l.result||"—")+'</span></td></tr>';
+    }).join(""):'<tr><td colspan="4" style="color:#9aa8a2">No checks logged yet — live once the Check Log table is connected.</td></tr>';
+
+    renderReg();
+  }
+
+  var FILTER="all";
+  function renderReg(){
+    var list=CURRENT.filter(function(m){
+      if(FILTER==="all")return true;
+      if(FILTER==="critical")return prosecutable(m);
+      return m.category===FILTER;
+    });
+    $("regCount").textContent="· "+list.length+" of "+CURRENT.length;
+    $("compReg").innerHTML=list.map(function(m){var rc=riskCode(m);
+      return '<tr><td class="ob">'+esc(m.obligation)+'</td>'+
+        '<td><span class="ctag">'+esc(m.category)+'</span></td>'+
+        '<td><span class="risk '+rc+'">'+(rc==="C"?"Critical":rc==="H"?"High":"Med")+'</span></td>'+
+        '<td>'+esc(shortOwner(m.owner))+'</td>'+
+        '<td class="ev">'+esc(m.evidence)+'</td>'+
+        '<td>'+stPill(m.status)+'</td></tr>';
+    }).join("");
+  }
+
+  // filter buttons
+  var fb=$("compFilt");
+  if(fb){fb.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+    FILTER=b.getAttribute("data-f");
+    Array.prototype.forEach.call(fb.querySelectorAll("button"),function(x){x.classList.toggle("on",x===b);});
+    renderReg();
+  });}
+
+  // load: try the live API, fall back to the embedded sample
+  function boot(){ render(SEED, SEED_LOG, false); } // sample first so the panel is never blank
+  fetch("/api/compliance").then(function(r){return r.ok?r.json():null;}).then(function(j){
+    if(j && j.ok && j.register && j.register.length){ render(j.register, j.log||[], true); }
+    else { boot(); }
+  }).catch(boot);
+})();
+</script>
+</body></html>

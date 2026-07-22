@@ -72,72 +72,17 @@
   <a class="back" href="index.html">← Steve's dashboard</a>
   <div class="kicker">The Globe · Bar · Restaurant · Bakery · Laugharne</div>
   <h1>The Globe Bar</h1>
-  <p>Everything for the Globe in one place — the look you choose for the website, and the plan for getting found: search, AI answers, Instagram &amp; Facebook, and the local groups where Laugharne actually talks. Your pick and any notes here are logged and emailed straight to Dominic.</p>
+  <p>Everything for the Globe in one place — the plan for getting found: search, AI answers, Instagram &amp; Facebook, and the local groups where Laugharne actually talks. Any notes you leave here are logged and emailed straight to Dominic.</p>
 </div></header>
 
 <div class="wrap">
 
-  <h2>1 · Choose the website look</h2>
-  <p class="sub">Same content, same brand — three directions for the homepage. Have a look at each full preview, then pick the one that feels like the Globe. You can change your mind; nothing's built until you choose.</p>
+  <h2>1 &middot; The homepage &mdash; decided</h2>
+  <p class="sub">The look is locked: <b>Alys &mdash; dark &amp; sleek</b>, the premium, Gordon-Ramsay evening feel with clear, high-contrast content underneath. It&rsquo;s now the live customer homepage.</p>
 
-  <div class="opts">
-    <!-- STEVE -->
-    <div class="opt">
-      <div class="mock m-steve">
-        <div class="nav"><span>THE GLOBE</span><span>BOOK</span></div>
-        <div class="kick">Laugharne · Bar &amp; Restaurant</div>
-        <p class="hh">The hidden gem<br>of Laugharne.</p>
-        <div class="btns"><span class="b1">Book a table</span><span class="b2">See the menu</span></div>
-      </div>
-      <div class="body">
-        <p class="nm">Steve</p>
-        <p class="ds">Warm &amp; clear. Light, bright and easy to read — “see exactly who we are” at a glance.</p>
-        <div class="swatches"><span class="sw" style="background:#F6F2E9"></span><span class="sw" style="background:#3a352c"></span><span class="sw" style="background:#b07d2b"></span></div>
-        <div class="act">
-          <a class="lk" href="globe-directions.html#steve" target="_blank">Full preview →</a>
-          <span class="lk choose" data-v="steve" data-label="Steve — warm &amp; clear">✓ Choose</span>
-        </div>
-      </div>
-    </div>
-    <!-- ALYS (rec) -->
-    <div class="opt rec">
-      <div class="mock m-alys">
-        <div class="nav"><span>THE GLOBE</span><span>BOOK</span></div>
-        <div class="kick">Laugharne · Bar &amp; Restaurant</div>
-        <p class="hh">The hidden gem<br>of <em>Laugharne.</em></p>
-        <div class="btns"><span class="b1">Book a table</span><span class="b2">See the menu</span></div>
-      </div>
-      <div class="body">
-        <p class="nm">Alys <span class="recbadge">Our rec</span></p>
-        <p class="ds">Dark &amp; sleek. The premium, Gordon-Ramsay evening look — atmosphere up front, clear content underneath.</p>
-        <div class="swatches"><span class="sw" style="background:#100d0a"></span><span class="sw" style="background:#caa257"></span><span class="sw" style="background:#f4ecda"></span></div>
-        <div class="act">
-          <a class="lk" href="globe-directions.html#alys" target="_blank">Full preview →</a>
-          <span class="lk choose" data-v="alys" data-label="Alys — dark &amp; sleek">✓ Choose</span>
-        </div>
-      </div>
-    </div>
-    <!-- WILD -->
-    <div class="opt">
-      <div class="mock m-wild">
-        <div class="nav"><span>THE GLOBE</span><span>BOOK</span></div>
-        <div class="kick">Laugharne · Bar &amp; Restaurant</div>
-        <p class="hh">The hidden gem<br>of Laugharne.</p>
-        <div class="btns"><span class="b1">Book a table</span><span class="b2">See the menu</span></div>
-      </div>
-      <div class="body">
-        <p class="nm">Wild card</p>
-        <p class="ds">Bold editorial. A braver, magazine-style personality with a more characterful serif.</p>
-        <div class="swatches"><span class="sw" style="background:#F4EEE2"></span><span class="sw" style="background:#120f0b"></span><span class="sw" style="background:#141210"></span></div>
-        <div class="act">
-          <a class="lk" href="globe-directions.html#wild" target="_blank">Full preview →</a>
-          <span class="lk choose" data-v="wild" data-label="Wild card — bold editorial">✓ Choose</span>
-        </div>
-      </div>
-    </div>
+  <div class="callout" style="border-left-color:var(--gold);"><b>Alys is the homepage.</b> Atmosphere up front, readable content beneath &mdash; a dark, premium <i>look</i> wrapped around clear <i>content</i>.
+    <div style="margin-top:12px;"><a class="lk solid" href="globe.html" target="_blank">Open the homepage &rarr;</a></div>
   </div>
-  <p id="decMsg"></p>
-  <div class="callout"><b>Why we lean to Alys.</b> The brief was to reconcile “dark like Gordon Ramsay” (Alys) with “easy to read” (Steve) — a dark, premium <i>look</i> wrapped around clear, high-contrast <i>content</i>. Alys delivers both; Wild is the one to keep in your pocket if you want more personality later. It's your call — pick whichever feels right.</p>
 
   <h2>2 · Getting found — the plan</h2>
   <p class="sub">A starter map of the data points and jobs that bring the Weekend Explorer to the door. Statuses are where we are now; we'll turn each one on.</p>
@@ -193,32 +138,14 @@
   <h2>3 · The working pages</h2>
   <p class="sub">The build in progress — react on any page with the ✍ Note button.</p>
   <div class="links">
-    <a class="lk solid" href="globe-directions.html" target="_blank">The three homepage options →</a>
     <a class="lk" href="globe-winebar.html" target="_blank">Current wine-bar page</a>
+    <a class="lk" href="globe-plan.html">The Globe · one-brand plan</a>
     <a class="lk" href="bakery-plan.html">The bakery plan</a>
   </div>
 
 </div>
 
-<script>
-/* choose-direction buttons → /api/decision */
-(function(){
-  var msg=document.getElementById('decMsg');
-  document.querySelectorAll('.lk.choose').forEach(function(b){
-    b.onclick=function(){
-      var label=(b.getAttribute('data-label')||'').replace('&amp;','&');
-      msg.className='';msg.textContent='Saving your choice…';
-      fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({reviewer:'Steve',items:[{item:'The Globe — homepage direction',business:'The Globe',type:'Decision',answer:'Chosen: '+label}]})})
-      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
-      .then(function(res){if(res.ok&&res.j&&res.j.ok){msg.className='ok';msg.textContent='✓ Locked in: '+label+'. Dominic will be emailed — we’ll build it out.';}
-        else{fb(label);}}).catch(function(){fb(label);});
-    };
-  });
-  function fb(label){msg.className='err';msg.textContent='Tracker offline — opening email…';
-    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Globe homepage direction')+'&body='+encodeURIComponent('Steve chose: '+label);}
-})();
-</script>
+
 
 <!-- universal notes widget -->
 <script>(function(){

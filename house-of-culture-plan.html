@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Globe — House of Culture · The Plan</title>
+<meta name="description" content="The full plan for the House of Culture: the cultural and experience layer of The Globe, Laugharne — turning a twenty-minute pilgrimage into a whole day, and a whole town.">
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;
+        --warm:#8a5a2b;--blue:#2b4a6b;--plum:#6b4a8a;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+  a{color:var(--green);}
+  header{background:linear-gradient(160deg,#4a3560,#2b1d3a);color:#f4efe6;padding:42px 22px 34px;}
+  header .inner{max-width:1040px;margin:0 auto;}
+  .crumb{font-size:12px;color:#c7bcd6;margin-bottom:14px;} .crumb a{color:#e0d3b4;text-decoration:none;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e0d3b4;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:35px;margin:8px 0 10px;}
+  header p{max-width:700px;color:#ded3ea;font-size:15px;margin:0;}
+  header .line{font-family:Georgia,serif;font-style:italic;font-size:16.5px;color:#f2e9d6;margin:18px 0 0;border-left:3px solid var(--gold);padding-left:14px;}
+  .out{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0 2px;}
+  .ot{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 16px;}
+  .ot b{display:block;font-family:Georgia,serif;font-size:26px;color:#fff;line-height:1.15;}
+  .ot span{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#e0d3b4;}
+  @media(max-width:760px){.out{grid-template-columns:1fr 1fr;}}
+
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:22px;margin:42px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  h3{font-family:Georgia,serif;color:var(--dark);font-size:17px;margin:24px 0 8px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,50,45,.06);margin-top:14px;}
+  .card p{margin:0 0 11px;font-size:14.5px;} .card p:last-child{margin-bottom:0;}
+  .lede{font-size:15.5px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+  @media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .loop{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:16px;}
+  @media(max-width:860px){.loop{grid-template-columns:1fr 1fr;}}
+  .step{background:#fff;border:1px solid var(--line);border-top:4px solid var(--plum);border-radius:12px;padding:13px 14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .step .n{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+  .step b{display:block;font-family:Georgia,serif;font-size:15px;color:var(--dark);margin:4px 0 4px;}
+  .step span{font-size:12px;color:#4a5a56;}
+  .step .money{display:block;margin-top:7px;font-size:11px;font-weight:700;color:var(--green);}
+
+  .box{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:12px;padding:15px 17px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .box.b2{border-left-color:var(--blue);} .box.b3{border-left-color:var(--warm);} .box.b4{border-left-color:var(--plum);} .box.b5{border-left-color:var(--gold);}
+  .box h4{font-family:Georgia,serif;font-size:16px;margin:0 0 7px;color:var(--dark);}
+  .box p{font-size:13.5px;color:#43534f;margin:0 0 8px;} .box p:last-child{margin-bottom:0;}
+
+  .rows{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .rows .row{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .rows .row:last-child{border-bottom:0;}
+  .rows b{color:var(--dark);}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap;height:fit-content;}
+  .t-now{background:#eef4f0;color:var(--green);} .t-next{background:#f7f0e1;color:var(--gold);} .t-later{background:#f1eef6;color:var(--plum);} .t-done{background:#e8f0ec;color:var(--dark);}
+
+  .q{background:#fffdf8;border:1px solid #eadfc4;border-left:5px solid var(--gold);border-radius:10px;padding:14px 18px;margin:12px 0;}
+  .q blockquote{margin:0;font-family:Georgia,serif;font-size:15px;color:#4a3a1e;font-style:italic;line-height:1.5;}
+  .q cite{display:block;margin-top:8px;font-style:normal;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--warm);}
+
+  .phase{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--line);}
+  .phase:last-child{border-bottom:0;}
+  .phase .num{font-family:Georgia,serif;font-size:26px;color:var(--gold);line-height:1;min-width:34px;}
+  .phase h4{font-family:Georgia,serif;font-size:16px;margin:0 0 5px;color:var(--dark);}
+  .phase p{font-size:13.5px;color:#43534f;margin:0;}
+</style></head><body>
+<header><div class="inner">
+  <div class="crumb"><a href="index.html">← Dashboard</a> &nbsp;·&nbsp; <a href="laugharne-history-trail.html">The record &amp; history trail</a></div>
+  <div class="kicker">The Globe · House of Culture</div>
+  <h1>The Plan</h1>
+  <p>The cultural and experience layer of The Globe, Laugharne — built to turn a twenty-minute literary pilgrimage into a whole day, and a single attraction into a whole town. Run by us, on our own terms, to a professional standard.</p>
+  <p class="line">The Boathouse is the shrine. The Globe is the living heart — where the story of Dylan, of Laugharne and of this building is told, experienced, eaten and taken home.</p>
+  <div class="out">
+    <div class="ot"><b>~15,000</b><span>Boathouse visitors a year</span></div>
+    <div class="ot"><b>20 min</b><span>Typical visit today</span></div>
+    <div class="ot"><b>A full day</b><span>What we are building</span></div>
+    <div class="ot"><b>563</b><span>Verified facts behind it</span></div>
+  </div>
+</div></header>
+<div class="wrap">
+
+  <!-- THE PROPOSITION -->
+  <h2>1 · The proposition</h2>
+  <p class="sub">What this business actually is.</p>
+  <div class="card">
+    <p class="lede">Laugharne receives a steady stream of visitors who arrive already caring — literary pilgrims, coast-path walkers, castle visitors, people who have read <i>Under Milk Wood</i> and want to stand where it came from. They arrive with intent, and most of them leave within an hour.</p>
+    <p>The House of Culture is the business that captures that. It is not a museum and not a rival to any existing attraction. It is the <b>base camp</b>: the place a visit starts, the place it returns to, and the place it ends — with coffee and a fresh bake before the walk, the story and the trail in between, and a proper table at the end of it.</p>
+    <p>Three revenue effects follow from one idea. Visitors stay longer, so they spend across more of the day. They arrive with a reason to come <i>here</i> rather than anywhere, so footfall is intentional rather than incidental. And they carry something home, so the visit continues earning after they leave.</p>
+  </div>
+
+  <!-- THE OPPORTUNITY -->
+  <h2>2 · The opportunity</h2>
+  <p class="sub">Drawn from systematic analysis of visitor reviews across the town's attractions.</p>
+  <div class="grid2">
+    <div class="box"><h4>The day has no spine</h4><p>Visitors piece the town together themselves from a handful of separate sites with no connecting narrative. There is no single thing that says: start here, and here is the whole story. That absence is our product.</p></div>
+    <div class="box b2"><h4>The steep approach excludes people</h4><p>The most-visited site sits up a steep path with no adjacent parking. A significant share of the literary audience is older or has limited mobility, and some of them simply cannot reach it. A level, town-centre anchor serves them properly.</p></div>
+    <div class="box b3"><h4>Interpretation is dated</h4><p>Reviews consistently describe the storytelling as tired. The material is extraordinary; the telling has not kept pace. Well-curated interpretation is a genuine differentiator here, not a nice-to-have.</p></div>
+    <div class="box b4"><h4>Nothing is taken home</h4><p>Almost no considered retail, and little that connects what a visitor has just seen to something they can keep. A trail that ends in a shop with real provenance behind every object is a straightforward gain.</p></div>
+  </div>
+  <div class="card">
+    <p><b>The honest framing.</b> Laugharne is not short of places to eat, and this plan does not depend on pretending otherwise. What it lacks is a single, dependable, all-day room on the trail itself — somewhere you can walk into mid-afternoon, wine-led and unhurried, between the tea rooms closing and dinner service beginning. That is the slot we take, and it is complementary to what the town already does well.</p>
+  </div>
+
+  <!-- THE DAY -->
+  <h2>3 · The day-loop</h2>
+  <p class="sub">The commercial spine, expressed as six moments. Each has an emotional job and a revenue job.</p>
+  <div class="loop">
+    <div class="step"><span class="n">01 · Arrive</span><b>Start here</b><span>Base camp — the desk, the map, the shop, the story. Pick up the trail and the app.</span><span class="money">Zero pressure</span></div>
+    <div class="step"><span class="n">02 · Warm up</span><b>Coffee &amp; bakery</b><span>Fresh bake and good coffee before the walk. Freshen up, set off well.</span><span class="money">First spend</span></div>
+    <div class="step"><span class="n">03 · Journey</span><b>The trail</b><span>The town, the estuary, the castle, the literary sites — with the story at every stop.</span><span class="money">The product</span></div>
+    <div class="step"><span class="n">04 · Return</span><b>Reading room</b><span>Come back in. The real, sourced story, room to sit, room to talk.</span><span class="money">Dwell time</span></div>
+    <div class="step"><span class="n">05 · Keep</span><b>Take it home</b><span>Considered retail with provenance — the gallery, the press, the deli, the book.</span><span class="money">Basket value</span></div>
+    <div class="step"><span class="n">06 · Stay</span><b>The table</b><span>Wine-led, seasonal, unhurried — and a booking for tonight.</span><span class="money">Highest value</span></div>
+  </div>
+  <div class="card">
+    <p><b>The bookend is the mechanism.</b> Foot traffic to the principal literary site passes our door in both directions, because there is nowhere to park at the other end. We hold both ends of that walk by being genuinely useful at the start of it — the wifi where the trail downloads, the loo, the water bottle filled, the phone charged, the map explained, the level place a split party agrees to meet. Earn the outward leg by being helpful and the return leg looks after itself.</p>
+    <p>The discipline that keeps this from becoming an advert: <b>the first stop carries no commercial content at all</b>, and the test applied to every line we write is — <i>would this still be here if the Globe didn't own it?</i></p>
+  </div>
+
+  <!-- THE TRAILS -->
+  <h2>4 · The trails</h2>
+  <p class="sub">One map, several journeys — so the town serves the ninety-minute visitor and the all-day walker equally.</p>
+  <div class="grid3">
+    <div class="box"><h4>The Township Loop</h4><p><b>Short · level · town centre.</b> The square, the Town Hall, the corporation town, the working port. Designed for visitors who cannot manage the steep approaches — the audience currently being lost entirely.</p></div>
+    <div class="box b2"><h4>The Literary Loop</h4><p><b>Medium.</b> The classic pilgrimage, done properly and bookended by us — the writing places, the pub, the grave, the view, with the real story rather than the received one.</p></div>
+    <div class="box b3"><h4>The Estuary Trail</h4><p><b>Long · harder.</b> The walk the poet actually walked — the heron-priested shore, the full day on foot for people who want the whole thing.</p></div>
+  </div>
+  <div class="card">
+    <p>Beneath the trails sits the structural idea that makes this more than a list of plaques: <b>a story is not tied to a single place.</b> One building carries several stories; one story runs through several buildings. The trail is a web, not a line — so completing a story means walking the town, and the town reveals itself in layers rather than in one pass.</p>
+  </div>
+
+  <!-- THE APP -->
+  <h2>5 · The app</h2>
+  <p class="sub">The delivery mechanism — and the thing that makes this defensible.</p>
+  <div class="grid2">
+    <div class="box b2"><h4>Simple on top</h4><p>Built for someone who does not enjoy technology. One screen, one stop, one big listen button, one thing to look out for, one tap to the next. No account, no menus, and it never depends on a phone signal or on satellite positioning to work.</p></div>
+    <div class="box b2"><h4>Deep underneath</h4><p>Beneath every stop, optional layers for the curious — the fuller story, the archive images, the recorded voices of people who remember, and the actual sources. The same app serves a twenty-minute walker and a three-hour obsessive.</p></div>
+    <div class="box b4"><h4>Ask it anything</h4><p>At any stop a visitor can ask a question and get a real answer drawn from our own verified library, with the source shown. And — the part nobody else can do — it says plainly when we don't know: <i>the record doesn't tell us, but here's what we do know.</i></p></div>
+    <div class="box b4"><h4>Collect the town</h4><p>An opt-in collecting layer: gather the stories as you walk, and completing one unlocks the full dossier behind it rather than a badge. Depth is the reward. It goes silent at the graveside and the other quiet places, by design.</p></div>
+  </div>
+  <div class="card">
+    <p><b>Works without signal.</b> The trail downloads at the Globe before you set off, and the coast path has no coverage — so the record itself travels with the walker, not merely a cached summary. If the phone loses signal, the stories and their sources still work.</p>
+    <p><b>Bilingual from the start.</b> Welsh and English are written in parallel from the same source material, not translated afterwards. In a Carmarthenshire town a translated script sounds translated, and that reads as a credibility failure rather than a quality one.</p>
+  </div>
+
+  <!-- THE FOUNDATION -->
+  <h2>6 · The foundation — why this is credible</h2>
+  <p class="sub">The research is the moat. Anyone can build an app; nobody else has the record underneath it.</p>
+  <div class="card">
+    <p>Behind the visitor experience sits a working historical archive with a full chain of custody: <b>563 recorded facts, 270 sources and 413 people, places and things</b>, every claim graded by how well it is proven and linked to the document that proves it. Research runs continuously against a register of 100 open questions.</p>
+    <p>The rule is absolute and built into the software rather than left to memory: <b>nothing is published while a claim behind it is unverified</b>, and every published sentence traces back to its source in one tap. Where the record is contested, we say so. Where we have only tradition, we call it tradition.</p>
+    <p>This has already changed what we say. Claims we initially believed have been retired under evidence — including a literary connection to this building that turned out to belong to another town, and a dating of the cellars that the statutory record does not support. Being willing to lose a good story is what makes the remaining ones worth telling.</p>
+    <div class="q"><blockquote>"The well established Inn, situate in High-street… called the Globe Inn, with two stables, a good Coach-house, yard and a small Garden, now in the occupation of the representatives of the late Mr. Thomas Edwards…"</blockquote><cite>Carmarthen Journal, April 1830 — the earliest named occupier of this building</cite></div>
+    <p>The Globe does not need to borrow anyone else's story. It has an innkeeper by name in 1830, a coach-house, assembly balls in its own ballroom by 1835, and around eighty years as a butcher's shop under the Gleeds, closing in 1991. <a href="laugharne-history-trail.html">The full record is here →</a></p>
+  </div>
+
+  <!-- THE PLACE -->
+  <h2>7 · What the building becomes</h2>
+  <p class="sub">The physical offer, room by room.</p>
+  <div class="rows">
+    <div class="row"><span><b>The desk &amp; the shop</b> — where the day begins. Maps, trails, the app, and considered retail with real provenance behind every object.</span><span class="tag t-now">Phase 1</span></div>
+    <div class="row"><span><b>Coffee &amp; bakery</b> — the reason to come in before the walk, and the easiest first spend of the day.</span><span class="tag t-now">Phase 1</span></div>
+    <div class="row"><span><b>The reading room</b> — the interpretive heart. The real, sourced story of the building, the town and its writers, with room to sit and talk rather than file past.</span><span class="tag t-next">Phase 2</span></div>
+    <div class="row"><span><b>The gallery</b> — a rotating hang of local artists, giving the town's working artists a proper wall and giving visitors something to take home that was made here.</span><span class="tag t-next">Phase 2</span></div>
+    <div class="row"><span><b>The table</b> — wine-led, seasonal, all-day. The dependable room on the trail, and the evening booking that ends the day.</span><span class="tag t-now">Phase 1</span></div>
+    <div class="row"><span><b>The courtyard &amp; the old abattoir</b> — the building's own working history, and a space with genuine character to grow into.</span><span class="tag t-later">Phase 3</span></div>
+  </div>
+
+  <!-- DELIVERY -->
+  <h2>8 · Delivery</h2>
+  <p class="sub">Phased so that each stage stands up on its own and pays for the next.</p>
+  <div class="card">
+    <div class="phase"><span class="num">1</span><div><h4>The record and the room</h4><p>Continuous research builds the verified library. The front of house — desk, shop, coffee, bakery, the table — does the commercial work from day one, without waiting for anything technical.</p></div></div>
+    <div class="phase"><span class="num">2</span><div><h4>One trail, done properly</h4><p>The app engine plus a single flagship loop, built and finished to a standard we would put our name to. Better one excellent walk than five thin ones.</p></div></div>
+    <div class="phase"><span class="num">3</span><div><h4>The town fills in</h4><p>Trails, stops and stories are poured in as content against a working machine — so the research programme and the build stop blocking each other.</p></div></div>
+    <div class="phase"><span class="num">4</span><div><h4>Voices and depth</h4><p>Recorded testimony from the people who remember the town, sitting beneath the narration as the layer nobody can copy. This work is urgent for reasons that have nothing to do with commerce.</p></div></div>
+    <div class="phase"><span class="num">5</span><div><h4>Partners and reach</h4><p>Approach institutional partners with something real and working rather than a proposal — and open the wider conversation from a position of strength.</p></div></div>
+  </div>
+
+  <!-- PRINCIPLES -->
+  <h2>9 · The principles we build to</h2>
+  <p class="sub">These are constraints, not aspirations. Each one has already cost us something.</p>
+  <div class="grid2">
+    <div class="box"><h4>Verified or it doesn't publish</h4><p>No claim reaches a visitor while the evidence behind it is unproven. When the record contradicts a good story, the story goes.</p></div>
+    <div class="box"><h4>We are a good neighbour</h4><p>Other attractions and businesses in this town are cited honestly and sent visitors, not undercut. A rising tide here genuinely does lift everyone, and we have to live here.</p></div>
+    <div class="box b4"><h4>The town is the attraction</h4><p>Built as a cultural resource for Laugharne to use, not a marketing device wearing a museum's clothes. That is also why it will still be worth something in ten years.</p></div>
+    <div class="box b4"><h4>Nobody's voice is a commodity</h4><p>Recorded testimony is given on clear, separable consent, held by this project, and never traded to anyone. A neighbour's voice is not currency.</p></div>
+    <div class="box b3"><h4>Promise only what we can deliver</h4><p>No accessibility claim without a physical audit. No promise of erasure we cannot honour. Where the truth is less impressive, we say the truth.</p></div>
+    <div class="box b3"><h4>Quiet where it matters</h4><p>The playful layer switches off at the graveside and the other places that deserve silence. One tone failure there would define us.</p></div>
+  </div>
+
+  <!-- WHY IT WINS -->
+  <h2>10 · Why this is defensible</h2>
+  <div class="card">
+    <p>A trail app can be copied in a fortnight. What cannot be copied is what sits underneath this one.</p>
+    <p><b>The archive.</b> Hundreds of verified facts assembled from primary documents — newspaper advertisements, wills, statute, listing records and parish registers. That took real work and it compounds.</p>
+    <p><b>The voices.</b> The people who remember this town, recorded properly while they are here. Nobody else can obtain that material, and each year it gets smaller.</p>
+    <p><b>The honesty.</b> An interpretation that shows its sources and admits its gaps is rare enough in heritage to be a position in itself — and it is exactly what serious institutional partners respond to.</p>
+    <p><b>The building.</b> Nine bedrooms, a ballroom, a courtyard and a coach-house on the corner of the town's principal streets, opposite the Town Hall, with two centuries of documented history and a bar, bakery and kitchen already trading inside it.</p>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:32px;">The Globe — House of Culture · Laugharne. Every claim on this page is backed by the record.</p>
+
+</div>
+</body></html>

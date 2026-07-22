@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laugharne — The Study, the Record & the History Trail</title>
+<meta name="description" content="The consolidated historical record for Laugharne and The Globe — what is verified, what is not, the strongest stories for the trail, and the plan of attack.">
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;
+        --warm:#8a5a2b;--blue:#2b4a6b;--plum:#6b3a55;--red:#a8402a;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+  a{color:var(--green);}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 34px;}
+  header .inner{max-width:1040px;margin:0 auto;}
+  .crumb{font-size:12px;color:#bcd0c7;margin-bottom:14px;} .crumb a{color:#d8c9a8;text-decoration:none;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:34px;margin:8px 0 8px;}
+  header p{max-width:700px;color:#e6dcc8;font-size:15px;margin:0;}
+
+  /* counters */
+  .out{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 0 2px;}
+  .ot{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 16px;}
+  .ot b{display:block;font-family:Georgia,serif;font-size:28px;color:#fff;line-height:1.1;}
+  .ot span{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#d8c9a8;}
+  @media(max-width:760px){.out{grid-template-columns:repeat(2,1fr);}}
+
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:21px;margin:40px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  h3{font-family:Georgia,serif;color:var(--dark);font-size:16px;margin:22px 0 8px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,50,45,.06);margin-top:14px;}
+  .card p{margin:0 0 10px;font-size:14px;} .card p:last-child{margin-bottom:0;}
+
+  /* primary source quote */
+  .q{background:#fffdf8;border:1px solid #eadfc4;border-left:5px solid var(--gold);border-radius:10px;padding:14px 18px;margin:12px 0;}
+  .q blockquote{margin:0;font-family:Georgia,serif;font-size:15.5px;color:#4a3a1e;font-style:italic;line-height:1.5;}
+  .q cite{display:block;margin-top:8px;font-style:normal;font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--warm);}
+
+  /* story cards */
+  .stories{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  @media(max-width:760px){.stories{grid-template-columns:1fr;}}
+  .st{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:12px;padding:15px 17px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .st .n{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+  .st h4{font-family:Georgia,serif;font-size:16.5px;margin:5px 0 7px;color:var(--dark);}
+  .st p{font-size:13px;color:#4a5a56;margin:0 0 8px;}
+  .st .ev{font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:7px;}
+  .st.thin{border-left-color:var(--warm);}
+
+  /* do not claim */
+  .dnc{background:#fff8f6;border:1px solid #eccfc6;border-left:6px solid var(--red);border-radius:12px;padding:6px 18px;margin-top:14px;}
+  .dnc .row{padding:11px 0;border-bottom:1px dashed #eccfc6;font-size:13.5px;}
+  .dnc .row:last-child{border-bottom:0;}
+  .dnc b{color:var(--red);}
+  .trad{background:#fff;border:1px solid var(--line);border-left:6px solid var(--plum);border-radius:12px;padding:6px 18px;margin-top:14px;}
+  .trad .row{padding:10px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .trad .row:last-child{border-bottom:0;}
+
+  /* rows */
+  .rows{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .rows .row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .rows .row:last-child{border-bottom:0;}
+  .rows .tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap;height:fit-content;}
+  .t-rich{background:#eef4f0;color:var(--green);} .t-thin{background:#f6efe5;color:var(--warm);}
+  .people{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;}
+  @media(max-width:760px){.people{grid-template-columns:1fr;}}
+  .people .p{padding:9px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .people .p b{color:var(--dark);}
+</style></head><body>
+<header><div class="inner">
+  <div class="crumb"><a href="index.html">← Dashboard</a> &nbsp;·&nbsp; <a href="globe-house-of-culture.html">House of Culture</a></div>
+  <div class="kicker">Laugharne · The Study &amp; The Record</div>
+  <h1>What we can prove, what we can't, and the trail that comes out of it</h1>
+  <p>The consolidated historical record behind the House of Culture — a live chain of custody where every claim is tiered and every published sentence traces to a source. This page is the working state of that record: the verified spine, the strongest stories for the trail, the things we must never say, and where the digging goes next.</p>
+  <div class="out">
+    <div class="ot"><b>563</b><span>Facts logged</span></div>
+    <div class="ot"><b>270</b><span>Sources</span></div>
+    <div class="ot"><b>413</b><span>Entities</span></div>
+    <div class="ot"><b>100</b><span>Threads</span></div>
+    <div class="ot"><b>11%</b><span>Register worked</span></div>
+  </div>
+</div></header>
+<div class="wrap">
+
+  <!-- THE STUDY -->
+  <h2>The study — where the record actually stands</h2>
+  <p class="sub">Honest state of play. 382 facts Verified, 10 Verified-strong, 151 Referenced-pending, 12 Tradition, 8 Refuted.</p>
+  <div class="card">
+    <p>Only <b>11 of 100 threads</b> have been dug to completion, and there are <b>no dead ends</b> — nothing yet asked has proved unanswerable. The research runs continuously, claiming one thread at a time and logging every claim against its source.</p>
+    <p>The important consequence: <b>the strength of the record is very uneven</b>, and the trail must be built where the evidence is, not where the romance is. Two areas are deep and primary-sourced. Five are almost bare.</p>
+  </div>
+  <div class="rows">
+    <div class="row"><span><b>Corporation, ritual &amp; offices</b> — 28 threads, the deepest worked and strongest evidentially. Anchored on primary statute read at object level and the Carmarthenshire Archives GB 211 OBB1 series (minute books 1711–1966, burgess lists, accounts 1647–1888).</span><span class="tag t-rich">Richest</span></div>
+    <div class="row"><span><b>The Globe building &amp; occupants</b> — 12 threads, with 1830 and 1835 newspaper primaries and the 2022 planning documents.</span><span class="tag t-rich">Strong</span></div>
+    <div class="row"><span><b>The name / Welsh-language layer</b> — Verified-strong, attested from 1364.</span><span class="tag t-rich">Strong</span></div>
+    <div class="row"><span><b>The castle &amp; its listed fabric</b> — 10 threads, though Cadw is doing most of the load-bearing.</span><span class="tag t-rich">Adequate</span></div>
+    <div class="row"><span><b>Cockle industry</b> (3 threads), <b>Common Walk</b> (2), <b>Folklore &amp; legend</b> (2), <b>Chapels, schools &amp; churches</b> (4), <b>20th-century living memory</b> (4) — <b>no completed threads at all</b> and almost no verified facts between them.</span><span class="tag t-thin">Thin</span></div>
+  </div>
+
+  <!-- THE SPINE -->
+  <h2>The verified spine — and the documents behind it</h2>
+  <p class="sub">The primary sources are the whole point. These are quoted exactly as they read.</p>
+
+  <h3>The Globe, from 1830</h3>
+  <div class="card">
+    <p>The Globe's own documented story begins earlier than anything we previously had, and it stands entirely on its own without borrowing a poet. An auction advertisement in the <i>Carmarthen Journal</i> of 23 and 30 April 1830 names it, describes it as already long-established, and gives us the first human being on record at the door.</p>
+    <div class="q"><blockquote>"The well established Inn, situate in High-street… called the Globe Inn, with two stables, a good Coach-house, yard and a small Garden, now in the occupation of the representatives of the late Mr. Thomas Edwards…"</blockquote><cite>Carmarthen Journal, 23 &amp; 30 April 1830</cite></div>
+    <p><b>Thomas Edwards</b>, innkeeper, dead by April 1830 — the earliest named occupier of the Globe on record. His representatives held the inn at <b>£30 a year</b>, due to quit at Michaelmas 1830. The <b>coach-house is now primary evidence</b>, where the "horse and coach station" line had previously rested only on a modern planning summary.</p>
+    <p>Five years later the ballroom is working as the town's assembly rooms:</p>
+    <div class="q"><blockquote>"Second Laugharne Assembly… at the Globe Inn, on Friday the 18th December next… Tickets to be had at the Globe."</blockquote><cite>The Welshman, 27 November 1835 — stewards Timothy Powell of Penycoed and Capt. Wm. Tringham RN</cite></div>
+    <p>Then the eighty years that most of the town still remembers: a butcher's shop under the <b>Gleed family</b>, roughly 1911 to 1991, closing on Bobby Gleed's retirement. In March 2021 the rear barn was <i>still fitted out as a working abattoir</i> and the shop untouched since its last occupation.</p>
+  </div>
+
+  <h3>The town that kept its medieval government</h3>
+  <div class="card">
+    <p>This is the strongest evidenced material we hold — read at object level from the King's Printer text of the Municipal Corporations Act 1883. Section 20 is headed, in the Act's own arrangement of sections, <b>"Saving as to Laugharne and Malmesbury"</b>.</p>
+    <div class="q"><blockquote>"…the corporation in the said place shall continue undissolved in like manner as if it were constituted by the said scheme."</blockquote><cite>Municipal Corporations Act 1883, s.20(1)</cite></div>
+    <p>The Act's First Schedule names the body as <b>"The portreeve and burgesses of the town and corporation of Laugharne."</b> Malmesbury took a new charter in 1886 and became an ordinary borough; Laugharne did not, so the saving fell on Laugharne alone. <b>Malmesbury kept the land. Laugharne kept the constitution.</b></p>
+    <p>The living machinery survives: the <b>Portreeve</b> sworn in at <b>Big Court</b> on the first Monday after Michaelmas, serving one year then becoming an Alderman; the Sunday breakfast and the oath reaffirmed at Divine Service before the Portreeve's Chaplain; <b>four Petty Constables chosen by lot</b>; two Common Attorneys collecting the rents; Court Leet and Court Baron still meeting fortnightly; and the timber dais in the Town Hall from which the Portreeve still conducts the court.</p>
+  </div>
+
+  <h3>The charter, and the name</h3>
+  <div class="card">
+    <div class="q"><blockquote>"…all the good laws and customs that the burgesses of Carmarthen have up to now used and enjoyed in the time of King John, the grandfather of the Lord Edward, the son of Henry… preserving the weights and measures that were in the time of Guido de Brione, the elder."</blockquote><cite>The Laugharne borough charter, granted to the burgesses of 'Thalacharn' — undated and unsigned</cite></div>
+    <p>The charter carries <b>no date on the instrument itself</b>. Best current scholarship places it between November 1279 and March 1282.</p>
+    <p>And the name is one word worn down, not two: <b>"Laugharne" is a reduction of the Welsh Talacharn</b> — the loss of the first syllable. Tal- forms are attested from 1 March 1364; the reduced form appears by 1 April 1509; both ran side by side by the 1420s, and no pre-1600 document uses the modern spelling. The local pronunciation <b>"Larn"</b> preserves the loss. The 1535 statute says it outright: <i>"Langeharne otherwise called Tallangherne."</i></p>
+  </div>
+
+  <h3>The port, and the water</h3>
+  <div class="card">
+    <p>The first medieval quay excavated in Wales sits on Island House's plot; its roof timbers are dated to <b>1437</b>, and imported pottery shows trade with Bristol, the French coast and Spain. The ordinary working trade is documented too — corn and oats "regularly shipped for Bristol" — with named coasters: the <b>Mary</b> (Thomas Lewis, master, monthly, 1830), the <b>Betsy</b> and the <b>Penelope</b> (fortnightly, 1844).</p>
+    <div class="q"><blockquote>"…a busy scene, one fit for an artist… they have walked miles."</blockquote><cite>Mary Curtis on the Laugharne cockle-women, c.1830</cite></div>
+    <p>The Strand still carries a ground-floor recess with a <b>cockleshell emblem</b> carved into it.</p>
+  </div>
+
+  <h3>Carved in the walls</h3>
+  <div class="card">
+    <p>Inscriptions still legible on the buildings themselves — the cheapest primary sources in town, and the easiest to stand in front of.</p>
+    <div class="q"><blockquote>"This wall was rebuilt by Maryabra Hughes Skyrme AD 1837."</blockquote><cite>Island House boundary wall</cite></div>
+    <div class="q"><blockquote>"This Pine End Belongs to G James 1752."</blockquote><cite>Brown's Hotel, gable plaque</cite></div>
+    <div class="q"><blockquote>"This New Cross was placed on the Old base 1911, G Williams, Sculptor, Laugharne."</blockquote><cite>The Grist cross, stamped with the badge of Laugharne Corporation</cite></div>
+  </div>
+
+  <!-- THE TRAIL -->
+  <h2>The history trail — the strongest stories</h2>
+  <p class="sub">Ranked by strength of evidence, not by romance. Amber-edged cards are running on thin material and need more digging before they carry a stop.</p>
+  <div class="stories">
+
+    <div class="st"><span class="n">01 · Verified-strong</span><h4>The town that refused a charter</h4>
+      <p>The 1883 Act named two towns. Malmesbury took a new charter and became an ordinary borough. Laugharne did not — so the saving fell to Laugharne alone, and its medieval corporation continued undissolved.</p>
+      <div class="ev">Primary statute read at object level; First Schedule naming the portreeve and burgesses.</div></div>
+
+    <div class="st"><span class="n">02 · Verified</span><h4>Big Court, and the year that turns on a Monday in October</h4>
+      <p>The Portreeve sworn at Big Court on the first Monday after Michaelmas; a one-year term; the Sunday breakfast and the oath reaffirmed in St Martin's; four Petty Constables chosen <i>by lot</i>; the courts still sitting fortnightly.</p>
+      <div class="ev">Corporation records; Cadw on the surviving timber dais.</div></div>
+
+    <div class="st"><span class="n">03 · Verified</span><h4>Eighty years a butcher's</h4>
+      <p>The Globe was a butcher's shop under the Gleeds for around eighty years, roughly 1911 until the shop closed in 1991. In 2021 the rear barn was still a fitted working abattoir.</p>
+      <div class="ev">Planning record; People's Collection Wales 554337 — Bobby and June Gleed serving in the shop.</div></div>
+
+    <div class="st"><span class="n">04 · Verified</span><h4>Thomas Edwards — the earliest name on the door</h4>
+      <p>An 1830 auction advert gives us a "well established Inn", a coach-house, two stables and a garden — and an innkeeper already dead, his representatives holding at £30 a year until Michaelmas.</p>
+      <div class="ev">Carmarthen Journal, 23 &amp; 30 April 1830; The Welshman, 27 Nov 1835.</div></div>
+
+    <div class="st"><span class="n">05 · Verified</span><h4>The siege won in the town, not at the castle</h4>
+      <p>Surrender came on Sunday 3 November 1644 after a week. The decisive action was fought in the streets — and afterwards, in Cadw's own words, the castle was "subsequently pillaged for the building of town houses." The castle's stone is in the town's walls.</p>
+      <div class="ev">Cadw designation text. Tactical detail rests on a single source — keep the telling broad.</div></div>
+
+    <div class="st"><span class="n">06 · Verified-strong</span><h4>Talacharn worn down to Larne</h4>
+      <p>One name eroding across six centuries — Tal- attested from 1364, the reduced form by 1509, both in parallel by the 1420s, and the local pronunciation still carrying the missing syllable.</p>
+      <div class="ev">Attested forms 1364–1535; Laws in Wales Act 1535.</div></div>
+
+    <div class="st"><span class="n">07 · Verified</span><h4>The medieval quay under Island House</h4>
+      <p>The first medieval quay excavated in Wales, roof timbers dated 1437, and pottery from Bristol, France and Spain — a small Welsh town wired into Atlantic trade.</p>
+      <div class="ev">Excavation and dendrochronology; not a Dylan site — do not present it as one.</div></div>
+
+    <div class="st"><span class="n">08 · Verified</span><h4>The heiress and the end of a line</h4>
+      <p>Mary Abra Hughes Skyrme, 1813–1885, sole heiress and last of her line, married at 45 and died without issue — with her name still carved on the wall she rebuilt in 1837.</p>
+      <div class="ev">Cadw listing text quoting the inscription.</div></div>
+
+    <div class="st"><span class="n">09 · Verified</span><h4>Two writers on one hill</h4>
+      <p>Richard Hughes wrote at Castle House from 1934 to 1947; Dylan arrived in Laugharne that same year, reached Sea View in 1938 and the Boathouse in 1949. Hughes is the under-told literary root; Dylan is the draw.</p>
+      <div class="ev">Cadw Register of Parks &amp; Gardens; the writing shed a 1920s garage built for the town's first car, a Wolseley.</div></div>
+
+    <div class="st thin"><span class="n">10 · Thin — needs digging</span><h4>The cockle women of Gosport</h4>
+      <p>Women walking miles out onto the Taf mudflats, living in the Gosport quarter, and a cockleshell carved into a doorway on The Strand. A wonderful stop — but all three cockle threads are still open.</p>
+      <div class="ev">Build on Curtis's eyewitness sentence and the carved shell only. No quantities, no licensing, no Corporation role — none of it is evidenced yet.</div></div>
+
+  </div>
+
+  <!-- DO NOT CLAIM -->
+  <h2>What we must never say</h2>
+  <p class="sub">The refuted list. These are not cautions — they are prohibitions, and several of them are claims we previously believed.</p>
+  <div class="dnc">
+    <div class="row"><b>Never</b> tie <i>Under Milk Wood</i>'s Butcher Beynon to the Globe or to any Laugharne butcher. He draws on <b>Carl Eynon, a butcher and publican of St Clears</b>. Richard Hughes — Dylan's Laugharne friend — said Dylan "didn't use actual Laugharne characters", and that the Llareggub characters "ought to live in Laugharne, perhaps, but in fact not one of them does."</div>
+    <div class="row"><b>Never</b> "13th-century medieval barrel-vaulted cellars". The vaulting and the four-foot walls are describable; the dating is not. Cadw dates the building late Georgian / mid-C19, and neither 2022 professional survey makes any medieval claim.</div>
+    <div class="row"><b>Never</b> "the Laugharne Corporation was abolished in 1886" — true of the borough, false of the Corporation.</div>
+    <div class="row"><b>Never</b> "the last surviving medieval corporation in the UK". Always <b>"one of only two medieval corporations to survive in Britain, alongside the City of London."</b></div>
+    <div class="row"><b>Never</b> "two portreeves". There is one Portreeve; the pair is the two Common Attorneys.</div>
+    <div class="row"><b>Never</b> say the town was named after Major-General Rowland Laugharne — he was of St Brides, had no connection to the town, and the English form of the name predates his birth by a century. His family took its name from the place.</div>
+    <div class="row"><b>Never</b> print 1278, 1290 or 1307 as the charter date. Say "a charter granted in the late thirteenth century by Sir Guy de Brian" or "probably around 1280".</div>
+    <div class="row"><b>Never</b> gloss the meaning of the name. The "bright rock" reading cannot be sourced and appears to be an AI-generated summary circulating as fact. <i>Tal</i> ("end, brow") is safe; leave the second element obscure.</div>
+    <div class="row"><b>Never</b> say the 1644 siege lasted five days — say six days, or a week at the end of October 1644.</div>
+    <div class="row"><b>Never</b> present Island House as a Dylan Thomas location.</div>
+    <div class="row"><b>Never</b> promise step-free or accessible routes. The centre slopes, the kerbs and thresholds are historic, and the castle car park floods at high spring tides. A physical access audit comes first.</div>
+    <div class="row"><b>Never</b> promise Dylan's recorded voice — sound recordings carry their own term plus performers' rights. His written work entered the UK public domain in January 2024 but remains in copyright in the USA.</div>
+  </div>
+
+  <h3>Say only as tradition</h3>
+  <div class="trad">
+    <div class="row">Cromwell watching the siege from Gosport House, and Van Dyck staying there.</div>
+    <div class="row">John Wesley preaching from the Cross at The Grist.</div>
+    <div class="row">Churchill and the bottle of whisky at the Great House.</div>
+    <div class="row">Sea View built taller than the castle, its top storey blown off in a storm.</div>
+    <div class="row">The bar "said to have been" made from the pulpit of the destroyed Congregational Chapel.</div>
+    <div class="row">Roman baths at Island House, and Virginia tobacco unloaded at the quay — both single-source Curtis.</div>
+    <div class="row">That <i>Under Milk Wood</i> was written at the Boathouse — <b>contested</b>: fewer than around 300 lines were written in Laugharne, and New Quay has a serious rival claim.</div>
+  </div>
+
+  <h3>Unreconciled — do not smooth over</h3>
+  <div class="card">
+    <p><b>The 1830 advert places the Globe Inn in "High-street"</b>, while the building today stands on the corner of Market and Duncan Streets. Not yet reconciled. The 1834 survey map and the 1841 tithe apportionment should settle street and plot together.</p>
+    <p><b>The origin of the Globe's name and the history of its sign are undocumented</b> in any accessible source.</p>
+    <p>Say <b>"the Globe Inn"</b> for the 1830s, not "the Globe Hotel". And note that Cadw's own castle record opens "Late C18 Castle…", which is an error in Cadw's record.</p>
+  </div>
+
+  <!-- PEOPLE -->
+  <h2>The people</h2>
+  <p class="sub">Named humans are the storytelling anchors — a name does what a date can't.</p>
+  <div class="card"><div class="people">
+    <div class="p"><b>Thomas Edwards</b> — innkeeper of the Globe, dead by April 1830. The earliest name on the door.</div>
+    <div class="p"><b>Bobby &amp; June Gleed</b> — ran the butcher's shop at the Globe; it closed on his retirement in 1991.</div>
+    <div class="p"><b>Mary Curtis</b> (1815–1895) — governess, painter and antiquarian; wrote <i>Antiquities of Laugharne</i>, 1871.</div>
+    <div class="p"><b>Mary Abra Hughes Skyrme</b> (1813–1885) — sole heiress of Island House, last of the line.</div>
+    <div class="p"><b>Sir John Perrot</b> (1530–1592) — turned the castle into a Renaissance mansion; died in the Tower.</div>
+    <div class="p"><b>Sir John Powell</b> (1633–1696) — judge; one of those who acquitted the Seven Bishops in 1688. Buried here.</div>
+    <div class="p"><b>Josiah Tucker</b> (1712–1799) — economist and Dean of Gloucester, born at Laugharne.</div>
+    <div class="p"><b>Richard Hughes</b> (1900–1976) — <i>A High Wind in Jamaica</i>; at Castle House 1934–47.</div>
+    <div class="p"><b>Sir Sackville Crowe</b> — Treasurer of the Navy, ambassador to Turkey, died in a debtors' prison.</div>
+    <div class="p"><b>Clementina, Viscountess Hawarden</b> (1822–1865) — pioneering photographer; her family held Westmead.</div>
+  </div></div>
+
+  <!-- PLAN OF ATTACK -->
+  <h2>The plan of attack</h2>
+  <p class="sub">Where the digging goes next, in priority order.</p>
+  <div class="rows">
+    <div class="row"><span><b>1 · Find the 1834 survey map.</b> Every dating of the Globe currently rests on it, and it has not been located. It would also close the High-street anomaly and fix the plot boundary — which the trail app needs regardless.</span><span class="tag t-thin">Highest</span></div>
+    <div class="row"><span><b>2 · Chase the abattoir photographic record.</b> Condition 5 of consent PL/03375 required a professional photographic survey lodged with Dyfed Archaeological Trust. It should exist. It is the visual spine of the butcher's story.</span><span class="tag t-thin">High</span></div>
+    <div class="row"><span><b>3 · Read the unread heavyweight sources.</b> Adcock's 2024 UWTSD thesis (only the abstract read), Avent 1987 on the siege (definitive, not online), Avent's 1995 Cadw guide, Archaeology Wales report 1581, and Owen &amp; Morgan's <i>Dictionary of the Place-Names of Wales</i>.</span><span class="tag t-thin">High</span></div>
+    <div class="row"><span><b>4 · Work the five bare areas.</b> Cockles, the Common Walk, folklore, chapels and schools, and twentieth-century living memory have no completed threads between them. Living memory is the urgent one — it is the only category that disappears.</span><span class="tag t-thin">Urgent</span></div>
+    <div class="row"><span><b>5 · Second-source the castle.</b> Cadw is currently load-bearing, and Coflein and British Listed Buildings are Cadw-derived — not independent corroboration. The genuine second objects are the historic OS maps.</span><span class="tag t-rich">Ongoing</span></div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:30px;">Every claim on this page is tiered in the shared chain of custody. Nothing publishes while a linked claim is unverified.</p>
+
+</div>
+</body></html>

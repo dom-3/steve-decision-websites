@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a table — The Globe, Laugharne</title>
+<meta name="description" content="Book a table at The Globe, Laugharne. Wine bar &amp; seasonal restaurant on Duncan Street. Reserve online, or call 01994 427546.">
+<link rel="canonical" href="https://www.globewinebar.co.uk/book.html">
+
+<!-- share -->
+<meta property="og:type" content="restaurant">
+<meta property="og:site_name" content="The Globe, Laugharne">
+<meta property="og:title" content="Book a table — The Globe, Laugharne">
+<meta property="og:description" content="Wine bar &amp; seasonal table. Reserve your table online.">
+<meta property="og:url" content="https://www.globewinebar.co.uk/book.html">
+<meta property="og:image" content="https://www.globewinebar.co.uk/images/og-globe.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#100D0A">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://globewinebar.resos.com">
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* Restaurant palette — brand pack v1 */
+  :root{--ink:#100D0A;--charcoal:#26221C;--gold:#C9A24B;--gold-lt:#dcbb74;--paper:#F4EFE4;
+        --line:rgba(201,162,75,.24);--muted:#9a9082;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.6;
+       background:var(--ink);color:#e9e1d2;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  h1,h2{font-family:'Playfair Display',Georgia,serif;font-weight:600;color:var(--paper);letter-spacing:-.01em}
+
+  /* header — Globe-first lockup */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(16,13,10,.94);
+             backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header.nav .in{max-width:940px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;
+                 justify-content:space-between;gap:16px}
+  .lockup{line-height:1.05}
+  .lockup .master{font-family:'Poiret One',sans-serif;font-size:15px;letter-spacing:.30em;
+                  text-transform:uppercase;color:var(--paper);display:block}
+  .lockup .branch{font-family:'Poiret One',sans-serif;font-size:9.5px;letter-spacing:.22em;
+                  text-transform:uppercase;color:var(--gold);display:block;margin-top:3px}
+  .navback{font-family:'Poiret One',sans-serif;font-size:11.5px;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--muted)}
+  .navback:hover{color:var(--gold)}
+
+  /* hero */
+  .hero{padding:56px 0 30px;text-align:center;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:'Poiret One',sans-serif;font-size:11.5px;letter-spacing:.30em;
+           text-transform:uppercase;color:var(--gold)}
+  h1{font-size:clamp(32px,6vw,52px);line-height:1.06;margin:14px 0 10px}
+  .lead{font-size:19px;color:#c4bba9;max-width:34em;margin:0 auto}
+
+  /* booking panel */
+  .panel{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;
+         padding:clamp(20px,4vw,38px);margin:34px 0 26px}
+  .panel h2{font-size:clamp(21px,3.4vw,27px);margin-bottom:6px}
+  .panel .note{font-size:15.5px;color:var(--muted);margin-bottom:20px}
+
+  /* the Resos widget mount */
+  #resos-mount{min-height:120px}
+  /* The widget script enhances this anchor. If the script never loads, the
+     anchor is still a working direct link — that's the fallback by design. */
+  a.resos-booking-widget{display:inline-block;background:var(--gold);color:var(--ink)!important;
+    font-family:'Poiret One',sans-serif;font-size:15px;letter-spacing:.12em;text-transform:uppercase;
+    padding:17px 40px;border-radius:2px;cursor:pointer;transition:background .2s;
+    border:1.5px solid var(--gold)}
+  a.resos-booking-widget:hover{background:var(--gold-lt);border-color:var(--gold-lt)}
+  /* Resos injects its own iframe/modal — keep it from bleeding out of the panel */
+  #resos-mount iframe{max-width:100%!important;border:0;border-radius:2px}
+
+  .fallback{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);
+            font-size:15.5px;color:var(--muted)}
+  .fallback a{color:var(--gold);border-bottom:1px solid rgba(201,162,75,.4)}
+  .slow{display:none;font-size:15px;color:var(--muted);margin-top:14px}
+  .slow.show{display:block}
+
+  /* call / details */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:50px}
+  @media(max-width:680px){.cols{grid-template-columns:1fr}}
+  .card{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;padding:22px 24px}
+  .card h3{font-family:'Poiret One',sans-serif;font-size:11.5px;letter-spacing:.20em;
+           text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:400}
+  .card p{font-size:17px;color:#d6cdbb}
+  .card a.big{display:block;font-family:'Playfair Display',serif;font-size:24px;color:var(--paper);margin-top:4px}
+  .card a.big:hover{color:var(--gold)}
+  .hours{width:100%;border-collapse:collapse;margin-top:2px}
+  .hours td{padding:8px 0;border-bottom:1px solid rgba(201,162,75,.14);font-size:16.5px;color:#d6cdbb}
+  .hours td:first-child{font-family:'Poiret One',sans-serif;font-size:11px;letter-spacing:.12em;
+                        text-transform:uppercase;color:var(--muted)}
+  .hours td:last-child{text-align:right;color:var(--gold)}
+  .hours tr:last-child td{border-bottom:0}
+
+  footer{border-top:1px solid var(--line);padding:26px 0 40px;text-align:center;
+         font-size:14px;color:var(--muted)}
+  footer a{color:var(--gold)}
+
+  /* sticky mobile call bar — most bookings come from a phone */
+  .callbar{display:none}
+  @media(max-width:680px){
+    .callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;
+             border-top:1px solid var(--line);background:rgba(16,13,10,.97);backdrop-filter:blur(8px)}
+    .callbar a{flex:1;text-align:center;padding:15px 8px;font-family:'Poiret One',sans-serif;
+               font-size:12.5px;letter-spacing:.12em;text-transform:uppercase}
+    .callbar a.b{background:var(--gold);color:var(--ink)}
+    .callbar a.c{color:var(--gold)}
+    body{padding-bottom:58px}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="in">
+  <a class="lockup" href="globe.html">
+    <span class="master">The Globe</span>
+    <span class="branch">Wine Bar &amp; Restaurant</span>
+  </a>
+  <span style="display:flex;align-items:center;gap:18px">
+    <a class="navback" href="globe-menu.html" data-menu-modal>Menu</a>
+    <a class="navback" href="globe.html">← Back to the site</a>
+  </span>
+</div></header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">Laugharne</div>
+    <h1>Book a table</h1>
+    <p class="lead">A small room and a short seasonal menu — booking ahead is the surest way to get the table you want.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Reserve online</h2>
+    <p class="note">Choose your date, time and party size. You'll get an email confirmation straight away.</p>
+
+    <div id="resos-mount">
+      <!-- Resos Booking widget v3 — the anchor below IS the fallback: if the
+           script fails to load it remains a working link to the booking page. -->
+      <a class="resos-booking-widget"
+         href="https://globewinebar.resos.com/booking"
+         data-lang="en"
+         data-restaurant-id="zyujFDJ77Gsv9wSRF"
+         data-domain="globewinebar.resos.com"
+         rel="noopener">Book a table</a>
+      <div id="resos-booking-script-3" style="text-align:center;opacity:.45;font-size:70%;margin-top:10px;">
+        <a target="_blank" rel="noopener" href="https://resos.com/feature/restaurant-system-for-table-management/?utm_source=restaurantsite&amp;utm_medium=bookingwidget&amp;utm_term=Restaurant-management-system">Restaurant management system by Resos</a>
+      </div>
+      <p class="slow" id="resos-slow">Booking form slow to load?
+        <a href="https://globewinebar.resos.com/booking" target="_blank" rel="noopener"
+           style="color:var(--gold);border-bottom:1px solid rgba(201,162,75,.4)">Open the booking page directly →</a></p>
+    </div>
+
+    <div class="fallback">
+      Prefer to speak to someone, or booking for more than 8?
+      Call <a href="tel:+441994427546">01994 427546</a> —
+      or go straight to <a href="https://globewinebar.resos.com/booking" target="_blank" rel="noopener">globewinebar.resos.com/booking</a>.
+    </div>
+  </section>
+
+  <div class="cols">
+    <div class="card">
+      <h3>Find us</h3>
+      <p>The Globe, Bar &amp; Restaurant<br>Duncan Street, Laugharne, SA33 4SA</p>
+      <a class="big" href="tel:+441994427546">01994 427546</a>
+      <p style="margin-top:12px">
+        <a href="https://maps.google.com/?q=The+Globe+Laugharne+SA33+4SA" target="_blank" rel="noopener"
+           style="color:var(--gold);border-bottom:1px solid rgba(201,162,75,.4)">Directions →</a>
+      </p>
+    </div>
+    <div class="card">
+      <h3>Opening hours</h3>
+      <table class="hours">
+        <tr><td>Monday</td><td>12 – 5</td></tr>
+        <tr><td>Tue – Sat</td><td>12 – late</td></tr>
+        <tr><td>Sunday</td><td>12 – 5</td></tr>
+        <tr><td>Happy hour</td><td>3 – 5 daily</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>The Globe · Duncan Street, Laugharne SA33 4SA · <a href="tel:+441994427546">01994 427546</a></p>
+  <p style="margin-top:8px"><a href="globe.html">Home</a> · <a href="https://www.instagram.com/globebarlaugharne/" target="_blank" rel="noopener">@globebarlaugharne</a></p>
+</footer>
+
+<div class="callbar">
+  <a class="b" href="https://globewinebar.resos.com/booking" target="_blank" rel="noopener">Book a table</a>
+  <a class="c" href="tel:+441994427546">Call us</a>
+</div>
+
+<script>
+/* Resos widget loader — deliberately defensive.
+   The third-party script is loaded async and wrapped so that a failure,
+   block (ad-blocker/privacy browser) or timeout can never break the page:
+   the .resos-booking-widget anchor stays a working direct link either way. */
+(function(){
+  "use strict";
+  var MOUNT_ID = "resos-booking-script-3";
+  var SRC = "https://globewinebar.resos.com/embed/booking/widget.js";
+  function boot(){
+    var mount = document.getElementById(MOUNT_ID);
+    if(!mount) return;
+    var slow = document.getElementById("resos-slow");
+    var done = false;
+    try{
+      var s = document.createElement("script");
+      s.src = SRC + "?ts=" + Date.now();
+      s.async = true;
+      s.onload  = function(){ done = true; };
+      s.onerror = function(){ if(slow) slow.classList.add("show"); };
+      mount.appendChild(s);
+      // if it hasn't loaded in 6s, surface the direct link rather than leave a dead panel
+      setTimeout(function(){ if(!done && slow) slow.classList.add("show"); }, 6000);
+    }catch(e){
+      if(slow) slow.classList.add("show");
+    }
+  }
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", boot);
+  } else { boot(); }
+})();
+</script>
+<script src="globe-menu-modal.js" defer></script>
+</body>
+</html>

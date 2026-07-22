@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Globe — House of Culture · Working Section</title>
+<meta name="description" content="The cultural layer of The Globe, Laugharne — turning Dylan Thomas pilgrims into a whole-day, whole-town experience. The Boathouse is the shrine; the Globe is the living heart.">
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;
+        --warm:#8a5a2b;--blue:#2b4a6b;--plum:#6b3a55;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+  a{color:var(--green);}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 32px;}
+  header .inner{max-width:1040px;margin:0 auto;}
+  .crumb{font-size:12px;color:#bcd0c7;margin-bottom:14px;} .crumb a{color:#d8c9a8;text-decoration:none;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:34px;margin:8px 0 8px;}
+  header p{max-width:680px;color:#e6dcc8;font-size:15px;margin:0;}
+  header .line{font-family:Georgia,serif;font-style:italic;font-size:16px;color:#f0e6cf;margin:16px 0 0;border-left:3px solid var(--gold);padding-left:14px;}
+
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:21px;margin:38px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,50,45,.06);margin-top:14px;}
+
+  /* day-loop */
+  .loop{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px;}
+  @media(max-width:760px){.loop{grid-template-columns:1fr 1fr;}}
+  .step{background:#fff;border:1px solid var(--line);border-top:4px solid var(--green);border-radius:12px;padding:14px 15px;box-shadow:0 2px 8px rgba(20,50,45,.05);position:relative;}
+  .step .n{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+  .step b{display:block;font-family:Georgia,serif;font-size:16px;color:var(--dark);margin:4px 0 4px;}
+  .step span{font-size:12.5px;color:#4a5a56;}
+
+  /* two-col grids */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr;}}
+
+  /* gap map */
+  .gap{background:#fff;border:1px solid var(--line);border-left:6px solid var(--warm);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .gap .pain{font-size:13.5px;color:#7a4a2b;font-weight:700;}
+  .gap .fix{font-size:13.5px;color:#2f4a44;margin-top:5px;} .gap .fix b{color:var(--green);}
+
+  /* trails */
+  .trail{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed var(--line);}
+  .trail:last-child{border-bottom:0;}
+  .trail .pill{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+  .pill.easy{background:#eef4f0;color:var(--green);} .pill.med{background:#f7f0e1;color:var(--gold);} .pill.hard{background:#f6efe5;color:var(--warm);}
+  .trail .tx{font-size:13.5px;color:#3a4a47;} .trail .tx b{color:var(--dark);}
+
+  /* workstream board */
+  .ws{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .ws.b2{border-left-color:var(--blue);} .ws.b3{border-left-color:var(--warm);} .ws.b4{border-left-color:var(--plum);} .ws.b5{border-left-color:var(--gold);}
+  .ws .who{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
+  .ws h3{font-family:Georgia,serif;font-size:16px;margin:4px 0 6px;color:var(--dark);}
+  .ws p{font-size:13px;color:#4a5a56;margin:0 0 10px;}
+  .stg{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+  .stg .s{font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:5px;}
+  .d{width:9px;height:9px;border-radius:50%;background:#dfe6e2;border:2px solid #dfe6e2;}
+  .d.done{background:var(--green);border-color:var(--green);} .d.now{background:#fff;border-color:var(--green);box-shadow:0 0 0 3px rgba(31,92,77,.15);}
+  .s.on{color:var(--dark);font-weight:700;}
+
+  /* decisions + awaiting */
+  .rows{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .rows .row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .rows .row:last-child{border-bottom:0;}
+  .rows .row .tick{color:var(--green);font-weight:700;white-space:nowrap;}
+  .rows .row b{color:var(--dark);}
+  .await .q{color:#8a6a2b;font-weight:700;white-space:nowrap;font-size:12px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="crumb"><a href="index.html">← Dashboard</a> &nbsp;·&nbsp; <a href="globe-operating.html">The Globe operating</a></div>
+  <div class="kicker">The Globe · House of Culture</div>
+  <h1>The living heart of Laugharne</h1>
+  <p>The cultural &amp; experience layer of The Globe — turning the ~15,000 Dylan Thomas Boathouse visitors a year (plus the castle, the coast path and the <i>Under Milk Wood</i> pilgrims) into a run-it-ourselves, whole-day, whole-town experience. Not a Boathouse alternative — the warm, well-run day the visitor actually hoped for.</p>
+  <p class="line">The Boathouse is the shrine. The Globe is the living heart — where the story of Dylan, of Laugharne and of the Globe itself is told, experienced, eaten and taken home.</p>
+</div></header>
+<div class="wrap">
+
+  <!-- THE THESIS -->
+  <h2>The opportunity, in one line</h2>
+  <p class="sub">What the reviews tell us — and the gap we fill.</p>
+  <div class="card">
+    Visitors love the views, the staff and the Welsh cakes — but the Boathouse exhibition and video feel dated, the path is steep with no parking, the price feels steep "for the size," and <b>reliable evening dining is thin</b>. It's a 20-minute stop crying out to be a day. We turn a short pilgrimage into a full-day experience that starts and ends at the Globe — and lifts the whole town with it.
+  </div>
+
+  <!-- THE DAY-LOOP -->
+  <h2>The day-loop</h2>
+  <p class="sub">Start here → freshen up → trail → finish with coffee, cake or food. The app leads you from one to the next.</p>
+  <div class="loop">
+    <div class="step"><span class="n">01 · Arrive</span><b>Start here</b><span>The Globe as base camp — museum desk, art shop, history &amp; culture. Pick up the trail, pick up the app.</span></div>
+    <div class="step"><span class="n">02 · Warm up</span><b>Coffee &amp; bakery</b><span>Emyr &amp; Osian's coffee, cake and fresh bake before you walk. Freshen up, set off well.</span></div>
+    <div class="step"><span class="n">03 · Journey</span><b>The trail</b><span>Boathouse, castle, town &amp; <i>Under Milk Wood</i> sites — history at every stop, audio, games, things to spot.</span></div>
+    <div class="step"><span class="n">04 · Return</span><b>History &amp; conversation</b><span>Back at the Globe — the Dylan reading room, leaflets, the real story, room to linger.</span></div>
+    <div class="step"><span class="n">05 · Stay</span><b>Buy &amp; book</b><span>Take-home merch, then finish with coffee, cake or food — and book dinner in the seasonal kitchen.</span></div>
+  </div>
+
+  <!-- THE APP -->
+  <h2>The app — built for the tech-useless</h2>
+  <p class="sub">Decision locked: <b>app-first, town later.</b> Ship the engine + one flagship Globe day-loop; pour in trails and partners as content.</p>
+  <div class="grid2">
+    <div class="card"><b>Dead-simple flow.</b><br><span style="font-size:13.5px;color:#4a5a56;">"Go to this page. Start here. Do this. Here's the bit you're at. Listen to this. Look out for this." One tap to the next stop. Audio narration, spot-it games and prompts along the way. Downloadable / offline for the dead-signal stretches on the coast path. Ends at coffee, cake, food — and book dinner.</span></div>
+    <div class="card"><b>Fed by verified history.</b><br><span style="font-size:13.5px;color:#4a5a56;">Every stop's story pulls from Mererid's sourced facts — nothing overclaimed. The town-wide culture database (Laugharne + Island House + Boathouse + Castle) becomes the content pipeline behind a working app, not a launch blocker.</span></div>
+  </div>
+
+  <!-- TRAILS -->
+  <h2>Tiered trails</h2>
+  <p class="sub">One map, many journeys — accessible loops through to long walks, each with history at every stop.</p>
+  <div class="card">
+    <div class="trail"><span class="pill easy">Easy · accessible</span><span class="tx"><b>The Town Loop</b> — short, flat, buggy- and wheelchair-friendly. The Globe, the square, the Under Milk Wood corners. The answer to "steep path, no parking."</span></div>
+    <div class="trail"><span class="pill med">Medium</span><span class="tx"><b>The Dylan Loop</b> — Globe → Boathouse → writing shed → castle → back. The classic pilgrimage, done properly and bookended by us.</span></div>
+    <div class="trail"><span class="pill hard">Longer · harder</span><span class="tx"><b>The Coast &amp; Estuary Trail</b> — the walk Dylan walked, the "heron-priested shore." For the pilgrims who want the whole day on foot.</span></div>
+  </div>
+
+  <!-- GAP MAP -->
+  <h2>The gap map — what we fix</h2>
+  <p class="sub">Every complaint in the reviews is a thing we convert. (Nia + Taliesin build the full version.)</p>
+  <div class="grid2">
+    <div class="gap"><div class="pain">"Exhibition &amp; video feel dated"</div><div class="fix">→ <b>Living, curated storytelling</b> — reading room, app narration, rotating gallery.</div></div>
+    <div class="gap"><div class="pain">"Steep path, no parking"</div><div class="fix">→ <b>Start in town at the Globe</b> — easy accessible loop, we're the warm, reachable base.</div></div>
+    <div class="gap"><div class="pain">"Price steep for the size"</div><div class="fix">→ <b>A whole day of value</b> — trail, app, food, take-home, not a 20-minute room.</div></div>
+    <div class="gap"><div class="pain">"Limited, inconsistent evening dining"</div><div class="fix">→ <b>A dependable seasonal kitchen</b> — the reliable, wine-led evening table, done our way.</div></div>
+  </div>
+
+  <!-- WORKSTREAM BOARD -->
+  <h2>The workstream board</h2>
+  <p class="sub">Each persona runs in its own chat; results come back, get ticked, next prompt goes out. Live state below.</p>
+  <div class="grid2">
+    <div class="ws"><div class="who">Mererid · Archival history</div><h3>The verified story</h3><p>563 facts, 270 sources, 100 threads — running continuously. The Globe now has its own documented story from 1830, with a named innkeeper and a primary-sourced coach-house. <b>The Butcher Beynon hook is REFUTED</b> — he draws on Carl Eynon of St Clears, not the Globe.</p>
+      <div class="stg"><span class="s"><span class="d done"></span>3 runs done</span><span class="s"><span class="d done"></span>Hooks table</span><span class="s on"><span class="d now"></span>Into copy</span></div></div>
+    <div class="ws b2"><div class="who">Bob + Taliesin · Architecture</div><h3>The app engine + content model</h3><p>Architecture spec + live pipeline tables. Beat = Thread × Stop makes the town a web, not a list. Four depth bands (orient → beat → thread → evidence). One linear spine, optional trapdoors. Offline, no account, no GPS dependency.</p>
+      <div class="stg"><span class="s"><span class="d done"></span>Architecture</span><span class="s"><span class="d done"></span>Pipeline live</span><span class="s on"><span class="d now"></span>Narration call</span></div></div>
+    <div class="ws b3"><div class="who">Taliesin · Culture &amp; Story</div><h3>Visit design + town map</h3><p>The end-to-end journey and the town mapped into tiered trails — as a content pipeline feeding the app.</p>
+      <div class="stg"><span class="s on"><span class="d now"></span>Designing</span><span class="s"><span class="d"></span>Map stops</span><span class="s"><span class="d"></span>Verify w/ Mererid</span></div></div>
+    <div class="ws b3"><div class="who">Nia · Social / SEO</div><h3>Review mining · gap map</h3><p>7 gaps mined with attributed verbatim quotes; grave claim corrected out; three honest positioning pillars — Reliable Table · Accessible Anchor · Whole Story. Weekly refresh scheduled.</p>
+      <div class="stg"><span class="s"><span class="d done"></span>Gap map</span><span class="s"><span class="d done"></span>Verbatim quotes</span><span class="s on"><span class="d now"></span>Positioning</span></div></div>
+    <div class="ws b4"><div class="who">Brush + local artists</div><h3>Gallery &amp; merch</h3><p>Rotating local-artist gallery + first take-home merch line, to Seren's brand system. Literary-named where it earns it.</p>
+      <div class="stg"><span class="s on"><span class="d now"></span>Planning</span><span class="s"><span class="d"></span>Artist terms</span><span class="s"><span class="d"></span>First line</span></div></div>
+    <div class="ws b5"><div class="who">Delphine + Nia</div><h3>The reveal story</h3><p>The public narrative of what we're building — held until you say go public.</p>
+      <div class="stg"><span class="s on"><span class="d now"></span>Drafting</span><span class="s"><span class="d"></span>Hold for go</span><span class="s"><span class="d"></span>Publish</span></div></div>
+  </div>
+
+  <!-- PARTNERSHIPS -->
+  <h2>Partnerships</h2>
+  <p class="sub">Decision locked: <b>include free, ask later.</b></p>
+  <div class="rows">
+    <div class="row"><span>🏰 <b>Laugharne Castle</b> — run by <b>Cadw</b> (Welsh Government heritage). Goes into the app now as a public trail stop; formal joint-ticket / day-pass talk after launch.</span><span class="tick">Include now</span></div>
+    <div class="row"><span>🕮 <b>Island House</b> — tie-in through our existing history database; rides alongside as trail content.</span><span class="tick">Phase in</span></div>
+    <div class="row"><span>⚓ <b>Boathouse</b> — light, non-controlling tie-up: mutual referral / joint angle, no dependency.</span><span class="tick">Keep light</span></div>
+    <div class="row"><span>🎪 <b>Laugharne Weekend</b> (Richard Thomas) — Globe as a 2027 venue + a brochure ad this year.</span><span class="tick">Chasing</span></div>
+  </div>
+
+  <!-- DECISIONS LOCKED -->
+  <h2>Decisions locked</h2>
+  <p class="sub">Steer given by the owner — the rails everything runs on.</p>
+  <div class="rows">
+    <div class="row"><span><b>Run it ourselves</b> — Steve-owned cultural layer of the Globe, not a third-party controlling takeover.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>App-first, town later</b> — ship the engine + Globe day-loop; trails &amp; partners as content in phases.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Castle: include free, ask later</b> — feature as public trail stop now; Cadw partnership post-launch.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Never overclaim</b> — no "Dylan drank here" without proof; Mererid's verified facts gate all content. <b>The Butcher Beynon hook is now refuted</b> (he draws on Carl Eynon of St Clears; Richard Hughes recorded that Dylan "didn't use actual Laugharne characters") — the Globe stands on its own 1830 record instead. <a href="laugharne-history-trail.html">See the full record →</a></span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Brown's / dinner positioning — UNDER REVIEW</b> — verified: Brown's runs Dexters (farm-to-fork steakhouse) serving dinner 7 days (5:30–9 Mon–Sat, 12–9 Sun), so the town is NOT a dinner void. Owner re-decision pending: compete head-on vs own the complementary daytime / early-evening wine-led "table on the trail." Guardrail stands: never claim "no dinner in Laugharne."</span><span class="tick">Revisit</span></div>
+    <div class="row"><span><b>Copy guardrails</b> — cellars are "atmospheric barrel-vaulted", never "13th-century"; "one of only two medieval corporations to survive in Britain, alongside the City of London"; no accessibility badge until an on-site audit.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>The town's app, the Globe's bookend</b> — built as a cultural asset for the whole of Laugharne to use (opens Heritage Fund and awards eligibility), with every journey quietly starting and finishing at the Globe.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Mererid runs continuously</b> — automated research every 30 minutes off a thread backlog; one verified thread per run, logged to the chain of custody.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Cadw — approach with a demo, not a deck</b> — they're award-recognised for immersive heritage storytelling (M+H Awards 2026), so we go to them from strength once the app is real.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Verified or it doesn't publish</b> — Mererid's register is an enforced gate in the app itself: a beat cannot go live while any linked claim is unverified, and every published sentence traces to its source in one click.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>The Globe earns the bookend</b> — Stop 0 carries zero commercial content; we hold both ends by being useful (wifi &amp; download point, loo, water, charge, map, the place a split party reunites). Test for every line: "would this still be here if the Globe didn't own the app?"</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Dylan's recorded voice is off the table</b> — sound recordings carry a separate term plus performers' rights, so text entering the public domain does not release the archive audio.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Professional commissioned narration</b> — our own prose, our own voice, rights-proof from day one. Copyright comes off the critical path: Mererid's verification now only decides whether we may <i>quote</i> Dylan, not whether the app works.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Bilingual, properly</b> — Welsh and English built in from the start, not retrofitted. Scripts, content model and audio pipeline all bilingual by design.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Self-funded, done properly</b> — no grant applications or funding vehicles pursued at this stage. We build it to a professional standard on our own terms; awards can be revisited once it's real.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Dylan's voice — Laugharne area only</b> — in the UK his words entered the public domain in Jan 2024 and pre-1962 sound recordings were never revived by the 2013 term extension, so the 1952–53 Caedmon recordings appear clear on all three rights layers. We restrict to the Laugharne area — a strict subset of that position rather than a test of it. Karen leads compliance.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>AI narration, no voice budget</b> — AI carries the narration spine (re-records are free, so versioning costs almost nothing), Welsh comes from local speakers as a parallel script, and the town's own recorded voices become the authentic layer nobody can copy. Gated on an accent test first.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Never synthesise Dylan's voice</b> — we use the real licensed recordings or we use our own narration. No AI approximation of a real or deceased person, ever. It would be an ethical and rights failure, and it would poison the credibility the whole project is built on.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>If it isn't in the index, it doesn't exist</b> — every document logged to <i>Docs — Index</i> in the shared base with its exact location, the moment it's written. Two handoffs have already degraded because a persona couldn't find another's work.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Self-hosted Welsh voice (Bangor / Techiaith)</b> — open-source bilingual Welsh–English voices built from a native-speaker corpus, self-hostable. Bilingual by construction, so its English is already Welsh-accented — our requirement, not a workaround. Local speaker recorded once, then every beat and every future correction generated free, in a real accent.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>We do not sell a neighbour's voice</b> — some providers take a perpetual licence to build derivatives from uploaded voices. We will never trade a Laugharne neighbour's voice likeness to a company in perpetuity for a free tier. Any provider demanding it is disqualified; the model stays ours and theirs.</span><span class="tick">✓</span></div>
+    <div class="row"><span><b>Town voices are v1, not a nice-to-have</b> — with a synthetic spine, the real voices are what stop this sounding like every other heritage app, and they're the one asset nobody can copy. Waiting has an irreversible cost.</span><span class="tick">✓</span></div>
+  </div>
+
+  <!-- AWAITING -->
+  <h2>Awaiting your steer, Steve</h2>
+  <p class="sub">The live calls that unblock the next step.</p>
+  <div class="rows await">
+    <div class="row"><span>🎪 <b>Laugharne Weekend</b> — go/no-go on the brochure ad (real deadline), plus 2027 venue positioning.</span><span class="q">Decide →</span></div>
+    <div class="row"><span>📄 <b>Taliesin's blueprint v0.3 (PDF)</b> — ready for your review; a structural OK releases Bob to build (copy tightened in parallel).</span><span class="q">Review →</span></div>
+    <div class="row"><span>📱 <b>Bob's v1 app scope</b> — sign off the cheapest-viable build + rough cost.</span><span class="q">Approve →</span></div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:30px;">The Globe — House of Culture · a live working section — everything logged and timestamped.</p>
+
+</div>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var biz='Bakery', who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body></html>

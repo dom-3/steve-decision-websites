@@ -8,9 +8,19 @@
 
 **Register:** Airtable base `appnt9vSQKrKyaKiZ` — *Steve Kirkwood — Build Projects*
 **Websites:** the git repo at `~/Documents/steve-decision-websites`
-**Docs:** Google Drive — *My Drive > Globe Winebar/Bakery > Globe — House of Culture* (folder `11q9k5njOuRI7ZrUzVVohWOsBZVjlNrT3`), indexed in `Docs — Index` (`tblk4jRBUX6bnHTiD`)
+**Docs:** the same git repo — `docs/` for research and write-ups, `team/` for persona and CEO-desk operating prompts — indexed in `Docs — Index` (`tblk4jRBUX6bnHTiD`)
 
-Everything else is retired. Write to the three places above and nowhere else.
+Everything else is retired. Write to the places above and nowhere else.
+
+### Docs rule — ratified 22 July 2026 (supersedes the earlier "docs live in Drive" rule)
+
+Documents live **in the git repo**, on Dominic's own machine, version-controlled and backed up to GitHub. Airtable stays the **register** — state, decisions, hours, and the `Docs — Index` pointing at each doc.
+
+- **Structured state** (tasks, hours, decisions, enquiries, the doc index) → **Airtable**. It is queryable and the portal APIs already read it.
+- **Long documents** (research, briefs, persona prompts) → **the repo**. Airtable long-text caps at 100k characters, cannot be diffed or versioned, and is the wrong tool for prose.
+- **Google Drive** → only for documents someone *outside* this system needs to open. Not the default, not the home.
+
+Why the repo and not a loose local folder: a plain folder is invisible to other desks and forks silently — that is how Doc 135 disappeared and how `steve-site` diverged. The repo is local **and** shared **and** versioned, which removes both failure modes. Commit path-scoped (`git add -- <paths>`), never `git add -A`.
 
 ---
 
@@ -22,7 +32,7 @@ Everything else is retired. Write to the three places above and nowhere else.
 | `CEO-Globe/site-build/` | the live website files | `~/Documents/steve-decision-websites` |
 | `CEO-Globe/site-build-BACKUP-2026-07-22/` | a working copy | — (read-only history) |
 | `~/Documents/steve-site/` | the live website files | `~/Documents/steve-decision-websites` |
-| Any session `outputs/` folder | a place to leave a doc | Google Drive, at the moment of writing |
+| Any session `outputs/` folder | a place to leave a doc | the git repo, at the moment of writing |
 
 The retired folders have been renamed with a `RETIRED —` prefix. The retired base has had its tables renamed `RETIRED — do not use — …` so that anything still pointed at it **fails loudly instead of writing silently into a dead fork**. That is deliberate. If you hit a 404 on a table name, you are pointed at the wrong base — fix the pointer, do not work around it.
 
@@ -69,7 +79,8 @@ Verified identical in both bases at retirement, so nothing to move: Decisions & 
 
 ## Standing rules
 
-- **Write to Drive at the moment of writing**, never at the end of a run. Session output folders are invisible to every other persona — that is how Doc 135 disappeared.
-- **Log the doc in `Docs — Index` immediately**, with a direct URL in *Where it lives* — a link, never a path description.
+- **Write into the repo at the moment of writing**, never at the end of a run. Session output folders are invisible to every other persona — that is how Doc 135 disappeared.
+- **Log the doc in `Docs — Index` immediately**, with its repo path (and GitHub URL) in *Where it lives* — a precise location, never a vague description.
+- **Commit path-scoped** — `git add -- <exact paths>`, never `git add -A`.
 - **Never back-fill a register from folder docs** without diffing record IDs first.
 - **If a number looks wrong, check the pointer before you check the data.**

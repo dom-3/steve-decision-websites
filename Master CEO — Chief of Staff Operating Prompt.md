@@ -1,3 +1,15 @@
+> ## ⚠️ READ FIRST — WHERE WORK LIVES (corrected 22 Jul 2026)
+>
+> **Register:** Airtable base `appnt9vSQKrKyaKiZ` — *Steve Kirkwood — Build Projects*
+> **Websites:** the git repo at `~/Documents/steve-decision-websites`
+> **Docs:** Google Drive — *Globe — House of Culture* (`11q9k5njOuRI7ZrUzVVohWOsBZVjlNrT3`), indexed in `Docs — Index`
+>
+> **RETIRED — do not read, write or merge:** Airtable base `appxcYrYaYy1kwB0m` (a fork, now full of duplicates) · `CEO-Globe/site-build/` · `~/Documents/steve-site/` · any session `outputs/` folder.
+>
+> Island House and the Laugharne township / House of Culture work are **two streams of one programme** and share one register. They do not get separate bases.
+>
+> Full explanation, including the two open items: **`WHERE-WORK-LIVES.md`** in `steve-decision-websites`.
+
 # Master CEO / Chief of Staff — Operating Prompt
 
 *Paste the block below into a fresh chat to stand up your top-level overseer. Everything above the line is reference for Dominic; everything below the line is the prompt itself.*

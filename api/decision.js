@@ -2,7 +2,7 @@
 // Accepts { reviewer, items: [{ item, business, type, answer }] } and writes
 // one Airtable row per answered item. Token lives only in Vercel env (AIRTABLE_TOKEN).
 
-const BASE_ID = process.env.AIRTABLE_BASE || "appxcYrYaYy1kwB0m";     // Steve Kirkwood — Build Projects
+const BASE_ID = process.env.AIRTABLE_BASE || "appnt9vSQKrKyaKiZ";     // Steve Kirkwood — Build Projects (THE single register. Do NOT point this at appxcYrYaYy1kwB0m — that is a RETIRED fork.)
 const TABLE   = process.env.AIRTABLE_DECISIONS_TABLE || "Decisions & Discussion";
 
 export default async function handler(req, res) {

@@ -93,6 +93,13 @@
 
   .visit{background:var(--band)}
   .visit .g2{display:grid;grid-template-columns:1fr 1fr;gap:52px}
+  /* Secondary slot — the entrance, so people know the door when they arrive.
+     Portrait frame; not a hero. */
+  .visit .entrance{margin-top:30px;aspect-ratio:4/5;background-position:center;
+    background-size:cover;background-repeat:no-repeat;border-radius:3px;
+    background-image:url('images/restaurant/exterior-entrance.jpg')}
+  @media(max-width:760px){.visit .entrance{aspect-ratio:3/2;
+    background-image:url('images/restaurant/exterior-entrance-m.jpg')}}
   .hours-t{width:100%;border-collapse:collapse;margin-top:14px}
   .hours-t td{padding:11px 0;border-bottom:1px solid var(--line);font-size:18px}
   .hours-t td:first-child{font-family:'Poiret One',sans-serif;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -108,7 +115,8 @@
   .lw{background-image:url('images/site/lw.png')}
   .lg-gold{background-image:url('images/site/lg-gold.png')}
   .b-sunset{background-image:url('images/site/b-sunset.jpg')}
-  .b-frontage{background-image:url('images/site/b-frontage.jpg')}
+  .b-frontage{background-image:url('images/restaurant/interior-dining.jpg')}
+  @media(max-width:760px){.b-frontage{background-image:url('images/restaurant/interior-dining-m.jpg')}}
   .b-courtyard{background-image:url('images/site/b-courtyard.jpg')}
   .f-wine{background-image:url('images/site/f-wine.jpg')}
   .f-wine2{background-image:url('images/site/f-wine2.jpg')}
@@ -120,8 +128,8 @@
   .f-seabass{background-image:url('images/site/f-seabass.jpg')}
   .f-seabass2{background-image:url('images/site/f-seabass2.jpg')}
   .f-scallop{background-image:url('images/site/f-scallop.jpg')}
-  .f-camembert{background-image:url('images/site/f-camembert.jpg')}
-  .f-tapas{background-image:url('images/site/f-tapas.jpg')}
+  .f-camembert{background-image:url('images/restaurant/interior-beams-sq.jpg')}
+  .f-tapas{background-image:url('images/restaurant/interior-dining-oak-sq.jpg')}
   .f-menu{background-image:url('images/site/f-menu.jpg')}
   .f-bread{background-image:url('images/site/f-bread.jpg')}
 
@@ -344,6 +352,7 @@
       <a class="bigbtn" href="#book">Book a table</a>
       <a class="bigbtn ghost" href="https://maps.google.com/?q=The+Globe+Laugharne+SA33+4SA" target="_blank" rel="noopener">Directions</a>
     </div>
+    <div class="entrance" role="img" aria-label="The entrance to The Globe — stone frontage and olive trees off the courtyard"></div>
   </div>
 </div></div></section>
 

@@ -2,7 +2,7 @@
 // Reads/writes the Airtable "Work Log" table. Token lives only in Vercel env (AIRTABLE_TOKEN).
 // NOTE: GET needs the token to have data.records:read scope (as well as :write).
 
-const BASE_ID = process.env.AIRTABLE_BASE || "appxcYrYaYy1kwB0m";
+const BASE_ID = process.env.AIRTABLE_BASE || "appnt9vSQKrKyaKiZ";
 const TABLE   = process.env.AIRTABLE_WORKLOG_TABLE || "Work Log";
 
 export default async function handler(req, res) {

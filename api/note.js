@@ -3,7 +3,7 @@
 // The Airtable token lives ONLY in a Vercel Environment Variable (AIRTABLE_TOKEN),
 // never in the public page. Runs on Vercel's Node runtime (global fetch built in).
 
-const BASE_ID   = process.env.AIRTABLE_BASE  || "appxcYrYaYy1kwB0m";       // Steve Kirkwood — Build Projects
+const BASE_ID   = process.env.AIRTABLE_BASE  || "appnt9vSQKrKyaKiZ";       // Steve Kirkwood — Build Projects (THE single register. Do NOT point this at appxcYrYaYy1kwB0m — that is a RETIRED fork.)
 const TABLE     = process.env.AIRTABLE_TABLE || "Website Notes";
 
 export default async function handler(req, res) {

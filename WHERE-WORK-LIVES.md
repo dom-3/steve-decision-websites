@@ -12,6 +12,17 @@
 
 Everything else is retired. Write to the places above and nowhere else.
 
+### Publishing rule — ratified 23 July 2026 (SINGLE PUBLISHER)
+
+**No CEO desk or persona runs `git` against this repo. Ever.** All commits and pushes to the website repo go through **one publisher: the Master / Jarvis desk.** This ends the lock contention and clobbering that comes from several desks committing to the same folder at once (the cause of the `HEAD.lock` / `index.lock` errors on 22–23 July, and the same class of problem as the base fork).
+
+How work reaches the site now:
+- **A desk that has a website or doc change** either writes the file into the repo working tree and **leaves it uncommitted**, or hands the change to the Master desk to make. It does **not** `git add`, `git commit` or `git push`.
+- **The Master / Jarvis desk is the only committer.** It reviews staged changes, commits path-scoped (`git add -- <exact paths>`, never `git add -A`), and pushes — either on demand (website changes, which go live) or via the Jarvis 21:00 run (the day's `docs/` batch).
+- **Going live = a deliberate act by the one publisher**, not a side effect of a desk saving a file.
+
+If you are a desk and you think something needs to go live, say so in your Handover line and let the publisher take it. Do not touch git.
+
 ### Docs rule — ratified 22 July 2026 (supersedes the earlier "docs live in Drive" rule)
 
 Documents live **in the git repo**, on Dominic's own machine, version-controlled and backed up to GitHub. Airtable stays the **register** — state, decisions, hours, and the `Docs — Index` pointing at each doc.
@@ -95,6 +106,6 @@ Verified identical in both bases at retirement, so nothing to move: Decisions & 
 
 - **Write into the repo at the moment of writing**, never at the end of a run. Session output folders are invisible to every other persona — that is how Doc 135 disappeared.
 - **Log the doc in `Docs — Index` immediately**, with its repo path (and GitHub URL) in *Where it lives* — a precise location, never a vague description.
-- **Commit path-scoped** — `git add -- <exact paths>`, never `git add -A`.
+- **Never run `git` against this repo.** Write your file and leave it uncommitted, or hand the change to the Master / Jarvis desk — the single publisher (see the Publishing rule above). Only the publisher commits and pushes. Say in your Handover line that something is waiting to go live.
 - **Never back-fill a register from folder docs** without diffing record IDs first.
 - **If a number looks wrong, check the pointer before you check the data.**

@@ -207,6 +207,33 @@
     .feature .t{padding:34px 32px;align-self:center}
   }
 
+  /* ---- image rhythm: three different treatments so nothing stacks the same ----
+     1) .band.mid  — a MEDIUM full-width band (shorter than the hero-height band)
+     2) .craft     — a modest PORTRAIT beside a line of copy (split, not a band)
+     3) .closeimg  — a CONTAINED, framed image within the column (not full-bleed)
+     Copy over any image sits on the cream scrim panel (crust 5.34:1 = AA) or on
+     solid cream beside/below the image. ------------------------------------- */
+  .band.mid img{height:clamp(190px,30vh,340px)}
+
+  .craft{padding:clamp(38px,6vw,66px) 0}
+  .craft .in{display:grid;grid-template-columns:1fr;gap:clamp(20px,4vw,40px);align-items:center}
+  .craft figure{margin:0 auto;max-width:300px;border:1px solid var(--line);overflow:hidden;background:var(--cream-dp)}
+  .craft img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
+  .craft .t h2{font-size:clamp(25px,3.6vw,37px);margin:10px 0 0}
+  .craft .t p{margin-top:13px;color:#4A3E2E;font-size:clamp(18px,2.3vw,21px);max-width:24em;
+              font-family:'Playfair Display',serif;line-height:1.35}
+  .craft .t .body{font-size:17.5px;margin-top:11px;max-width:30em;color:#4A3E2E}
+  @media(min-width:780px){
+    .craft .in{grid-template-columns:minmax(0,300px) 1fr}   /* portrait stays modest */
+  }
+
+  .closeimg{padding:clamp(30px,5vw,56px) 0 0}
+  .closeimg figure{margin:0 auto;max-width:440px}
+  .closeimg img{width:100%;display:block;aspect-ratio:3/2;object-fit:cover;border-radius:4px;
+                border:1px solid var(--line)}
+  .closeimg figcaption{margin-top:11px;text-align:center;font-family:'Poiret One',sans-serif;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-dk)}
+
   /* ---- ordering ---- */
   .order{background:var(--cream-dp);border-top:1px solid var(--line);
          border-bottom:1px solid var(--line);padding:clamp(44px,7vw,74px) 0}
@@ -316,17 +343,17 @@
   </div>
 </div></section>
 
-<!-- ============ PROVENANCE BAND ============ -->
-<section class="band">
+<!-- ============ IN THE BAKEHOUSE — medium oven band ============ -->
+<section class="band mid">
   <picture>
-    <source media="(max-width:760px)" srcset="images/bakery/heroes/bakery-courtyard-m.jpg">
-    <img src="images/bakery/heroes/bakery-courtyard-hero.jpg"
-         alt="Fresh bread laid out in the stone courtyard at The Globe, Laugharne"
-         width="1920" height="1080" loading="lazy" decoding="async">
+    <source media="(max-width:760px)" srcset="images/bakery/bakehouse-oven-m.jpg">
+    <img src="images/bakery/bakehouse-oven.jpg"
+         alt="Loaves baking in the deck oven at The Globe Bakery, Laugharne"
+         width="2400" height="1350" loading="lazy" decoding="async">
   </picture>
   <div class="cap"><div class="in"><div class="panel">
-    <div class="e">Duncan Street, Laugharne</div>
-    <p>Here's where it's made — the courtyard behind the bar, most mornings before eight.</p>
+    <div class="e">In the bakehouse</div>
+    <p>Baked here, every morning.</p>
   </div></div></div>
 </section>
 
@@ -447,19 +474,36 @@
   </figure>
 </div></section>
 
-<!-- ============ SECTION BREAK ============ -->
-<section class="band">
-  <picture>
-    <source media="(max-width:760px)" srcset="images/bakery/heroes/bakery-overhead-m.jpg">
-    <img src="images/bakery/heroes/bakery-overhead-hero.jpg"
-         alt="Overhead view of the day's bread at The Globe Bakery"
-         width="1920" height="1080" loading="lazy" decoding="async">
-  </picture>
-  <div class="cap"><div class="in"><div class="panel">
-    <div class="e">One morning's bake</div>
-    <p>Everything, laid out. When it's gone, it's gone.</p>
-  </div></div></div>
-</section>
+<!-- ============ CRAFT ROW — scoring (portrait beside copy, modest) ============ -->
+<section class="craft"><div class="wrap"><div class="in">
+  <figure>
+    <picture>
+      <source media="(max-width:760px)" srcset="images/bakery/bakehouse-scoring-m.jpg">
+      <img src="images/bakery/bakehouse-scoring.jpg"
+           alt="Hands scoring a sourdough loaf with a lame, proving baskets alongside, at The Globe Bakery"
+           width="1280" height="1600" loading="lazy" decoding="async">
+    </picture>
+  </figure>
+  <div class="t">
+    <div class="eyebrow">By hand</div>
+    <h2>Scored by hand, every morning.</h2>
+    <p>Every loaf is cut by hand before it goes in — the last thing that happens before the oven.</p>
+    <div class="body">Small batches, made on the bench behind the bar, and sold the day they're baked.</div>
+  </div>
+</div></div></section>
+
+<!-- ============ CLOSING IMAGE — baskets (contained frame, near the order) ============ -->
+<section class="closeimg"><div class="wrap">
+  <figure>
+    <picture>
+      <source media="(max-width:760px)" srcset="images/bakery/bakehouse-baskets-m.jpg">
+      <img src="images/bakery/bakehouse-baskets.jpg"
+           alt="Baskets of freshly baked bread and baguettes at The Globe Bakery"
+           width="2400" height="1600" loading="lazy" decoding="async">
+    </picture>
+    <figcaption>Fresh this morning — baskets filled and ready</figcaption>
+  </figure>
+</div></section>
 
 <!-- ============ HOW TO ORDER ============ -->
 <section class="order" id="order"><div class="wrap">

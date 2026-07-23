@@ -1,39 +1,26 @@
 # Files here are NEVER uploaded to Vercel — they can't be reached at any URL.
 # They stay on your Mac and still work locally (python3 -m http.server 8080).
 #
-# Delete a line to start publishing that file again.
+# UPDATED 23 Jul 2026 — Dominic: "publish everything". Every HTML page and the
+# compliance endpoint that used to be blocked are now PUBLISHED, so all the
+# dashboard tabs and planning-page links resolve. Money / rates / compliance are
+# therefore reachable by anyone who has the (private, unguessable) URL — that was
+# the explicit choice, to be locked down properly when the staff login goes in.
+#
+# What stays blocked below is deliberately NOT web pages: secrets, the internal
+# operating docs and persona prompts, and the research library. Publishing those
+# would expose the whole operating system and the do-not-claim register on the
+# public URL. Delete a line to publish it.
 
-# ---- Money & compliance (the sensitive stuff) ----
-globe-operating.html      # CEO dashboard — finances panel + compliance register
-api/compliance.js         # endpoint that serves Karen's compliance register
-commercials.html          # the money framework — rates, retainer
+# ---- Secrets — NEVER deploy ----
+.env.local
+.env
 
-# ---- Internal working pages ----
-globe-brand-pack.html    # brand reference — internal, and quotes copy rulings
-bakery-architecture.html
-bakery-concepts.html
-bakery-plan.html
-bakery-prototype.html
-bakery.html
-business.html
-worklog.html
-worklog-2026-07-20-INTERIM.md
-meeting-notes.html
-roadmap.html
-direction.html
-timelines.html
-globe-plan.html
-globe-customers.html
-the-globe-bar.html
-
-_preview/                # local PDF render previews
-make-menu-pdf.py         # build script, not a web asset
-
-# ---- Working notes & source material ----
+# ---- Internal operating docs, persona prompts, research library (NOT web pages) ----
 *.md
 team/
-CONSOLIDATION-REPORT.md
-Master CEO — Chief of Staff Operating Prompt.md
+docs/
 
-# ---- Never deploy ----
-.env.local
+# ---- Build scripts & local render previews (not web assets) ----
+_preview/
+make-menu-pdf.py

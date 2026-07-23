@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House of Culture — The Heritage Centre, the Shop & the Guided Experience</title>
+<meta name="description" content="Concept for the physical experience: an art & design heritage centre, a high-standard shop of locally-made things with real provenance, and the whole site guided by the tour.">
+<style>
+  :root{--plum:#4a3560;--plum-d:#2b1d3a;--brass:#9c7a3c;--brass-l:#c6a768;--paper:#ede7d8;--slate:#1b1e1e;
+        --green:#1f5c4d;--ink:#22302e;--muted:#6a7b76;--line:#e0dccf;--warm:#8a5a2b;}
+  *{box-sizing:border-box;} body{margin:0;background:#f2efe6;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px 90px;}
+  a{color:var(--plum);}
+  header{background:linear-gradient(160deg,var(--slate),#0e100f);color:#efe7d5;padding:44px 22px 36px;}
+  header .inner{max-width:1080px;margin:0 auto;}
+  .crumb{font-size:12px;color:#b7ae98;margin-bottom:14px;} .crumb a{color:var(--brass-l);text-decoration:none;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:var(--brass-l);}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:33px;margin:8px 0 10px;color:#f4eede;}
+  header p{max-width:700px;color:#d8cfba;font-size:15px;margin:0;}
+  .flag{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,.08);border:1px solid rgba(198,167,104,.4);color:var(--brass-l);padding:5px 12px;border-radius:20px;}
+
+  h2{font-family:Georgia,serif;color:var(--plum-d);font-size:22px;margin:46px 0 4px;border-bottom:2px solid var(--brass);padding-bottom:6px;}
+  h3{font-family:Georgia,serif;color:var(--plum-d);font-size:16px;margin:22px 0 8px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 18px;max-width:72ch;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,20,10,.05);margin-top:14px;}
+  .card p{font-size:14px;margin:0 0 10px;} .card p:last-child{margin-bottom:0;} .lede{font-size:15.5px;}
+
+  /* zones */
+  .zones{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px;}
+  @media(max-width:820px){.zones{grid-template-columns:1fr;}}
+  .zone{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(20,20,10,.05);}
+  .zone .zh{padding:13px 16px;color:#f4eede;background:var(--plum);}
+  .zone.z2 .zh{background:var(--brass);} .zone.z3 .zh{background:var(--green);}
+  .zone .zh b{font-family:Georgia,serif;font-size:16px;display:block;} .zone .zh small{font-size:11px;opacity:.9;letter-spacing:.5px;text-transform:uppercase;}
+  .zone .zb{padding:13px 16px;font-size:13px;color:#43413a;}
+  .zone .zb ul{margin:6px 0 0;padding-left:16px;} .zone .zb li{margin-bottom:4px;}
+
+  /* provenance principle */
+  .prov{background:var(--paper);border:1px solid #d8d0bc;border-left:6px solid var(--brass);border-radius:12px;padding:16px 20px;margin-top:14px;}
+  .prov b{color:var(--warm);} .prov .test{font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--plum-d);margin-top:8px;}
+
+  /* product grid */
+  .prods{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px;}
+  @media(max-width:820px){.prods{grid-template-columns:1fr;}}
+  .prod{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 17px;box-shadow:0 2px 8px rgba(20,20,10,.05);border-top:4px solid var(--brass);}
+  .prod .st{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--brass);}
+  .prod h4{font-family:Georgia,serif;font-size:16px;margin:5px 0 6px;color:var(--plum-d);}
+  .prod p{font-size:13px;color:#43413a;margin:0 0 8px;}
+  .prod .why{font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:7px;}
+  .prod .why b{color:var(--green);}
+  .prod.pend{border-top-color:var(--warm);opacity:.92;}
+  .prod.pend .st{color:var(--warm);}
+
+  /* throughline steps */
+  .flow{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .fstep{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 14px;position:relative;box-shadow:0 2px 8px rgba(20,20,10,.05);border-top:4px solid var(--plum);}
+  .fstep .n{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--brass);}
+  .fstep b{display:block;font-family:Georgia,serif;font-size:14.5px;color:var(--plum-d);margin:4px 0 4px;}
+  .fstep span{font-size:12px;color:#43413a;}
+
+  /* principles */
+  .princ{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+  @media(max-width:820px){.princ{grid-template-columns:1fr;}}
+  .pr{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;box-shadow:0 2px 8px rgba(20,20,10,.05);}
+  .pr b{font-family:Georgia,serif;font-size:14px;color:var(--plum-d);display:block;margin-bottom:4px;}
+  .pr span{font-size:12.5px;color:#43413a;}
+
+  /* meeting */
+  .meet{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(20,20,10,.05);}
+  .meet .row{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .meet .row:last-child{border-bottom:0;} .meet b{color:var(--plum-d);}
+</style></head><body>
+<header><div class="inner">
+  <div class="crumb"><a href="index.html">← Dashboard</a> &nbsp;·&nbsp; <a href="house-of-culture-plan.html">The plan</a> &nbsp;·&nbsp; <a href="house-of-culture-app-concept.html">The app concept</a></div>
+  <div class="kicker">House of Culture · The Physical Experience</div>
+  <h1>The heritage centre, the shop, and the guided day</h1>
+  <p>The building itself as the start and end of the visit — a small, well-made heritage centre and design shop where everything on the shelf has a real story behind it, and the whole site is threaded by the tour. Concept to work from, and to talk to a maker through.</p>
+  <span class="flag">⚠ Concept — product ideas drawn from verified material, all subject to the provenance rule below</span>
+</div></header>
+<div class="wrap">
+
+  <!-- 1 · THE IDEA -->
+  <h2>1 · One space, three jobs</h2>
+  <p class="sub">Not three separate rooms fighting for space — one experience that shifts register as you move through it. You arrive into interpretation, you leave through the shop, and the tour connects the building to the whole town.</p>
+  <div class="zones">
+    <div class="zone"><div class="zh"><small>Understand</small><b>The Heritage Centre</b></div><div class="zb">The reading room and "start here". Factual, sourced interpretation — the Globe's hundred lives, the Corporation, the port, the town's writers — told honestly and beautifully.
+      <ul><li>The story, with its sources shown</li><li>The trailhead — pick up the tour</li><li>Archive images &amp; recorded voices</li><li>Room to sit, not file past</li></ul></div></div>
+    <div class="zone z2"><div class="zh"><small>Take home</small><b>The Design Shop</b></div><div class="zb">Small, locally-made, high-standard things that carry the place and the day home — every one with provenance.
+      <ul><li>Made in or near Laugharne</li><li>Tied to a real story on the trail</li><li>A range at every price point</li><li>Quality over quantity, always</li></ul></div></div>
+    <div class="zone z3"><div class="zh"><small>Discover</small><b>The Gallery</b></div><div class="zb">A rotating hang of local artists — a proper, well-paid wall for the town's makers, and something to take home that was made here.
+      <ul><li>Rotating local-artist hang</li><li>Original work &amp; affordable prints</li><li>The maker's story beside the work</li><li>A reason to come back</li></ul></div></div>
+  </div>
+
+  <!-- 2 · THE PRINCIPLE -->
+  <h2>2 · The rule that makes it work</h2>
+  <p class="sub">The difference between a heritage shop and a souvenir shop is one question, asked of every single object.</p>
+  <div class="prov">
+    <p>Everything we sell must pass the <b>provenance test</b>: it is genuinely made here or nearby, to a real standard, and it connects to a true story from the record. No manufactured heritage, no claim the history won't support, nothing mass-imported with a Laugharne sticker on it. If it can't answer <i>"why does this exist and what is it connected to,"</i> it doesn't go on the shelf.</p>
+    <p class="test">"Real things, made by real hands, that carry a true story — not souvenirs."</p>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:10px;">This is the same chain-of-custody discipline we apply to the history, applied to the shelf. It is also the commercial edge: a shop where every object has a story is a shop people remember, photograph and come back to — and it can charge properly, because it isn't selling tat.</p>
+  </div>
+
+  <!-- 3 · PRODUCT CONCEPTS -->
+  <h2>3 · What's on the shelf — product concepts</h2>
+  <p class="sub">Concept directions, each anchored to verified material. Amber cards wait on research or rights before they can be made. These are starting points to hand a maker, not a fixed range.</p>
+  <div class="prods">
+
+    <div class="prod"><span class="st">Verified · the Globe</span><h4>The Hundred Lives print</h4>
+      <p>A single beautiful piece charting the building's real lives — inn, coach-house, assembly rooms, butcher's, today — dated from the record. Letterpress or screen-print by a local printer.</p>
+      <div class="why"><b>Why it exists:</b> the 1830 advert, the 1835 assembly, the Gleeds to 1991 — all documented.</div></div>
+
+    <div class="prod"><span class="st">Verified · the Corporation</span><h4>The cockle-shell &amp; the Portreeve</h4>
+      <p>Enamel pin, tea towel or card celebrating the town's medieval Corporation — the Portreeve, Big Court, the constables chosen by lot. A story almost nobody outside Laugharne knows.</p>
+      <div class="why"><b>Why it exists:</b> the 1883 Act saved the Corporation; it still swears in a Portreeve each autumn.</div></div>
+
+    <div class="prod"><span class="st">Verified · the estuary</span><h4>The cockle-women range</h4>
+      <p>A print or ceramic drawn from Curtis's eyewitness line — "a busy scene, one fit for an artist… they have walked miles." Ties to the real cockle trade and the carved shell on The Strand.</p>
+      <div class="why"><b>Why it exists:</b> Curtis, c.1830; the cockleshell emblem still carved on The Strand.</div></div>
+
+    <div class="prod"><span class="st">Verified · the name</span><h4>Talacharn → Laugharne</h4>
+      <p>A typographic piece on the name worn down across six centuries — and the pronunciation "Larn". Quietly local; the kind of thing a Welsh speaker buys as much as a visitor.</p>
+      <div class="why"><b>Why it exists:</b> attested forms 1364–1535; the reduction is Verified-strong.</div></div>
+
+    <div class="prod"><span class="st">Verified · the kitchen</span><h4>The Globe larder</h4>
+      <p>Edible take-home made by the kitchen and bakery — preserves, biscuits, a bottled something — and, in time, the Globe Cook Book. The bakery people already rave about, in a jar.</p>
+      <div class="why"><b>Why it exists:</b> made on site; the deli/kitchen/Cook Book are already in build.</div></div>
+
+    <div class="prod"><span class="st">Verified · the makers</span><h4>The gallery editions</h4>
+      <p>Signed originals and affordable prints from the rotating local artists, with the maker's own story on the label. The wall and the shop feeding each other.</p>
+      <div class="why"><b>Why it exists:</b> real local artists, real work — the good-neighbour engine of the whole thing.</div></div>
+
+    <div class="prod pend"><span class="st">Pending rights · Dylan</span><h4>His words, carefully</h4>
+      <p>A line of Dylan's own words — a printed card, a cloth — <i>if and only if</i> the public-domain position is confirmed, and framed honestly. Never his voice, never a claim we can't hold.</p>
+      <div class="why"><b>Held until:</b> the UK/US rights position is verified. Do not make ahead of that.</div></div>
+
+    <div class="prod pend"><span class="st">Pending research · the walk</span><h4>The Common Walk keepsake</h4>
+      <p>Something tied to the beating of the bounds and its offices — but only with the Corporation's blessing, and only once the detail is verified. A once-every-three-years thing.</p>
+      <div class="why"><b>Held until:</b> Corporation blessing + verified detail. Embargoed for now.</div></div>
+
+  </div>
+
+  <!-- 4 · THE THROUGHLINE -->
+  <h2>4 · Guided all the way through</h2>
+  <p class="sub">The tour isn't only outside — it threads the building too. The same voice that walks you round the town introduces the centre, hands you off to the trail, and welcomes you back to the shop.</p>
+  <div class="flow">
+    <div class="fstep"><span class="n">In</span><b>Welcome &amp; orient</b><span>The centre sets the scene and hands you the tour. No hard sell — this is the start of the story.</span></div>
+    <div class="fstep"><span class="n">Out</span><b>Onto the trail</b><span>The app leads you into the town; the building becomes base camp you'll return to.</span></div>
+    <div class="fstep"><span class="n">Back</span><b>Return &amp; linger</b><span>The reading room deepens what you just walked — sources, voices, the fuller story.</span></div>
+    <div class="fstep"><span class="n">Keep</span><b>Through the shop</b><span>You leave past the things that carry the day home — each one a story you now recognise.</span></div>
+  </div>
+  <div class="card"><p><b>The quiet mechanism:</b> by the time a visitor reaches the shop, they've heard the stories behind what's on the shelf. The Hundred Lives print isn't décor — it's the building they've just stood inside. That's why provenance sells: the tour does the storytelling, so the object only has to remind.</p></div>
+
+  <!-- 5 · PRINCIPLES -->
+  <h2>5 · Principles</h2>
+  <div class="princ">
+    <div class="pr"><b>Provenance or it's not stocked</b><span>Made here, to a standard, tied to a true story. No exceptions, no imported tat with a sticker.</span></div>
+    <div class="pr"><b>The makers are paid properly</b><span>A real, fair platform for local artists and makers — the town benefiting, not being mined. This is also Steve's standing.</span></div>
+    <div class="pr"><b>Never overclaim on an object</b><span>No "13th-century cellars" on a tea towel, no Dylan quote before rights, no manufactured legend. The shelf obeys the record.</span></div>
+    <div class="pr"><b>A range at every price</b><span>A £3 card and a £300 original under one roof — so everyone leaves with something, and nobody's priced out of the story.</span></div>
+    <div class="pr"><b>Quality over quantity</b><span>Fewer, better things. A small shelf of remarkable objects beats a wall of forgettable ones.</span></div>
+    <div class="pr"><b>Interpretation is free</b><span>The heritage centre's factual content is open and generous. We charge for the made thing, never for the truth.</span></div>
+  </div>
+
+  <!-- 6 · FOR THE MEETING -->
+  <h2>6 · For whoever's coming in</h2>
+  <p class="sub">What we bring to the table, and what we'd want from a design/heritage/maker partner.</p>
+  <div class="meet">
+    <div class="row"><span><b>What we already have</b> — a verified historical record (1,086 facts, sourced), a building with two centuries of documented history, the app and trail concept, an approved visual identity (Fraunces, Aged Brass, Archival Paper), and a live kitchen, bakery and bar inside the building.</span></div>
+    <div class="row"><span><b>What we're looking for</b> — a curator's eye for the shop and heritage centre, relationships with local makers, a feel for high-standard small-batch retail, and someone who understands that the provenance rule is the whole point.</span></div>
+    <div class="row"><span><b>What we won't do</b> — mass-import, overclaim, or turn the story into cheap souvenirs. The bar is high on purpose, and it's the thing that makes it work.</span></div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:32px;">Concept · the physical experience. Every product idea obeys the record before it's ever made.</p>
+
+</div>
+</body></html>

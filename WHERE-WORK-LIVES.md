@@ -23,6 +23,19 @@ How work reaches the site now:
 
 If you are a desk and you think something needs to go live, say so in your Handover line and let the publisher take it. Do not touch git.
 
+### Two repos — PUBLIC vs INTERNAL (ratified 23 July 2026, after the theglobe.wales launch)
+
+There are now **two website repos**, and this is the "no diverging copies" rule in its most important form yet. Get this wrong and you edit one copy while the live site serves the other.
+
+- **PUBLIC — the customer-facing Globe site.** Its own GitHub repo + Vercel, live at **`theglobe.wales`**. This is the **single source of truth for anything a customer sees**: homepage, wine-bar/restaurant, bakery, pre-order, menu. **All** future customer-facing edits — menu, prices, images, copy — go **here and nowhere else.**
+- **INTERNAL — this repo (`steve-decision-websites`).** The Business Operating System: the private dashboard, work log, decisions, finances, research and docs. **Not customer-facing.**
+
+Rules:
+1. The customer-facing Globe pages that still sit in this internal repo are **RETIRED** — do not edit them. They are stale the moment `theglobe.wales` moves. Either delete them or have the dashboard **link out** to `theglobe.wales`, never host its own editable copy.
+2. **If you edit a public page and the live site doesn't change, you edited the wrong repo.** Public = theglobe.wales.
+3. The **single-publisher rule applies to BOTH repos** — only the Master / Jarvis desk commits and pushes, to either one.
+4. The **staff photo-upload tool is internal-only** — it must never sit on the public marketing site.
+
 ### Docs rule — ratified 22 July 2026 (supersedes the earlier "docs live in Drive" rule)
 
 Documents live **in the git repo**, on Dominic's own machine, version-controlled and backed up to GitHub. Airtable stays the **register** — state, decisions, hours, and the `Docs — Index` pointing at each doc.

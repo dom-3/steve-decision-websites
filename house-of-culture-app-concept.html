@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House of Culture — App & Trail Concept</title>
+<meta name="description" content="First design concept for the Laugharne trail app and route structure — the flow, the screens, the content engine and the Common Walk heartbeat.">
+<style>
+  :root{--plum:#4a3560;--plum-d:#2b1d3a;--gold:#b07d2b;--gold-l:#d8b877;--green:#1f5c4d;--dark:#153f35;
+        --ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;--warm:#8a5a2b;--paper:#eef1ee;--screen:#faf7f1;}
+  *{box-sizing:border-box;} body{margin:0;background:var(--paper);color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px 90px;}
+  a{color:var(--plum);}
+  header{background:linear-gradient(160deg,var(--plum),var(--plum-d));color:#f4efe6;padding:42px 22px 34px;}
+  header .inner{max-width:1080px;margin:0 auto;}
+  .crumb{font-size:12px;color:#c7bcd6;margin-bottom:14px;} .crumb a{color:#e0d3b4;text-decoration:none;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e0d3b4;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:33px;margin:8px 0 10px;}
+  header p{max-width:680px;color:#ded3ea;font-size:15px;margin:0;}
+  .flag{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#f0e6cf;padding:5px 12px;border-radius:20px;}
+
+  h2{font-family:Georgia,serif;color:var(--plum-d);font-size:22px;margin:46px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  h3{font-family:Georgia,serif;color:var(--plum-d);font-size:16px;margin:22px 0 8px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 18px;max-width:70ch;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,50,45,.06);margin-top:14px;}
+  .card p{font-size:14px;margin:0 0 10px;} .card p:last-child{margin-bottom:0;}
+
+  /* DAY LOOP RING */
+  .ring{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin-top:16px;}
+  .rnode{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 14px;position:relative;box-shadow:0 2px 8px rgba(20,50,45,.05);border-top:4px solid var(--plum);}
+  .rnode .n{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+  .rnode b{display:block;font-family:Georgia,serif;font-size:15px;color:var(--plum-d);margin:4px 0 4px;}
+  .rnode span{font-size:12px;color:#4a5a56;}
+  .rnode .arrow{position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:16px;z-index:2;}
+  @media(max-width:820px){.rnode .arrow{display:none;}}
+  .loopback{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;font-style:italic;}
+
+  /* TRAILS schematic */
+  .trails{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px;}
+  @media(max-width:820px){.trails{grid-template-columns:1fr;}}
+  .trail{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .trail .th{padding:13px 16px;color:#fff;}
+  .trail.t1 .th{background:var(--green);} .trail.t2 .th{background:var(--gold);} .trail.t3 .th{background:var(--warm);}
+  .trail .th b{font-family:Georgia,serif;font-size:16px;display:block;} .trail .th small{font-size:11px;opacity:.9;letter-spacing:.5px;text-transform:uppercase;}
+  .trail .tb{padding:12px 16px;}
+  .dots{display:flex;align-items:center;gap:0;margin:4px 0 12px;flex-wrap:wrap;}
+  .dots .d{width:11px;height:11px;border-radius:50%;background:var(--gold-l);border:2px solid #fff;box-shadow:0 0 0 1px var(--line);}
+  .dots .ln{flex:1;height:2px;background:var(--line);min-width:10px;}
+  .trail .tb ul{margin:0;padding-left:16px;font-size:12.5px;color:#43534f;} .trail .tb li{margin-bottom:3px;}
+  .trail .meta{font-size:11px;color:var(--muted);margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;}
+
+  /* PHONE WIREFRAMES */
+  .phones{display:flex;gap:18px;overflow-x:auto;padding:8px 2px 14px;margin-top:16px;}
+  .phone{flex:0 0 232px;}
+  .scr{width:232px;height:430px;background:var(--screen);border:9px solid #23202a;border-radius:30px;overflow:hidden;box-shadow:0 10px 30px rgba(20,10,40,.18);display:flex;flex-direction:column;position:relative;}
+  .scr .notch{height:20px;background:#23202a;border-radius:0 0 12px 12px;width:90px;margin:0 auto;}
+  .scr .body{flex:1;padding:14px 14px 10px;display:flex;flex-direction:column;overflow:hidden;}
+  .plabel{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--plum);text-align:center;margin-top:9px;}
+  .plabel small{display:block;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;margin-top:2px;}
+  /* screen bits */
+  .s-kick{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+  .s-h{font-family:Georgia,serif;font-size:19px;color:var(--plum-d);line-height:1.15;margin:5px 0;}
+  .s-h.sm{font-size:16px;}
+  .s-p{font-size:11.5px;color:#4a5a56;margin:4px 0;}
+  .s-btn{background:var(--plum);color:#fff;text-align:center;font-size:13px;font-weight:700;padding:11px;border-radius:10px;margin-top:auto;}
+  .s-btn.gold{background:var(--gold);}
+  .s-btn.ghost{background:transparent;border:1.5px solid var(--plum);color:var(--plum);}
+  .s-listen{width:74px;height:74px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;margin:14px auto;box-shadow:0 6px 18px rgba(176,125,43,.4);}
+  .s-wave{height:26px;background:repeating-linear-gradient(90deg,var(--gold-l) 0 2px,transparent 2px 6px);opacity:.5;border-radius:4px;margin:6px 0;}
+  .s-tile{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 9px;font-size:11px;color:#3a4a47;margin-top:6px;}
+  .s-tile b{color:var(--plum-d);font-size:11.5px;}
+  .s-look{background:#f3eef7;border:1px solid #ddd0e8;border-radius:8px;padding:8px 9px;font-size:11px;color:#5a4a6b;margin-top:6px;}
+  .s-look b{display:block;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--plum);margin-bottom:2px;}
+  .s-drawer{margin-top:6px;border-top:2px solid var(--gold);padding-top:7px;}
+  .s-row{display:flex;justify-content:space-between;font-size:11px;color:#43534f;padding:5px 0;border-bottom:1px dashed var(--line);}
+  .s-row .src{color:var(--green);font-weight:700;font-size:10px;}
+  .s-bubble{font-size:11px;padding:7px 9px;border-radius:10px;margin-top:6px;max-width:88%;}
+  .s-bubble.you{background:var(--plum);color:#fff;margin-left:auto;border-bottom-right-radius:3px;}
+  .s-bubble.ai{background:#fff;border:1px solid var(--line);color:#33413d;border-bottom-left-radius:3px;}
+  .s-cite{font-size:9px;color:var(--green);margin-top:3px;}
+  .s-coll{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px;}
+  .s-coll .cc{aspect-ratio:1;border-radius:8px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gold);}
+  .s-coll .cc.got{background:var(--green);color:#fff;border-color:var(--green);}
+  .s-coll .cc.lock{color:#c9d2ce;}
+  .s-prog{height:7px;background:var(--line);border-radius:4px;margin-top:8px;overflow:hidden;}
+  .s-prog i{display:block;height:100%;width:55%;background:var(--green);}
+
+  /* ENGINE diagram */
+  .eng{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:center;margin-top:16px;}
+  @media(max-width:820px){.eng{grid-template-columns:1fr;}.eng .op{display:none;}}
+  .ebox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 15px;box-shadow:0 2px 8px rgba(20,50,45,.05);text-align:center;}
+  .ebox .lab{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+  .ebox b{display:block;font-family:Georgia,serif;font-size:16px;color:var(--plum-d);margin:4px 0;}
+  .ebox span{font-size:11.5px;color:#4a5a56;}
+  .op{font-size:26px;color:var(--gold);text-align:center;font-family:Georgia,serif;}
+  .gate{background:#fff8f6;border:1px solid #eccfc6;border-left:5px solid #a8402a;border-radius:12px;padding:13px 16px;margin-top:14px;font-size:13px;}
+  .gate b{color:#a8402a;}
+
+  /* depth ladder */
+  .ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px;}
+  @media(max-width:820px){.ladder{grid-template-columns:1fr 1fr;}}
+  .rung{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 13px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .rung .lv{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#fff;background:var(--plum);border-radius:20px;padding:2px 9px;display:inline-block;}
+  .rung b{display:block;font-family:Georgia,serif;font-size:14px;color:var(--plum-d);margin:7px 0 4px;}
+  .rung span{font-size:11.5px;color:#4a5a56;}
+
+  /* heartbeat states */
+  .beat{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;}
+  @media(max-width:820px){.beat{grid-template-columns:1fr 1fr;}}
+  .bstate{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 15px;box-shadow:0 2px 8px rgba(20,50,45,.05);border-top:4px solid var(--plum);}
+  .bstate.live{border-top-color:var(--gold);background:#fffdf6;}
+  .bstate b{font-family:Georgia,serif;font-size:15px;color:var(--plum-d);display:block;margin-bottom:5px;}
+  .bstate span{font-size:12px;color:#4a5a56;}
+
+  /* status */
+  .status{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
+  .status .row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .status .row:last-child{border-bottom:0;}
+  .st-tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap;height:fit-content;}
+  .st-real{background:#e8f0ec;color:var(--green);} .st-design{background:#f1eef6;color:var(--plum);} .st-wait{background:#f6efe5;color:var(--warm);}
+</style></head><body>
+<header><div class="inner">
+  <div class="crumb"><a href="index.html">← Dashboard</a> &nbsp;·&nbsp; <a href="house-of-culture-plan.html">The plan</a> &nbsp;·&nbsp; <a href="laugharne-history-trail.html">The record</a></div>
+  <div class="kicker">House of Culture · Design Concept v1</div>
+  <h1>The routes, the screens, and the engine underneath</h1>
+  <p>A first frame to design to — how the day is shaped, how the app is walked, and how the verified library drives it. Not final artwork and not final copy: a structure the design and build can now hang on.</p>
+  <span class="flag">⚠ Concept — placeholder copy drawn from verified material, subject to the publish gate</span>
+</div></header>
+<div class="wrap">
+
+  <!-- 1 · THE DAY -->
+  <h2>1 · The shape of the day</h2>
+  <p class="sub">The commercial spine as a loop that starts and ends at the Globe. Every visit is a circle, not a line — you always come back to base.</p>
+  <div class="ring">
+    <div class="rnode"><span class="n">01 · Arrive</span><b>Start here</b><span>Desk, map, shop, the app downloads on our wifi.</span><span class="arrow">→</span></div>
+    <div class="rnode"><span class="n">02 · Warm up</span><b>Coffee &amp; bake</b><span>The first, easiest spend — and a coffee for the walk.</span><span class="arrow">→</span></div>
+    <div class="rnode"><span class="n">03 · Journey</span><b>The trail</b><span>The town and the story, stop by stop, at your pace.</span><span class="arrow">→</span></div>
+    <div class="rnode"><span class="n">04 · Return</span><b>Reading room</b><span>Come back in — the real story, room to sit and talk.</span><span class="arrow">→</span></div>
+    <div class="rnode"><span class="n">05 · Keep &amp; stay</span><b>Buy &amp; the table</b><span>Take something home; book a table for tonight.</span></div>
+  </div>
+  <div class="loopback">↺ and the loop closes at the Globe — Stop 0 carries no sell; we earn both ends by being useful</div>
+
+  <!-- 2 · THE ROUTES -->
+  <h2>2 · The routes</h2>
+  <p class="sub">One map, three journeys — so the ninety-minute visitor and the all-day walker are both served. Stop counts are indicative; the real geography waits on the 1842 tithe map to fix plot boundaries.</p>
+  <div class="trails">
+    <div class="trail t1"><div class="th"><small>Easy · level · accessible</small><b>The Township Loop</b></div><div class="tb">
+      <div class="dots"><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span></div>
+      <ul><li>The Globe (start)</li><li>The Town Hall &amp; the Portreeve's court</li><li>The square &amp; the corporation town</li><li>The Grist &amp; the old port</li><li>back to the Globe</li></ul>
+      <div class="meta">~0.8 mi · flat · the answer to "steep path, no parking"</div>
+    </div></div>
+    <div class="trail t2"><div class="th"><small>Medium</small><b>The Literary Loop</b></div><div class="tb">
+      <div class="dots"><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span></div>
+      <ul><li>The Globe → Brown's (the pub)</li><li>The Boathouse &amp; writing shed</li><li>Castle House &amp; the gazebo</li><li>St Martin's &amp; the grave</li><li>the estuary view → back</li></ul>
+      <div class="meta">the pilgrimage, done properly &amp; bookended by us</div>
+    </div></div>
+    <div class="trail t3"><div class="th"><small>Long · harder</small><b>The Estuary Trail</b></div><div class="tb">
+      <div class="dots"><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span><span class="ln"></span><span class="d"></span></div>
+      <ul><li>The full shore walk</li><li>Over Sir John's Hill</li><li>the cockle sands</li><li>the bound-line the town walks</li><li>a whole day on foot</li></ul>
+      <div class="meta">for pilgrims who want the whole thing</div>
+    </div></div>
+  </div>
+
+  <!-- 3 · THE APP FLOW -->
+  <h2>3 · How the app is walked</h2>
+  <p class="sub">One simple linear spine on top — go here, listen, look, next — with optional trapdoors into depth. Built for someone who doesn't enjoy technology: no account, no menus, never depends on signal or GPS. Wireframes, not final art.</p>
+  <div class="phones">
+
+    <div class="phone"><div class="scr"><div class="notch"></div><div class="body">
+      <div class="s-kick">The Globe · Laugharne</div>
+      <div class="s-h">Start here.</div>
+      <div class="s-p">Pick your walk. The whole trail downloads now, so it works with no signal out on the coast path.</div>
+      <div class="s-tile"><b>The Township Loop</b><br>~45 min · flat · 5 stops</div>
+      <div class="s-tile"><b>The Literary Loop</b><br>~2 hrs · 6 stops</div>
+      <div class="s-btn">Download &amp; begin ▸</div>
+    </div></div><div class="plabel">Start<small>choose &amp; download</small></div></div>
+
+    <div class="phone"><div class="scr"><div class="notch"></div><div class="body">
+      <div class="s-kick">Stop 2 of 5</div>
+      <div class="s-h sm">The Town Hall</div>
+      <div class="s-p">You're opposite the Globe, looking at the little white building with the clock.</div>
+      <div class="s-look"><b>👀 Look for</b>The upstairs window — the court still sits behind it, fortnightly, as it has for centuries.</div>
+      <div class="s-btn gold">▸ Listen · 80 sec</div>
+    </div></div><div class="plabel">Arrive at a stop<small>L0 — orient, 10 sec</small></div></div>
+
+    <div class="phone"><div class="scr"><div class="notch"></div><div class="body">
+      <div class="s-kick">The Town Hall</div>
+      <div class="s-listen">❚❚</div>
+      <div class="s-wave"></div>
+      <div class="s-p" style="text-align:center;font-style:italic;">"In 1883 an Act of Parliament named two towns. Laugharne kept its medieval constitution — and still swears in a Portreeve every autumn…"</div>
+      <div class="s-btn ghost">⌄ More — go deeper</div>
+      <div class="s-btn">Next stop ▸</div>
+    </div></div><div class="plabel">The beat<small>L1 — 80 sec, must stand alone</small></div></div>
+
+    <div class="phone"><div class="scr"><div class="notch"></div><div class="body">
+      <div class="s-kick">⌄ Deeper · The Town Hall</div>
+      <div class="s-drawer">
+        <div class="s-row"><span>The Portreeve &amp; Big Court</span><span class="src">source ▸</span></div>
+        <div class="s-row"><span>Chosen by lot: 4 constables</span><span class="src">source ▸</span></div>
+        <div class="s-row"><span>The 1883 Act, s.20 — read it</span><span class="src">source ▸</span></div>
+        <div class="s-row"><span>Archive photos (1896 clock)</span><span class="src">3 imgs</span></div>
+        <div class="s-row"><span>🎙 "I was Portreeve in '02…"</span><span class="src">voice</span></div>
+      </div>
+      <div class="s-p" style="margin-top:auto;font-size:10px;color:#8a9a95;">Every line traces to a source in one tap.</div>
+    </div></div><div class="plabel">Trapdoor<small>L2/L3 — thread &amp; evidence</small></div></div>
+
+    <div class="phone"><div class="scr"><div class="notch"></div><div class="body">
+      <div class="s-kick">Ask anything</div>
+      <div class="s-h sm">About this stop</div>
+      <div class="s-bubble you">Did Dylan Thomas drink here?</div>
+      <div class="s-bubble ai">Not here — his pub was Brown's, a few doors up. This building was the town's court, and before that the market house.<div class="s-cite">▸ Cadw 9638 · Ferris, Letters</div></div>
+      <div class="s-bubble ai" style="background:#f3eef7;">Honest when we don't know: "the record doesn't tell us."</div>
+      <div class="s-btn ghost">Type a question…</div>
+    </div></div><div class="plabel">Grounded Q&amp;A<small>answers only from the library</small></div></div>
+
+    <div class="phone"><div class="scr"><div class="notch"></div><div class="body">
+      <div class="s-kick">Your collection</div>
+      <div class="s-h sm">The Corporation</div>
+      <div class="s-p">Collect the stops in a story. Finish one to unlock its full dossier.</div>
+      <div class="s-coll"><div class="cc got">✓</div><div class="cc got">✓</div><div class="cc">◆</div><div class="cc lock">🔒</div><div class="cc lock">🔒</div><div class="cc lock">🔒</div></div>
+      <div class="s-prog"><i></i></div>
+      <div class="s-p" style="font-size:10px;color:#8a9a95;">Opt-in · silent at the grave &amp; the quiet places.</div>
+      <div class="s-btn gold">Unlock the dossier ▸</div>
+    </div></div><div class="plabel">Collect<small>depth is the reward, not badges</small></div></div>
+
+  </div>
+
+  <!-- 4 · DEPTH LADDER -->
+  <h2>4 · The layer model</h2>
+  <p class="sub">The same stop serves a twenty-minute walker and a three-hour obsessive. Only L1 is mandatory; everything below is a choice.</p>
+  <div class="ladder">
+    <div class="rung"><span class="lv">L0</span><b>Orient</b><span>10 seconds. Where you are, what you're looking at.</span></div>
+    <div class="rung"><span class="lv">L1</span><b>The beat</b><span>60–90 seconds. The one story, told well, standing alone. Mandatory.</span></div>
+    <div class="rung"><span class="lv">L2</span><b>The thread</b><span>The fuller story it belongs to, running across other stops.</span></div>
+    <div class="rung"><span class="lv">L3</span><b>The evidence</b><span>The sources, the archive images, the recorded voices. One tap to proof.</span></div>
+  </div>
+
+  <!-- 5 · THE ENGINE -->
+  <h2>5 · The engine underneath</h2>
+  <p class="sub">The library isn't decoration — it's the machine. One join turns a flat list of plaques into a web the app can walk in any direction.</p>
+  <div class="eng">
+    <div class="ebox"><span class="lab">A place</span><b>Stop</b><span>The Globe, the Town Hall, the grave…</span></div>
+    <div class="op">×</div>
+    <div class="ebox"><span class="lab">A story</span><b>Thread</b><span>The Corporation, the port, the butchers…</span></div>
+    <div class="op">=</div>
+    <div class="ebox" style="border:2px solid var(--gold);"><span class="lab">The unit of content</span><b>Beat</b><span>One story, at one place. The thing you hear and collect.</span></div>
+  </div>
+  <div class="card"><p><b>Why it matters:</b> one place carries many stories, and one story runs through many places — so the Town Hall appears in the Corporation thread <i>and</i> the market-town thread, and "the town that kept its government" plays across four stops. Completing a thread means walking the town, not ticking a list.</p></div>
+  <div class="gate"><b>The publish gate is built into the machine.</b> A beat cannot go live while any claim behind it is unverified. Nothing a visitor hears is unsourced, and the guardrails (no "Dylan drank at the Globe", no "13th-century cellars", nothing about living people or Corporation finances without consent) are enforced by the software, not by memory.</div>
+
+  <!-- 6 · THE HEARTBEAT -->
+  <h2>6 · The heartbeat — the Common Walk</h2>
+  <p class="sub">The town beats its bounds every three years. We interpret and host it; we never sell it as a walk — it's a working civic ritual on private ground. In the app, its rarity becomes the feature: one thread that changes state through a three-year cycle, and gives locals a reason to keep the app.</p>
+  <div class="beat">
+    <div class="bstate"><b>Dormant</b><span>The whole story readable, past &amp; future tense. "The town next walks its bounds in ___." Never a locked door.</span></div>
+    <div class="bstate"><b>Countdown</b><span>As the date nears, the thread wakes. "Notify me before the next Walk."</span></div>
+    <div class="bstate live"><b>Live · one day</b><span>A different app for a single day — cached that morning. Follow the bounds from home; the Globe is the download point.</span></div>
+    <div class="bstate"><b>Afterglow</b><span>The day's voices and photos fold back into the record, and the countdown to the next one begins.</span></div>
+  </div>
+  <div class="card"><p><b>Open question with a real deadline:</b> which year is the next Walk? Whit Monday 2026 has passed; 2027 → 17 May, 2028 → 5 June. If it's 2027 or 2028, filming the real thing becomes a live workstream now. Nothing about the Corporation or the Walk publishes until the Corporation blesses it as a body.</p></div>
+
+  <!-- 7 · STATUS -->
+  <h2>7 · What's real, what's to design, what's waiting</h2>
+  <p class="sub">Honest status, so we design forward without pretending anything is finished.</p>
+  <div class="status">
+    <div class="row"><span>The content model (Stop / Thread / Beat / Layer) and the publish gate</span><span class="st-tag st-real">Built in Airtable</span></div>
+    <div class="row"><span>The verified library the app draws on — 1,086 facts, 46 threads worked</span><span class="st-tag st-real">Live &amp; growing</span></div>
+    <div class="row"><span>The route logic, the app flow, the layer model, the heartbeat states</span><span class="st-tag st-design">This concept</span></div>
+    <div class="row"><span>Real geography — plotted routes, GPS-free unlock at each stop</span><span class="st-tag st-wait">Waits on the 1842 tithe map</span></div>
+    <div class="row"><span>Visual design — the actual look, the brand, the typography</span><span class="st-tag st-design">Brush, to this frame</span></div>
+    <div class="row"><span>Narration voice (English + Welsh) and the accent test</span><span class="st-tag st-wait">Waits on a named local speaker</span></div>
+    <div class="row"><span>Working software — the built app against the Township Loop</span><span class="st-tag st-wait">Waits on the blueprint sign-off</span></div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:32px;">Concept v1 · a frame to react to and design against. Everything shown is placeholder until it clears the record.</p>
+
+</div>
+</body></html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Globe — Coffee Shop · Working Section</title>
+<meta name="description" content="The daytime door of The Globe, Laugharne — specialty coffee, the bakery over the counter, and a rest stop on the Dylan trail. The working hub: research, comparables and the decisions in front of Steve and Phil.">
+<style>
+  /* Coffee — WORKING palette (provisional third face; CS-08 to ratify against globe-brand-tokens.md) */
+  :root{--espresso:#3a2416;--dark:#241209;--gold:#c9a24b;--ink:#2a1c12;--muted:#7a6a58;--line:#e3d9c9;
+        --warm:#8a5a2b;--crust:#6e4a29;--green:#7d8a4f;--blue:#2b4a6b;--plum:#6b3a55;}
+  *{box-sizing:border-box;} body{margin:0;background:#efe9e0;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+  a{color:var(--crust);}
+  header{background:linear-gradient(160deg,var(--espresso),var(--dark));color:#f4efe6;padding:40px 22px 32px;}
+  header .inner{max-width:1040px;margin:0 auto;}
+  .crumb{font-size:12px;color:#d8c3a8;margin-bottom:14px;} .crumb a{color:#e5d3ac;text-decoration:none;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e5d3ac;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:34px;margin:8px 0 8px;}
+  header p{max-width:700px;color:#ece0cc;font-size:15px;margin:0;}
+  header .line{font-family:Georgia,serif;font-style:italic;font-size:16px;color:#f2e6cf;margin:16px 0 0;border-left:3px solid var(--gold);padding-left:14px;}
+
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:21px;margin:38px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(58,36,22,.06);margin-top:14px;}
+  .card b{color:var(--dark);}
+
+  /* daypart loop */
+  .loop{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px;}
+  @media(max-width:760px){.loop{grid-template-columns:1fr 1fr;}}
+  .step{background:#fff;border:1px solid var(--line);border-top:4px solid var(--crust);border-radius:12px;padding:14px 15px;box-shadow:0 2px 8px rgba(58,36,22,.05);}
+  .step .n{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+  .step b{display:block;font-family:Georgia,serif;font-size:16px;color:var(--dark);margin:4px 0 4px;}
+  .step span{font-size:12.5px;color:#5a4a3a;}
+
+  /* two & three col grids */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px;}
+  @media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  /* crossover / research cards */
+  .xo{background:#fff;border:1px solid var(--line);border-left:6px solid var(--crust);border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(58,36,22,.05);}
+  .xo.b2{border-left-color:var(--green);} .xo.b3{border-left-color:var(--gold);}
+  .xo h3{font-family:Georgia,serif;font-size:16px;margin:0 0 6px;color:var(--dark);}
+  .xo p{font-size:13px;color:#5a4a3a;margin:0;}
+
+  /* comparables gallery */
+  .cmp{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 16px;box-shadow:0 2px 8px rgba(58,36,22,.05);}
+  .cmp .site{font-family:Georgia,serif;font-size:15.5px;color:var(--dark);}
+  .cmp .url{font-size:11.5px;color:var(--warm);word-break:break-all;display:block;margin:2px 0 8px;}
+  .cmp .why{font-size:12.5px;color:#5a4a3a;margin:0 0 8px;}
+  .cmp .borrow{font-size:12px;color:var(--dark);background:#f6efe1;border-radius:8px;padding:8px 10px;}
+  .cmp .borrow b{color:var(--crust);}
+
+  /* workstream board */
+  .ws{background:#fff;border:1px solid var(--line);border-left:6px solid var(--crust);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(58,36,22,.05);}
+  .ws.b2{border-left-color:var(--green);} .ws.b3{border-left-color:var(--blue);} .ws.b4{border-left-color:var(--plum);} .ws.b5{border-left-color:var(--gold);}
+  .ws .who{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
+  .ws h3{font-family:Georgia,serif;font-size:16px;margin:4px 0 6px;color:var(--dark);}
+  .ws p{font-size:13px;color:#5a4a3a;margin:0 0 10px;}
+  .stg{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+  .stg .s{font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:5px;}
+  .d{width:9px;height:9px;border-radius:50%;background:#e3d9c9;border:2px solid #e3d9c9;}
+  .d.done{background:var(--crust);border-color:var(--crust);} .d.now{background:#fff;border-color:var(--crust);box-shadow:0 0 0 3px rgba(110,74,41,.15);}
+  .d.blk{background:#fff;border-color:#b0472b;box-shadow:0 0 0 3px rgba(176,71,43,.14);}
+  .s.on{color:var(--dark);font-weight:700;}
+
+  /* decisions + gap + awaiting rows */
+  .rows{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(58,36,22,.05);}
+  .rows .row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .rows .row:last-child{border-bottom:0;}
+  .rows .row b{color:var(--dark);}
+  .rows .row .tick{color:var(--crust);font-weight:700;white-space:nowrap;font-size:12px;}
+  .await .q{color:#8a6a2b;font-weight:700;white-space:nowrap;font-size:12px;}
+
+  .gap{background:#fff;border:1px solid var(--line);border-left:6px solid var(--warm);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(58,36,22,.05);}
+  .gap .pain{font-size:13.5px;color:#7a4a2b;font-weight:700;}
+  .gap .fix{font-size:13.5px;color:#3a2a1a;margin-top:5px;} .gap .fix b{color:var(--crust);}
+
+  .flag{background:#fbf4e6;border:1px solid #ecdcb8;border-radius:10px;padding:12px 15px;font-size:12.5px;color:#6a5433;margin-top:14px;}
+  .flag b{color:#8a6a2b;}
+</style></head><body>
+<header><div class="inner">
+  <div class="crumb"><a href="index.html">← Dashboard</a> &nbsp;·&nbsp; <a href="globe-operating.html">The Globe operating</a></div>
+  <div class="kicker">The Globe · Coffee Shop</div>
+  <h1>The daytime door</h1>
+  <p>The Globe's daytime trade — specialty coffee, the bakery's bread and pastry over the counter, light daytime food, and the first rest stop on the Dylan trail. Not a standalone café: one of the Globe's doors, read as the Globe. The working hub for the research, the comparables and the decisions in front of Steve and Phil — research stage, no build until they've decided.</p>
+  <p class="line">One kitchen, one brand, one operation. The bakery makes the bread; the coffee makes it pay; the trail brings the town to the door.</p>
+</div></header>
+<div class="wrap">
+
+  <!-- OPPORTUNITY -->
+  <h2>The opportunity, in one line</h2>
+  <p class="sub">What the competitor scan tells us — and the gap we fill.</p>
+  <div class="card">
+    Laugharne has plenty of places to get a coffee, but <b>none that treats coffee itself as the point.</b> The Boathouse tearoom pours only filter and shuts two days a week; the Owl &amp; the Pussycat is a beloved cake-tearoom; the Ferryman is a good deli on a fair-trade blend; Poon's serves specialty (Coaltown) but inconsistently; the rest are pubs. There is no design-led, early-opening, seven-day, specialty-grade coffee house engineered for both the estuary sit-in crowd and grab-and-go walkers heading to the Boathouse. <b>That is the third Globe door.</b>
+  </div>
+
+  <!-- THE DAYPART -->
+  <h2>The daypart</h2>
+  <p class="sub">How the day runs — and how each part feeds the bakery collection window and the evening table.</p>
+  <div class="loop">
+    <div class="step"><span class="n">01 · Early</span><b>First light</b><span>Open on the bakery's clock. Collection trade, dog-walkers, the early tourist — the 8&ndash;10am slot nobody in town owns.</span></div>
+    <div class="step"><span class="n">02 · Mid-morning</span><b>Coffee &amp; bake</b><span>The high-GP hour. Specialty coffee, pastry and bread over the counter — the coffee is what makes the low-margin bread pay.</span></div>
+    <div class="step"><span class="n">03 · Lunch</span><b>Light daytime food</b><span>Built from bakery output and evening prep, not a third production stream. One kitchen, shared waste.</span></div>
+    <div class="step"><span class="n">04 · Mid-walk</span><b>The trail stop</b><span>The rest stop on the Dylan day-loop — takeaway for walkers, a table on the trail, the low-commitment way in.</span></div>
+    <div class="step"><span class="n">05 · Handover</span><b>Book the table</b><span>The daytime visit converts to an evening booking. The coffee is the introduction; the seasonal kitchen is the return.</span></div>
+  </div>
+
+  <!-- THREE CROSSOVERS -->
+  <h2>The three crossovers</h2>
+  <p class="sub">Why this door exists — the hinges it sits on.</p>
+  <div class="grid3">
+    <div class="xo"><h3>Bakery → coffee</h3><p>The coffee shop is the bakery's daytime retail front. One kitchen, shared production and waste. Bread is low-margin; coffee is high-margin — modelled together on the existing EPOS break-even model, never as two businesses.</p></div>
+    <div class="xo b2"><h3>House of Culture → coffee</h3><p>The Dylan day-loop needs a morning anchor and a mid-walk rest. Trail footfall becomes Globe customers at a &pound;4 coffee, then upsells the evening table. Built on the blueprint's arrive&nbsp;&rarr;&nbsp;coffee&nbsp;&rarr;&nbsp;reading-room spine.</p></div>
+    <div class="xo b3"><h3>Brand → coffee</h3><p>The third face of the Globe Studio design system — Wine Bar dark, Bakery light, now this. It extends the system, it does not invent a new identity. No separate café name.</p></div>
+  </div>
+
+  <!-- RESEARCH BACKBONE -->
+  <h2>The research backbone</h2>
+  <p class="sub">The three deep threads, in brief. Full write-ups: Doc 170 (decision list) and Doc 171 (deep research) in the register.</p>
+
+  <div class="grid3">
+    <div class="xo"><h3>Supply — the roaster</h3><p><b>Coaltown</b> (Ammanford, ~30 mi) is the lead: UK's first B Corp roaster, 2026 SCA design award, La&nbsp;Marzocco's South-Wales service partner, and the "black gold / liquid gold" story. <b>Caveat:</b> already poured in town (Poon's) and at Wright's — so the room, hours and takeaway differentiate, not the bean. Add a guest single-origin (Origin / Round Hill) on a second grinder. Specialty beans &pound;16&ndash;24/kg; machine-loan removes ~&pound;10&ndash;18k of capital but ties beans 2&ndash;5 yrs. Milk: Totally Welsh. Decaf: Swiss Water.</p></div>
+    <div class="xo b3"><h3>Awards — "liquid gold"</h3><p>The fast, credible win is a <b>Great Taste star on a signature house blend</b> — every entry can win, ~&pound;77, and we needn't roast it ourselves. Enter the moment the 2027 window opens (~Dec&nbsp;2026). Welsh route: Food &amp; Drink Awards Wales + public-vote Welsh café awards. Coaltown is the blueprint. <b>Correction:</b> "Golden Bean UK" does not exist — the real title is the SCA UK Roasting Championship (a roaster's long game).</p></div>
+    <div class="xo b2"><h3>Competition &amp; footfall</h3><p>Real daytime rivals: <b>Ferryman, Poon's, Owl &amp; the Pussycat, Boathouse tearoom</b> — <i>not</i> "Dexter's", which is a steakhouse at Brown's. Regional bar set by destinations people drive to: Wright's (Llanarthne), Crwst (Cardigan), Ginhaus (Llandeilo), Coaltown's own canteen. Footfall is literary-tourism led (Castle ~14.6k/yr 2018; Boathouse significant but unquantified), summer- and weekend-weighted — the business must survive winter mid-weeks on local trade.</p></div>
+  </div>
+
+  <!-- COMPARABLES -->
+  <h2>Comparables — independent coffee sites</h2>
+  <p class="sub">The six strongest sites to react to, each with the one thing to borrow. Our shortlist for the third-face build.</p>
+  <div class="grid2">
+    <div class="cmp"><span class="site">Coaltown</span><span class="url">coaltowncoffee.co.uk</span><p class="why">West-Wales neighbour; 2026 SCA branding award — proves heritage-industrial storytelling wins at the top level, in our region.</p><div class="borrow"><b>Borrow:</b> the single-story provenance block (archival B&amp;W heritage photo → purpose → producer). Do the Dylan/Laugharne version.</div></div>
+    <div class="cmp"><span class="site">WatchHouse</span><span class="url">watchhouse.com</span><p class="why">The definitive "one brand, many doors" execution and the premium design ceiling — cafés even sit inside cultural venues (Somerset House).</p><div class="borrow"><b>Borrow:</b> naming venue types under one system with a reconciling tagline — the template for the Globe's three doors.</div></div>
+    <div class="cmp"><span class="site">Origin</span><span class="url">origincoffee.co.uk</span><p class="why">Closest business match: premium rural B Corp roaster with cafés inside cultural institutions (British Library).</p><div class="borrow"><b>Borrow:</b> a Locations page that sells each place as a destination, plus named-producer profiles.</div></div>
+    <div class="cmp"><span class="site">Crwst</span><span class="url">crwst.cymru</span><p class="why">Nearest format twin: a Welsh destination bakery-café-deli on a lean, warm, bilingual site.</p><div class="borrow"><b>Borrow:</b> tight structure + bilingual <b>.cymru</b> authenticity — proof we don't need to over-build.</div></div>
+    <div class="cmp"><span class="site">Ozone</span><span class="url">ozonecoffee.co.uk</span><p class="why">Best framing of café-as-equal-pillar — Roasting / Sourcing / <b>Hosting</b> as three co-equal faces.</p><div class="borrow"><b>Borrow:</b> the three-pillar homepage model; consider a house illustrator instead of photography.</div></div>
+    <div class="cmp"><span class="site">Square Mile</span><span class="url">shop.squaremilecoffee.com</span><p class="why">The restraint benchmark — expertise-first, minimal, confident. Premium = less.</p><div class="borrow"><b>Borrow:</b> product-page discipline — origin + process + tasting notes, iconic names, nothing extraneous.</div></div>
+  </div>
+
+  <!-- DECISION LIST -->
+  <h2>The decision list for Steve &amp; Phil</h2>
+  <p class="sub">Ranked, each with the desk's recommended option. Full trade-offs in Doc 170.</p>
+  <div class="rows">
+    <div class="row"><span><b>D1 · A door, not a business</b> — one P&amp;L, one kitchen, one EPOS, one brand with the bakery.</span><span class="tick">Rec: door</span></div>
+    <div class="row"><span><b>D2 · Coffee GP carries the bread</b> — model the daytime as one line; stress-test against February, not August.</span><span class="tick">Rec: one line</span></div>
+    <div class="row"><span><b>D3 · Hours</b> — open on the bakery's production clock; concede the late-afternoon tea slot.</span><span class="tick">Rec: early</span></div>
+    <div class="row"><span><b>D4 · Roaster</b> — Coaltown for beans/kit/servicing/story + a rotating guest single-origin.</span><span class="tick">Rec: Coaltown +1</span></div>
+    <div class="row"><span><b>D5 · Machine</b> — loan-with-contract year one, purchase at review.</span><span class="tick">Rec: loan first</span></div>
+    <div class="row"><span><b>D6 · Walker takeaway</b> — hot drinks + whole bakery items to go; <b>no</b> pre-packed filled food at launch (PPDS).</span><span class="tick">Rec: no PPDS yet</span></div>
+    <div class="row"><span><b>D8 · Brand</b> — no separate name; it is <i>The Globe</i> in the daytime, the third face.</span><span class="tick">Rec: no new name</span></div>
+    <div class="row"><span><b>D11 · Award play</b> — commit to a signature blend and enter Great Taste when the window opens (~Dec 2026).</span><span class="tick">Rec: commit now</span></div>
+    <div class="row"><span><b>D12 · Serve Coaltown vs differentiate</b> — serve it (quality + local story), differentiate on room/hours/takeaway.</span><span class="tick">Rec: serve + out-execute</span></div>
+  </div>
+
+  <!-- WORKSTREAM BOARD -->
+  <h2>The workstream board</h2>
+  <p class="sub">Each persona runs its own thread; results come back, get ticked, next prompt goes out. Live state below.</p>
+  <div class="grid2">
+    <div class="ws"><div class="who">Rhys · Commercial</div><h3>Market, daypart &amp; the numbers</h3><p>Competitor set and gap verified; daypart model drafted. The numbers (coffee + bakery on one break-even model) are blocked — the existing EPOS model must be found first.</p>
+      <div class="stg"><span class="s"><span class="d done"></span>Market</span><span class="s"><span class="d done"></span>Daypart</span><span class="s"><span class="d blk"></span>Numbers · blocked</span></div></div>
+    <div class="ws b5"><div class="who">Alex · Suppliers</div><h3>The roaster route</h3><p>Three routes ranked; Coaltown the lead with the ubiquity caveat and a guest-origin mitigation. Trade model, price ranges, milk and decaf documented. Next: pin Coaltown's terms in writing.</p>
+      <div class="stg"><span class="s"><span class="d done"></span>Research</span><span class="s"><span class="d done"></span>Shortlist</span><span class="s on"><span class="d now"></span>Terms</span></div></div>
+    <div class="ws b3"><div class="who">Awards thread</div><h3>The "liquid gold" plan</h3><p>Sequenced: signature blend → Great Taste (enter Dec 2026) → Welsh + public-vote awards → SCA long game. Coaltown studied as the blueprint.</p>
+      <div class="stg"><span class="s"><span class="d done"></span>Landscape</span><span class="s on"><span class="d now"></span>Blend brief</span><span class="s"><span class="d"></span>Enter</span></div></div>
+    <div class="ws b4"><div class="who">Lowri + Nia · Brand &amp; web</div><h3>The third face + comparables</h3><p>Six-site comparable shortlist done. The brand face itself is blocked pending a read of <i>globe-brand-tokens.md</i> — extend the system, never invent.</p>
+      <div class="stg"><span class="s"><span class="d done"></span>Comparables</span><span class="s"><span class="d blk"></span>Face · blocked</span><span class="s"><span class="d"></span>Build</span></div></div>
+    <div class="ws b2"><div class="who">Sol + Emyr · Kitchen</div><h3>Shared kitchen &amp; daytime food</h3><p>One kitchen, shared production and waste. The daytime offer built from bakery output and evening prep trim — not a third stream. Yesterday's-bread policy. Not started.</p>
+      <div class="stg"><span class="s on"><span class="d now"></span>To scope</span><span class="s"><span class="d"></span>Menu</span><span class="s"><span class="d"></span>Cost/GP</span></div></div>
+    <div class="ws"><div class="who">Osian · Drinks</div><h3>The coffee programme spec</h3><p>Machine and grinder tier, drinks range, batch brew for trail spikes, and the honest skill floor for a non-barista on a wet Tuesday. Feeds the capex and staffing lines. Not started.</p>
+      <div class="stg"><span class="s on"><span class="d now"></span>To scope</span><span class="s"><span class="d"></span>Kit</span><span class="s"><span class="d"></span>Range</span></div></div>
+    <div class="ws b2"><div class="who">Seren + Bob · Build</div><h3>Space &amp; operations</h3><p>Physical position, counter and kitchen flow, takeaway hatch vs internal service for walkers, EPOS reporting separately but rolling into one P&amp;L. Hours vs the premises licence. Not started.</p>
+      <div class="stg"><span class="s on"><span class="d now"></span>To scope</span><span class="s"><span class="d"></span>Flow</span><span class="s"><span class="d"></span>EPOS</span></div></div>
+    <div class="ws b4"><div class="who">Karen · Compliance</div><h3>Hygiene · allergens · licensing</h3><p>Food-hygiene registration, allergens/PPDS on walker takeaway (the sharp edge), premises-licence hours, and any change-of-use with Carmarthenshire. Output: a go/no-go list with lead times. Not started.</p>
+      <div class="stg"><span class="s on"><span class="d now"></span>To scope</span><span class="s"><span class="d"></span>PPDS</span><span class="s"><span class="d"></span>Licence</span></div></div>
+  </div>
+
+  <!-- BLOCKERS -->
+  <h2>Blockers &amp; what's open</h2>
+  <p class="sub">What's stuck, and on whom.</p>
+  <div class="rows await">
+    <div class="row"><span>📊 <b>The numbers (CS-03)</b> — blocked on the existing Globe EPOS break-even model. It isn't in the repo or the Docs Index; the brief forbids starting a new one.</span><span class="q">Need the model →</span></div>
+    <div class="row"><span>🎨 <b>The third face (CS-08)</b> — needs a read of <i>globe-brand-tokens.md</i>; there is no ratified coffee palette yet. This page uses a working palette only.</span><span class="q">Ratify face →</span></div>
+    <div class="row"><span>🖋 <b>Publisher</b> — this page, plus Docs 170 &amp; 171, are handed to the Master/Jarvis single publisher to ship.</span><span class="q">To publish →</span></div>
+  </div>
+
+  <div class="flag"><b>Note on this page.</b> Research stage — nothing here is built or decided. The colour treatment is a <b>working coffee palette</b> grounded in the Globe master neutrals + gold, not the ratified third face (CS-08 owns that). Everything is drawn from Doc&nbsp;170 (decision list) and Doc&nbsp;171 (deep research), both in the register with full sources.</div>
+
+  <p class="sub" style="text-align:center;margin-top:30px;">The Globe — Coffee Shop · a live working section — everything logged and timestamped.</p>
+
+</div>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var biz='Coffee Shop', who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#3a2416;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(58,36,22,.28);}'
+   +'#gnwBtn:hover{background:#241209;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #e3d9c9;border-radius:14px;box-shadow:0 18px 50px rgba(58,36,22,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#3a2416;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#7a6a58;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #e3d9c9;background:#f6efe1;color:#3a2a1a;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#3a2416;border-color:#3a2416;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #d8ccb8;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#3a2416;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#241209;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#a89a86;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body></html>

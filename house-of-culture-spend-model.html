@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House of Culture — The Spend-Flow Model</title>
+<meta name="description" content="Top-down economic model for the Laugharne experience flow — the target spend per head, honestly benchmarked, and how the money flows back out to the town.">
+<style>
+  :root{--plum:#4a3560;--plum-d:#2b1d3a;--brass:#9c7a3c;--brass-l:#c6a768;--green:#1f5c4d;--dark:#153f35;
+        --ink:#22302e;--muted:#6a7b76;--line:#e0dccf;--warm:#8a5a2b;--red:#a8402a;--paper:#ede7d8;}
+  *{box-sizing:border-box;} body{margin:0;background:#f2efe6;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px 90px;}
+  a{color:var(--plum);}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:44px 22px 36px;}
+  header .inner{max-width:1080px;margin:0 auto;}
+  .crumb{font-size:12px;color:#bcd0c7;margin-bottom:14px;} .crumb a{color:#d8c9a8;text-decoration:none;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:33px;margin:8px 0 10px;color:#f4eede;}
+  header p{max-width:720px;color:#e6dcc8;font-size:15px;margin:0;}
+  .flag{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#f0e6cf;padding:5px 12px;border-radius:20px;}
+
+  h2{font-family:Georgia,serif;color:var(--plum-d);font-size:22px;margin:46px 0 4px;border-bottom:2px solid var(--brass);padding-bottom:6px;}
+  h3{font-family:Georgia,serif;color:var(--plum-d);font-size:16px;margin:22px 0 8px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 18px;max-width:74ch;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,20,10,.05);margin-top:14px;}
+  .card p{font-size:14px;margin:0 0 10px;} .card p:last-child{margin-bottom:0;} .lede{font-size:15.5px;}
+
+  /* reality check */
+  .reality{background:#fff8f6;border:1px solid #eccfc6;border-left:6px solid var(--red);border-radius:12px;padding:16px 20px;margin-top:14px;}
+  .reality b{color:var(--red);}
+
+  /* three cases */
+  .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px;}
+  @media(max-width:820px){.cases{grid-template-columns:1fr;}}
+  .case{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(20,20,10,.05);text-align:center;}
+  .case.base{border-top:4px solid var(--muted);} .case.target{border-top:4px solid var(--green);background:#f6faf7;} .case.stretch{border-top:4px solid var(--brass);}
+  .case .lab{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+  .case .big{font-family:Georgia,serif;font-size:34px;color:var(--plum-d);line-height:1.1;margin:6px 0;}
+  .case .big small{font-size:14px;color:var(--muted);}
+  .case p{font-size:12px;color:#43413a;margin:6px 0 0;}
+
+  /* flow table */
+  table{width:100%;border-collapse:collapse;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px;box-shadow:0 2px 8px rgba(20,20,10,.05);}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);}
+  th{background:var(--plum);color:#f4eede;font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;}
+  td.n{text-align:right;font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:0;}
+  tr.tot td{background:#f6faf7;font-weight:700;color:var(--plum-d);border-top:2px solid var(--green);}
+  .stage{font-weight:700;color:var(--plum-d);}
+  .note-cell{font-size:11.5px;color:var(--muted);}
+
+  /* comparables */
+  .comp td:first-child{font-weight:700;color:var(--plum-d);}
+
+  /* distribution bars */
+  .dist{margin-top:14px;}
+  .dbar{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);}
+  .dbar:last-child{border-bottom:0;}
+  .dbar .lbl{flex:0 0 200px;font-size:13px;} .dbar .lbl b{color:var(--plum-d);}
+  .dbar .track{flex:1;height:20px;background:#efeadd;border-radius:6px;overflow:hidden;}
+  .dbar .fill{height:100%;background:var(--green);border-radius:6px;}
+  .dbar .fill.local{background:var(--brass);}
+  .dbar .pct{flex:0 0 90px;text-align:right;font-size:12.5px;font-variant-numeric:tabular-nums;color:#43413a;}
+
+  /* levers / angles */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr;}}
+  .box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;box-shadow:0 2px 8px rgba(20,20,10,.05);border-left:5px solid var(--green);}
+  .box.b2{border-left-color:var(--brass);} .box.b3{border-left-color:var(--plum);}
+  .box b{font-family:Georgia,serif;font-size:14.5px;color:var(--plum-d);display:block;margin-bottom:4px;}
+  .box span{font-size:12.5px;color:#43413a;}
+
+  /* awards */
+  .awards{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(20,20,10,.05);}
+  .awards .row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .awards .row:last-child{border-bottom:0;} .awards b{color:var(--plum-d);}
+  .awards .when{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap;height:fit-content;background:#eef4f0;color:var(--green);}
+  .awards .when.later{background:#f6efe5;color:var(--warm);}
+  .src{font-size:11.5px;color:var(--muted);margin-top:6px;}
+</style></head><body>
+<header><div class="inner">
+  <div class="crumb"><a href="index.html">← Dashboard</a> &nbsp;·&nbsp; <a href="house-of-culture-plan.html">The plan</a> &nbsp;·&nbsp; <a href="house-of-culture-heritage-centre.html">Heritage centre</a></div>
+  <div class="kicker">House of Culture · The Economics</div>
+  <h1>The spend-flow model — and where the money goes</h1>
+  <p>Top-down: pick the target spend per head, benchmark it honestly, then back-solve the experience to hit it — and design it so the income flows out to the town, not just into the till.</p>
+  <span class="flag">⚠ Model — sourced benchmarks vs stated assumptions, clearly separated</span>
+</div></header>
+<div class="wrap">
+
+  <!-- 1 · THE REALITY -->
+  <h2>1 · The honest starting point</h2>
+  <p class="sub">You set the target at £30–50 per head. Here's what the sector actually does, so we design to reality rather than hope.</p>
+  <div class="reality">
+    <p>The best UK dataset (AIM Economic Impact Study 2024) puts <b>all-in on-site spend</b> — admission + retail + café combined — at about <b>£4–7.50 a head at a small museum</b>, rising to <b>£21.93 even at the largest independents</b>. So <b>£30–50 secondary spend per head is roughly 2–7× the sector norm.</b></p>
+    <p>That is not a reason to lower the ambition — it's the reason the ambition needs an unusual model. £30–50 is only reachable if <i>every</i> stage earns and we run a genuine "full day out," not a museum with a gift shop bolted on. And the move that unlocks it is counter-intuitive: <b>give the trail away free</b>, seed it across the town on QR codes, and put the money downstream — in the artisan bakery, the restaurant, the bar and the shop. Free isn't lost revenue; it's the widest possible funnel, and it's what lets us reach past the pilgrims to everyone passing through.</p>
+    <p><b>What's free, what's paid — the owner's lever.</b> Only the app and the town QR layer are fixed as free. The heritage centre is free to enter on an <b>invited donation</b> (with Gift Aid) — the model most free museums use, and it still lifts per-head. Everything else — food, retail, gallery, events — is paid. That split is Steve's to set and adjust as the model beds in; nothing here is locked except the free app.</p>
+  </div>
+  <div class="cases">
+    <div class="case base"><span class="lab">Base case</span><div class="big">£11<small>/head</small></div><p>What a well-run small heritage site of this scale typically achieves. Matches AIM's "large" band. Realistic from day one.</p></div>
+    <div class="case target"><span class="lab">Target — the design goal</span><div class="big">£30–50<small>/head</small></div><p>Every stage firing: a free trail feeding the funnel, the artisan bakery, provenance retail, and the restaurant &amp; bar as the pot — up to £50 a head on their own.</p></div>
+    <div class="case stretch"><span class="lab">Per-visit ceiling</span><div class="big">£80+<small>/head</small></div><p>The occasional big day — a gallery original, dinner, a case of the larder. Rare, but it lifts the average.</p></div>
+  </div>
+
+  <!-- 2 · THE FUNNEL -->
+  <h2>2 · The funnel — free, and everywhere</h2>
+  <p class="sub">The trail is the acquisition engine, not a revenue line. Give it away, and put it everywhere the town already has footfall.</p>
+  <div class="card">
+    <p><b>How it works.</b> QR codes on the buildings and spots Steve holds around Laugharne — the castle approach, the estuary, the square, the shopfronts. Someone scans out of curiosity; the web app loads instantly, no download, no account; it tells them where they're standing and what happened there — and it quietly makes the Globe the place the walk begins and ends. Even a passer-by with no plan gets pulled into the loop, because the thing is genuinely good and genuinely free.</p>
+    <p><b>Why free beats paid here.</b> A paid trail only sells to people who already came for Dylan. A free one, seeded across town, catches the castle visitor, the coast-path walker, the family killing an hour — a far bigger pool — and routes them all past our doors. We give away the £5 trail ticket to win the £30 day. And it doubles as the honest, award-worthy story: a free cultural gift to the town.</p>
+    <p style="font-size:12px;color:var(--muted);"><b>One practical guardrail:</b> QR codes go on Steve's own property or with the owner's permission — not fly-posted on listed buildings or others' walls, which is an offence and the opposite of good-neighbour. A short "where can codes go" list is a quick job worth doing before printing.</p>
+  </div>
+
+  <!-- 3 · THE FLOW -->
+  <h2>3 · The flow — something to buy at every step</h2>
+  <p class="sub">The target case, rebuilt with a FREE trail. The revenue is downstream, and the restaurant &amp; bar is the pot. "Capture" = share of visitors who spend at that stage; "per spend" = what they spend when they do. Figures illustrative and marked as assumptions; sourced ranges below.</p>
+  <table>
+    <tr><th>Stage in the day</th><th>What's bought</th><th style="text-align:right;">Capture</th><th style="text-align:right;">Per spend</th><th style="text-align:right;">Per head</th></tr>
+    <tr><td class="stage">The trail &amp; app</td><td>Free — the funnel that fills every line below</td><td class="n">—</td><td class="n">£0</td><td class="n">£0</td></tr>
+    <tr><td class="stage">Warm up</td><td>Coffee &amp; the fresh artisan bake</td><td class="n">70%</td><td class="n">£8</td><td class="n">£5.60</td></tr>
+    <tr><td class="stage">The table</td><td>The restaurant &amp; bar — the pot, up to £50/head</td><td class="n">40%</td><td class="n">£30</td><td class="n">£12.00</td></tr>
+    <tr><td class="stage">The shop &amp; gallery</td><td>Provenance retail — a story you now recognise</td><td class="n">30%</td><td class="n">£24</td><td class="n">£7.20</td></tr>
+    <tr><td class="stage">Bakery to go</td><td>A loaf of the real bread home</td><td class="n">35%</td><td class="n">£9</td><td class="n">£3.15</td></tr>
+    <tr><td class="stage">Butcher, deli &amp; produce</td><td>Local meat &amp; essentials for the cottage</td><td class="n">20%</td><td class="n">£15</td><td class="n">£3.00</td></tr>
+    <tr><td class="stage">Take home</td><td>The larder &amp; a bottle from the wine bar</td><td class="n">20%</td><td class="n">£16</td><td class="n">£3.20</td></tr>
+    <tr class="tot"><td colspan="4">Blended spend per head — with a FREE trail</td><td class="n">≈ £34</td></tr>
+  </table>
+  <p class="src">Assumptions stated; sits inside sourced ranges — café £5–9pp, restaurant/F&amp;B the largest and most reliable attraction spend, museum retail conversion 15–40% at ATV £12–60. Note: £0 from the trail, yet still ≈£34 — <b>and the funnel is now far wider</b>, because free + QR catches passers-by a paid trail never would. More people through the door × this per-head = the real prize.</p>
+  <p class="src"><b>Scope:</b> the food &amp; drink lines (café, restaurant, bar, bakery, butcher, deli) are run by the Globe's own operating desks and their organic, farm-fresh sourcing plan. This model shows the whole-day <i>flow</i> the House of Culture drives <i>into</i> them — the funnel and the experience — not their operation. Our own lines are the trail, the heritage centre, the gallery and the take-home story objects.</p>
+
+  <h3>The annual pot — per-head × volume</h3>
+  <p class="sub">Per-head is only half the story. The council car park alone takes roughly <b>£40,000 a year at £1/hour</b> — a rough proxy that implies tens of thousands of car-borne visitors before coaches, walkers and non-parkers. Stated visitor range is <b>15,000–50,000+</b>. Here's what the flow is worth across a plausible spread. Illustrative — sharpen once we have Steve's real footfall.</p>
+  <table>
+    <tr><th>Visitors through the funnel / yr</th><th style="text-align:right;">Base case · £11/head</th><th style="text-align:right;">Target · £34/head</th></tr>
+    <tr><td class="stage">20,000 (conservative)</td><td class="n">£220,000</td><td class="n">£680,000</td></tr>
+    <tr><td class="stage">35,000 (mid)</td><td class="n">£385,000</td><td class="n">£1,190,000</td></tr>
+    <tr class="tot"><td>60,000 (parking-implied, plausible)</td><td class="n">£660,000</td><td class="n">£2,040,000</td></tr>
+  </table>
+  <p class="src">Even the pessimistic corner — 20,000 people at the base £11 — is £220k/yr of secondary revenue. The target corner is over £1m. The free QR trail is what pushes the <i>volume</i> up the left column; the flow is what pushes <i>per-head</i> across. Both levers, same model. NB: the car-park figure and per-car occupancy are proxies — getting Steve's actual visitor and parking data replaces every number here with a real one.</p>
+
+  <!-- 3b · SELLING FORWARD -->
+  <h2>4 · Selling forward — prompts along the journey</h2>
+  <p class="sub">Because the app walks with the visitor, it can surface the next good thing at the right moment — gently, and always as a genuine tip, never a pop-up ad. Tiered so the message meets the mood.</p>
+  <div class="grid2">
+    <div class="box"><b>Early — plant the seed</b><span>On the way out: "the bread's just out of the oven — we'll set a loaf aside for your walk back." The purchase is placed hours before it happens.</span></div>
+    <div class="box b2"><b>Mid-walk — the useful nudge</b><span>Passing a stop near lunch: "hungry? the kitchen's doing X today." Passing the butcher's story: "the town's meat, if you're self-catering tonight."</span></div>
+    <div class="box b3"><b>The turn home — the reminder</b><span>"On your way back: the deli, the wine bar, and that loaf we saved. Everything for tonight, under one roof."</span></div>
+    <div class="box"><b>At the end — the keepsake</b><span>"Take the day home" — the larder, the print of the stop they lingered at, a bottle. The story becomes the object.</span></div>
+  </div>
+  <div class="card"><p><b>The rule that keeps it from being spam:</b> every prompt is a real service to the walker, not an interruption — "we'll save you a loaf" is a kindness that happens to sell. If a prompt wouldn't be welcome from a helpful local, it doesn't ship. That's what makes the free app feel like a gift and still drive the spend.</p></div>
+
+  <!-- 5 · COMPARABLES -->
+  <h2>5 · What comparable places do</h2>
+  <p class="sub">Real figures, sourced. The literary-house benchmark charges £13–14 and runs ~70,000 visitors; the local Boathouse charges only £6. We can't out-footfall them — so we win on spend intensity, not numbers.</p>
+  <table class="comp">
+    <tr><th>Place</th><th>Admission</th><th>Visitors / yr</th><th>The model</th></tr>
+    <tr><td>Dylan Thomas Boathouse</td><td>£6</td><td>not published</td><td>Rooms + tearoom + shop. Our direct local comparable — and the one reviews call tired.</td></tr>
+    <tr><td>Dylan Thomas Centre, Swansea</td><td>Free</td><td>not published</td><td>Free exhibition; earns via events, hire, café, shop.</td></tr>
+    <tr><td>Brontë Parsonage, Haworth</td><td>£13</td><td>~70,000</td><td>Literary house + shop, in a literary tourist village. The closest parallel to Laugharne.</td></tr>
+    <tr><td>Wordsworth / Dove Cottage</td><td>£14</td><td>70,000+</td><td>Cottage + museum + shop + café; annual-pass model.</td></tr>
+    <tr><td>St Fagans (Wales)</td><td>Free</td><td>570,000</td><td>Volume + secondary spend; sells resident makers' craft, local-ingredient café.</td></tr>
+    <tr><td>Portmeirion</td><td>Charged</td><td>not published</td><td>The mature "whole-village retail + hospitality" destination.</td></tr>
+  </table>
+  <p class="src">Sources: AIM Economic Impact Study 2024; VisitBritain (day-visit avg £44, 2023); WhichMuseum; Brontë Society; Wordsworth Grasmere; Amgueddfa Cymru. Full sourcing in the research doc.</p>
+
+  <!-- 4 · OUT TO THE TOWN -->
+  <h2>6 · Where the money goes — out to the town</h2>
+  <p class="sub">The part that matters most, and the part that makes it award-worthy rather than just profitable. A large share of every pound is designed to leave our till and land in Laugharne.</p>
+  <div class="card dist">
+    <div class="dbar"><span class="lbl"><b>Local makers &amp; artists</b><br><small>gallery + shop consignment</small></span><div class="track"><div class="fill local" style="width:55%;"></div></div><span class="pct">50–60% to maker</span></div>
+    <div class="dbar"><span class="lbl"><b>Local produce &amp; suppliers</b><br><small>the larder, the kitchen, the deli</small></span><div class="track"><div class="fill local" style="width:45%;"></div></div><span class="pct">cost → local farms</span></div>
+    <div class="dbar"><span class="lbl"><b>Local people &amp; services</b><br><small>staff, guides, voices, performers</small></span><div class="track"><div class="fill local" style="width:40%;"></div></div><span class="pct">wages stay here</span></div>
+    <div class="dbar"><span class="lbl"><b>The wider town</b><br><small>referrals to Brown's, the castle, other shops</small></span><div class="track"><div class="fill" style="width:30%;"></div></div><span class="pct">footfall shared</span></div>
+  </div>
+  <div class="card"><p><b>The good-neighbour engine.</b> Standard gallery consignment is 50/50 to 40/60 — we lean it to the maker. The larder is sourced from named local farms. The oral-history voices and the guides are paid local people. And we send visitors <i>to</i> the town's other businesses, not around them. In a town of ~1,200, an anchor attraction that keeps its spend circulating locally is the difference between being resented and being defended — and it's the honest basis for raising the owner's profile: the town benefiting, not being mined.</p></div>
+
+  <!-- 5 · THE LEVERS -->
+  <h2>7 · The levers that get us from £11 to £34</h2>
+  <div class="grid2">
+    <div class="box"><b>Free trail, seeded everywhere</b><span>Give the app away and QR-code it across the town, so it catches passers-by, not just committed pilgrims — and every route quietly runs through the Globe. Free maximises the funnel; the money is downstream. The single biggest structural move.</span></div>
+    <div class="box b2"><b>Provenance lets you charge properly</b><span>A shop where every object carries a true story commands a higher average transaction than a souvenir rack — and it's the reason retail can run at £30 ATV, not £12.</span></div>
+    <div class="box b3"><b>Pre-book to lift secondary spend</b><span>Online pre-booking of the trail/experience lifts on-site spend by up to 24% (ACE) — the entry money is already spent, so the café and shop money is still in the pocket.</span></div>
+    <div class="box"><b>The café is the biggest single lever</b><span>Catering is the largest and most reliable secondary spend at most attractions — and the most punished on reviews if over-priced. Get coffee-and-cake right and it carries the average.</span></div>
+    <div class="box b2"><b>A range at every price</b><span>A £3 card and a £300 original under one roof means nobody leaves empty-handed and the occasional big sale lifts the blended figure.</span></div>
+    <div class="box b3"><b>A reason to return</b><span>The rotating gallery, the three-year Common Walk, the changing larder — repeat visits and locals, not only one-time pilgrims.</span></div>
+  </div>
+
+  <!-- 6 · EXTRA ANGLES -->
+  <h2>8 · Extra angles &amp; benefits discovered</h2>
+  <div class="grid2">
+    <div class="box"><b>A CIC / community structure</b><span>Structuring the cultural layer as a community-benefit body would strengthen grant and award eligibility, and make the "money flows to the town" claim formal and defensible — worth weighing against the simplicity of full ownership.</span></div>
+    <div class="box b2"><b>Replicable across the branches</b><span>The flow model — arrive, warm up, guided experience, provenance retail, a table, take home — is a template. Prove it here and the same spend-flow can run at Island House and the other sites, each with its own story.</span></div>
+    <div class="box b3"><b>The app is a sellable asset</b><span>A working, honest, bilingual heritage-trail engine has value beyond Laugharne — other towns and heritage bodies have the same problem and no chain of custody to solve it.</span></div>
+    <div class="box"><b>Events fill the quiet hours</b><span>Evenings and the off-season — readings, the reading room, private hire, festival tie-ins (Laugharne Weekend) — turn a daytime-pilgrim business into a year-round one.</span></div>
+    <div class="box b2"><b>All-weather — the rainy-day magnet</b><span>The Boathouse, the castle and the coast are exposed. A large, warm, indoor heritage centre is the thing to do when the weather turns — and in coastal Wales, that's a lot of days. It de-risks the whole model against the one thing it can't control.</span></div>
+    <div class="box b3"><b>It solves the reviews' actual complaints</b><span>Our own gap map found: dated exhibition, steep path/no parking, price-for-size, nowhere reliable to eat. A free, well-curated, level, indoor experience with good food answers every one — so the service spreads through the reviews itself.</span></div>
+    <div class="box"><b>Room to grow — building by building</b><span>Large indoor space now, and the real prospect of acquiring further buildings around the town as they come up. The model isn't one venue; it's a template that can spread across Laugharne, each site its own chapter.</span></div>
+  </div>
+
+  <!-- 7 · AWARDS -->
+  <h2>9 · The award pathway — for each branch</h2>
+  <p class="sub">Real, named awards this could target, nearest-term first. The point isn't vanity — accreditation drives bookings, funding eligibility and credibility with partners like Cadw.</p>
+  <div class="awards">
+    <div class="row"><span><b>VisitWales VAQAS</b> — whole-journey accreditation, with accolades for <b>Best Told Story</b> and <b>Quality Café</b> that fit a strong-narrative site almost exactly. The foundation the rest build on.</span><span class="when">Near-term</span></div>
+    <div class="row"><span><b>Kids in Museums — Family Friendly Award</b> — the Dylan Thomas Centre was shortlisted 2026; a realistic early target for a family literary site.</span><span class="when">Near-term</span></div>
+    <div class="row"><span><b>Wales Tourism Awards</b> — Best Attraction, Sustainable Tourism, Accessibility &amp; Inclusivity.</span><span class="when">Near-term</span></div>
+    <div class="row"><span><b>The Sandford Award</b> — the heritage-education quality mark; needs a real curriculum-linked learning programme (a workstream in itself, but a strong one).</span><span class="when later">Build first</span></div>
+    <div class="row"><span><b>Museums + Heritage Awards</b> — the sector's own; categories for new interpretation, visitor welcome and sustainability. Cadw won here in 2026 for immersive storytelling — our partner-to-be's own arena.</span><span class="when later">Once live</span></div>
+    <div class="row"><span><b>RIBA Wales / Civic Trust</b> — for the building conversion and fit-out, if the design earns it.</span><span class="when later">On completion</span></div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:32px;">Model v1 · honest numbers, stated assumptions. The £30–50 target is a stretch the whole flow has to earn — and the design brief that follows from it.</p>
+
+</div>
+</body></html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House of Culture — The Master Build-Out</title>
+<meta name="description" content="Every moving piece of the House of Culture, with an enhancement idea and action points — the team, the business lines, the building, the tech, and the process that keeps it alive.">
+<style>
+  :root{--plum:#4a3560;--plum-d:#2b1d3a;--brass:#9c7a3c;--brass-l:#c6a768;--green:#1f5c4d;--dark:#153f35;
+        --ink:#22302e;--muted:#6a7b76;--line:#e0dccf;--warm:#8a5a2b;--blue:#2b4a6b;--red:#a8402a;}
+  *{box-sizing:border-box;} body{margin:0;background:#f2efe6;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px 90px;}
+  a{color:var(--plum);}
+  header{background:linear-gradient(160deg,var(--plum),var(--plum-d));color:#f4efe6;padding:44px 22px 36px;}
+  header .inner{max-width:1080px;margin:0 auto;}
+  .crumb{font-size:12px;color:#c7bcd6;margin-bottom:14px;} .crumb a{color:#e0d3b4;text-decoration:none;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#e0d3b4;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:33px;margin:8px 0 10px;color:#f4eede;}
+  header p{max-width:720px;color:#ded3ea;font-size:15px;margin:0;}
+  .flag{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#f0e6cf;padding:5px 12px;border-radius:20px;}
+
+  h2{font-family:Georgia,serif;color:var(--plum-d);font-size:22px;margin:46px 0 4px;border-bottom:2px solid var(--brass);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;max-width:74ch;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,20,10,.05);margin-top:14px;}
+  .card p{font-size:14px;margin:0 0 10px;} .card p:last-child{margin-bottom:0;}
+
+  /* the loop */
+  .loop{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .lnode{flex:1;min-width:130px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 13px;position:relative;box-shadow:0 2px 8px rgba(20,20,10,.05);border-top:4px solid var(--green);}
+  .lnode .n{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--brass);}
+  .lnode b{display:block;font-family:Georgia,serif;font-size:14px;color:var(--plum-d);margin:4px 0 3px;}
+  .lnode span{font-size:11.5px;color:#43413a;}
+
+  /* piece rows */
+  .piece{background:#fff;border:1px solid var(--line);border-left:5px solid var(--plum);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(20,20,10,.05);margin-top:10px;}
+  .piece.t{border-left-color:var(--green);} .piece.b{border-left-color:var(--brass);} .piece.k{border-left-color:var(--blue);} .piece.x{border-left-color:var(--warm);}
+  .piece .h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .piece h3{font-family:Georgia,serif;font-size:16px;margin:0;color:var(--plum-d);}
+  .piece .who{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
+  .piece .enh{font-size:13px;color:#43413a;margin:7px 0 8px;}
+  .piece .enh b{color:var(--plum-d);}
+  .piece .act{font-size:12px;color:#3a4a47;background:#f5f2ea;border-radius:8px;padding:8px 11px;}
+  .piece .act b{color:var(--green);text-transform:uppercase;font-size:9.5px;letter-spacing:.5px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr;}}
+
+  /* scorecard */
+  .score{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px;}
+  @media(max-width:820px){.score{grid-template-columns:1fr;}}
+  .sc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(20,20,10,.05);border-top:4px solid var(--brass);}
+  .sc b{font-family:Georgia,serif;font-size:17px;color:var(--plum-d);display:block;margin-bottom:6px;}
+  .sc ul{margin:0;padding-left:16px;font-size:12.5px;color:#43413a;} .sc li{margin-bottom:4px;}
+
+  .tech-note{background:#fffdf6;border:1px solid #e6d9b0;border-left:5px solid var(--brass);border-radius:12px;padding:14px 18px;margin-top:12px;font-size:13px;}
+  .tech-note b{color:var(--warm);}
+</style></head><body>
+<header><div class="inner">
+  <div class="crumb"><a href="index.html">← Dashboard</a> &nbsp;·&nbsp; <a href="house-of-culture-plan.html">The plan</a> &nbsp;·&nbsp; <a href="house-of-culture-spend-model.html">The economics</a></div>
+  <div class="kicker">House of Culture · The Master Build-Out</div>
+  <h1>Every moving piece, and how we make each one better</h1>
+  <p>The alignment layer: the team, the business lines, the building and the technology — each with the idea that lifts it and the next action to take. Plus the process that keeps the whole thing current instead of letting it go stale.</p>
+  <span class="flag">In-depth respect, 21st-century delivery — the two held together</span>
+</div></header>
+<div class="wrap">
+
+  <!-- THE UPDATING PROCESS -->
+  <h2>0 · The living loop — how it stays true</h2>
+  <p class="sub">Everything here updates, and it updates safely. This is the cycle that turns new research into live experience without ever letting an unproven claim through.</p>
+  <div class="loop">
+    <div class="lnode"><span class="n">1 · Dig</span><b>Research runs</b><span>Mererid works the backlog continuously; new facts enter the chain of custody, tiered.</span></div>
+    <div class="lnode"><span class="n">2 · Prove</span><b>The gate</b><span>A fact's status (Verified → Refuted) decides whether the beat it feeds can go live.</span></div>
+    <div class="lnode"><span class="n">3 · Find</span><b>The index</b><span>Every doc logged the moment it's written — nothing lost, nothing paraphrased.</span></div>
+    <div class="lnode"><span class="n">4 · Approve</span><b>Your tick</b><span>"Approved for site" — a human gate. Nothing reaches the public without it.</span></div>
+    <div class="lnode"><span class="n">5 · Ship</span><b>One publisher</b><span>The Master desk publishes; no desk overwrites another.</span></div>
+    <div class="lnode"><span class="n">6 · Correct</span><b>Propagate</b><span>When a claim changes, the retraction sweeps every place it lived. Same day.</span></div>
+  </div>
+  <div class="card"><p><b>The instant fact-check sits inside this loop.</b> Because every claim is already graded and sourced, an AI can answer a visitor's question <i>from the same graded library</i> — and refuse to bluff when the record is silent. The honesty engine isn't a feature bolted on; it's the loop, made conversational.</p></div>
+
+  <!-- THE TEAM -->
+  <h2>1 · The team — enhancing every role</h2>
+  <p class="sub">Each persona, the idea that raises their game, and the next action.</p>
+
+  <div class="piece t"><div class="h"><h3>Mererid — archival history</h3><span class="who">The record</span></div>
+    <div class="enh"><b>Enhance:</b> she's proven the read-back discipline and the method-thread-first rule. Next lift: point her at the <b>bare areas</b> (cockles, Common Walk, living memory) and the heavyweight unread sources (Adcock thesis, Avent 1987), so the thin stops get bodies.</div>
+    <div class="act"><b>Action</b> · Continuous runs on the backlog; the 1842 tithe archive request out (needs owner details); debrief Steve on the Common Walk as a primary source, tiered like anyone's.</div></div>
+
+  <div class="piece t"><div class="h"><h3>Taliesin — culture &amp; story</h3><span class="who">The experience</span></div>
+    <div class="enh"><b>Enhance:</b> he owns the beats and the tone rules. Next lift: write the <b>Welsh parallel scripts</b> for the six Ready beats, and design the answer-tone for the AI — including the honest-refusal script ("the record doesn't tell us…").</div>
+    <div class="act"><b>Action</b> · Flip verified beats to Ready with read-back; hand the Strand claim to Mererid; author the AI's honest-when-unknown voice.</div></div>
+
+  <div class="piece b"><div class="h"><h3>Bob — build &amp; code</h3><span class="who">The machine</span></div>
+    <div class="enh"><b>Enhance:</b> he built the content model and caught the licence and pipeline traps. Next lift: the <b>free web-app + QR engine</b> (instant load, no download), and the grounded text Q&A prototype before voice.</div>
+    <div class="act"><b>Action</b> · Build the Township Loop as working software (waits on blueprint sign-off); pin canonical table IDs; prototype the honesty engine.</div></div>
+
+  <div class="piece b"><div class="h"><h3>Brush — design</h3><span class="who">The look</span></div>
+    <div class="enh"><b>Enhance:</b> heritage register approved (Fraunces, Aged Brass). Next lift: full screen set + the <b>physical</b> — signage, the QR-point design, the shop and heritage-centre fit-out, one identity across all of it.</div>
+    <div class="act"><b>Action</b> · Build out the six-screen set; design the QR-point marker; carry the identity to leaflet, signage, merch.</div></div>
+
+  <div class="piece"><div class="h"><h3>Nia — social / SEO</h3><span class="who">The reach</span></div>
+    <div class="enh"><b>Enhance:</b> gap map and positioning done. Next lift: turn the <b>flywheel</b> — the free QR trail and the review-headache fixes are the story; seed them where the town's visitors already look.</div>
+    <div class="act"><b>Action</b> · Positioning to the free-funnel story; the audit of superseded claims; weekly gap-map refresh.</div></div>
+
+  <div class="piece k"><div class="h"><h3>Karen — compliance</h3><span class="who">The guardrails</span></div>
+    <div class="enh"><b>Enhance:</b> she holds the claims ceiling and the rights case. Next lift: the <b>data-controller / oral-history</b> position (a hard stop before recording), the AI provider terms, and the Dylan-voice licensing.</div>
+    <div class="act"><b>Action</b> · Settle the named data controller + ICO position; check AI TTS commercial-use terms; the Corporation blessing protocol.</div></div>
+
+  <div class="piece x"><div class="h"><h3>Emyr &amp; Osian — kitchen &amp; bar</h3><span class="who">The pot</span></div>
+    <div class="enh"><b>Enhance:</b> the restaurant/bar is the biggest revenue line. Next lift: menu and larder that <b>carry the story</b> — literary/local dishes, the Cook Book, preserves and bread as take-home, the wine bar as an evening draw.</div>
+    <div class="act"><b>Action</b> · Build the seasonal menu + larder range; the take-home bakery loaf; price the covers against the £30–50 target.</div></div>
+
+  <div class="piece"><div class="h"><h3>Delphine — interpretation copy</h3><span class="who">The words</span></div>
+    <div class="enh"><b>Enhance:</b> the reading-room and signage copy — honest, beautiful, sourced. Next lift: write from the <b>verified beats</b>, never ahead of them.</div>
+    <div class="act"><b>Action</b> · Draft heritage-centre panels + shop provenance labels from Ready beats only.</div></div>
+
+  <div class="piece x"><div class="h"><h3>Local makers &amp; voices</h3><span class="who">The town</span></div>
+    <div class="enh"><b>Enhance:</b> the gallery artists, the oral-history voices, the Welsh speaker. Next lift: a <b>fair, well-paid platform</b> — 50–60% to makers, consented recordings owned by the town, the voice actor for the whole app.</div>
+    <div class="act"><b>Action</b> · Name the Welsh speaker (owner); consent forms settled; gallery curation + commission model.</div></div>
+
+  <!-- BUSINESS LINES -->
+  <h2>2 · The business lines — the assembly</h2>
+  <p class="sub">Each door, the enhancement, and how it feeds the flow.</p>
+  <div class="grid2">
+    <div class="piece b"><div class="h"><h3>The Coffee Shop</h3><span class="who">Daytime door</span></div><div class="enh"><b>The morning anchor &amp; the QR download point.</b> Coffee in hand while the free trail loads on our wifi — the bookend mechanism in one moment.</div><div class="act"><b>Action</b> · Coordinate the sibling desk on the day-loop; takeaway for walkers.</div></div>
+    <div class="piece b"><div class="h"><h3>The Artisan Bakery</h3><span class="who">Take-home</span></div><div class="enh"><b>The loaf people take home.</b> Fresh, organic, local — planted early in the walk ("we'll save you one"), collected on the way back.</div><div class="act"><b>Action</b> · Sell-forward prompt in the app; the bread as a provenance product.</div></div>
+    <div class="piece x"><div class="h"><h3>The Restaurant &amp; Bar</h3><span class="who">The pot</span></div><div class="enh"><b>Up to £50 a head — the biggest line.</b> Seasonal, local, wine-led; the evening draw that turns a day-trip into a night out.</div><div class="act"><b>Action</b> · Menu + covers modelled to target; booking built into the trail's end.</div></div>
+    <div class="piece x"><div class="h"><h3>Deli, Butcher &amp; Larder</h3><span class="who">Essentials</span></div><div class="enh"><b>The self-caterer's shop.</b> Local meat, the cottage essentials, preserves — the town's missing butcher, back.</div><div class="act"><b>Action</b> · Range + local sourcing; the mid-walk "self-catering tonight?" nudge.</div></div>
+    <div class="piece b"><div class="h"><h3>The Design Shop</h3><span class="who">The keepsake</span></div><div class="enh"><b>Provenance retail — a story you now recognise.</b> Every object true and local; a £3 card to a £300 original under one roof.</div><div class="act"><b>Action</b> · Product range from verified stories; the provenance rule enforced.</div></div>
+    <div class="piece"><div class="h"><h3>The Gallery</h3><span class="who">Discover</span></div><div class="enh"><b>The town's makers, properly hung.</b> Rotating local artists, the maker's story beside the work, a reason to return.</div><div class="act"><b>Action</b> · Curation model + commission split (owner call on who curates).</div></div>
+  </div>
+
+  <!-- THE BUILDING -->
+  <h2>3 · The building — planning the rooms</h2>
+  <p class="sub">The physical structure that holds the experience, weather-proof and room to grow.</p>
+  <div class="grid2">
+    <div class="piece"><div class="h"><h3>The Heritage Centre</h3><span class="who">Start here</span></div><div class="enh"><b>The warm, indoor, all-weather heart</b> — the rainy-day magnet the Boathouse and castle can't be. Factual, sourced, generous; free to enter.</div><div class="act"><b>Action</b> · Space plan + panel copy from verified beats; the interactive stations.</div></div>
+    <div class="piece"><div class="h"><h3>The Reading Room</h3><span class="who">Return &amp; linger</span></div><div class="enh"><b>Depth for the curious</b> — the fuller story, the sources, the recorded voices, room to sit and talk.</div><div class="act"><b>Action</b> · The Dylan/Corporation/Globe stories as physical interpretation, once cleared.</div></div>
+    <div class="piece"><div class="h"><h3>The Interaction Stations</h3><span class="who">21st-C</span></div><div class="enh"><b>Ask-and-hear points</b> — speak a question, hear the answer in our local voice, drawn only from the record. The tech that wins awards <i>because</i> it refuses to bluff.</div><div class="act"><b>Action</b> · Bob prototypes the grounded Q&A; then voice; offline fallback.</div></div>
+    <div class="piece"><div class="h"><h3>Courtyard &amp; the old abattoir</h3><span class="who">Grow into</span></div><div class="enh"><b>The building's own working history</b> — genuine character, event space, the story of the Gleeds' trade told where it happened.</div><div class="act"><b>Action</b> · Chase the DAT abattoir photo record; scope events use.</div></div>
+  </div>
+
+  <!-- THE TECH -->
+  <h2>4 · The technology — depth, delivered modern</h2>
+  <p class="sub">The 21st-century layer, held to the same in-depth discipline as the history.</p>
+  <div class="piece b"><div class="h"><h3>Instant fact-check &amp; understanding</h3><span class="who">Bob · Taliesin</span></div>
+    <div class="enh"><b>Ask anything, anywhere, and get a true answer</b> — drawn only from the verified library, with the source one tap away, and an honest "the record doesn't tell us" when it's silent.</div>
+    <div class="act"><b>Action</b> · Prototype the grounded text Q&A first — it proves the honesty engine cheaply.</div></div>
+  <div class="piece b"><div class="h"><h3>Speak &amp; hear — the local voice</h3><span class="who">Bob · Karen</span></div>
+    <div class="enh"><b>Speak into the mic, hear it answered back in our own local voice</b> — bilingual, warm, ours. Never Dylan's voice, never an impersonation; the commissioned local narrator, clearly a device.</div>
+    <div class="act"><b>Action</b> · Add voice once the accent test passes; check the provider's commercial terms; the voice stays the town's, never sold.</div></div>
+  <div class="tech-note"><b>The line that keeps the tech respectful:</b> every spoken answer obeys the same publish gate as a printed panel — Verified only, Contested labelled, nothing invented, source shown. That is the whole differentiator. Anyone can bolt a chatbot to a museum; only a site with a real chain of custody can build one that tells the truth and admits what it doesn't know.</div>
+
+  <!-- INTERACTION PSYCHOLOGY -->
+  <h2>5 · The interaction psychology</h2>
+  <p class="sub">Why people engage, spend and come back — designed in, not left to chance.</p>
+  <div class="grid2">
+    <div class="piece x"><div class="h"><h3>Curiosity, then reward</h3></div><div class="enh">The QR asks a question ("what happened here?") and answers it. Completing a story unlocks the dossier — <b>depth as the reward</b>, never a badge for its own sake.</div></div>
+    <div class="piece x"><div class="h"><h3>Free earns trust</h3></div><div class="enh">A genuine free gift lowers the guard and raises goodwill — so the later spend feels like thanks, not extraction. The provenance shop then converts trust into a purchase people feel good about.</div></div>
+    <div class="piece x"><div class="h"><h3>Place the spend early</h3></div><div class="enh">"We'll save you a loaf" plants a purchase hours ahead — a small commitment that completes itself on the walk home. Service that happens to sell.</div></div>
+    <div class="piece x"><div class="h"><h3>Reverence where it's due</h3></div><div class="enh">The game goes silent at the grave. Knowing when <i>not</i> to gamify is what earns the respect that makes the playful parts acceptable.</div></div>
+  </div>
+
+  <!-- THE END GAME -->
+  <h2>6 · The end game — three scoreboards</h2>
+  <p class="sub">Every moving piece above feeds one or more of these. That's how we know a job is worth doing.</p>
+  <div class="score">
+    <div class="sc"><b>Experience</b><ul><li>All-weather, all-day, all-town</li><li>Honest, sourced, never bluffs</li><li>Simple for anyone; deep for the curious</li><li>Answers the reviews' every complaint</li><li>Bilingual, of the place, unrepeatable</li></ul></div>
+    <div class="sc"><b>Awards</b><ul><li>VAQAS — Best Told Story, Quality Café</li><li>Kids in Museums · Wales Tourism Awards</li><li>Museums + Heritage (Cadw's own arena)</li><li>The chain of custody as the entry story</li><li>Community benefit as the differentiator</li></ul></div>
+    <div class="sc"><b>Money in the pocket</b><ul><li>Free funnel → wide volume</li><li>£30–50/head across the flow</li><li>Restaurant &amp; bar as the pot</li><li>£220k–£2m/yr on plausible volume</li><li>A template to replicate building by building</li></ul></div>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:32px;">The master build-out · in-depth respect, delivered in 21st-century form. Every piece has an owner, an enhancement, and a next action.</p>
+
+</div>
+</body></html>

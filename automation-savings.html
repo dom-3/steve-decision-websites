@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hours Saved by Automation — The Business</title>
+<style>
+  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;
+        --warm:#8a5a2b;--blue:#2b4a6b;}
+  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 30px;}
+  header .inner{max-width:1040px;margin:0 auto;}
+  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:32px;margin:8px 0 6px;}
+  header p{max-width:680px;color:#e6dcc8;font-size:14.5px;margin:0;}
+  .back{display:inline-block;margin-top:16px;color:#d8c9a8;text-decoration:none;font-size:12.5px;letter-spacing:1px;}
+  .back:hover{color:#fff;}
+
+  /* headline tally */
+  .out{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 2px;}
+  .ot{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 16px;}
+  .ot b{display:block;font-family:Georgia,serif;font-size:30px;color:#fff;line-height:1.1;}
+  .ot span{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:#d8c9a8;}
+  .out .note{grid-column:1/-1;font-size:11.5px;color:#bcd0c7;margin-top:4px;}
+  @media(max-width:640px){.out{grid-template-columns:repeat(2,1fr);}}
+
+  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+
+  /* automation ledger card */
+  .card{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:14px;padding:20px 22px;box-shadow:0 3px 12px rgba(20,50,45,.06);margin-top:16px;}
+  .card.live{border-left-color:var(--green);}
+  .card.next{border-left-color:var(--gold);background:#fffdf8;}
+  .card .h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .card h3{font-family:Georgia,serif;font-size:22px;margin:0;color:var(--dark);}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:#eef4f0;color:var(--green);}
+  .tag.soon{background:#f7f0e1;color:var(--gold);}
+  .who{font-size:12px;color:var(--muted);margin:2px 0 12px;}
+  .who b{color:var(--dark);}
+
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 14px;}
+  @media(max-width:640px){.metrics{grid-template-columns:1fr;}}
+  .m{background:#f3f6f4;border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .m b{display:block;font-family:Georgia,serif;font-size:24px;color:var(--green);line-height:1.1;}
+  .m span{font-size:11px;color:var(--muted);letter-spacing:.3px;}
+
+  .card p{font-size:14px;margin:8px 0;}
+  .card .lead{color:#3a4a47;}
+  ul.clean{list-style:none;padding:0;margin:10px 0 0;}
+  ul.clean li{position:relative;padding:6px 0 6px 22px;font-size:13.5px;border-bottom:1px dashed var(--line);}
+  ul.clean li:last-child{border-bottom:0;}
+  ul.clean li:before{content:"→";position:absolute;left:0;color:var(--gold);font-weight:700;}
+  .strap{font-size:12.5px;color:var(--muted);margin-top:12px;font-style:italic;}
+
+  table.calc{width:100%;border-collapse:collapse;margin:6px 0 4px;font-size:13.5px;}
+  table.calc th,table.calc td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);}
+  table.calc th{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  table.calc td.n{text-align:right;font-variant-numeric:tabular-nums;}
+  table.calc tr.tot td{font-weight:700;color:var(--dark);border-top:2px solid var(--gold);border-bottom:0;}
+
+  .guard{background:#f3f6f4;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:8px;font-size:13px;color:#3a4a47;}
+  .guard b{color:var(--dark);}
+</style></head><body>
+<header><div class="inner">
+  <div class="kicker">Private &middot; The Business · Automation &amp; Software</div>
+  <h1>Hours Saved by Automation</h1>
+  <p>A running ledger of the software and automations built into the businesses that take work <b>off the staff</b> — the fiddly, repeatable jobs a person used to do by hand, now handled by a machine. Each entry records what it replaced, the hours it gives back, and the guardrails that keep quality safe. This list will grow.</p>
+  <a class="back" href="index.html">← Back to the Business Operating System</a>
+</div></header>
+<div class="wrap">
+
+  <div class="out">
+    <div class="ot"><b>1</b><span>Automation live</span></div>
+    <div class="ot"><b>~4–6</b><span>Staff hrs / week saved</span></div>
+    <div class="ot"><b>~230–310</b><span>Staff hrs / year saved</span></div>
+    <div class="ot"><b>~£0</b><span>Marginal cost to run</span></div>
+    <div class="note">Conservative estimate from the automations live today. Figures scale straight up as real volume and the next automations come online.</div>
+  </div>
+
+  <h2>Why this page exists</h2>
+  <p class="sub">A distinction worth drawing for the owners.</p>
+  <p style="font-size:14px;">There are two kinds of automation running across the group. Some help <b>Dominic</b> run the operation faster behind the scenes. This page is only about the other kind — <b>the automations that take work off the staff's plate</b>: jobs an employee used to do by hand, now done for them so their hours go back into the guests, the floor and the room. Each one is recorded here with an honest read on the time it returns.</p>
+
+  <!-- ENTRY 1 — CONTENT ENGINE -->
+  <h2>The ledger</h2>
+  <p class="sub">Live automations, most recent first.</p>
+
+  <div class="card live">
+    <div class="h"><h3>The Content Engine — automatic photo QA &amp; enhancement</h3><span class="tag">Live · 30 Jul 2026</span></div>
+    <div class="who">Replaces manual work by: <b>Alys, the bar manager</b> (a non-editor) · Businesses: <b>The Globe &amp; Bakery</b></div>
+
+    <div class="metrics">
+      <div class="m"><b>~4–6 hrs</b><span>Saved per week</span></div>
+      <div class="m"><b>~230–310 hrs</b><span>Saved per year</span></div>
+      <div class="m"><b>~£0</b><span>Marginal cost (pennies of AI per image)</span></div>
+    </div>
+
+    <p class="lead"><b>What used to happen.</b> Social photos were handled by hand — originally by the bar manager. A busy manager, who isn't a trained photo editor, stopping between service to sort the day's phone snaps, decide which were good enough, then crop, sharpen, resize and brand each one to something postable. Slow, fiddly, and dependent on one person having the time and the eye for it.</p>
+
+    <p class="lead"><b>What happens now.</b> Staff drop a photo and walk away. The machine judges it against a fixed "premium for an upmarket restaurant" bar, screens out the weak ones, and enhances the good ones automatically — sharpened, correctly cropped, on-brand — ready for a one-tap approval. No editing skill required, no manager's time consumed.</p>
+
+    <table class="calc">
+      <tr><th>Manual task (before)</th><th class="n">Time / day</th><th class="n">Now</th></tr>
+      <tr><td>Editing ~2 posts a day</td><td class="n">~30 min</td><td class="n">~0</td></tr>
+      <tr><td>Screening the day's candidates</td><td class="n">~10–15 min</td><td class="n">~0</td></tr>
+      <tr class="tot"><td>Per week</td><td class="n">~4–6 hrs</td><td class="n">a few approval taps</td></tr>
+    </table>
+    <p class="strap">Roughly half a shift a week, given back — indefinitely. The estimate is deliberately cautious; plug in the real posting volume and it scales straight from there.</p>
+
+    <p style="font-size:14px;margin-top:14px;"><b>Worth more than the hours:</b></p>
+    <ul class="clean">
+      <li><b>Consistency &amp; quality.</b> Every image now clears the same bar and gets the same on-brand treatment, whoever took it — not just as good as the time and eye the manager could spare that day.</li>
+      <li><b>The bottleneck is gone.</b> The work no longer waits on one person; any staff member drops a photo and the pipeline does the rest. No single point of failure.</li>
+      <li><b>A manager's time back on the floor.</b> The hours freed are a bar manager's hours — returned to guests and running the room, not crop tools.</li>
+      <li><b>It compounds.</b> This isn't a one-off saving; it runs every day at effectively zero cost, so the chore is off the team's plate permanently.</li>
+    </ul>
+
+    <div class="guard" style="margin-top:14px;">
+      <b>Guardrails.</b> Nothing posts automatically — every image passes a human approval tick. Enhancement is honest (sharpen / crop / colour only — never fabricating the food or the venue), the original is always kept pristine, and any photo with guests but no consent is screened out and can never advance.
+    </div>
+  </div>
+
+  <!-- NEXT -->
+  <h2>Coming next</h2>
+  <p class="sub">The next automations being built to take work off the staff.</p>
+
+  <div class="card next">
+    <div class="h"><h3>Automatic reply assistant</h3><span class="tag soon">In build</span></div>
+    <div class="who">Will take work off: <b>front-of-house / whoever answers messages</b></div>
+    <p class="lead">A drafting assistant for replying to messages, comments and posts — so routine responses are prepared in the right tone, ready to review and send, instead of a staff member composing every one from scratch. Hours-saved figures will be recorded here once it's live.</p>
+  </div>
+
+  <p class="sub" style="text-align:center;margin-top:26px;">CCP Project Enablement · a live ledger — every automation logged with an honest read on the time it returns.</p>
+
+</div>
+
+<!-- universal notes widget -->
+<script>(function(){
+  if(window.__gnw) return; window.__gnw=1;
+  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
+  var biz='General', who='Steve';
+  var css=''
+   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
+   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
+   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
+   +'#gnwBtn:hover{background:#153f35;}'
+   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
+   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
+   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
+   +'#gnwP.open{display:block;}'
+   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
+   +'display:flex;justify-content:space-between;align-items:center;}'
+   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
+   +'#gnwP .b{padding:13px 15px 15px;}'
+   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
+   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
+   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
+   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
+   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
+   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
+   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
+   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
+   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
+   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
+  var el=document.createElement('div');
+  el.innerHTML='<style>'+css+'</style>'
+    +'<button id="gnwBtn">✍ Note</button>'
+    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
+    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
+    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
+    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
+    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
+    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
+  document.body.appendChild(el);
+  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
+  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
+  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
+  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
+  function txt(){return (T.value||'').trim();}
+  document.getElementById('gnwSave').onclick=function(){
+    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
+    S.className='';S.textContent='Saving…';
+    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
+      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
+        else{fallback(v);}})
+      .catch(function(){fallback(v);});
+  };
+  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
+    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
+})();</script>
+
+</body></html>

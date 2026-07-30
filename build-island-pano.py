@@ -42,8 +42,8 @@ def main():
 
     # ---- FULL MODE: downscale + build ----
     step    = int(args[0]) if len(args) > 0 else 1
-    maxdim  = int(args[1]) if len(args) > 1 else 3072
-    quality = int(args[2]) if len(args) > 2 else 80
+    maxdim  = int(args[1]) if len(args) > 1 else 4608   # higher-res default for sharper zoom (was 3072)
+    quality = int(args[2]) if len(args) > 2 else 85
 
     if not os.path.isdir(SRC):
         print("ERROR: source images not found at", SRC); sys.exit(1)

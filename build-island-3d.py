@@ -179,6 +179,7 @@ function applyCam(){
   camera.lookAt(target);
 }
 var current = null, camLine = null;
+var homeTarget = new THREE.Vector3(), homeRad = 6, homeTheta = 0.6, homePhi = 1.05;
 
 function clearScene(){
   if(current){ scene.remove(current); current.geometry.dispose(); current.material.dispose(); current=null; }
@@ -206,7 +207,7 @@ function loadFrag(i){
   var g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(pos,3));
   g.setAttribute('color', new THREE.BufferAttribute(col,3));
-  var m = new THREE.PointsMaterial({size:0.02, vertexColors:true, sizeAttenuation:true});
+  var m = new THREE.PointsMaterial({size:0.06, vertexColors:true, sizeAttenuation:true});
   current = new THREE.Points(g,m); scene.add(current);
 
   // camera path
@@ -221,7 +222,10 @@ function loadFrag(i){
     var sg=new THREE.SphereGeometry(0.05,8,8), sm=new THREE.MeshBasicMaterial({color:0xf0b64a});
     for(var k=0;k<cp.length;k++){ var sp=new THREE.Mesh(sg,sm); sp.position.copy(cp[k]); camLine.add(sp); }
   }
-  target.set(0,0,0); rad=6; theta=0.6; phi=1.1; applyCam();
+  current.geometry.computeBoundingSphere();
+  var bs=current.geometry.boundingSphere;
+  homeTarget.copy(bs.center); homeRad=Math.max(1.2, bs.radius*2.4);
+  target.copy(homeTarget); rad=homeRad; theta=homeTheta; phi=homePhi; applyCam();
   document.getElementById('hud').innerHTML =
     'Fragment '+(i+1)+' of '+FRAGS.length+'<br>'+f.nimg+' photos linked · '+n.toLocaleString()+' points';
   document.querySelectorAll('.fb').forEach(function(b,bi){ b.classList.toggle('on', bi===i); });
@@ -256,7 +260,7 @@ window.addEventListener('mousemove',function(e){
 renderer.domElement.addEventListener('contextmenu',function(e){ e.preventDefault(); });
 renderer.domElement.addEventListener('wheel',function(e){ rad *= (1+ (e.deltaY>0?0.1:-0.1)); rad=Math.max(0.5,Math.min(60,rad)); applyCam(); e.preventDefault(); },{passive:false});
 
-document.getElementById('reset').onclick=function(){ target.set(0,0,0); rad=6; theta=0.6; phi=1.1; applyCam(); };
+document.getElementById('reset').onclick=function(){ target.copy(homeTarget); rad=homeRad; theta=homeTheta; phi=homePhi; applyCam(); };
 document.getElementById('spin').onclick=function(){ autospin=!autospin; this.textContent='Auto-spin: '+(autospin?'on':'off'); };
 
 window.addEventListener('resize',function(){

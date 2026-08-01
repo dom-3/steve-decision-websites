@@ -1,0 +1,114 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Island House — Walk-through on the Plan</title>
+<style>
+ html,body{margin:0;height:100%;background:#12140f;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;overflow:hidden}
+ #bar{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;gap:10px;padding:0 14px;background:#1b1e17;border-bottom:1px solid #2c3126;z-index:20}
+ #bar b{font-size:15px;letter-spacing:.02em}#bar .sp{flex:1}
+ button,.seg{background:#2a2f24;border:1px solid #3c4433;color:#eee;border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer}
+ button:hover{background:#374030}.seg.on{background:#b08640;border-color:#b08640;color:#12140f;font-weight:700}
+ #wrap{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
+ #view{flex:1.2;position:relative;background:#000;min-width:0}
+ #load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;z-index:2}
+ #hud{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.5);padding:6px 11px;border-radius:8px;font-size:13px;z-index:3}
+ #planwrap{flex:1;position:relative;background:#e9e7e0;overflow:auto}
+ #plan{position:relative;transform-origin:top left}
+ #plan img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+ .pin{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:#b08640;border:2px solid #fff;
+   color:#12140f;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.5);z-index:5}
+ .pin.cur{background:#e23b2e;color:#fff;width:32px;height:32px;margin:-16px 0 0 -16px;z-index:6;box-shadow:0 0 0 4px rgba(226,59,46,.35)}
+ #planwrap.edit{cursor:crosshair}
+ #tip{position:absolute;top:8px;left:8px;background:rgba(20,20,15,.82);color:#fff;font-size:12px;padding:7px 10px;border-radius:8px;max-width:260px;z-index:8;line-height:1.35}
+ #exp{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:40}
+ #exp .box{background:#1b1e17;border:1px solid #3c4433;border-radius:12px;padding:18px;width:min(620px,92vw)}
+ #exp textarea{width:100%;height:220px;background:#0e100b;color:#cfe;border:1px solid #333;border-radius:8px;font-family:monospace;font-size:12px}
+ @media(max-width:760px){#wrap{flex-direction:column}#view{flex:none;height:45%}#planwrap{flex:none;height:55%}}
+</style></head><body>
+<div id="bar">
+  <b>Island House — Walk-through on the Plan</b>
+  <span class="seg" id="fG">Ground</span><span class="seg" id="fU">Upper</span>
+  <span class="sp"></span>
+  <span id="count" style="font-size:13px;color:#b9c3ad"></span>
+  <button id="prev">◀</button><button id="next">▶</button>
+  <span class="seg" id="edit">✎ Place pins</span>
+  <button id="save">⤓ Export pins</button>
+</div>
+<div id="wrap">
+  <div id="view"><div id="load">Loading…</div><div id="hud"></div></div>
+  <div id="planwrap"><div id="tip"></div><div id="plan"><img id="planimg" src="plans/ground.jpg" alt="Floor plan"></div></div>
+</div>
+<div id="exp"><div class="box">
+  <div style="margin-bottom:8px;font-size:14px">Pin positions — copy this and send to Jarvis to bake in permanently:</div>
+  <textarea id="expT" readonly></textarea>
+  <div style="margin-top:10px;text-align:right"><button id="expCopy">Copy</button> <button id="expClose">Close</button></div>
+</div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ---- stations: 40 evenly-spaced frames from the 280-frame walk ----
+const FRAMEDIR="../island-house-walk-2026-07-31/frames/";
+const STATIONS=[]; for(let i=0;i<40;i++){const n=Math.min(280,i*7+1); STATIONS.push(String(n).padStart(3,'0'));}
+const KEY="ih_map_pins_v1";
+let pins=JSON.parse(localStorage.getItem(KEY)||"{}");   // { stationIdx: {floor,x,y} }
+let floor="ground", cur=0, editMode=false;
+
+// ---- 360 viewer ----
+let scene,cam,ren,mesh,loader,lon=0,lat=0,down=false,dx,dy,dl,dla,fov=75;
+function v360init(){
+ scene=new THREE.Scene();cam=new THREE.PerspectiveCamera(fov,1,1,1100);
+ const g=new THREE.SphereGeometry(500,60,40);g.scale(-1,1,1);
+ mesh=new THREE.Mesh(g,new THREE.MeshBasicMaterial());scene.add(mesh);
+ ren=new THREE.WebGLRenderer({antialias:true});document.getElementById('view').appendChild(ren.domElement);
+ loader=new THREE.TextureLoader();
+ const el=ren.domElement;
+ el.addEventListener('pointerdown',e=>{down=true;dx=e.clientX;dy=e.clientY;dl=lon;dla=lat;});
+ addEventListener('pointermove',e=>{if(!down)return;lon=dl-(e.clientX-dx)*0.11;lat=Math.max(-85,Math.min(85,dla+(e.clientY-dy)*0.11));});
+ addEventListener('pointerup',()=>down=false);
+ el.addEventListener('wheel',e=>{e.preventDefault();fov=Math.max(35,Math.min(95,fov+e.deltaY*0.05));cam.fov=fov;cam.updateProjectionMatrix();},{passive:false});
+ resize();addEventListener('resize',resize);anim();
+}
+function resize(){const v=document.getElementById('view');cam.aspect=v.clientWidth/v.clientHeight;cam.updateProjectionMatrix();ren.setSize(v.clientWidth,v.clientHeight);ren.setPixelRatio(devicePixelRatio);}
+function anim(){requestAnimationFrame(anim);const p=THREE.MathUtils.degToRad(90-lat),t=THREE.MathUtils.degToRad(lon);
+ cam.lookAt(500*Math.sin(p)*Math.cos(t),500*Math.cos(p),500*Math.sin(p)*Math.sin(t));ren.render(scene,cam);}
+function showStation(i){
+ cur=i;
+ loader.load(FRAMEDIR+STATIONS[i]+".jpg",tx=>{tx.minFilter=THREE.LinearFilter;const o=mesh.material.map;mesh.material.map=tx;mesh.material.needsUpdate=true;if(o)o.dispose();document.getElementById('load').style.display='none';});
+ document.getElementById('hud').textContent="Station "+(i+1)+" / "+STATIONS.length;
+ document.getElementById('count').textContent="Station "+(i+1)+"/"+STATIONS.length;
+ // if this station has a pin, jump the plan to its floor
+ const p=pins[i]; if(p&&p.floor!==floor){setFloor(p.floor);} else renderPins();
+}
+// ---- plan + pins ----
+function renderPins(){
+ const plan=document.getElementById('plan');
+ [...plan.querySelectorAll('.pin')].forEach(e=>e.remove());
+ const img=document.getElementById('planimg');
+ STATIONS.forEach((s,idx)=>{const p=pins[idx]; if(!p||p.floor!==floor)return;
+   const d=document.createElement('div');d.className='pin'+(idx===cur?' cur':'');d.textContent=idx+1;
+   d.style.left=(p.x*100)+'%';d.style.top=(p.y*100)+'%';
+   d.onclick=ev=>{ev.stopPropagation();showStation(idx);};plan.appendChild(d);});
+}
+function setFloor(f){floor=f;document.getElementById('planimg').src="plans/"+f+".jpg";
+ document.getElementById('fG').classList.toggle('on',f==='ground');document.getElementById('fU').classList.toggle('on',f==='upper');
+ document.getElementById('planimg').onload=renderPins; renderPins();}
+document.getElementById('fG').onclick=()=>setFloor('ground');
+document.getElementById('fU').onclick=()=>setFloor('upper');
+document.getElementById('prev').onclick=()=>showStation(Math.max(0,cur-1));
+document.getElementById('next').onclick=()=>showStation(Math.min(STATIONS.length-1,cur+1));
+addEventListener('keydown',e=>{if(e.key==='ArrowLeft')showStation(Math.max(0,cur-1));if(e.key==='ArrowRight')showStation(Math.min(STATIONS.length-1,cur+1));});
+// edit mode: click the plan to place current station's pin
+const pw=document.getElementById('planwrap');
+document.getElementById('edit').onclick=function(){editMode=!editMode;this.classList.toggle('on',editMode);pw.classList.toggle('edit',editMode);
+ document.getElementById('tip').textContent=editMode?("PLACE MODE: click where Station "+(cur+1)+" is on this floor. Use ◀ ▶ to move through stations and pin each one. Switch Ground/Upper as needed."):"";};
+document.getElementById('planimg').addEventListener('click',function(e){
+ if(!editMode)return; const r=this.getBoundingClientRect();
+ const x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+ pins[cur]={floor:floor,x:x,y:y}; localStorage.setItem(KEY,JSON.stringify(pins)); renderPins();
+ document.getElementById('tip').textContent="Pinned Station "+(cur+1)+". Next ▶ and place the following one.";
+});
+// export
+document.getElementById('save').onclick=()=>{document.getElementById('expT').value=JSON.stringify(pins,null,1);document.getElementById('exp').style.display='flex';};
+document.getElementById('expClose').onclick=()=>document.getElementById('exp').style.display='none';
+document.getElementById('expCopy').onclick=()=>{const t=document.getElementById('expT');t.select();document.execCommand('copy');};
+// go
+v360init();setFloor('ground');showStation(0);
+</script></body></html>

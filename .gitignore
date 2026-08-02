@@ -3,3 +3,15 @@ island-house-history.html.bak
 patch-trail.py
 .vercel
 .env*
+
+# OS / editor junk
+.DS_Store
+**/.DS_Store
+*.~lock.*#
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Sensitive / internal — do not deploy to the public site
+docs/finance/

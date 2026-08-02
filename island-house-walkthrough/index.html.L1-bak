@@ -1,0 +1,193 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Island House — Walk the Building</title>
+<style>
+ html,body{margin:0;height:100%;background:#000;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;overflow:hidden;user-select:none}
+ #view{position:fixed;inset:0;background:#000;touch-action:none}
+ #top{position:fixed;top:0;left:0;right:0;height:46px;display:flex;align-items:center;gap:10px;padding:0 14px;background:linear-gradient(#000c,#0000);z-index:20;pointer-events:none}
+ #top b{font-size:14px;letter-spacing:.03em;text-shadow:0 1px 3px #000}
+ #top .sp{flex:1}
+ .btn{pointer-events:auto;background:rgba(20,24,16,.72);border:1px solid #ffffff2a;color:#eee;border-radius:8px;padding:6px 11px;font-size:13px;cursor:pointer}
+ .btn:hover{background:rgba(50,58,40,.9)}
+ .btn.on{background:#b08640;border-color:#b08640;color:#12140f;font-weight:700}
+ /* progress */
+ #prog{position:fixed;left:14px;bottom:14px;z-index:20;background:rgba(0,0,0,.5);border-radius:9px;padding:8px 12px;font-size:12.5px;line-height:1.4;pointer-events:none}
+ #prog b{color:#e7b866}
+ #bar{width:180px;height:5px;background:#ffffff22;border-radius:3px;margin-top:6px;overflow:hidden}
+ #barfill{height:100%;width:0;background:#b08640}
+ /* plan panel */
+ #plan{position:fixed;right:14px;bottom:14px;width:330px;max-width:44vw;background:#12140fdd;border:1px solid #ffffff2a;border-radius:12px;overflow:hidden;z-index:20;box-shadow:0 6px 26px #000a}
+ #plan.big{width:min(680px,72vw)}
+ #planhead{display:flex;align-items:center;gap:6px;padding:7px 9px;background:#1b1e17;border-bottom:1px solid #2c3126;font-size:12px}
+ #planhead .t{font-weight:700;color:#d8c9a8;letter-spacing:.02em}
+ #planhead .sp{flex:1}
+ .seg{background:#2a2f24;border:1px solid #3c4433;color:#cfe;border-radius:7px;padding:4px 9px;font-size:12px;cursor:pointer}
+ .seg.on{background:#b08640;border-color:#b08640;color:#12140f;font-weight:700}
+ #planbody{position:relative;background:#e9e7e0;max-height:52vh;overflow:hidden}
+ #planbody.edit{cursor:crosshair}
+ #planimg{display:block;width:100%;height:auto;-webkit-user-drag:none}
+ #dot{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;pointer-events:none;transition:left .18s linear,top .18s linear;display:none}
+ #dot .ring{position:absolute;inset:0;border-radius:50%;background:#e23b2e;border:2px solid #fff;box-shadow:0 0 0 4px #e23b2e55}
+ #dot .cone{position:absolute;left:50%;top:50%;width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:22px solid #e23b2eaa;transform-origin:50% 0;margin:-1px 0 0 -9px}
+ #planhint{padding:7px 10px;font-size:11px;color:#9fae8c;background:#12140f;border-top:1px solid #2c3126;display:none}
+ #planhint.show{display:block}
+ /* help */
+ #help{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:40}
+ #help .card{background:#151812;border:1px solid #3c4433;border-radius:16px;padding:26px 30px;max-width:440px;text-align:center}
+ #help h2{font-family:Georgia,serif;font-weight:400;margin:0 0 6px;color:#e7b866}
+ #help p{font-size:13.5px;color:#cbd3c0;margin:4px 0}
+ .keys{display:flex;gap:8px;justify-content:center;margin:16px 0 6px}
+ .key{background:#222a1c;border:1px solid #4a5540;border-radius:8px;min-width:34px;padding:9px 0;font-size:15px;font-weight:700}
+ .keyrow{font-size:12px;color:#9fae8c;margin-top:2px}
+ #go{margin-top:18px;background:#b08640;color:#12140f;font-weight:700;border:none;border-radius:9px;padding:11px 26px;font-size:15px;cursor:pointer}
+ #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;z-index:10;pointer-events:none}
+ #expw{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:50}
+ #expw .b{background:#1b1e17;border:1px solid #3c4433;border-radius:12px;padding:16px;width:min(560px,92vw)}
+ #expw textarea{width:100%;height:180px;background:#0e100b;color:#cfe;border:1px solid #333;border-radius:8px;font-family:monospace;font-size:11px}
+</style></head><body>
+<canvas id="view"></canvas>
+<div id="load">Loading the building…</div>
+<div id="top">
+  <b>Island House — walk the building</b>
+  <span class="sp"></span>
+  <button class="btn" id="floorBtn">Plan: Ground</button>
+  <button class="btn" id="helpBtn">Controls</button>
+</div>
+<div id="prog">Position <b id="pos">1</b> / 280<div id="bar"><div id="barfill"></div></div></div>
+
+<div id="plan">
+  <div id="planhead">
+    <span class="t">DESIGN PLAN</span>
+    <span class="seg on" id="pgG">Ground</span><span class="seg" id="pgU">Upper</span>
+    <span class="sp"></span>
+    <button class="seg" id="setBtn">📍 Set route</button>
+    <button class="seg" id="bigBtn">⤢</button>
+  </div>
+  <div id="planbody"><img id="planimg" src="../island-house-map/plans/ground.jpg" alt="Design plan">
+    <div id="dot"><div class="cone" id="cone"></div><div class="ring"></div></div>
+  </div>
+  <div id="planhint">Walk to a spot, then click the plan where you are. Drop a few points along the route (use ↑ to move between them) and the red marker will follow you. <button class="seg" id="expBtn">Export</button></div>
+</div>
+
+<div id="help"><div class="card">
+  <h2>Walk through Island House</h2>
+  <p>Move through the building with your keyboard — the design plan tracks where you are.</p>
+  <div class="keys">
+    <div><div class="key">↑</div><div class="keyrow">walk<br>forward</div></div>
+    <div><div class="key">↓</div><div class="keyrow">step<br>back</div></div>
+    <div><div class="key">←</div><div class="keyrow">turn<br>left</div></div>
+    <div><div class="key">→</div><div class="keyrow">turn<br>right</div></div>
+  </div>
+  <p style="font-size:12px;color:#8fa07d">Hold ↑ to keep walking · drag the view to look around · scroll to zoom</p>
+  <button id="go">Enter the building →</button>
+</div></div>
+
+<div id="expw"><div class="b">
+  <div style="font-size:13px;margin-bottom:8px">Route points — copy and send to Jarvis to bake in permanently:</div>
+  <textarea id="expT" readonly></textarea>
+  <div style="margin-top:10px;text-align:right"><button class="seg" id="expCopy">Copy</button> <button class="seg" id="expClose">Close</button></div>
+</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const FRAMEDIR="../island-house-walk-2026-07-31/frames/";
+const N=280;                              // frames 0001..0280
+const KEY="ih_route_pins_v1";
+let pins=JSON.parse(localStorage.getItem(KEY)||"{}");   // { frameIdx: {floor,x,y} }
+let idx=0, floor="ground", lon=0, lat=0, fov=76, editMode=false, big=false;
+
+// ---- three.js photosphere ----
+let scene,cam,ren,mesh,texCache=new Map(),loader=new THREE.TextureLoader();
+function fname(i){return FRAMEDIR+String(i+1).padStart(4,'0')+".jpg";}
+function getTex(i,cb){ if(texCache.has(i)){cb(texCache.get(i));return;}
+  loader.load(fname(i),tx=>{tx.minFilter=THREE.LinearFilter;texCache.set(i,tx);
+    if(texCache.size>14){const first=texCache.keys().next().value;if(first!==i){const t=texCache.get(first);if(t!==mesh.material.map)t.dispose();texCache.delete(first);}}
+    cb(tx);});
+}
+function initGL(){
+ const c=document.getElementById('view');
+ ren=new THREE.WebGLRenderer({canvas:c,antialias:true});ren.setPixelRatio(devicePixelRatio);
+ scene=new THREE.Scene();cam=new THREE.PerspectiveCamera(fov,1,1,1100);
+ const g=new THREE.SphereGeometry(500,60,40);g.scale(-1,1,1);
+ mesh=new THREE.Mesh(g,new THREE.MeshBasicMaterial({color:0xffffff}));scene.add(mesh);
+ resize();addEventListener('resize',resize);
+ // look controls
+ let down=false,px,py,dl,dla;
+ c.addEventListener('pointerdown',e=>{down=true;px=e.clientX;py=e.clientY;dl=lon;dla=lat;});
+ addEventListener('pointermove',e=>{if(!down)return;lon=dl-(e.clientX-px)*0.11;lat=Math.max(-85,Math.min(85,dla+(e.clientY-py)*0.11));});
+ addEventListener('pointerup',()=>down=false);
+ c.addEventListener('wheel',e=>{e.preventDefault();fov=Math.max(40,Math.min(92,fov+e.deltaY*0.05));cam.fov=fov;cam.updateProjectionMatrix();},{passive:false});
+ goTo(0,true);anim();
+}
+function resize(){cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();ren.setSize(innerWidth,innerHeight);}
+function anim(){requestAnimationFrame(anim);
+ const p=THREE.MathUtils.degToRad(90-lat),t=THREE.MathUtils.degToRad(lon);
+ cam.lookAt(500*Math.sin(p)*Math.cos(t),500*Math.cos(p),500*Math.sin(p)*Math.sin(t));
+ ren.render(scene,cam);updateCone();}
+function goTo(i,instant){
+ i=Math.max(0,Math.min(N-1,i));idx=i;
+ getTex(i,tx=>{mesh.material.map=tx;mesh.material.needsUpdate=true;document.getElementById('load').style.display='none';});
+ getTex(Math.min(N-1,i+1),()=>{});getTex(Math.min(N-1,i+2),()=>{});   // prefetch ahead
+ document.getElementById('pos').textContent=i+1;
+ document.getElementById('barfill').style.width=((i/(N-1))*100)+"%";
+ placeDot();
+}
+// ---- movement ----
+let lastStep=0;
+function step(d){const now=performance.now();if(now-lastStep<95)return;lastStep=now;goTo(idx+d);}
+addEventListener('keydown',e=>{
+ if(document.getElementById('help').style.display!=='none')return;
+ if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","w","s","a","d","W","S","A","D"].includes(e.key))e.preventDefault();
+ const k=e.key.toLowerCase();
+ if(k==='arrowup'||k==='w')step(1);
+ else if(k==='arrowdown'||k==='s')step(-1);
+ else if(k==='arrowleft'||k==='a')lon-=5;
+ else if(k==='arrowright'||k==='d')lon+=5;
+},{passive:false});
+
+// ---- plan + dot ----
+function setPlanFloor(f){floor=f;document.getElementById('planimg').src="../island-house-map/plans/"+f+".jpg";
+ document.getElementById('pgG').classList.toggle('on',f==='ground');
+ document.getElementById('pgU').classList.toggle('on',f==='upper');
+ document.getElementById('floorBtn').textContent="Plan: "+(f==='ground'?'Ground':'Upper');}
+function currentPos(){
+ const keys=Object.keys(pins).map(Number).sort((a,b)=>a-b);
+ if(!keys.length)return null;
+ let lo=null,hi=null;
+ for(const kk of keys){if(kk<=idx)lo=kk;if(kk>=idx&&hi===null)hi=kk;}
+ if(lo===null)lo=hi;if(hi===null)hi=lo;
+ const a=pins[lo],b=pins[hi];
+ if(a.floor!==b.floor){return (Math.abs(idx-lo)<=Math.abs(idx-hi))?a:b;}
+ const t=(hi===lo)?0:(idx-lo)/(hi-lo);
+ return {floor:a.floor,x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t};
+}
+function placeDot(){
+ const pos=currentPos();const dot=document.getElementById('dot');
+ if(!pos){dot.style.display='none';return;}
+ if(!editMode && pos.floor!==floor)setPlanFloor(pos.floor);
+ dot.style.display='block';dot.style.left=(pos.x*100)+'%';dot.style.top=(pos.y*100)+'%';
+}
+function updateCone(){const c=document.getElementById('cone');if(c)c.style.transform="rotate("+(180+lon)+"deg)";}
+
+// ---- edit / route ----
+document.getElementById('setBtn').onclick=function(){editMode=!editMode;this.classList.toggle('on',editMode);
+ document.getElementById('planbody').classList.toggle('edit',editMode);
+ document.getElementById('planhint').classList.toggle('show',editMode);};
+document.getElementById('planimg').addEventListener('click',function(e){
+ if(!editMode)return;const r=this.getBoundingClientRect();
+ pins[idx]={floor:floor,x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height};
+ localStorage.setItem(KEY,JSON.stringify(pins));placeDot();});
+document.getElementById('expBtn').onclick=()=>{document.getElementById('expT').value=JSON.stringify(pins,null,1);document.getElementById('expw').style.display='flex';};
+document.getElementById('expClose').onclick=()=>document.getElementById('expw').style.display='none';
+document.getElementById('expCopy').onclick=()=>{const t=document.getElementById('expT');t.select();document.execCommand('copy');};
+
+// ---- ui wires ----
+document.getElementById('pgG').onclick=()=>setPlanFloor('ground');
+document.getElementById('pgU').onclick=()=>setPlanFloor('upper');
+document.getElementById('floorBtn').onclick=()=>setPlanFloor(floor==='ground'?'upper':'ground');
+document.getElementById('bigBtn').onclick=function(){big=!big;document.getElementById('plan').classList.toggle('big',big);};
+document.getElementById('helpBtn').onclick=()=>document.getElementById('help').style.display='flex';
+document.getElementById('go').onclick=()=>{document.getElementById('help').style.display='none';};
+
+initGL();
+</script></body></html>

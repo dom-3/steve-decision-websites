@@ -1,0 +1,70 @@
+{
+  "maxDepth": 8.0,
+  "colorW": 2048,
+  "colorH": 1024,
+  "depthW": 1024,
+  "depthH": 512,
+  "note": "geometric room prior; AI depth replaces per-frame",
+  "views": [
+    {
+      "frame": 292,
+      "color": "view_00.jpg",
+      "depth": "depth_prior.png",
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "frame": 305,
+      "color": "view_01.jpg",
+      "depth": "depth_prior.png",
+      "pos": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "frame": 318,
+      "color": "view_02.jpg",
+      "depth": "depth_prior.png",
+      "pos": [
+        0.0,
+        0.0,
+        2.0
+      ]
+    },
+    {
+      "frame": 331,
+      "color": "view_03.jpg",
+      "depth": "depth_prior.png",
+      "pos": [
+        0.0,
+        0.0,
+        3.0
+      ]
+    },
+    {
+      "frame": 344,
+      "color": "view_04.jpg",
+      "depth": "depth_prior.png",
+      "pos": [
+        0.0,
+        0.0,
+        4.0
+      ]
+    },
+    {
+      "frame": 358,
+      "color": "view_05.jpg",
+      "depth": "depth_prior.png",
+      "pos": [
+        0.0,
+        0.0,
+        5.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+frames=281 total_s=69.6 per_frame_s=0.223 device=mps width=1024

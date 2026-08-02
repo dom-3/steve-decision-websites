@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Island House Restoration Ltd — Laugharne</title>
+<!--
+  RECREATION of islandhouse.wales home page, in our own clean stack (no WordPress/Enfold).
+  Stage 1 of 3: RECREATE (faithful) → EDIT → REFLOW to our story. Nothing here is final.
+  Images are PLACEHOLDERS: each carries data-src = the exact file in docs/island-house-site-capture/media-manifest.csv,
+  so swapping in the real media (from the WordPress export) is a 1:1 drop-in later.
+  Claims flagged <!-- LEDGER: ... --> are disputed in island-house-claim-reference-ledger.md — leave AS-IS for now
+  (this is a faithful recreation); address them at the EDIT stage, via Karen, before anything is public.
+  Single-publisher rule: this file is written uncommitted; the Master/Jarvis desk commits & pushes.
+-->
+<style>
+  :root{
+    --ink:#2b2620; --muted:#6b6257; --line:#e0d8cb; --paper:#f7f3ec; --card:#fffdf9;
+    --accent:#7c2d2d; --accent2:#b08640; --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--ink);background:var(--paper);line-height:1.6}
+  h1,h2,h3,nav,.btn,.eyebrow{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
+  a{color:var(--accent)}
+  header.site{position:sticky;top:0;z-index:20;background:rgba(43,38,32,.96);color:#f7f3ec}
+  .bar{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:16px}
+  .brand{font-weight:700;letter-spacing:.02em;color:#f7f3ec;text-decoration:none;font-size:17px}
+  nav a{color:#e7ddca;text-decoration:none;font-size:14px;margin-left:18px;white-space:nowrap}
+  nav a:hover{color:#fff}
+  .navwrap{display:flex;flex-wrap:wrap;justify-content:flex-end}
+  .hero{position:relative;min-height:72vh;display:flex;align-items:flex-end;
+        background:linear-gradient(#0000,#000a),#3a3228;color:#fff}
+  .hero .ph{position:absolute;inset:0}
+  .hero-inner{position:relative;max-width:var(--maxw);margin:0 auto;padding:48px 20px;width:100%}
+  .hero h1{font-size:clamp(30px,6vw,58px);margin:0 0 8px;font-family:Georgia,serif;font-weight:700}
+  .hero p{max-width:640px;font-size:18px;color:#f0e9db}
+  section{padding:56px 20px}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+  .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--accent2);margin:0 0 6px}
+  h2.section-title{font-size:clamp(24px,4vw,38px);margin:0 0 22px;font-weight:700}
+  .divider{background:var(--ink);color:#fff;text-align:center}
+  .divider h2{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.14em;font-size:clamp(26px,5vw,52px);margin:0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+  .lead{font-size:19px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:11px 20px;border-radius:6px;font-size:14px;margin-top:10px}
+  .btn.gold{background:var(--accent2)}
+  /* image placeholders */
+  .ph{background:repeating-linear-gradient(45deg,#efe7d8,#efe7d8 14px,#e8dfcd 14px,#e8dfcd 28px);
+      border:1px dashed #b9ad96;border-radius:8px;display:flex;align-items:center;justify-content:center;
+      text-align:center;color:#7a6f5c;min-height:220px;padding:16px;font-family:-apple-system,sans-serif;font-size:13px}
+  .ph small{display:block;color:#9a8f79;margin-top:6px;font-size:11px;word-break:break-all}
+  .ph.tall{min-height:340px}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .news{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+  .card .ph{min-height:180px;border:0;border-radius:0}
+  .card .body{padding:14px 16px}
+  .card h3{font-size:17px;margin:0 0 4px}
+  .card .date{font-size:12px;color:var(--muted);font-family:-apple-system,sans-serif}
+  blockquote.curtis{font-style:italic;font-size:17px;line-height:1.75;border-left:3px solid var(--accent2);
+        margin:22px 0 0;padding:6px 0 6px 22px;color:#3a332a}
+  .consultants{columns:2;column-gap:40px;font-size:15px}
+  .consultants div{break-inside:avoid;padding:5px 0;border-bottom:1px solid var(--line)}
+  .consultants b{font-family:-apple-system,sans-serif;font-size:13px;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.06em}
+  footer.site{background:var(--ink);color:#e7ddca;padding:40px 20px;font-family:-apple-system,sans-serif;font-size:14px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between}
+  .note{background:#fbf6e9;border:1px solid var(--accent2);border-radius:8px;padding:10px 14px;font-family:-apple-system,sans-serif;font-size:12.5px;color:#6b5a2e;margin-top:14px}
+  @media(max-width:760px){.two,.gallery,.news{grid-template-columns:1fr}.consultants{columns:1}nav{display:none}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#top">ISLAND HOUSE · Laugharne</a>
+    <div class="navwrap">
+      <nav>
+        <a href="#about">About</a>
+        <a href="#history">History</a>
+        <a href="owners.html">Owners &amp; People</a>
+        <a href="exhibition.html">Exhibition</a>
+        <a href="reports.html">Consultants &amp; Reports</a>
+        <a href="#news">Updates</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+<div class="hero">
+  <div class="ph" data-src="IH.jpg / IH-1500x844.jpg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="eyebrow" style="color:#e0c98a">Britain's medieval port house — brought back to life</p>
+    <h1>Island House Restoration Ltd</h1>
+    <p>A 16th-century Grade II*-listed house beside Laugharne Castle, under careful restoration into a hotel, bar and restaurant.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section id="about">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">The Project</p>
+      <h2 class="section-title">Restoring Island House</h2>
+      <p class="lead">Island House, Laugharne, was purchased by Island House Restoration Ltd in March 2020. A 16th-century Grade II*-listed house, last occupied sixteen years ago and now seriously dilapidated, it is being restored to its original condition and converted into a hotel, bar and restaurant. The house stands on Wogan Street, close to Laugharne Castle.</p>
+      <p>The company's architects are making planning applications and discussing the project with Carmarthenshire County Council and Cadw, the Welsh Government's historic buildings department.</p>
+      <!-- LEDGER: "16th century" is REFUTED in our library — roof timbers dated 1437 (15th c). Leave for recreate; correct at edit stage. -->
+    </div>
+    <div class="ph tall" data-src="Island-House-Aerial-1.png" >Island House &amp; Laugharne Castle — aerial<small>Island-House-Aerial-1.png</small></div>
+  </div>
+</section>
+
+<!-- GLOBE WINEBAR PROMO -->
+<section style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap two">
+    <div class="ph" data-src="555560283_..._n.jpg (2025/10)">The Globe Winebar<small>555560283_122238784478079609_1587755834170295017_n.jpg</small></div>
+    <div>
+      <p class="eyebrow">In the meantime</p>
+      <h2 class="section-title">Have you visited The Globe Winebar yet?</h2>
+      <p>Our hidden gem in the heart of historic Laugharne — an intimate corner with a relaxed but upbeat charm.</p>
+      <a class="btn" href="https://www.globewinebar.co.uk/">Find out more</a>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST UPDATE -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Latest Update</p>
+    <h2 class="section-title">The restoration, chapter by chapter</h2>
+    <p class="lead">This website is updated regularly as the work moves forward — surveys, emergency repairs, the chimneys and oak beams, and the before-and-after record of the building's recovery.</p>
+    <a class="btn" href="#news">View the updates</a>
+    <div class="note">Placeholder date — the captured page reads "Latest Update, 22 Nov 2022"; the live site reads 13 July 2023. Use the live date at reflow.</div>
+  </div>
+</section>
+
+<!-- EXHIBITION -->
+<section style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">2021 / 2022</p>
+      <h2 class="section-title">Island House Restoration Ltd Exhibition</h2>
+      <p>Island House Restoration Ltd hosted an exhibition in December 2021 / January 2022 showcasing the work carried out on the house from purchase to the present day, including the proposals for its future as a boutique hotel, bar and restaurant. It was open to everyone and held at Globe House, opposite the Town Hall.</p>
+      <p>The help of many consultants and researchers, and the dedication and private funding of the owners, made this extensive exhibition possible for the people of Laugharne and its wider communities.</p>
+      <a class="btn gold" href="exhibition.html">View the exhibition online</a>
+    </div>
+    <div class="ph tall" data-src="264210936_..._n.jpg (2022/02)">Exhibition at Globe House<small>264210936_10159609968798629_5589075425275281351_n.jpg</small></div>
+  </div>
+</section>
+
+<!-- AERIAL VIEWS -->
+<section id="aerial">
+  <div class="wrap">
+    <p class="eyebrow">From the air</p>
+    <h2 class="section-title">Aerial Views</h2>
+    <div class="gallery">
+      <div class="ph" data-src="A-902-V1-2.jpeg">Aerial 1<small>A-902-V1-2</small></div>
+      <div class="ph" data-src="A-902-V2.jpeg">Aerial 2<small>A-902-V2</small></div>
+      <div class="ph" data-src="A-902-V3-2.jpeg">Aerial 3<small>A-902-V3-2</small></div>
+      <div class="ph" data-src="A-902-V4.jpeg">Aerial 4<small>A-902-V4</small></div>
+      <div class="ph" data-src="A-902-V5-2.jpeg">Aerial 5<small>A-902-V5-2</small></div>
+      <div class="ph" data-src="A-902-V6-2.jpeg">Aerial 6<small>A-902-V6-2</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Find us</p>
+    <h2 class="section-title">Location</h2>
+    <div class="ph" data-src="map.jpg / embed Google Map">Island House, Wogan Street, Laugharne SA33 4ST — map<small>map.jpg (or live Google Map embed)</small></div>
+  </div>
+</section>
+
+<!-- THE HISTORY divider -->
+<section id="history" class="divider">
+  <h2>THE HISTORY</h2>
+</section>
+
+<!-- MARY CURTIS -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center">Antiquities of Laugharne, 2nd edn, 1880</p>
+    <h2 class="section-title" style="text-align:center;font-weight:400">An extract of Mary Curtis's text</h2>
+    <div class="ph tall" data-src="Island-House-Sketch-By-Mary-Curtis.jpg">A sketch of Island House from the rear of the garden, by Mary Curtis (1856)<small>Island-House-Sketch-By-Mary-Curtis.jpg</small></div>
+    <blockquote class="curtis">
+      "Island House, a most ancient and interesting one, is near the castle; its walls in some parts as thick as those of the castle. The projecting part of it is properly the middle of the house; the other half, extending on the other side of it, was destroyed by accident by the cannon-balls fired on the castle by Cromwell's soldiers. At that time a partisan of his was living in the house; and a small part of the half now extending out from the other side of the projecting part, was destroyed; one of the balls was preserved in the house up to 1823. It extended farther out at the back; for on the outside wall, on the castle side, are two protuberances showing there had been a room; besides, foundations proving a building went farther out. In the garden the foundation of a rounded tower was discovered underground in 1818; also Roman baths and leaden pipes; an Etruscan urn was found in the Roman remains. About 150 years ago a small cottage was at the bottom of the garden not far from the wall by the Strand; there were steps from it to the sea; the wall at bottom of the garden did not go so far out as now. At the front of the house an old door opening into a yard bears the date 1658. There were two bridges belonging to Island House till 1800, when, through the neglect of a guardian to the then minor — the heir to the property — their possession was lost. One bridge was on the Strand, and taken away a few years ago; the other remains close to the house. Formerly there was no thoroughfare before the house; the public road went by that row of houses opposite the turning to Stoneway, and probably passed hence round the back of the mill which is on the Grist. This house appears in the sketch of the castle, dated 1740, and to the right of it."
+    </blockquote>
+    <!-- LEDGER: this passage carries TRADITION (Roman baths, Etruscan urn, cottage/sea-steps) and REFUTED items
+         (Cromwell → it was Rowland Laugharne, 1644). Keep verbatim for recreate; reframe as "what has long been
+         said of the house" at the edit stage, past Karen, before publishing. -->
+  </div>
+</section>
+
+<!-- LATEST NEWS -->
+<section id="news" class="divider" style="background:var(--muted)">
+  <h2>LATEST NEWS</h2>
+</section>
+<section>
+  <div class="wrap">
+    <div class="news">
+      <div class="card"><div class="ph" data-src="Comparison-5-Before-Work.jpg">13 July 2023</div><div class="body"><h3>Island House 13 July 2023</h3><div class="date">13 July 2023 · scaffolding free</div></div></div>
+      <div class="card"><div class="ph" data-src="2023/01/1-1.jpeg">13 Jan 2023</div><div class="body"><h3>Island House 13th January 2023</h3><div class="date">13 January 2023</div></div></div>
+      <div class="card"><div class="ph" data-src="2022/11/1-5.jpeg">28 Nov 2022</div><div class="body"><h3>Island House 28th November 2022</h3><div class="date">22 November 2022</div></div></div>
+      <div class="card"><div class="ph" data-src="2021/02/1-2-1.jpeg">Chimneys</div><div class="body"><h3>Chimney Repair Progression</h3><div class="date">26 February 2021</div></div></div>
+      <div class="card"><div class="ph" data-src="Screenshot-2021-02-18-...owners.png">Owners timeline</div><div class="body"><h3>The Owners &amp; People of Island House · 1778–2020</h3><div class="date">Timeline (image)</div></div></div>
+      <div class="card"><div class="ph" data-src="Screenshot-2021-02-17-...trench2.png">DAT</div><div class="body"><h3>DAT Interim Reports</h3><div class="date">Dyfed Archaeology</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--card);border-top:1px solid var(--line)">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">Consultants, Advisors &amp; Reports</p>
+      <div class="consultants">
+        <div><b>Architects</b>PJL, Bridgend</div>
+        <div><b>Structural Engineers</b>Mann Williams, Cardiff</div>
+        <div><b>M&amp;E Engineers</b>SABA, Swansea</div>
+        <div><b>Business Advisors</b>Landsker, Whitland</div>
+        <div><b>Building Historian</b>Rob Scourfield, Cresswell Quay</div>
+        <div><b>Historian &amp; Archivist</b>David Llewellyn, Templeton</div>
+        <div><b>Archaeologists</b>Dyfed Archaeological Trust, Llandeilo</div>
+        <div><b>Dendrochronology</b>Tree Ring Services, Mitcheldean</div>
+        <div><b>Arboriculture</b>David Rice Forestry</div>
+        <div><b>Architectural Geologist</b>Dr Tim Palmer, Aberystwyth University</div>
+        <div><b>Ecologists</b>Wild Wood Ecology, Caerphilly</div>
+        <div><b>Civil / Scientific</b>Eden Vale Young, Bristol</div>
+        <div><b>Ground Penetration</b>Aberystwyth &amp; Lincoln Universities</div>
+        <div><b>Core Sampling</b>Gown Engineering, Somerset</div>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="section-title">Contact</h2>
+      <p>Island House Restoration Ltd<br>Globe House, Market Street, Laugharne, Carmarthenshire SA33 4SA</p>
+      <p>Tel: 01994 231377<br>Email: <a href="mailto:info@islandhouse.wales">info@islandhouse.wales</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div>Island House Restoration Ltd · Company Number 12452655</div>
+    <div>Recreation build · content faithful to islandhouse.wales · images are placeholders pending media export</div>
+  </div>
+</footer>
+
+</body>
+</html>

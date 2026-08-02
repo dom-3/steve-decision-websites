@@ -1,0 +1,86 @@
+/* Island House showcase — shared styles. Used by every page via <link>. */
+:root{
+  --ink:#2b2620; --muted:#6b6257; --line:#e0d8cb; --paper:#f7f3ec; --card:#fffdf9;
+  --accent:#7c2d2d; --accent2:#b08640; --maxw:1080px;
+  --prov-original:#9a8f79; --prov-new:#2f7d4f; --prov-corrected:#b23b3b; --prov-tradition:#c79a3a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--ink);background:var(--paper);line-height:1.6}
+h1,h2,h3,nav,.btn,.eyebrow,.crumb,.badge{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
+a{color:var(--accent)}
+img{max-width:100%;height:auto;display:block}
+
+/* header / nav (injected by site.js) */
+header.site{position:sticky;top:0;z-index:30;background:rgba(43,38,32,.97);color:#f7f3ec}
+.bar{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:16px}
+.brand{font-weight:700;letter-spacing:.02em;color:#f7f3ec;text-decoration:none;font-size:16px}
+.navwrap{display:flex;flex-wrap:wrap;justify-content:flex-end}
+nav.mainnav{display:flex;flex-wrap:wrap;justify-content:flex-end}
+nav.mainnav .item{position:relative}
+nav.mainnav a{color:#e7ddca;text-decoration:none;font-size:13.5px;margin-left:16px;white-space:nowrap;display:inline-block;padding:4px 0}
+nav.mainnav a:hover{color:#fff}
+nav.mainnav .sub{display:none;position:absolute;right:0;top:100%;background:#2b2620;border:1px solid #4a4239;border-radius:8px;padding:8px 0;min-width:230px;box-shadow:0 10px 30px #0005}
+nav.mainnav .item:hover .sub{display:block}
+nav.mainnav .sub a{display:block;margin:0;padding:7px 16px;font-size:13px}
+nav.mainnav .sub a:hover{background:#3a332a}
+
+/* generic layout */
+.hero{position:relative;min-height:64vh;display:flex;align-items:flex-end;background:linear-gradient(#0000,#000a),#3a3228;color:#fff}
+.hero.short{min-height:40vh}
+.hero-inner{position:relative;max-width:var(--maxw);margin:0 auto;padding:44px 20px;width:100%}
+.hero h1{font-size:clamp(28px,6vw,54px);margin:0 0 8px;font-weight:700}
+.hero p{max-width:640px;font-size:18px;color:#f0e9db}
+section{padding:52px 20px}
+.wrap{max-width:var(--maxw);margin:0 auto}
+.crumb{font-size:12px;color:var(--muted);margin:0 0 14px}
+.crumb a{color:var(--muted)}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--accent2);margin:0 0 6px}
+h2.section-title{font-size:clamp(24px,4vw,36px);margin:0 0 20px;font-weight:700}
+.lead{font-size:19px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:11px 20px;border-radius:6px;font-size:14px;margin-top:10px}
+.btn.gold{background:var(--accent2)}
+.divider{background:var(--ink);color:#fff;text-align:center}
+.divider h2{font-family:-apple-system,sans-serif;letter-spacing:.14em;font-size:clamp(24px,5vw,48px);margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card .body{padding:14px 16px}
+.card h3{font-size:17px;margin:0 0 4px}
+.card .date{font-size:12px;color:var(--muted);font-family:-apple-system,sans-serif}
+
+/* image placeholders */
+.ph{background:repeating-linear-gradient(45deg,#efe7d8,#efe7d8 14px,#e8dfcd 14px,#e8dfcd 28px);
+    border:1px dashed #b9ad96;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    text-align:center;color:#7a6f5c;min-height:200px;padding:16px;font-family:-apple-system,sans-serif;font-size:13px}
+.ph small{display:block;color:#9a8f79;margin-top:6px;font-size:11px;word-break:break-all}
+.ph.tall{min-height:320px}
+.card .ph{min-height:170px;border:0;border-radius:0}
+
+/* footer */
+footer.site{background:var(--ink);color:#e7ddca;padding:36px 20px;font-family:-apple-system,sans-serif;font-size:14px}
+footer.site .wrap{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between}
+
+/* status badge for stubs */
+.badge{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:#efe7d8;color:#7a6f5c;border:1px solid #d8cdb8}
+
+/* ===== PROVENANCE SYSTEM ===== */
+/* Every content block can carry data-prov="original|new|corrected|tradition" and data-cite="…".
+   Dots are HIDDEN by default and only shown in edit mode (?edit=1). */
+[data-prov]{position:relative}
+.prov-dot{display:none}
+body.edit-mode [data-prov]{outline:1px dotted #cbbfa6;outline-offset:4px}
+body.edit-mode .prov-dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:8px;vertical-align:middle;cursor:help}
+.prov-dot[data-state="original"]{background:var(--prov-original)}
+.prov-dot[data-state="new"]{background:var(--prov-new)}
+.prov-dot[data-state="corrected"]{background:var(--prov-corrected)}
+.prov-dot[data-state="tradition"]{background:var(--prov-tradition)}
+#prov-toggle{position:fixed;right:16px;bottom:16px;z-index:50;background:var(--ink);color:#f7f3ec;border:0;
+  border-radius:24px;padding:10px 16px;font-family:-apple-system,sans-serif;font-size:13px;cursor:pointer;box-shadow:0 6px 20px #0004}
+#prov-legend{position:fixed;right:16px;bottom:64px;z-index:50;background:var(--card);border:1px solid var(--line);
+  border-radius:10px;padding:12px 14px;font-family:-apple-system,sans-serif;font-size:12px;display:none;box-shadow:0 8px 24px #0003}
+body.edit-mode #prov-legend{display:block}
+#prov-legend .row{display:flex;align-items:center;gap:8px;padding:3px 0}
+#prov-legend .d{width:11px;height:11px;border-radius:50%}
+
+@media(max-width:760px){.two,.grid3{grid-template-columns:1fr}nav.mainnav{display:none}}

@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Island House — L4 Free-Movement Pilot (seg_02)</title>
+<style>
+ html,body{margin:0;height:100%;background:#000;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;overflow:hidden;user-select:none}
+ #view{position:fixed;inset:0;background:#000;touch-action:none}
+ #top{position:fixed;top:0;left:0;right:0;height:44px;display:flex;align-items:center;gap:10px;padding:0 14px;background:linear-gradient(#000c,#0000);z-index:20;pointer-events:none}
+ #top b{font-size:14px;text-shadow:0 1px 3px #000}
+ #tag{font-size:11px;color:#5fa8d3;border:1px solid #5fa8d355;border-radius:6px;padding:2px 7px}
+ .btn{pointer-events:auto;background:rgba(20,24,16,.72);border:1px solid #ffffff2a;color:#eee;border-radius:8px;padding:6px 11px;font-size:13px;cursor:pointer}
+ .btn.on{background:#5fa8d3;border-color:#5fa8d3;color:#08121a;font-weight:700}
+ #hud{position:fixed;left:14px;bottom:14px;z-index:20;background:rgba(0,0,0,.55);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:1.5;pointer-events:none}
+ #hud b{color:#7fc0e6}
+ #note{position:fixed;right:14px;bottom:14px;width:280px;z-index:20;background:#0e1a24dd;border:1px solid #5fa8d355;border-radius:11px;padding:11px 13px;font-size:11.5px;line-height:1.5;color:#bcd6e6}
+ #note b{color:#7fc0e6}
+ #help{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:40}
+ #help .card{background:#0e1a24;border:1px solid #35617f;border-radius:16px;padding:24px 28px;max-width:460px;text-align:center}
+ #help h2{font-family:Georgia,serif;font-weight:400;margin:0 0 8px;color:#7fc0e6}
+ #help p{font-size:13px;color:#bcd6e6;margin:5px 0}
+ #go{margin-top:16px;background:#5fa8d3;color:#08121a;font-weight:700;border:none;border-radius:9px;padding:10px 24px;font-size:15px;cursor:pointer}
+ #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#88a;z-index:10;pointer-events:none}
+</style></head><body>
+<canvas id="view"></canvas>
+<div id="load">Building the room shells…</div>
+<div id="top">
+  <b>Island House — free-movement pilot</b>
+  <span id="tag">L4 · seg_02 · geometric depth prior</span>
+  <span style="flex:1"></span>
+  <button class="btn" id="swayBtn">▶ Parallax demo</button>
+  <button class="btn" id="helpBtn">Controls</button>
+</div>
+<div id="hud">
+  View blend <b id="blend">0 → 1</b> · lateral <b id="lat">0.00</b> m<br>
+  <span style="color:#9fb4c4">WASD move · drag look · near objects shift more = parallax</span>
+</div>
+<div id="note">
+  <b>What this proves:</b> stepping ~0.5–1 m around a 360 point with real parallax, blending across two capture points — no LiDAR, no reconstruction. Depth here is a <b>local geometric room prior</b>; the production <b>AI depth</b> pass (<code>pipeline.sh depth</code>, Depth‑Anything V2) drops in per‑frame on the Mac.
+</div>
+<div id="help"><div class="card">
+  <h2>Move freely inside seg_02</h2>
+  <p>This is the L4 pilot: a real camera translation around the 360 viewpoints, with genuine parallax from a per‑point depth shell.</p>
+  <p style="color:#8fb0c4;font-size:12px">W / S — forward &amp; back along the walk · A / D — step sideways · drag — look around · <b>Parallax demo</b> auto‑sways the camera so you can see near vs far shift instantly.</p>
+  <button id="go">Enter →</button>
+</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const DATA="data/";
+let M=null, scene,cam,ren,loader=new THREE.TextureLoader(), shells=[], depthTex=null;
+let camPos=new THREE.Vector3(0,0,0), yaw=0, pitch=0;
+let kW=false,kS=false,kA=false,kD=false, sway=false, lastT=performance.now();
+const LAT_LIMIT=0.7;                 // metres of sideways freedom before graceful clamp
+const MOVE=1.2;                      // m/s
+
+const VERT=`
+ uniform sampler2D depthMap; uniform float maxDepth; varying vec2 vUv;
+ void main(){
+   vUv = vec2(1.0-uv.x, uv.y);
+   float dn = texture2D(depthMap, vUv).r;
+   float depth = max(dn*maxDepth, 0.15);
+   vec3 p = normalize(position) * depth;
+   gl_Position = projectionMatrix * modelViewMatrix * vec4(p,1.0);
+ }`;
+const FRAG=`
+ uniform sampler2D colorMap; uniform float opacity; varying vec2 vUv;
+ void main(){ vec4 c = texture2D(colorMap, vUv); gl_FragColor = vec4(c.rgb, opacity); }`;
+
+function load(url){return new Promise(res=>loader.load(url,t=>{t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter;res(t);}));}
+
+async function boot(){
+ M=await fetch(DATA+"manifest.json").then(r=>r.json());
+ const c=document.getElementById('view');
+ ren=new THREE.WebGLRenderer({canvas:c,antialias:true});ren.setPixelRatio(devicePixelRatio);
+ scene=new THREE.Scene();cam=new THREE.PerspectiveCamera(72,1,0.05,200);
+ resize();addEventListener('resize',resize);
+ depthTex=await load(DATA+M.views[0].depth);           // shared box prior for the pilot
+ const geo=new THREE.SphereGeometry(1,256,128);
+ for(const v of M.views){
+   const colorTex=await load(DATA+v.color);
+   const mat=new THREE.ShaderMaterial({
+     uniforms:{colorMap:{value:colorTex},depthMap:{value:depthTex},maxDepth:{value:M.maxDepth},opacity:{value:1.0}},
+     vertexShader:VERT,fragmentShader:FRAG,side:THREE.BackSide,transparent:true,depthTest:false,depthWrite:false});
+   const mesh=new THREE.Mesh(geo,mat);
+   mesh.position.set(v.pos[0],v.pos[1],v.pos[2]);
+   mesh.renderOrder=1;scene.add(mesh);shells.push(mesh);
+ }
+ camPos.set(M.views[0].pos[0],0,M.views[0].pos[2]);
+ // look controls (decoupled from movement)
+ let down=false,px,py,y0,p0;
+ c.addEventListener('pointerdown',e=>{down=true;px=e.clientX;py=e.clientY;y0=yaw;p0=pitch;});
+ addEventListener('pointermove',e=>{if(!down)return;yaw=y0-(e.clientX-px)*0.003;pitch=Math.max(-1.2,Math.min(1.2,p0-(e.clientY-py)*0.003));});
+ addEventListener('pointerup',()=>down=false);
+ document.getElementById('load').style.display='none';
+ anim();
+}
+function resize(){cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();ren.setSize(innerWidth,innerHeight);}
+
+function anim(){requestAnimationFrame(anim);
+ const now=performance.now();let dt=(now-lastT)/1000;lastT=now;dt=Math.min(dt,0.05);
+ const zMin=M.views[0].pos[2], zMax=M.views[M.views.length-1].pos[2];
+ // movement (camera-relative forward/strafe on the horizontal plane)
+ const fwd=new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
+ const rgt=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));
+ if(kW)camPos.addScaledVector(fwd,MOVE*dt);
+ if(kS)camPos.addScaledVector(fwd,-MOVE*dt);
+ if(kA)camPos.addScaledVector(rgt,-MOVE*dt);
+ if(kD)camPos.addScaledVector(rgt,MOVE*dt);
+ camPos.z=Math.max(zMin,Math.min(zMax,camPos.z));
+ // auto parallax demo: sway laterally
+ if(sway){camPos.x=Math.sin(now*0.0016)*0.5;}
+ camPos.x=Math.max(-LAT_LIMIT,Math.min(LAT_LIMIT,camPos.x));   // graceful clamp, no tearing
+ camPos.y=0;
+ // which two views are we between -> blend
+ let i=0; for(let k=0;k<M.views.length-1;k++){ if(camPos.z>=M.views[k].pos[2]) i=k; }
+ const za=M.views[i].pos[2], zb=M.views[i+1]?M.views[i+1].pos[2]:za+1;
+ const s=Math.max(0,Math.min(1,(camPos.z-za)/(zb-za)));
+ shells.forEach((m,k)=>{
+   let op=0;
+   if(k===i)op=1.0; else if(k===i+1)op=s; else op=0;
+   m.material.uniforms.opacity.value=op;
+   m.visible=op>0.001;
+ });
+ // camera
+ cam.position.copy(camPos);
+ cam.lookAt(camPos.x+Math.sin(yaw)*Math.cos(pitch),camPos.y+Math.sin(pitch),camPos.z+Math.cos(yaw)*Math.cos(pitch));
+ ren.render(scene,cam);
+ document.getElementById('blend').textContent=(i)+" → "+(i+1)+"  ("+(s*100|0)+"%)";
+ document.getElementById('lat').textContent=camPos.x.toFixed(2);
+}
+
+addEventListener('keydown',e=>{const k=e.key.toLowerCase();
+ if(["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(k))e.preventDefault();
+ if(k==='w'||k==='arrowup')kW=true; else if(k==='s'||k==='arrowdown')kS=true;
+ else if(k==='a'||k==='arrowleft')kA=true; else if(k==='d'||k==='arrowright')kD=true;});
+addEventListener('keyup',e=>{const k=e.key.toLowerCase();
+ if(k==='w'||k==='arrowup')kW=false; else if(k==='s'||k==='arrowdown')kS=false;
+ else if(k==='a'||k==='arrowleft')kA=false; else if(k==='d'||k==='arrowright')kD=false;});
+document.getElementById('swayBtn').onclick=function(){sway=!sway;this.classList.toggle('on',sway);this.textContent=sway?"⏸ Parallax demo":"▶ Parallax demo";};
+document.getElementById('helpBtn').onclick=()=>document.getElementById('help').style.display='flex';
+document.getElementById('go').onclick=()=>document.getElementById('help').style.display='none';
+
+boot();
+</script></body></html>

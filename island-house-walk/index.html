@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Island House — 360 Walk-through</title>
+<style>
+  html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  #view{position:fixed;inset:0}
+  #hud{position:fixed;left:0;right:0;bottom:0;padding:14px 16px 18px;
+    background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0));color:#fff;z-index:5}
+  .row{display:flex;align-items:center;gap:12px;max-width:900px;margin:0 auto}
+  button{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);color:#fff;
+    border-radius:10px;padding:9px 14px;font-size:15px;cursor:pointer;backdrop-filter:blur(4px)}
+  button:hover{background:rgba(255,255,255,.24)}
+  #scrub{flex:1;accent-color:#b08640}
+  #meta{position:fixed;top:14px;left:16px;color:#fff;z-index:5;
+    background:rgba(0,0,0,.4);padding:8px 12px;border-radius:10px;font-size:13px;line-height:1.3}
+  #meta b{font-size:15px;letter-spacing:.02em}
+  #hint{position:fixed;top:14px;right:16px;color:#fff;z-index:5;
+    background:rgba(0,0,0,.4);padding:8px 12px;border-radius:10px;font-size:12px;max-width:230px;line-height:1.35}
+  #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;z-index:8;background:#000}
+  .counter{font-variant-numeric:tabular-nums;min-width:88px;text-align:center;font-size:14px}
+</style></head><body>
+<div id="view"></div>
+<div id="load">Loading the walk-through…</div>
+<div id="meta"><b>ISLAND HOUSE</b><br>360° site walk · 31 Jul 2026</div>
+<div id="hint">Drag to look around · scroll to zoom · ← → or the slider to move through the building</div>
+<div id="hud"><div class="row">
+  <button id="prev">◀ Back</button>
+  <button id="play">▶ Play</button>
+  <button id="next">Forward ▶</button>
+  <input id="scrub" type="range" min="0" value="0" step="1">
+  <span class="counter" id="counter">1 / 1</span>
+</div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const FRAMES=[{f:'frames/001.jpg',t:14},{f:'frames/002.jpg',t:28},{f:'frames/003.jpg',t:42},{f:'frames/004.jpg',t:56},{f:'frames/005.jpg',t:70},{f:'frames/006.jpg',t:84},{f:'frames/007.jpg',t:98},{f:'frames/008.jpg',t:112},{f:'frames/009.jpg',t:126},{f:'frames/010.jpg',t:140},{f:'frames/011.jpg',t:154},{f:'frames/012.jpg',t:168},{f:'frames/013.jpg',t:182},{f:'frames/014.jpg',t:196},{f:'frames/015.jpg',t:210},{f:'frames/016.jpg',t:224},{f:'frames/017.jpg',t:238},{f:'frames/018.jpg',t:252},{f:'frames/019.jpg',t:266},{f:'frames/020.jpg',t:280},{f:'frames/021.jpg',t:294},{f:'frames/022.jpg',t:308},{f:'frames/023.jpg',t:322},{f:'frames/024.jpg',t:336},{f:'frames/025.jpg',t:350},{f:'frames/026.jpg',t:364},{f:'frames/027.jpg',t:378},{f:'frames/028.jpg',t:392},{f:'frames/029.jpg',t:406},{f:'frames/030.jpg',t:420},{f:'frames/031.jpg',t:434},{f:'frames/032.jpg',t:448},{f:'frames/033.jpg',t:462},{f:'frames/034.jpg',t:476},{f:'frames/035.jpg',t:490},{f:'frames/036.jpg',t:504},{f:'frames/037.jpg',t:518},{f:'frames/038.jpg',t:532},{f:'frames/039.jpg',t:546},{f:'frames/040.jpg',t:560},{f:'frames/041.jpg',t:574},{f:'frames/042.jpg',t:588},{f:'frames/043.jpg',t:602},{f:'frames/044.jpg',t:616},{f:'frames/045.jpg',t:630},{f:'frames/046.jpg',t:644},{f:'frames/047.jpg',t:658},{f:'frames/048.jpg',t:672},{f:'frames/049.jpg',t:686},{f:'frames/050.jpg',t:700},{f:'frames/051.jpg',t:714},{f:'frames/052.jpg',t:728},{f:'frames/053.jpg',t:742},{f:'frames/054.jpg',t:756},{f:'frames/055.jpg',t:770},{f:'frames/056.jpg',t:784},{f:'frames/057.jpg',t:798},{f:'frames/058.jpg',t:812},{f:'frames/059.jpg',t:826},{f:'frames/060.jpg',t:840},{f:'frames/061.jpg',t:854},{f:'frames/062.jpg',t:868},{f:'frames/063.jpg',t:882},{f:'frames/064.jpg',t:896},{f:'frames/065.jpg',t:910},{f:'frames/066.jpg',t:924},{f:'frames/067.jpg',t:938},{f:'frames/068.jpg',t:952},{f:'frames/069.jpg',t:966},{f:'frames/070.jpg',t:980},{f:'frames/071.jpg',t:994},{f:'frames/072.jpg',t:1008},{f:'frames/073.jpg',t:1022},{f:'frames/074.jpg',t:1036},{f:'frames/075.jpg',t:1050},{f:'frames/076.jpg',t:1064},{f:'frames/077.jpg',t:1078},{f:'frames/078.jpg',t:1092},{f:'frames/079.jpg',t:1106},{f:'frames/080.jpg',t:1120},{f:'frames/081.jpg',t:1134},{f:'frames/082.jpg',t:1148},{f:'frames/083.jpg',t:1162},{f:'frames/084.jpg',t:1176},{f:'frames/085.jpg',t:1190},{f:'frames/086.jpg',t:1204},{f:'frames/087.jpg',t:1218},{f:'frames/088.jpg',t:1232},{f:'frames/089.jpg',t:1246},{f:'frames/090.jpg',t:1260},{f:'frames/091.jpg',t:1274},{f:'frames/092.jpg',t:1288},{f:'frames/093.jpg',t:1302},{f:'frames/094.jpg',t:1316},{f:'frames/095.jpg',t:1330},{f:'frames/096.jpg',t:1344},{f:'frames/097.jpg',t:1358},{f:'frames/098.jpg',t:1372},{f:'frames/099.jpg',t:1386},{f:'frames/100.jpg',t:1400},{f:'frames/101.jpg',t:1414},{f:'frames/102.jpg',t:1428},{f:'frames/103.jpg',t:1442},{f:'frames/104.jpg',t:1456},{f:'frames/105.jpg',t:1470},{f:'frames/106.jpg',t:1484},{f:'frames/107.jpg',t:1498},{f:'frames/108.jpg',t:1512},{f:'frames/109.jpg',t:1526},{f:'frames/110.jpg',t:1540},{f:'frames/111.jpg',t:1554},{f:'frames/112.jpg',t:1568},{f:'frames/113.jpg',t:1582},{f:'frames/114.jpg',t:1596},{f:'frames/115.jpg',t:1610},{f:'frames/116.jpg',t:1624},{f:'frames/117.jpg',t:1638},{f:'frames/118.jpg',t:1652},{f:'frames/119.jpg',t:1666}];
+let scene,camera,renderer,mesh,loader,idx=0,playing=false,playTimer=null;
+let lon=0,lat=0,down=false,dx=0,dy=0,dl=0,dla=0,fov=75;
+const cache={};
+function fmt(s){s=Math.round(s);return (s/60|0)+':'+String(s%60).padStart(2,'0');}
+function init(){
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(fov,innerWidth/innerHeight,1,1100);
+  const geo=new THREE.SphereGeometry(500,60,40); geo.scale(-1,1,1);
+  mesh=new THREE.Mesh(geo,new THREE.MeshBasicMaterial());
+  scene.add(mesh);
+  renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(devicePixelRatio); renderer.setSize(innerWidth,innerHeight);
+  document.getElementById('view').appendChild(renderer.domElement);
+  const el=renderer.domElement;
+  el.addEventListener('pointerdown',e=>{down=true;dx=e.clientX;dy=e.clientY;dl=lon;dla=lat;});
+  addEventListener('pointermove',e=>{if(!down)return;lon=dl-(e.clientX-dx)*0.11;lat=Math.max(-85,Math.min(85,dla+(e.clientY-dy)*0.11));});
+  addEventListener('pointerup',()=>down=false);
+  el.addEventListener('wheel',e=>{e.preventDefault();fov=Math.max(30,Math.min(100,fov+e.deltaY*0.05));camera.fov=fov;camera.updateProjectionMatrix();},{passive:false});
+  addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+  addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);});
+  document.getElementById('prev').onclick=()=>go(-1);
+  document.getElementById('next').onclick=()=>go(1);
+  document.getElementById('play').onclick=togglePlay;
+  const sc=document.getElementById('scrub'); sc.max=FRAMES.length-1;
+  sc.oninput=()=>set(+sc.value);
+  loader=new THREE.TextureLoader();
+  set(0,true); animate();
+}
+function preload(i){for(let k=i-2;k<=i+3;k++){if(k>=0&&k<FRAMES.length&&!cache[k]){const im=new Image();im.src=FRAMES[k].f;cache[k]=im;}}}
+function set(i,first){
+  i=Math.max(0,Math.min(FRAMES.length-1,i)); idx=i;
+  loader.load(FRAMES[i].f,tex=>{tex.minFilter=THREE.LinearFilter;const old=mesh.material.map;mesh.material.map=tex;mesh.material.needsUpdate=true;if(old)old.dispose();if(first)document.getElementById('load').style.display='none';});
+  document.getElementById('counter').textContent=(i+1)+' / '+FRAMES.length+'  ·  '+fmt(FRAMES[i].t);
+  document.getElementById('scrub').value=i; preload(i);
+}
+function go(d){set(idx+d);}
+function togglePlay(){playing=!playing;document.getElementById('play').textContent=playing?'❚❚ Pause':'▶ Play';
+  if(playing){playTimer=setInterval(()=>{if(idx>=FRAMES.length-1){togglePlay();return;}go(1);},900);}else clearInterval(playTimer);}
+function animate(){requestAnimationFrame(animate);
+  const phi=THREE.MathUtils.degToRad(90-lat),th=THREE.MathUtils.degToRad(lon);
+  camera.lookAt(500*Math.sin(phi)*Math.cos(th),500*Math.cos(phi),500*Math.sin(phi)*Math.sin(th));
+  renderer.render(scene,camera);}
+init();
+</script></body></html>

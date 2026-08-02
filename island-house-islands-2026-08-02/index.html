@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Island House — 3D Islands (salvage reconstruction)</title>
+<style>
+ html,body{margin:0;height:100%;background:#0e100b;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;overflow:hidden}
+ #bar{position:fixed;top:0;left:0;right:0;min-height:54px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;background:#1b1e17;border-bottom:1px solid #2c3126;z-index:20}
+ #bar b{font-size:15px;letter-spacing:.02em;margin-right:6px}
+ .seg{background:#2a2f24;border:1px solid #3c4433;color:#cfe;border-radius:8px;padding:6px 11px;font-size:13px;cursor:pointer;line-height:1.15}
+ .seg small{display:block;color:#8fa07d;font-size:10px;margin-top:1px}
+ .seg.on{background:#b08640;border-color:#b08640;color:#12140f;font-weight:700}
+ .seg.on small{color:#3a2f14}
+ .sp{flex:1}
+ button{background:#2a2f24;border:1px solid #3c4433;color:#eee;border-radius:8px;padding:7px 11px;font-size:13px;cursor:pointer}
+ button:hover{background:#374030}
+ #view{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 50% 40%,#16190f,#0a0b07)}
+ #hud{position:fixed;left:14px;bottom:14px;background:rgba(0,0,0,.55);padding:9px 13px;border-radius:9px;font-size:13px;z-index:15;max-width:340px;line-height:1.4}
+ #hud .t{color:#e7b866;font-weight:700}
+ #note{position:fixed;right:14px;bottom:14px;background:rgba(0,0,0,.5);padding:8px 12px;border-radius:9px;font-size:11.5px;color:#b9c3ad;z-index:15;max-width:280px;line-height:1.4}
+</style></head><body>
+<div id="bar">
+  <b>Island House · 3D Islands</b>
+  <span id="segs"></span>
+  <span class="sp"></span>
+  <button id="rot">⟳ Auto-rotate</button>
+  <button id="cams">◉ Camera path</button>
+</div>
+<canvas id="view"></canvas>
+<div id="hud"></div>
+<div id="note">Salvage reconstruction from the existing 360 walk (2026-07-31). Each island is a separately-reconstructed segment. Drag to orbit · scroll to zoom.</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="islands.js"></script>
+<script>
+const ROOMHINT={seg_06:"Walk start — front-door / entrance run",seg_02:"Bright mid-section (100% locked)",seg_05:"",seg_03:"",seg_01:"Longest run (72 frames)",seg_04:""};
+let scene,cam,ren,pts,camline,center=new THREE.Vector3(0,0,0);
+let az=0.6,pol=1.15,rad=40,auto=false,showCams=true,cur="seg_01",down=false,px,py;
+function init(){
+ const c=document.getElementById('view');
+ ren=new THREE.WebGLRenderer({canvas:c,antialias:true});ren.setPixelRatio(devicePixelRatio);
+ scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x0a0b07,0.006);
+ cam=new THREE.PerspectiveCamera(60,1,0.1,4000);
+ resize();addEventListener('resize',resize);
+ c.addEventListener('pointerdown',e=>{down=true;px=e.clientX;py=e.clientY;});
+ addEventListener('pointermove',e=>{if(!down)return;az-=(e.clientX-px)*0.006;pol=Math.max(0.15,Math.min(3.0,pol-(e.clientY-py)*0.006));px=e.clientX;py=e.clientY;});
+ addEventListener('pointerup',()=>down=false);
+ c.addEventListener('wheel',e=>{e.preventDefault();rad=Math.max(3,Math.min(220,rad*(1+e.deltaY*0.0012)));},{passive:false});
+ document.getElementById('rot').onclick=function(){auto=!auto;this.style.background=auto?'#b08640':'';this.style.color=auto?'#12140f':'';};
+ document.getElementById('cams').onclick=function(){showCams=!showCams;if(camline)camline.visible=showCams;this.style.opacity=showCams?1:.5;};
+ buildTabs();load(cur);anim();
+}
+function resize(){cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();ren.setSize(innerWidth,innerHeight);}
+function buildTabs(){
+ const wrap=document.getElementById('segs');
+ ISLANDS.meta.forEach(m=>{const s=document.createElement('span');s.className='seg'+(m.id===cur?' on':'');
+   s.innerHTML=m.id.replace('seg_','Island ')+"<small>"+m.pct+"% · "+m.frames+"f</small>";
+   s.onclick=()=>{cur=m.id;[...wrap.children].forEach(c=>c.classList.remove('on'));s.classList.add('on');load(m.id);};
+   wrap.appendChild(s);});
+}
+function load(id){
+ if(pts){scene.remove(pts);pts.geometry.dispose();pts.material.dispose();}
+ if(camline){scene.remove(camline);camline.geometry.dispose();camline.material.dispose();}
+ const d=ISLANDS.data[id],m=ISLANDS.meta.find(x=>x.id===id);
+ const n=d.pts.length,pos=new Float32Array(n*3),col=new Float32Array(n*3);
+ for(let i=0;i<n;i++){const p=d.pts[i];pos[i*3]=p[0];pos[i*3+1]=p[1];pos[i*3+2]=p[2];col[i*3]=p[3]/255;col[i*3+1]=p[4]/255;col[i*3+2]=p[5]/255;}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));
+ pts=new THREE.Points(g,new THREE.PointsMaterial({size:0.16,vertexColors:true,sizeAttenuation:true}));scene.add(pts);
+ // camera path
+ const cn=d.cams.length,cp=new Float32Array(cn*3);
+ for(let i=0;i<cn;i++){cp[i*3]=d.cams[i][0];cp[i*3+1]=d.cams[i][1];cp[i*3+2]=d.cams[i][2];}
+ const cg=new THREE.BufferGeometry();cg.setAttribute('position',new THREE.BufferAttribute(cp,3));
+ camline=new THREE.Line(cg,new THREE.LineBasicMaterial({color:0xe23b2e}));camline.visible=showCams;scene.add(camline);
+ // frame extent → default zoom
+ g.computeBoundingSphere();rad=Math.max(8,g.boundingSphere.radius*1.7);
+ const hint=ROOMHINT[id]?("<br>"+ROOMHINT[id]):"";
+ document.getElementById('hud').innerHTML="<span class='t'>"+id.replace('seg_','Island ')+"</span> — "+m.points.toLocaleString()+" points · "+m.shots+" camera positions · "+m.pct+"% locked · "+(m.secs/60).toFixed(1)+" min compute"+hint+"<br><span style='color:#8fa07d'>frames "+m.first+"–"+m.last+" of the walk</span>";
+}
+function anim(){requestAnimationFrame(anim);if(auto)az+=0.0016;
+ const x=rad*Math.sin(pol)*Math.cos(az),y=rad*Math.cos(pol),z=rad*Math.sin(pol)*Math.sin(az);
+ cam.position.set(x,y,z);cam.lookAt(center);ren.render(scene,cam);}
+init();
+</script></body></html>

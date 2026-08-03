@@ -26,16 +26,16 @@
 import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
 try{
   const viewer = new GaussianSplats3D.Viewer({
-    cameraUp: [0, -1, 0],                 // RadianceKit/COLMAP splats are usually Y-down; flip to [0,1,0] if it loads upside-down
-    initialCameraPosition: [-4, -1, 6],
-    initialCameraLookAt: [0, 0, 0],
+    cameraUp: [0, 1, 0],                  // Y is the vertical axis (site is wide+flat)
+    initialCameraPosition: [146, 104, 150],   // pulled well back from a ~200-wide model, elevated 3/4 view
+    initialCameraLookAt: [-3.4, 4.4, 0.14],   // the model's actual centroid
     sharedMemoryForWorkers: false,        // no COOP/COEP headers needed on a normal static host
     dynamicScene: false,
     antialiased: true
   });
   viewer.addSplatScene('scene.ply', {
     format: GaussianSplats3D.SceneFormat.Ply,
-    splatAlphaRemovalThreshold: 5,
+    splatAlphaRemovalThreshold: 30,       // cull the faint floater gaussians (~32% are low-opacity haze)
     showLoadingUI: false,
     progressiveLoad: false
   }).then(() => {

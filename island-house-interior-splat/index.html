@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Island House — Interior (Room 1)</title>
+<style>
+ html,body{margin:0;height:100%;background:#0b0d0a;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;overflow:hidden}
+ #bar{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;gap:10px;padding:0 14px;background:linear-gradient(#000c,#0000);z-index:20}
+ #bar b{font-size:14px;letter-spacing:.03em;text-shadow:0 1px 3px #000;pointer-events:none}
+ #bar .tag{font-size:11px;color:#e7b866;border:1px solid #e7b86655;border-radius:6px;padding:2px 8px;pointer-events:none}
+ #bar .sp{flex:1}
+ .btn{background:rgba(20,24,16,.8);border:1px solid #ffffff2a;color:#eee;border-radius:8px;padding:6px 11px;font-size:13px;cursor:pointer}
+ .btn:hover{background:rgba(50,58,40,.95)}
+ #hint{position:fixed;left:14px;bottom:14px;background:rgba(0,0,0,.55);border-radius:9px;padding:8px 12px;font-size:12.5px;color:#cbd3c0;z-index:20;pointer-events:none}
+ #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#cbd3c0;z-index:15;background:#0b0d0a}
+ #load .big{font-size:15px;color:#e7b866}
+ #err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:30px;text-align:center;color:#e6b;z-index:30;background:#0b0d0a;font-size:14px;line-height:1.5}
+</style></head><body>
+<div id="bar"><b>Island House — Interior · Room 1</b> <span class="tag">stop-and-shoot · 472k gaussians</span>
+  <span class="sp"></span>
+  <button class="btn" id="flip">⟲ Flip up</button>
+  <button class="btn" id="reset">⌂ Reset view</button>
+</div>
+<div id="hint">Drag to orbit · scroll to zoom · right-drag to pan · "Flip up" if it's upside down</div>
+<div id="load"><div class="big">Loading the room…</div><small style="color:#8fa07d">~32&nbsp;MB</small></div>
+<div id="err"></div>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "@mkkellogg/gaussian-splats-3d": "https://cdn.jsdelivr.net/npm/@mkkellogg/gaussian-splats-3d@0.4.7/build/gaussian-splats-3d.module.js"
+}}
+</script>
+<script type="module">
+import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
+const START_UP=[0,-1,0], START_POS=[7.78,-6.1,8.1], LOOK=[-0.22,-0.1,0.1];
+let viewer;
+try{
+  viewer = new GaussianSplats3D.Viewer({
+    cameraUp: START_UP,
+    initialCameraPosition: START_POS,
+    initialCameraLookAt: LOOK,
+    sharedMemoryForWorkers: false,
+    dynamicScene: false,
+    antialiased: true
+  });
+  viewer.addSplatScene('interior.ply', {
+    format: GaussianSplats3D.SceneFormat.Ply,
+    splatAlphaRemovalThreshold: 5,
+    showLoadingUI: false,
+    progressiveLoad: false
+  }).then(() => { document.getElementById('load').style.display='none'; viewer.start(); })
+    .catch(e => showErr(e));
+}catch(e){ showErr(e); }
+
+let up=[...START_UP];
+document.getElementById('flip').onclick = function(){
+  try{ up=up.map(v=>-v); viewer.camera.up.set(up[0],up[1],up[2]); if(viewer.controls) viewer.controls.update(); }catch(e){ console.error(e); }
+};
+document.getElementById('reset').onclick = function(){
+  try{ up=[...START_UP]; viewer.camera.up.set(up[0],up[1],up[2]);
+    viewer.camera.position.set(START_POS[0],START_POS[1],START_POS[2]);
+    if(viewer.controls){ viewer.controls.target.set(LOOK[0],LOOK[1],LOOK[2]); viewer.controls.update(); }
+  }catch(e){ console.error(e); }
+};
+function showErr(e){
+  document.getElementById('load').style.display='none';
+  const d=document.getElementById('err'); d.style.display='flex';
+  d.textContent = "Couldn't load the room in this browser. Try Chrome/Safari (latest), or tell Jarvis: " + (e&&e.message?e.message:e);
+  console.error(e);
+}
+</script>
+</body></html>

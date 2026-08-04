@@ -12,7 +12,7 @@
  #load small{color:#8fa07d}
  #err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:30px;text-align:center;color:#e6b;z-index:30;background:#0b0d0a;font-size:14px;line-height:1.5}
 </style></head><body>
-<div id="bar"><b>Island House — Exterior</b> <span class="tag">drone splat · 238,968 gaussians</span></div>
+<div id="bar"><b>Island House — Exterior</b> <span class="tag">drone splat · HQ · 2.5M gaussians</span></div>
 <div id="hint">Drag to orbit · scroll to zoom · right-drag to pan</div>
 <div id="load"><div class="big">Loading the 3D model…</div><small>~58&nbsp;MB · first load takes a few seconds</small></div>
 <div id="err"></div>
@@ -26,16 +26,16 @@
 import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
 try{
   const viewer = new GaussianSplats3D.Viewer({
-    cameraUp: [0, 1, 0],                  // Y is the vertical axis (site is wide+flat)
-    initialCameraPosition: [146, 104, 150],   // pulled well back from a ~200-wide model, elevated 3/4 view
-    initialCameraLookAt: [-3.4, 4.4, 0.14],   // the model's actual centroid
+    cameraUp: [0, 1, 0],
+    initialCameraPosition: [30, 35, 32],      // reframed for the cloud-trained model (~33-unit extent)
+    initialCameraLookAt: [-0.49, 2.01, 1.56], // this model's centroid
     sharedMemoryForWorkers: false,        // no COOP/COEP headers needed on a normal static host
     dynamicScene: false,
     antialiased: true
   });
-  viewer.addSplatScene('scene.ply', {
-    format: GaussianSplats3D.SceneFormat.Ply,
-    splatAlphaRemovalThreshold: 30,       // cull the faint floater gaussians (~32% are low-opacity haze)
+  viewer.addSplatScene('exterior-hq.splat', {
+    format: GaussianSplats3D.SceneFormat.Splat,
+    splatAlphaRemovalThreshold: 1,        // floaters already removed during compression
     showLoadingUI: false,
     progressiveLoad: false
   }).then(() => {

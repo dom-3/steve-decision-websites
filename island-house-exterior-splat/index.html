@@ -26,9 +26,9 @@
 import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
 try{
   const viewer = new GaussianSplats3D.Viewer({
-    cameraUp: [0, 1, 0],
-    initialCameraPosition: [16, 22, 18],      // reframed for the cleaned model (~21-unit extent)
-    initialCameraLookAt: [-0.47, 2.02, 1.57], // cleaned model's centroid
+    cameraUp: [0, -1, 0],                     // model's up is -Y (it loaded upside-down with +Y)
+    initialCameraPosition: [15, -16, 15],     // elevated view for the flipped up-axis
+    initialCameraLookAt: [-0.48, 2.0, 1.61],  // centroid
     sharedMemoryForWorkers: false,        // no COOP/COEP headers needed on a normal static host
     dynamicScene: false,
     antialiased: true

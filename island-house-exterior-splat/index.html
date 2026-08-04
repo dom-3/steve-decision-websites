@@ -12,7 +12,7 @@
  #load small{color:#8fa07d}
  #err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:30px;text-align:center;color:#e6b;z-index:30;background:#0b0d0a;font-size:14px;line-height:1.5}
 </style></head><body>
-<div id="bar"><b>Island House — Exterior</b> <span class="tag">drone splat · prototype</span></div>
+<div id="bar"><b>Island House — Exterior</b> <span class="tag">drone splat · HQ · 2.4M gaussians</span></div>
 <div id="hint">Drag to orbit · scroll to zoom · right-drag to pan</div>
 <div id="load"><div class="big">Loading the 3D model…</div><small>~58&nbsp;MB · first load takes a few seconds</small></div>
 <div id="err"></div>
@@ -26,19 +26,17 @@
 import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
 try{
   const viewer = new GaussianSplats3D.Viewer({
-    cameraUp: [0, 1, 0],
-    initialCameraPosition: [146, 104, 150],
-    initialCameraLookAt: [-3.4, 4.4, 0.14],
+    cameraUp: [-0.047, 0.727, 0.685],       // true ground-plane normal (model is tilted in COLMAP space)
+    initialCameraPosition: [-5.65, 12.06, 2.23],
+    initialCameraLookAt: [-0.47, 2.02, 1.56],
     sharedMemoryForWorkers: false,
     dynamicScene: false,
     antialiased: true
   });
-  viewer.addSplatScene('scene.ply', {
-    format: GaussianSplats3D.SceneFormat.Ply,
-    splatAlphaRemovalThreshold: 30,
-    showLoadingUI: false,
-    progressiveLoad: false
-  }).then(() => {
+  viewer.addSplatScenes([
+    { path: 'exterior-a.ply', format: GaussianSplats3D.SceneFormat.Ply, splatAlphaRemovalThreshold: 5 },
+    { path: 'exterior-b.ply', format: GaussianSplats3D.SceneFormat.Ply, splatAlphaRemovalThreshold: 5 }
+  ], false).then(() => {
     document.getElementById('load').style.display = 'none';
     viewer.start();
   }).catch(e => showErr(e));

@@ -27,8 +27,8 @@ import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
 try{
   const viewer = new GaussianSplats3D.Viewer({
     cameraUp: [0, 1, 0],
-    initialCameraPosition: [30, 35, 32],      // reframed for the cloud-trained model (~33-unit extent)
-    initialCameraLookAt: [-0.49, 2.01, 1.56], // this model's centroid
+    initialCameraPosition: [16, 22, 18],      // reframed for the cleaned model (~21-unit extent)
+    initialCameraLookAt: [-0.47, 2.02, 1.57], // cleaned model's centroid
     sharedMemoryForWorkers: false,        // no COOP/COEP headers needed on a normal static host
     dynamicScene: false,
     antialiased: true

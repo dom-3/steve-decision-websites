@@ -12,7 +12,7 @@
  #load small{color:#8fa07d}
  #err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:30px;text-align:center;color:#e6b;z-index:30;background:#0b0d0a;font-size:14px;line-height:1.5}
 </style></head><body>
-<div id="bar"><b>Island House — Exterior</b> <span class="tag">drone splat · HQ · 2.5M gaussians</span></div>
+<div id="bar"><b>Island House — Exterior</b> <span class="tag">drone splat · HQ · 1.3M gaussians</span></div>
 <div id="hint">Drag to orbit · scroll to zoom · right-drag to pan</div>
 <div id="load"><div class="big">Loading the 3D model…</div><small>~58&nbsp;MB · first load takes a few seconds</small></div>
 <div id="err"></div>
@@ -33,9 +33,9 @@ try{
     dynamicScene: false,
     antialiased: true
   });
-  viewer.addSplatScene('exterior-hq.splat', {
-    format: GaussianSplats3D.SceneFormat.Splat,
-    splatAlphaRemovalThreshold: 1,        // floaters already removed during compression
+  viewer.addSplatScene('exterior-hq.ply', {
+    format: GaussianSplats3D.SceneFormat.Ply,   // native loader — no hand-rolled compression
+    splatAlphaRemovalThreshold: 5,
     showLoadingUI: false,
     progressiveLoad: false
   }).then(() => {

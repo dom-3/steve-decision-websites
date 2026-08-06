@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Island House &amp; Laugharne — The Research Data (live)</title>
+<style>
+  :root{--ink:#171b21;--muted:#5b636e;--line:#e7e3da;--bg:#f5f3ee;--gold:#b08640;--gold-lt:#d9b878;--green:#2f6f4f;--deep:#0f2019;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.55}
+  a{color:var(--green)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  header{background:radial-gradient(120% 140% at 80% -10%,#1c3a2c 0%,var(--deep) 60%);color:#eafff2;padding:44px 0 34px;border-bottom:3px solid var(--gold)}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-lt);font-weight:700}
+  header h1{font-size:clamp(26px,4.5vw,38px);margin:12px 0 8px;font-weight:800;letter-spacing:-.015em;color:#fff}
+  header p{max-width:680px;color:#cfe6d8;font-size:15px;margin:0}
+  header .back{display:inline-block;margin-top:14px;color:#9fc3ac;font-size:13px;font-weight:700}
+  section{padding:30px 0 6px}
+  .shead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--gold);padding-bottom:8px}
+  .shead h2{font-size:20px;margin:0;font-weight:800;color:var(--deep)}
+  .shead .tag{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .desc{color:#3d4744;font-size:13.5px;margin:10px 0 14px;max-width:760px}
+  .frame{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(15,32,25,.06)}
+  .frame iframe{width:100%;height:560px;border:0;display:block}
+  .pending{padding:40px 22px;text-align:center;color:var(--muted);font-size:14px;background:#faf8f3}
+  .pending b{color:var(--deep)}
+  footer{margin:30px 0 60px;color:var(--muted);font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">Salem Construction · CCP Project Enablement</div>
+    <h1>The Research Data — live</h1>
+    <p>The working back-office behind the Island House and Laugharne history. Every source, entity and fact we've collected, straight from the database — and it updates here automatically as the research grows.</p>
+    <a class="back" href="index.html">← Back to the portal</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="sources">
+    <div class="shead"><h2>Research — Sources</h2><div class="tag">Live · auto-updating</div></div>
+    <p class="desc">Every source and reference the research draws on — archives, records, newspapers, statutory listings — logged and traceable.</p>
+    <div class="frame" data-key="sources"><div class="pending"><b>Live table connecting…</b><br>The shareable Airtable link drops in here — then it renders live.</div></div>
+  </section>
+
+  <section id="entities">
+    <div class="shead"><h2>Research — Entities</h2><div class="tag">Live · auto-updating</div></div>
+    <p class="desc">The people, places, families and buildings of Island House and Laugharne, indexed and cross-linked.</p>
+    <div class="frame" data-key="entities"><div class="pending"><b>Live table connecting…</b><br>The shareable Airtable link drops in here — then it renders live.</div></div>
+  </section>
+
+  <section id="facts">
+    <div class="shead"><h2>Research — Facts</h2><div class="tag">Live · auto-updating</div></div>
+    <p class="desc">The individual dated, sourced facts — the granular record that feeds the history trail and the Ask engine.</p>
+    <div class="frame" data-key="facts"><div class="pending"><b>Live table connecting…</b><br>The shareable Airtable link drops in here — then it renders live.</div></div>
+  </section>
+
+  <footer>Read-only live views · Salem Construction · CCP Project Enablement</footer>
+</main>
+
+<script>
+// Live Airtable shared views. Airtable blocks being framed on some setups, so we
+// open each table in its own tab — always reliable, always the latest data.
+const T = {
+  sources:  "https://airtable.com/appnt9vSQKrKyaKiZ/shraOMrDEeOwQdCSh",
+  entities: "https://airtable.com/appnt9vSQKrKyaKiZ/shrrB8EGkcAz94pNi",
+  facts:    "https://airtable.com/appnt9vSQKrKyaKiZ/shrttxld2VD4PcFAv"
+};
+Object.keys(T).forEach(function(k){
+  const box=document.querySelector('.frame[data-key="'+k+'"]');
+  const url=T[k].trim();
+  if(box && url){
+    box.innerHTML='<div class="pending"><b>Live table — '+k+'</b><br>Opens the current Airtable view in a new tab.<br><br>'
+      +'<a href="'+url+'" target="_blank" rel="noopener" '
+      +'style="display:inline-block;background:#2f6f4f;color:#fff;text-decoration:none;font-weight:700;'
+      +'padding:11px 20px;border-radius:10px;font-size:14px">Open the live table →</a></div>';
+  }
+});
+</script>
+</body>
+</html>

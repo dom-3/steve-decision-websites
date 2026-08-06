@@ -1,301 +1,524 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Business Operating System</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salem Construction · CCP Project Enablement — Owner Portal</title>
 <style>
-  :root{--green:#1f5c4d;--dark:#153f35;--gold:#b07d2b;--ink:#22302e;--muted:#6a7b76;--line:#dfe6e2;
-        --warm:#8a5a2b;--blue:#2b4a6b;}
-  *{box-sizing:border-box;} body{margin:0;background:#eef1ee;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.55;}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
-  header{background:linear-gradient(160deg,var(--green),var(--dark));color:#f4efe6;padding:40px 22px 30px;}
-  header .inner{max-width:1040px;margin:0 auto;}
-  .kicker{letter-spacing:4px;text-transform:uppercase;font-size:11px;color:#d8c9a8;}
-  h1{font-family:Georgia,serif;font-weight:400;font-size:32px;margin:8px 0 6px;}
-  header p{max-width:640px;color:#e6dcc8;font-size:14.5px;margin:0;}
+  :root{
+    --ink:#171b21; --muted:#5b636e; --line:#e7e3da; --bg:#f5f3ee; --card:#ffffff;
+    --gold:#b08640; --gold-lt:#d9b878; --oxblood:#7c2d2d; --green:#2f6f4f; --deep:#0f2019;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--green);text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header{background:radial-gradient(120% 140% at 80% -10%,#1c3a2c 0%,var(--deep) 60%);color:#eafff2;
+    padding:52px 0 40px;border-bottom:3px solid var(--gold)}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-lt);font-weight:700}
+  header h1{font-size:clamp(28px,5vw,44px);line-height:1.08;margin:12px 0 10px;font-weight:800;letter-spacing:-.015em;color:#fff}
+  header .sub{max-width:660px;color:#cfe6d8;font-size:16px;margin:0}
+  .meta{margin-top:16px;font-size:12.5px;color:#9fc3ac;letter-spacing:.02em}
+  nav{position:sticky;top:0;z-index:30;background:#f5f3eecc;backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line)}
+  nav .in{display:flex;gap:8px;flex-wrap:wrap;padding:11px 0}
+  nav a{font-size:12.5px;font-weight:700;color:#3a4a47;background:#fff;border:1px solid var(--line);
+    border-radius:9px;padding:7px 12px}
+  nav a:hover{border-color:var(--gold);color:var(--gold)}
+  section{padding:36px 0 6px}
+  .shead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    border-bottom:2px solid var(--gold);padding-bottom:8px;margin-bottom:4px}
+  .shead h2{font-size:23px;margin:0;font-weight:800;letter-spacing:-.01em;color:var(--deep)}
+  .shead .tag{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .lede{color:#3d4744;font-size:14.5px;margin:12px 0 18px;max-width:760px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);
+    border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;transition:.15s}
+  .card:hover{box-shadow:0 8px 22px rgba(20,50,45,.10);transform:translateY(-1px)}
+  .card.gold{border-left-color:var(--gold)} .card.ox{border-left-color:var(--oxblood)}
+  .card h3{margin:0 0 3px;font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  .card .d{font-size:13.5px;color:#3d4744;margin:0 0 12px}
+  .card .impact{font-size:12.5px;color:var(--green);background:#f0f6f1;border-radius:8px;padding:8px 11px;margin:0 0 13px}
+  .card .impact b{color:var(--green)}
+  .card .links{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+  .card .links a{font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:8px;
+    padding:6px 11px;color:var(--deep)}
+  .card .links a:hover{background:var(--deep);color:#fff;border-color:var(--deep)}
+  .soon{font-size:11px;color:var(--gold);font-weight:700;border:1px dashed var(--gold);border-radius:7px;padding:5px 9px;align-self:flex-start}
+  /* ---------- ASK ENGINE ---------- */
+  .ask{background:linear-gradient(160deg,#12281e,#0c1a14);border:1px solid #21402f;border-radius:18px;
+    padding:22px 22px 18px;margin:6px 0 22px;color:#eafff2;box-shadow:0 14px 36px rgba(12,26,20,.18)}
+  .ask .ah{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .ask .dot{width:9px;height:9px;border-radius:50%;background:#5fd08e;box-shadow:0 0 0 4px rgba(95,208,142,.16)}
+  .ask h3{margin:0;font-size:18px;color:#fff;font-weight:800}
+  .ask .subtle{color:#9fc3ac;font-size:13px;margin:2px 0 14px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);color:#dceee3;
+    font-size:12.5px;font-weight:600;border-radius:999px;padding:7px 13px;cursor:pointer;transition:.14s}
+  .chip:hover{background:var(--gold);border-color:var(--gold);color:#20140a}
+  .log{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+  .bub{border-radius:13px;padding:12px 15px;font-size:14px;line-height:1.5;max-width:92%}
+  .bub.u{align-self:flex-end;background:var(--gold);color:#20140a;font-weight:600}
+  .bub.a{align-self:flex-start;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);color:#eafff2}
+  .bub.a b{color:#fff} .bub.a .ev{display:block;margin-top:9px;font-size:11.5px;color:#8fb7a1;border-top:1px solid rgba(255,255,255,.1);padding-top:8px}
+  .bub.a .vtag{display:inline-block;margin-top:9px;font-size:11px;font-weight:700;letter-spacing:.04em;
+    background:rgba(217,184,120,.16);color:var(--gold-lt);border:1px solid rgba(217,184,120,.35);border-radius:7px;padding:4px 9px}
+  .askform{display:flex;gap:9px}
+  .askform input{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);
+    color:#fff;border-radius:11px;padding:12px 14px;font-size:14px;font-family:inherit;outline:none}
+  .askform input::placeholder{color:#8fb7a1}
+  .askform button{background:var(--gold);color:#20140a;border:0;border-radius:11px;padding:0 18px;
+    font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+  .askform button:hover{background:var(--gold-lt)}
+  .disc{font-size:11px;color:#7ba58c;margin-top:10px}
+  /* ---------- VALUE ---------- */
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+  @media(max-width:720px){.vgrid{grid-template-columns:1fr}}
+  .vchip{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 6px 18px rgba(15,32,25,.06)}
+  .vchip .n{font-size:25px;font-weight:800;letter-spacing:-.02em;color:var(--deep)}
+  .vchip .l{font-size:13.5px;color:var(--muted);margin-top:4px}
+  .vchip.g .n{color:var(--green)} .vchip.o .n{color:var(--gold)}
+  .headline{background:var(--ink);color:#fff;border-radius:16px;padding:20px 24px;margin:16px 0 0}
+  .headline .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lt);font-weight:700}
+  .headline p{margin:7px 0 0;font-size:16px;line-height:1.45;font-weight:600}
+  /* ---------- STEER + FOOTER ---------- */
+  .steer{background:#12241a;color:#eafff2;border-radius:18px;padding:26px 28px;margin:38px 0 0}
+  .steer h2{margin:0 0 4px;font-size:20px;color:#fff}
+  .steer p.i{color:#9fc3ac;font-size:13.5px;margin:0 0 14px}
+  .steer ul{margin:0;padding:0;list-style:none}
+  .steer li{padding:11px 0;border-top:1px solid rgba(255,255,255,.12);font-size:14.5px}
+  .steer li:first-child{border-top:0}
+  .steer li b{color:var(--gold-lt)}
+  .bottom{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-top:34px;
+    font-size:15px;color:#2c3532;line-height:1.5}
+  .bottom b{color:var(--deep)}
+  .tally{border:1px solid var(--line);border-radius:14px;background:#faf8f3;padding:18px 22px;margin-top:22px}
+  .tally .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+  .tally p{margin:0;font-size:13.5px;color:#4a544f;line-height:1.58}
+  .tally b{color:var(--deep)}
+  .story{background:linear-gradient(160deg,#14261d,#0d1a14);border:1px solid #21402f;border-radius:18px;color:#eafff2;padding:26px 26px 22px;margin-top:8px}
+  .story h2{margin:0 0 6px;font-size:22px;color:#fff}
+  .story p{color:#cfe6d8;font-size:14.5px;line-height:1.6;margin:0 0 13px;max-width:820px}
+  .story b{color:#fff}
+  .chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:18px 0 4px}
+  .step{flex:1 1 150px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:13px 14px}
+  .step .t{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8fdcae;font-weight:700}
+  .step .b{font-size:13px;color:#eafff2;margin-top:5px;line-height:1.4}
+  .arrow{align-self:center;color:#5f8a72;font-weight:800;font-size:18px}
+  @media(max-width:720px){.arrow{display:none}.chain{flex-direction:column}}
+  .storystat{margin-top:12px;font-size:12.5px;color:#8fb7a1;border-top:1px solid rgba(255,255,255,.1);padding-top:12px}
+  .teamgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+  @media(max-width:720px){.teamgrid{grid-template-columns:1fr}}
+  .tm{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .tm .nm{font-size:15px;font-weight:800;color:var(--deep)}
+  .tm .rl{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:1px 0 6px}
+  .tm .sk{font-size:12.5px;color:#3d4744;margin:0;line-height:1.45}
+  footer{margin:34px 0 60px;color:var(--muted);font-size:12px;line-height:1.6;text-align:center}
+</style>
+</head>
+<body>
 
-  /* output strip */
-  .out{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 2px;}
-  .ot{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 16px;}
-  .ot b{display:block;font-family:Georgia,serif;font-size:30px;color:#fff;line-height:1.1;}
-  .ot span{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:#d8c9a8;}
-  .out .note{grid-column:1/-1;font-size:11.5px;color:#bcd0c7;margin-top:-2px;}
-  @media(max-width:640px){.out{grid-template-columns:repeat(2,1fr);}}
+<header>
+  <div class="wrap">
+    <div class="kicker">Salem Construction · CCP Project Enablement</div>
+    <h1>What we've built for you</h1>
+    <p class="sub">An owner's view of the work delivered across the group — starting with Island House, where a restoration now comes with a documented 800-year story and its own research engine you can question directly.</p>
+    <div class="meta">Prepared for Phil · Updated August 2026 · Every item opens the live work</div>
+  </div>
+</header>
 
-  h2{font-family:Georgia,serif;color:var(--dark);font-size:20px;margin:34px 0 4px;border-bottom:2px solid var(--gold);padding-bottom:6px;}
-  .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+<nav><div class="wrap"><div class="in">
+  <a href="#island">Island House</a>
+  <a href="#ask">Ask the research</a>
+  <a href="#value">The value</a>
+  <a href="#globe">The Globe</a>
+  <a href="#culture">House of Culture</a>
+  <a href="#sancler">Sancler</a>
+  <a href="#studio">Software Studio</a>
+  <a href="#story">The whole story</a>
+  <a href="#data">The data</a>
+  <a href="#team">The AI team</a>
+</div></div></nav>
 
-  /* business cards */
-  .biz{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px;}
-  .bc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--green);border-radius:14px;padding:18px 20px;box-shadow:0 3px 12px rgba(20,50,45,.06);}
-  .bc.bk{border-left-color:var(--warm);} .bc.sc{border-left-color:var(--blue);} .bc.ih{border-left-color:var(--green);}
-  .bc.bs{border-left-color:var(--gold);background:#fffdf8;}
-  .bc .h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
-  .bc h3{font-family:Georgia,serif;font-size:22px;margin:0;color:var(--dark);}
-  .bc .tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:#eef4f0;color:var(--green);}
-  .bc.bk .tag{background:#f6efe5;color:var(--warm);} .bc.sc .tag{background:#eef2f7;color:var(--blue);}
-  .bc.bs .tag{background:#f7f0e1;color:var(--gold);}
-  .bc.bs .lk{color:var(--gold);} .bc.bs .lk:hover{background:var(--gold);color:#fff;border-color:var(--gold);}
-  .bc.bs .lk.solid{background:var(--gold);border-color:var(--gold);color:#fff;}
-  .bc .status{font-size:14px;color:#3a4a47;margin:8px 0 6px;}
-  .bc .status b{color:var(--dark);}
-  .logged{font-size:12px;color:var(--muted);margin:0 0 12px;} .logged a{color:inherit;text-decoration:underline;}
-  /* stage bar */
-  .stage{display:flex;gap:6px;align-items:center;margin:0 0 14px;flex-wrap:wrap;}
-  .stage .seg{display:flex;align-items:center;gap:6px;}
-  .dot{width:11px;height:11px;border-radius:50%;background:#dfe6e2;border:2px solid #dfe6e2;}
-  .dot.done{background:var(--green);border-color:var(--green);} .dot.now{background:#fff;border-color:var(--green);box-shadow:0 0 0 3px rgba(31,92,77,.15);}
-  .bc.bk .dot.done{background:var(--warm);border-color:var(--warm);} .bc.bk .dot.now{border-color:var(--warm);box-shadow:0 0 0 3px rgba(138,90,43,.15);}
-  .bc.sc .dot.done{background:var(--blue);border-color:var(--blue);} .bc.sc .dot.now{border-color:var(--blue);box-shadow:0 0 0 3px rgba(43,74,107,.15);}
-  .slab{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
-  .slab.on{color:var(--dark);font-weight:700;}
-  .links{display:flex;gap:8px;flex-wrap:wrap;}
-  .lk{text-decoration:none;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:8px;background:#f3f6f4;color:var(--green);border:1px solid var(--line);}
-  .lk:hover{background:var(--green);color:#fff;border-color:var(--green);}
-  .bc.bk .lk{color:var(--warm);} .bc.bk .lk:hover{background:var(--warm);color:#fff;border-color:var(--warm);}
-  .bc.sc .lk{color:var(--blue);} .bc.sc .lk:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
-  .lk.solid{background:var(--green);color:#fff;border-color:var(--green);}
-  .bc.bk .lk.solid{background:var(--warm);border-color:var(--warm);color:#fff;}
-  .bc.sc .lk.solid{background:var(--blue);border-color:var(--blue);color:#fff;}
+<main class="wrap">
 
-  /* tools + awaiting */
-  .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
-  @media(max-width:640px){.tools{grid-template-columns:1fr 1fr;}}
-  .tool{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(20,50,45,.05);}
-  .tool:hover{border-color:var(--green);}
-  .tool b{display:block;font-size:14.5px;color:var(--dark);} .tool span{font-size:12px;color:var(--muted);}
-  .await{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:14px;box-shadow:0 2px 8px rgba(20,50,45,.05);}
-  .await .row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px;}
-  .await .row:last-child{border-bottom:0;} .await a{color:var(--green);text-decoration:none;font-weight:700;font-size:12.5px;white-space:nowrap;}
-</style></head><body>
-<header><div class="inner">
-  <div class="kicker">Private &middot; CCP Project Enablement × Steve Kirkwood</div>
-  <h1>Business Operating System</h1>
-  <p>Everything in one place — your four businesses, plus <b>The Business</b>, where the direction, decisions, work log and hours all live. Click any area to go deeper; the Globe opens into its own branches.</p>
-</div></header>
-<div class="wrap">
+  <!-- ISLAND HOUSE (LEAD) -->
+  <section id="island">
+    <div class="shead"><h2>Island House</h2><div class="tag">Heritage · Grade II*</div></div>
+    <p class="lede">Island House isn't just a beautiful building with a famous medieval quay underneath it. We've traced its <b>continuous, documented 800-year human story</b> — every owner and occupier from the 1300s to today — across 29 source-checked research threads — now a live, growing register of <b>2,034 sourced facts, 895 people &amp; places and 748 sources</b> — and graded every claim by evidence. Before this, it was "an old merchant's house" and a handful of legends. Now it's a defensible archive you can stand behind — and question directly, below.</p>
 
-  <h2>Your businesses</h2>
-  <p class="sub">Four businesses — and The Business, where the direction, decisions and work all live. The Globe opens into its five branches.</p>
-  <div class="biz">
-
-    <!-- THE GLOBE — OPERATING PLATFORM (bar + bakery folded into one) -->
-    <div class="bc" style="border-left-color:var(--gold);">
-      <div class="h"><h3>The Globe</h3><span class="tag" style="background:#f7f0e1;color:var(--gold);">Operating dashboard</span></div>
-      <div class="status"><b>One operation, many doors.</b> The wine bar &amp; seasonal restaurant, the <b>bakery (live first)</b>, coffee, butchers and food production — all one brand, one operation. Click in for the branch you want.</div>
-      <div class="logged" data-b="Bakery"></div>
-      <div class="stage">
-        <div class="seg"><span class="dot done"></span><span class="slab">Research</span></div>
-        <div class="seg"><span class="dot done"></span><span class="slab">Strategy</span></div>
-        <div class="seg"><span class="dot now"></span><span class="slab on">Build</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Launch</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Grow</span></div>
+    <!-- ASK ENGINE -->
+    <div class="ask" id="ask">
+      <div class="ah"><span class="dot"></span><h3>Ask the History Engine</h3></div>
+      <p class="subtle">Ask anything about what we've uncovered at Island House. Every answer is drawn from our own sourced research — and it will only tell you what the record supports.</p>
+      <div class="chips" id="chips"></div>
+      <div class="log" id="log">
+        <div class="bub a">Hello Phil — I'm the Island House research engine. Ask me how much new history we've found, who really lived here, which legends we corrected, how it's all proven, or what it would have cost to commission. Tap a question above, or type your own.</div>
       </div>
-      <div class="links">
-        <a class="lk solid" href="https://theglobe.wales" target="_blank">🌐 View the live site</a>
-        <a class="lk" href="globe-operating.html">🌙 Operating dashboard</a>
-        <a class="lk" href="globe-coffee.html">☕ Coffee — working hub</a>
-        <a class="lk" href="globe-content.html">📸 Content — daily photos</a>
-      </div>
-      <p class="sub" style="margin:12px 0 0;">Live at theglobe.wales · Branches: Restaurant &amp; Bar · Bakery · Coffee · Butchers · Food Production</p>
+      <form class="askform" id="askform" autocomplete="off">
+        <input id="askin" type="text" placeholder="e.g. How much new history have we discovered?">
+        <button type="submit">Ask</button>
+      </form>
+      <p class="disc">Answers are drawn from our sourced research corpus — 29 threads and a live register of 2,034 facts, 895 people &amp; places and 748 sources (~83,000 words), still growing. Cost figures are illustrative estimates at typical UK rates.</p>
     </div>
 
-    <!-- ISLAND HOUSE -->
-    <div class="bc ih">
-      <div class="h"><h3>Island House</h3><span class="tag">The flagship</span></div>
-      <div class="status"><b>Strategy.</b> History done &amp; fact-checked; plan &amp; documentation system designed. Awaiting your steer on the standards, and the photo archive to sort.</div>
-      <div class="logged" data-b="Island House"></div>
-      <div class="stage">
-        <div class="seg"><span class="dot done"></span><span class="slab">Research</span></div>
-        <div class="seg"><span class="dot now"></span><span class="slab on">Strategy</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Build</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Launch</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Grow</span></div>
+    <div class="grid">
+      <div class="card gold">
+        <h3>The History Trail</h3>
+        <p class="d">The full, navigable archive — every owner and legend, dated, connected, and graded by confidence, with every claim traced to a primary source.</p>
+        <div class="impact"><b>Impact:</b> ~83,000 words of sourced research — the equivalent of a specialist heritage team working the better part of a year to two.</div>
+        <div class="links"><a href="https://steve-decision-websites.vercel.app/island-house-history.html" target="_blank" rel="noopener">Explore the trail →</a><a href="https://steve-decision-websites.vercel.app/island-house-story.html" target="_blank" rel="noopener">The Story</a></div>
       </div>
-      <div class="links">
-        <a class="lk solid" href="island-house-survey.html">📋 Weekly Survey</a>
-        <a class="lk solid" href="island-house-exterior-splat/index.html">🛰️ Exterior 3D — drone splat (spin around it)</a>
-        <a class="lk solid" href="island-house-interior-splat/index.html">🏛️ Interior 3D — Room 1 (stop-and-shoot splat)</a>
-        <a class="lk solid" href="island-house-walkthrough/index.html">🎮 Walk the building — arrow keys + design plan</a>
-        <a class="lk" href="island-house-room.html">🏠 Step inside — 360 walk-through</a>
-        <a class="lk solid" href="island-house-walk-2026-07-31/index.html">🎥 Full-site video walk — 31 Jul</a>
-        <a class="lk" href="island-house-3d-2026-08-01/index.html">🧊 3D model — 1 Aug (first pass)</a>
-        <a class="lk solid" href="island-house-islands-2026-08-02/index.html">🧩 3D islands — 2 Aug (6 rooms, salvage)</a>
-        <a class="lk solid" href="island-house-map/index.html">🗺️ Walk-through on the plan</a>
-        <a class="lk" href="island-house-plan.html">The plan</a>
-        <a class="lk" href="island-house-history.html">🕮 The History Trail</a>
-        <a class="lk" href="island-house-story.html">The Story · published work</a>
-        <a class="lk" href="island-house-3d.html">🧊 3D capture (spike)</a>
-        <a class="lk" href="timelines.html#island-house">Timeline</a>
+      <div class="card gold">
+        <h3>The Timeline — who had what, when</h3>
+        <p class="d">The house's continuous 800-year story as a single timeline: every owner and occupier from the 14th-century Whites to today, with the turning points marked.</p>
+        <div class="impact"><b>Impact:</b> the whole ownership spine at a glance — the organisation behind the research.</div>
+        <div class="links"><a href="island-house-timeline.html">Open the timeline →</a></div>
       </div>
-    </div>
-
-    <!-- SANCLER -->
-    <div class="bc sc">
-      <div class="h"><h3>Sancler Property</h3><span class="tag">Refresh</span></div>
-      <div class="status"><b>Strategy.</b> Direction set — real photos over CGI, website-only, organic-first. Awaiting scope, the houses to shoot, and site access.</div>
-      <div class="logged" data-b="Sancler Property"></div>
-      <div class="stage">
-        <div class="seg"><span class="dot done"></span><span class="slab">Research</span></div>
-        <div class="seg"><span class="dot now"></span><span class="slab on">Strategy</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Build</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Launch</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Grow</span></div>
+      <div class="card gold">
+        <h3>Weekly Building Survey</h3>
+        <p class="d">A fixed nine-lens condition report from a single 360° walk — so nothing about a listed building's condition slips between visits. The system is almost finished; once the process is locked we'll run routine surveys across the whole build, week on week.</p>
+        <div class="impact"><b>Impact:</b> replaces ~£1,000/month of survey software plus surveyor/architect time; £3k–£8k for one professional pass, done weekly.</div>
+        <div class="links"><a href="https://steve-decision-websites.vercel.app/island-house-survey.html" target="_blank" rel="noopener">Open the survey →</a></div>
       </div>
-      <div class="links">
-        <a class="lk solid" href="sancler-plan.html">The plan</a>
-        <a class="lk" href="timelines.html#sancler">Timeline</a>
+      <div class="card gold">
+        <h3>Walk the Building — 360° tour</h3>
+        <p class="d">A point-to-point 360° walk-through of Island House with a you-are-here floor-plan — step through the house room by room, and always know exactly where you're standing.</p>
+        <div class="impact"><b>Impact:</b> a shareable spatial record for decisions, contractors and heritage bodies — without another site visit.</div>
+        <div class="links">
+          <a href="https://steve-decision-websites.vercel.app/island-house-room.html" target="_blank" rel="noopener">360° walk-through →</a>
+          <a href="https://steve-decision-websites.vercel.app/island-house-map/index.html" target="_blank" rel="noopener">On the plan →</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Photoreal 3D models <span style="display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8a7a4f;background:#f3ecd9;border:1px solid #e2d4ab;border-radius:7px;padding:2px 8px;vertical-align:middle;margin-left:6px">Coming soon</span></h3>
+        <p class="d">The whole house captured as photoreal 3D — exterior from the air and interior room-by-room — spun and measured on our own viewer. The final capture is being scheduled now and the route to collect it is being organised.</p>
+        <div class="impact"><b>Impact:</b> a survey-grade digital twin of Island House, inside and out — built and owned in-house.</div>
       </div>
     </div>
+  </section>
 
-    <!-- HOUSE OF CULTURE -->
-    <div class="bc" style="border-left-color:#6b4a8a;">
-      <div class="h"><h3>House of Culture</h3><span class="tag" style="background:#efe8f4;color:#6b4a8a;">New · its own business</span></div>
-      <div class="status"><b>The plan is written.</b> The full business plan is live — the proposition, the opportunity, the six-beat day-loop, the three trails, the app, the research foundation, what each room becomes, a five-phase delivery plan and the principles we build to. Backed by a working archive of 563 verified facts.</div>
-      <div class="logged" data-b="House of Culture"></div>
-      <div class="stage">
-        <div class="seg"><span class="dot done"></span><span class="slab">Research</span></div>
-        <div class="seg"><span class="dot done"></span><span class="slab">Strategy</span></div>
-        <div class="seg"><span class="dot now"></span><span class="slab on">Build</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Launch</span></div>
-        <div class="seg"><span class="dot"></span><span class="slab">Grow</span></div>
+  <!-- VALUE / COSTINGS -->
+  <section id="value">
+    <div class="shead"><h2>The value</h2><div class="tag">What it's worth · What it replaces</div></div>
+    <p class="lede">This is software and systems we've created that save the group time and effort — work that, bought separately, would amount to a large recurring bill. It doesn't pay once; it pays every week.</p>
+    <div class="vgrid">
+      <div class="vchip o"><div class="n">£25k+/yr</div><div class="l">software &amp; agency subscriptions replaced — recurring, compounding</div></div>
+      <div class="vchip g"><div class="n">£40k–£90k</div><div class="l">professional, survey &amp; creative work delivered in a single week</div></div>
+      <div class="vchip"><div class="n">Owned, not rented</div><div class="l">every business moved onto our own stack — controlled end to end</div></div>
+    </div>
+    <div class="headline">
+      <div class="k">The one to know</div>
+      <p>Island House now runs on our own system — off WordPress, looks identical, loads faster, costs almost nothing to host, fully under our control. Email untouched, switch reversible. The history archive above would cost £10k–£30k+ to commission — and it keeps growing at near-zero marginal cost.</p>
+    </div>
+  </section>
+
+  <!-- THE GLOBE -->
+  <section id="globe">
+    <div class="shead"><h2>The Globe</h2><div class="tag">Bar · Restaurant · Bakery</div></div>
+    <p class="lede">A content engine you can trust and an operating system that runs the day — with an accuracy gate that caught the AI inventing a product we don't sell before it ever went public.</p>
+    <div class="grid">
+      <div class="card ox">
+        <h3>Operating Dashboard</h3>
+        <p class="d">The day-to-day hub — the one page the team runs the business from.</p>
+        <div class="impact"><b>Impact:</b> occasional jobs turned into a weekly rhythm at near-zero marginal cost.</div>
+        <div class="links"><a href="https://steve-decision-websites.vercel.app/globe-operating.html" target="_blank" rel="noopener">Open dashboard →</a></div>
       </div>
-      <div class="links">
-        <a class="lk solid" href="house-of-culture-plan.html">📋 The plan</a>
-        <a class="lk" href="house-of-culture-app-concept.html">📱 The app &amp; route concept</a>
-        <a class="lk" href="house-of-culture-heritage-centre.html">🏛 Heritage centre &amp; shop</a>
-        <a class="lk" href="house-of-culture-spend-model.html">💷 The spend-flow model</a>
-        <a class="lk" href="house-of-culture-buildout.html">🧭 The master build-out</a>
-        <a class="lk" href="globe-house-of-culture.html">🎭 The working hub</a>
-        <a class="lk" href="laugharne-history-trail.html">🕮 The record &amp; history trail</a>
+      <div class="card ox">
+        <h3>Content Engine</h3>
+        <p class="d">Writes, brands, quality-checks and (once switched on) auto-posts to Instagram &amp; Facebook — with a gate that blocks anything it can't stand behind.</p>
+        <div class="impact"><b>Impact:</b> replaces a ~£1k–£2k/month social retainer, and protects the brand from a costly public error.</div>
+        <div class="links">
+          <a href="https://steve-decision-websites.vercel.app/globe-content.html" target="_blank" rel="noopener">Daily content →</a>
+          <a href="https://steve-decision-websites.vercel.app/globe-coffee.html" target="_blank" rel="noopener">Coffee hub →</a>
+        </div>
+      </div>
+      <div class="card ox">
+        <h3>Daily Management Page</h3>
+        <p class="d">Alys's live daily page for the Globe — the day's operating view, kept current for the floor and the kitchen.</p>
+        <div class="impact"><b>Impact:</b> one always-current page the team runs the day from — no chasing, no stale printouts.</div>
+        <div class="links"><a href="https://www.theglobe.wales/daily" target="_blank" rel="noopener">Open the daily page →</a></div>
       </div>
     </div>
+  </section>
 
-    <!-- THE BUSINESS -->
-    <div class="bc bs">
-      <div class="h"><h3>The Business</h3><span class="tag">You, work &amp; decisions</span></div>
-      <div class="status"><b>Direction &amp; the working relationship.</b> The written brief and where we're heading, your decisions and steers, the day-by-day work log and hours, and the business admin — all in one place.</div>
-      <div class="logged" data-b="General"></div>
-      <div class="links">
-        <a class="lk solid" href="direction.html">Direction &amp; the brief</a>
-        <a class="lk" href="timelines.html">Timelines &amp; targets</a>
-        <a class="lk" href="worklog.html">Work log &amp; hours</a>
-        <a class="lk" href="automation-savings.html">⚙️ Hours saved by automation</a>
-        <a class="lk" href="business.html">Contracts &amp; agreements</a>
-        <a class="lk" href="commercials.html">Money</a>
-        <a class="lk" href="meeting-notes.html">Meeting notes</a>
-        <a class="lk" href="roadmap.html">Roadmap</a>
+  <!-- HOUSE OF CULTURE -->
+  <section id="culture">
+    <div class="shead"><h2>House of Culture · Laugharne</h2><div class="tag">Heritage · Town</div></div>
+    <p class="lede">A live town trail and a real, verified history archive — it won't publish anything it can't prove — plus the full plan and economics for a heritage centre.</p>
+    <div class="grid">
+      <div class="card gold">
+        <h3>The Township Loop — live trail app</h3>
+        <p class="d">A live, bilingual (EN/CY), offline-first walking trail of Laugharne — a verified story at every stop, a you-are-here map, and honest hospitality nudges that route visitors to the Globe. It won't publish anything it can't prove.</p>
+        <div class="impact"><b>Impact:</b> turns the research into footfall — the app that walks visitors through the town and in through the Globe's door.</div>
+        <div class="links"><a href="https://laugharen-town-app.vercel.app" target="_blank" rel="noopener">Open the trail app →</a></div>
+      </div>
+      <div class="card gold">
+        <h3>The Record &amp; History Trail</h3>
+        <p class="d">A public-facing, sourced record of the town's history — the same research discipline as Island House, applied to Laugharne.</p>
+        <div class="impact"><b>Impact:</b> hundreds of hours of professional-grade historian research — £10k–£30k of work — kept and searchable in one place.</div>
+        <div class="links"><a href="https://steve-decision-websites.vercel.app/laugharne-history-trail.html" target="_blank" rel="noopener">Open the record →</a></div>
+      </div>
+      <div class="card">
+        <h3>Heritage Centre — the plan</h3>
+        <p class="d">The concept, the route, the build-out and the spend-flow model for a heritage centre and shop.</p>
+        <div class="impact"><b>Impact:</b> an investment-ready plan with the numbers attached, not just an idea.</div>
+        <div class="links">
+          <a href="https://steve-decision-websites.vercel.app/house-of-culture-heritage-centre.html" target="_blank" rel="noopener">Heritage centre →</a>
+          <a href="https://steve-decision-websites.vercel.app/house-of-culture-spend-model.html" target="_blank" rel="noopener">Spend model →</a>
+          <a href="https://steve-decision-websites.vercel.app/house-of-culture-buildout.html" target="_blank" rel="noopener">Build-out →</a>
+        </div>
       </div>
     </div>
+  </section>
 
+  <!-- SANCLER -->
+  <section id="sancler">
+    <div class="shead"><h2>Sancler Property</h2><div class="tag">Property · Sales · now live on our system</div></div>
+    <p class="lede">Now moved onto our own system, with edits under way — the same "own it, don't rent it" migration we made on Island House. Plus real photography that beats CGI and a reusable media library.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Now on our own system</h3>
+        <p class="d">Sancler is off the old platform and onto our stack — we're editing it now, and transferring roughly <b>15 years of marketing data</b> across so nothing is lost.</p>
+        <div class="impact"><b>Impact:</b> the same hosting/maintenance savings and full control we banked on Island House — plus a £1k–£3k agency migration avoided.</div>
+      </div>
+      <div class="card">
+        <h3>The Plan &amp; the imagery</h3>
+        <p class="d">Website audit, comparables and the online-sell strategy — plus the first real house-portrait photography (a full-tide golden-hour hero of Clôs Hugdon) instead of CGI.</p>
+        <div class="impact"><b>Impact:</b> a ~£500–£1,000 drone-photography day, real imagery, and a reusable media library.</div>
+        <div class="links"><a href="https://steve-decision-websites.vercel.app/sancler-plan.html" target="_blank" rel="noopener">Open the plan →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOFTWARE STUDIO -->
+  <section id="studio">
+    <div class="shead"><h2>Software Studio</h2><div class="tag">New · In-house · self-learning</div></div>
+    <p class="lede">An in-house studio building tools we can't buy — the "own it, don't rent it" principle applied to the software itself. And because these tools learn, the longer they run the better they get.</p>
+    <div class="grid">
+      <div class="card ox">
+        <h3>Social Content Engine</h3>
+        <p class="d">A full social-media content engine — writes, brands and quality-checks posts — built once and <b>reused across every business</b> (Sancler, Island House, the Globe): we simply copy it over.</p>
+        <div class="impact"><b>Impact:</b> replaces a <b>£1,000–£1,500/month</b> marketer to reproduce per business — and as a self-learning system with full learning modules, it improves the longer it runs.</div>
+      </div>
+      <div class="card ox">
+        <h3>Website Management System</h3>
+        <p class="d">A systemised website-management tab that lets the staff run and update the sites themselves — no agency, no bottleneck.</p>
+        <div class="impact"><b>Impact:</b> the team functions at greater capacity, updating their own sites at near-zero cost.</div>
+      </div>
+      <div class="card ox">
+        <h3>Auto Video Editor</h3>
+        <p class="d">Turns our raw footage into on-brand, on-trend social videos automatically — first product out of the studio.</p>
+        <div class="impact"><b>Impact:</b> aimed at replacing per-seat editing and social SaaS, and the editor/agency time to produce social video.</div>
+        <span class="soon">In build — demo on request</span>
+      </div>
+      <div class="card ox">
+        <h3>The 3D Survey System</h3>
+        <p class="d">Our own open-source pipeline that turns drone, 360 and iPhone-LiDAR captures into a measurable survey and a walkable tour — the capability commercial rigs charge £50k+ for.</p>
+        <div class="impact"><b>Impact:</b> replaces tens of £000s of survey hardware and software with a system we own and can run on any building.</div>
+        <span class="soon">Proving now — first room in progress</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET THE AI TEAM -->
+  <section id="team">
+    <div class="shead"><h2>Meet the AI team</h2><div class="tag">One team · every business</div></div>
+    <p class="lede">Behind all of this is a team of AI specialists — defined seats, each with its own remit — working across every business at once. The model is simple: <b>the CEO decides, Jarvis coordinates, the personas deliver, and Dominic ships.</b></p>
+    <div class="teamgrid">
+      <div class="tm"><div class="nm">Jarvis</div><div class="rl">Chief of Staff · Publisher</div><p class="sk">Coordinates the whole operation, runs the daily brief, and is the single hand that pushes anything live.</p></div>
+      <div class="tm"><div class="nm">Nia</div><div class="rl">Social &amp; Marketing (B2C)</div><p class="sk">Owns the daily content engine, community, reviews and ads — the customer-facing voice.</p></div>
+      <div class="tm"><div class="nm">Alex</div><div class="rl">Partnerships &amp; Conversion (B2B)</div><p class="sk">Partnerships, LinkedIn, trade and press, and the copy that has to convert.</p></div>
+      <div class="tm"><div class="nm">Delphine</div><div class="rl">Brand Voice &amp; Words</div><p class="sk">The voice every piece of customer copy is written to; menu and product words.</p></div>
+      <div class="tm"><div class="nm">Brush</div><div class="rl">Design &amp; Visual</div><p class="sk">Menus, posters, social templates, image treatment — steward of the brand system.</p></div>
+      <div class="tm"><div class="nm">Lowri</div><div class="rl">Photo Editor &amp; Imaging</div><p class="sk">Photo editing and brand imaging — turns raw shots into on-brand assets.</p></div>
+      <div class="tm"><div class="nm">Bob</div><div class="rl">Build Engineer</div><p class="sk">Builds the sites and apps, with the QA gate before anything ships.</p></div>
+      <div class="tm"><div class="nm">Tech Guy</div><div class="rl">Ops &amp; Integrations</div><p class="sk">Deploys, tokens, integrations and payments — keeps the plumbing running.</p></div>
+      <div class="tm"><div class="nm">Mererid</div><div class="rl">Research &amp; Verified History</div><p class="sk">The 227,000-word history chain-of-custody — nothing is a fact until she's verified it.</p></div>
+      <div class="tm"><div class="nm">Rhiannon</div><div class="rl">Storyweaver</div><p class="sk">Turns the verified research into narrative — the bilingual story and script behind the town trail.</p></div>
+      <div class="tm"><div class="nm">Grant</div><div class="rl">Survey &amp; 3D Capture</div><p class="sk">The survey and 3D-capture specialist — drone, 360 and LiDAR into a measurable model.</p></div>
+      <div class="tm"><div class="nm">Taliesin</div><div class="rl">Story Director</div><p class="sk">The bard — holds the single scroll-story of Island House so visitors feel the place and keep reading.</p></div>
+      <div class="tm"><div class="nm">Emyr</div><div class="rl">Kitchen &amp; Food</div><p class="sk">The food seat — menus, dishes and the culinary side of the Globe.</p></div>
+      <div class="tm"><div class="nm">Osian</div><div class="rl">Bar &amp; Drinks</div><p class="sk">The drinks seat — the bar list, coffee and the wet side of the Globe.</p></div>
+      <div class="tm"><div class="nm">Karen</div><div class="rl">Compliance Counsel</div><p class="sk">The claims ceiling on everything public — privacy and compliance before it goes out.</p></div>
+    </div>
+    <p class="lede" style="margin-top:14px">Fifteen specialist seats, one system — and because they share one register and keep learning, the whole team gets sharper the longer it runs.</p>
+  </section>
+
+  <!-- HOW IT TIES TOGETHER -->
+  <section id="story">
+    <div class="story">
+      <h2>How it all ties together</h2>
+      <p>This isn't a handful of separate projects — it's <b>one connected body of research about one place</b>. Across <b>158 documents and ~227,000 words</b>, we've traced the deep history of Laugharne and Island House together: the castle and the medieval borough, the quay, the notable townspeople and the town's war dead, the old industries, and the buildings along King Street. Island House is the landmark — and we hold even more on the town around it (~115,000 words) than on the house itself (~83,000).</p>
+      <p>The Globe sits right inside that story. We've researched <b>the Globe's own building</b> — its ballroom, its coach-house courtyard, the 1869 sale — and Brown's Hotel next door with its Dylan Thomas association. So the history doesn't just decorate the town; it gives every venue, the Globe included, a real story to tell.</p>
+      <p>That's exactly what the <b>township trail app</b> is built to do: turn the research into footfall. It hooks visitors with verified stories of the buildings around them, walks them through the town — and routes them to the Globe's door.</p>
+      <div class="chain">
+        <div class="step"><div class="t">Research</div><div class="b">~227k words on the town &amp; the house, sourced and graded</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">The story</div><div class="b">every street, building and figure given a real, told history</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">The app</div><div class="b">a live trail that hooks visitors where they stand</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">Footfall</div><div class="b">routed through the town and into the Globe</div></div>
+      </div>
+      <p class="storystat">One asset, many returns — the same research powers Island House's story, the town record, and the app that turns curiosity into customers.</p>
+    </div>
+  </section>
+
+  <!-- THE RESEARCH BACK-OFFICE (LIVE DATA) -->
+  <section id="data">
+    <div class="shead"><h2>The research back-office</h2><div class="tag">Live data · the tables behind the story</div></div>
+    <p class="lede">Not just the finished pages — the actual database they're built from. This is the working back-office where every source, entity and fact is logged as it's collected, covering both Island House and the wider history of Laugharne. It's how you can see the research actually operating.</p>
+    <div class="grid">
+      <div class="card gold">
+        <h3>Research — Sources</h3>
+        <p class="d">Every source and reference we've drawn on — archives, records, newspapers, listings — logged and traceable.</p>
+        <div class="links"><a href="https://airtable.com/appnt9vSQKrKyaKiZ/shraOMrDEeOwQdCSh" target="_blank" rel="noopener">Open the live table →</a></div>
+      </div>
+      <div class="card gold">
+        <h3>Research — Entities</h3>
+        <p class="d">The people, places, families and buildings of Island House and Laugharne, indexed and cross-linked.</p>
+        <div class="links"><a href="https://airtable.com/appnt9vSQKrKyaKiZ/shrrB8EGkcAz94pNi" target="_blank" rel="noopener">Open the live table →</a></div>
+      </div>
+      <div class="card gold">
+        <h3>Research — Facts</h3>
+        <p class="d">The individual dated, sourced facts — the granular record that feeds the history trail and the engine above.</p>
+        <div class="links"><a href="https://airtable.com/appnt9vSQKrKyaKiZ/shrttxld2VD4PcFAv" target="_blank" rel="noopener">Open the live table →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tally">
+    <div class="k">Value delivered — the longer view</div>
+    <p>Shown business by business above, so no need to labour it — but taken together, the work delivered so far is in the order of <b>£50k–£145k of professional work</b>, alongside roughly <b>£50k–£85k a year in costs replaced</b>. Because it's owned rather than rented, that annual figure doesn't happen once: it repeats, and grows as each new tool comes online. Illustrative estimates at typical UK rates.</p>
   </div>
 
-  <h2>Awaiting your steer, Steve</h2>
-  <p class="sub">The live calls that unblock the next step — answer inside each plan, or leave a note on any page.</p>
-  <div class="await">
-    <div class="row"><span>🥖 <b>Bakery</b> — brand direction, pricing sign-off, opening date</span><a href="bakery-concepts.html">Open →</a></div>
-    <div class="row"><span>🏡 <b>Sancler</b> — website scope, houses to shoot, site access</span><a href="sancler-plan.html">Open →</a></div>
-    <div class="row"><span>🏰 <b>Island House</b> — recording standard, Conservation Plan, publishing sensitivities</span><a href="island-house-plan.html">Open →</a></div>
-    <div class="row"><span>🧭 <b>The Business</b> — read &amp; approve the project brief</span><a href="direction.html">Open →</a></div>
+  <div class="bottom">
+    <b>The bottom line.</b> Every business is being moved off rented, fragile platforms onto our own stack, and the tools we build compound — each one replaces a monthly bill and a chunk of professional time, then keeps delivering week after week at near-zero cost. The savings don't happen once; they repeat.
   </div>
 
-  <h2>Locations</h2>
-  <p class="sub">Where each business sits — and the live pages as they go up.</p>
-  <div class="await">
-    <div class="row"><span>🌐 <b>The Globe</b> — Wine Bar &amp; Bakery · Duncan Street, Laugharne, SA33 4SA · 01994 427546 / 07956 022246</span><a href="globe-plan.html">One-brand page →</a></div>
-    <div class="row"><span>🏰 <b>Island House</b> — Laugharne (on the medieval port site) · exact address to confirm</span><a href="island-house-plan.html">Open →</a></div>
-    <div class="row"><span>🏡 <b>Sancler — Clôs Hugdon</b> — Laugharne · exact plot / postcode to confirm</span><a href="sancler-plan.html">Open →</a></div>
-  </div>
+  <footer>
+    Figures are illustrative estimates at typical UK rates — happy to firm them to real numbers.<br>
+    Outputs verifiable in Airtable, the repositories and the project docs. · Salem Construction · CCP Project Enablement
+  </footer>
 
-  <h2>Latest — 30 Jul</h2>
-  <p class="sub">A quick pulse of what moved today — full detail in the work log.</p>
-  <div class="await">
-    <div class="row"><span>📋 <b>Island House — Weekly Survey launched</b> — the building seen through <b>nine professional lenses</b> every week (builder, architect, structural, surveyor, damp, conservation &amp; history, building control, H&amp;S) to one fixed standard, with the 3D model and walk-through. <b>Week 1</b> is live: 53 stations, 11 high-priority items, headline — persistent water in the new blockwork zone to fix before lining.</span><a href="island-house-survey.html">Open →</a></div>
-    <div class="row"><span>🏠 <b>Island House — step inside (360 rooms)</b> — the real 360 photos as an <b>in-the-room walk-through</b>: stand in each spot and look all the way around, then step from station to station. The immersive view of the building as it is today.</span><a href="island-house-room.html">Open →</a></div>
-    <div class="row"><span>🧊 <b>Island House — 3D capture spike</b> — a first pass at a 3D model from the 360 photos. It reconstructed several <b>area fragments</b> (spin them in the browser) but didn't yet tie into one whole-house model — the photos were shot too far apart. The page shows what we have plus the exact re-shoot spec that fixes it.</span><a href="island-house-3d.html">Open →</a></div>
-    <div class="row"><span>⚙️ <b>The Business — Hours saved by automation</b> — new ledger live: the <b>Content Engine</b> (automatic photo QA &amp; enhancement) now saves the bar manager <b>~4–6 hrs/week (~230–310 hrs/year)</b> of manual photo editing — with the honest read for the owners on why it's worth more than the hours. A growing list; auto-reply is next.</span><a href="automation-savings.html">Open →</a></div>
-    <div class="row"><span>☕ <b>The Globe — Coffee Shop</b> — new <b>working hub live</b>: the daytime-door thesis, the daypart, the three crossovers, the research backbone (roaster route, awards plan, competitor gap) and six independent-coffee comparables to react to. Research stage — no build until decided.</span><a href="globe-coffee.html">Open →</a></div>
-    <div class="row"><span>📋 <b>House of Culture</b> — <b>the full plan is live</b>: proposition, opportunity, day-loop, trails, the app, delivery phases and the principles — plus the consolidated record behind it (563 facts, 270 sources, 100 threads) and a major retraction: the Butcher Beynon link to the Globe is refuted</span><a href="house-of-culture-plan.html">Open →</a></div>
-    <div class="row"><span>🎭 <b>House of Culture</b> — now its own business: the whole-day, whole-town Dylan experience, the day-loop, tiered trails, app-first plan, review gap map and the persona workstream board</span><a href="globe-house-of-culture.html">Open →</a></div>
-    <div class="row"><span>🌐 <b>The Globe</b> — new <b>CEO Operating Dashboard</b> live: real EPOS sales turned into a turnaround &amp; break-even model, positioning sharpened (wine-led, seasonal), site copy + marketing plan aligned</span><a href="globe-operating.html">Open →</a></div>
-    <div class="row"><span>🕮 <b>Island House</b> — the <b>History Trail</b> grew to <b>30 stops</b>: a whole-town history web, the 3 St David's wills transcribed, and a full verified audit correcting the record</span><a href="island-house-history.html">Explore →</a></div>
-    <div class="row"><span>🏡 <b>Sancler</b> — a faithful rebuild of the property site on our own systems, with a live enquiry back-end capturing register-interest leads</span><a href="index.html">See it →</a></div>
-  </div>
+</main>
 
-  <p class="sub" style="text-align:center;margin-top:26px;">CCP Project Enablement · a live dashboard — everything logged and timestamped.</p>
-
-</div>
 <script>
-(function(){
-  fetch('/api/worklog').then(function(r){return r.ok?r.json():null;}).then(function(j){
-    if(!j||!j.ok||!j.items)return;
-    var items=j.items;
-    document.querySelectorAll('.logged').forEach(function(el){
-      var b=el.getAttribute('data-b');
-      var days=items.filter(function(it){return (it.Projects||[]).indexOf(b)>=0;}).length;
-      if(days>0) el.innerHTML='📓 Logged on '+days+' day'+(days===1?'':'s')+' — <a href="worklog.html">see the reports →</a>';
-    });
-  }).catch(function(){});
-})();
+// ---- Island House research engine: answers drawn from our sourced corpus (29 threads) ----
+const KB = [
+  { q:"How much new history have we discovered?",
+    keys:["new","discover","more history","how much history","before","compared","dom","found out"],
+    a:`Before this, Island House was "an old merchant's house" with a famous quay and a few romantic legends. We've now traced its <b>continuous, documented 800-year human story</b> — every owner and occupier from the 1300s to today — across <b>29 source-checked research threads</b>, now held as a <b>live, growing register of 2,034 sourced facts, 895 people and places, and 748 sources</b>, with every claim graded by evidence. In short: from a paragraph and some folklore to a defensible, fully-referenced archive that's still growing week on week.`,
+    ev:"Live register: 2,034 facts · 895 entities · 748 sources · 29 threads · ~83,000 words — and growing.",
+    vtag:"" },
+  { q:"What are the biggest discoveries?",
+    keys:["biggest","discoveries","notable","famous","people","who was","tucker","perrot","skyrme","find"],
+    a:`It's older and grander than "a merchant's house": the <b>White family held the land from the 14th century</b> and may be the original builders, before a succession of Laugharne's leading families. And a real cast of national figures — <b>Josiah Tucker</b>, Dean of Gloucester and an economist who argued for American independence; <b>Sir John Perrot</b>, Lord Deputy of Ireland (reputedly Henry VIII's illegitimate son, died in the Tower); the <b>Skyrme</b> marine-merchants whose own ship appears in Lloyd's Register; and <b>Caleb Rees</b>, Deputy Chief Inspector of Schools for Wales, with his wife <b>Dr Laura Powell</b>, a pioneering woman doctor.`,
+    ev:"29 threads, primary-sourced: Lloyd's Register, TNA, probate and authoritative biographies." },
+  { q:"What did the archaeology find?",
+    keys:["quay","dig","archaeolog","excavat","medieval","1437","pottery","heneb","fabric"],
+    a:`The Heneb excavation uncovered the <b>first medieval quay ever excavated in Wales</b>, a high-status medieval hall house, imported pottery from Bristol, France and Spain, and roof timbers dated to <b>1437</b>. The dig proved the fabric — the stones and objects. Our research then found the people: the merchants who traded from that quay and the families who owned the walls for six centuries.`,
+    ev:"Heneb dig record · 1437 dendrochronology · imported-ware finds." },
+  { q:"Which legends did you correct?",
+    keys:["myth","legend","debunk","false","roman","cromwell","tobacco","corrected","true","fake","real"],
+    a:`We stress-tested the old owner-story and corrected what it got wrong, so nothing shaky goes public: the romantic <b>"de Brian marriage" — false</b>; the <b>"Roman remains" — a single Victorian sentence, a legend not a fact</b>; the <b>"Virginia tobacco" quay — unprovable, told as tradition</b>; <b>"Cromwell's cannonballs" — actually Rowland Laugharne in 1644, not Cromwell</b>; and two of the three grand "owner" families (<b>Mansel and Russell — knocked out</b>; only Vaughan of Golden Grove survives). Correcting the record is what makes the rest trustworthy.`,
+    ev:"Each legend traced to source and graded; confidence tiers shown in the History Trail." },
+  { q:"Who actually owned and lived there?",
+    keys:["own","owned","lived","occup","families","resident","spine","who lived"],
+    a:`A documented spine from medieval gentry to the 20th century: the <b>White family</b> (14th c, possible builders) → the <b>Prydderchs of Hawksbrook</b> (twice High Sheriff of the county) → the Thomases → the Hughes → the Georgian <b>Skyrme</b> merchants → through to <b>Caleb Rees &amp; Dr Laura Powell</b> (1943–70) and the modern era. Every holder was tested surname by surname against the records.`,
+    ev:"Probate (NLW pre-1858; TNA PROB 11), newspapers, Companies House, heraldic pedigrees." },
+  { q:"Did the Civil War reach the house?",
+    keys:["civil war","1644","siege","lots","war"],
+    a:`Yes — the town was taken in <b>1644</b>, and Island House sits at the heart of one of the war's most dramatic local endings: three condemned commanders who <b>drew lots for their lives</b>. It also settles the "Cromwell's cannonballs" legend — the action was Rowland Laugharne's in 1644, not Cromwell.`,
+    ev:"Civil-War research thread, source-checked." },
+  { q:"How do we know it's all true?",
+    keys:["how do you know","proof","prove","source","accurate","reliable","trust","verified","evidence","standard"],
+    a:`Every claim is traced to a primary document or authoritative source and <b>graded by evidence tier</b> — established fact, open question, or clearly-labelled legend — so nothing is asserted beyond what the record supports. Local legends are kept, but flagged as legend. The research even logs the "search traps" it caught (mis-dated newspaper reprints, forename/surname mix-ups), which is why it's defensible, not just voluminous.`,
+    ev:"29 threads to a scholarly standard; confidence tier on every entry." },
+  { q:"What would this have cost to commission?",
+    keys:["cost","price","worth","pay","expensive","commission","how much would","budget","value","£"],
+    a:`Commissioned from a heritage consultancy as documentary research — dozens of archive series across Coflein, Cadw, TNA Discovery, the NLW probate index and Welsh Newspapers Online, all cross-checked and graded — this would bill in the region of <b>£10,000–£30,000+</b>. It represents the equivalent of a specialist team (historian, genealogist, archival researcher) working the better part of a year to two — produced here in weeks, and still growing at near-zero marginal cost.`,
+    ev:"~83,000 words across the Island House threads; typical UK heritage-research rates.",
+    vtag:"Saves £10k–£30k+ · recurring at near-zero cost" },
+  { q:"How long would a traditional team have taken?",
+    keys:["how long","time","years","team take","take a team","quick","weeks"],
+    a:`At traditional speeds — physical visits to Kew and the National Library of Wales, ordering probate copies, microfilm, waiting on records — this depth of primary-source, cross-checked, graded research realistically represents <b>one to two years of a small specialist team</b>. It's been compressed into weeks.`,
+    ev:"Based on the volume (29 threads, ~83k words) and traditional archive-access timescales." },
+  { q:"What's still open or being chased?",
+    keys:["open","next","still","chasing","remaining","unfinished","abra","builders","gaps"],
+    a:`We deliberately hold the unproven open rather than overclaim. Still being chased: the <b>origin of the "Abra" family name</b> carried for generations, final <b>confirmation of the White family as the original builders</b>, and the untested lowest stratigraphy beneath the quay. The desk research is complete; it's now a focused visit to the National Library of Wales and the county archives to close the last gaps.`,
+    ev:"Open questions are logged and labelled, not hidden." },
+  { q:"Is the family's wartime loss remembered in the town?",
+    keys:["war","memorial","congreve","tynedale","remembered","wartime","1943","roll of honour","fallen"],
+    a:`Yes — <b>Lieutenant J. W. Congreve RNVR</b>, of Island House, lost on <b>HMS Tynedale in 1943</b>, is named on Laugharne's Second World War roll-of-honour tablet, part of the town war memorial. The house's own story is written into the public record of the town — and the town also honours a Laugharne-born VC, <b>William Charles Fuller</b> (1884), on a plaque at the memorial's base.`,
+    ev:"CWGC · IWM War Memorials Register (WMR 36672) · town memorial slate tablets." },
+  { q:"When did Sir John Perrot get the castle?",
+    keys:["perrot","castle","1575","1587","tudor mansion","elizabeth","when did perrot","gatehouse"],
+    a:`<b>Elizabeth I granted Laugharne Castle to Sir John Perrot in 1575</b>, and between <b>1587 and 1592</b> he converted the medieval fortress into a Tudor mansion — the grand neighbour to Island House in its Elizabethan heyday.`,
+    ev:"Cadw listing — Castle Outer Gatehouse (9652)." },
+  { q:"How old is Laugharne Town Hall?",
+    keys:["town hall","1747","clock","tower","how old","civic","building","grade"],
+    a:`The present <b>Town Hall dates from 1747</b>, replacing an earlier hall on the same site; the bellcote was added in 1786 and the clock-tower keystones are dated 1896. It's Grade II* listed — part of the wider town history the research now documents alongside the house.`,
+    ev:"Cadw listing 9659 (Grade II*)." },
+  { q:"How big was old Laugharne, and how many pubs?",
+    keys:["how big","burgage","plots","1595","pubs","inns","globe","1830","1844","town size","how many pubs"],
+    a:`A <b>1595 survey</b> of the lordship counted <b>over 161 burgage plots</b> — a walled town grown from an early settlement of barely 30 dwellings. And it was well served: <b>Pigot's directory listed eleven inns in 1830</b> (the Globe among them, kept by Thomas Edwards), rising to <b>sixteen by 1844</b>.`,
+    ev:"Laugharne Corporation survey (1595) · Pigot & Co. directories 1830/1844." }
+];
+
+const chipsWrap = document.getElementById('chips');
+const log = document.getElementById('log');
+const form = document.getElementById('askform');
+const input = document.getElementById('askin');
+
+// suggested-question chips
+["How much new history have we discovered?","Biggest discoveries?","Which legends did you correct?","Who lived there?","Is the wartime loss remembered?","When did Perrot get the castle?","How big was old Laugharne?","How is it proven?","What would it have cost?"]
+  .forEach(function(label, i){
+    const c = document.createElement('button');
+    c.type='button'; c.className='chip'; c.textContent=label;
+    c.onclick=function(){ answer(label); };
+    chipsWrap.appendChild(c);
+  });
+
+function bubble(cls, html){
+  const b=document.createElement('div'); b.className='bub '+cls; b.innerHTML=html;
+  log.appendChild(b); b.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function match(query){
+  const q=query.toLowerCase();
+  let best=null, bestScore=0;
+  KB.forEach(function(item){
+    let s=0; item.keys.forEach(function(k){ if(q.indexOf(k)>-1) s+=k.length>6?2:1; });
+    if(s>bestScore){ bestScore=s; best=item; }
+  });
+  return bestScore>0 ? best : null;
+}
+
+function answer(query){
+  bubble('u', query.replace(/</g,'&lt;'));
+  const hit=match(query);
+  setTimeout(function(){
+    if(hit){
+      let html=hit.a+'<span class="ev">Source: '+hit.ev+'</span>';
+      if(hit.vtag) html+='<span class="vtag">'+hit.vtag+'</span>';
+      bubble('a', html);
+    } else {
+      bubble('a', "I answer from our sourced Island House research — 800 years, 29 threads, every claim graded. Try asking about the <b>discoveries</b>, the <b>people who lived here</b>, the <b>legends we corrected</b>, <b>how it's proven</b>, or <b>what it would have cost</b>. For anything deeper, the full <a href='https://steve-decision-websites.vercel.app/island-house-history.html' target='_blank' rel='noopener' style='color:#d9b878'>History Trail</a> has every source.");
+    }
+  }, 260);
+}
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  const v=input.value.trim(); if(!v) return;
+  answer(v); input.value='';
+});
 </script>
-
-<!-- universal notes widget -->
-<script>(function(){
-  if(window.__gnw) return; window.__gnw=1;
-  var page=(document.title||location.pathname).replace(/ — .*$/,'').trim();
-  var p=location.pathname.toLowerCase(), biz='General';
-  if(p.indexOf('bakery')>=0||p.indexOf('globe')>=0) biz='Bakery';
-  else if(p.indexOf('sancler')>=0) biz='Sancler Property';
-  else if(p.indexOf('island')>=0) biz='Island House';
-  var who='Steve';
-  var css=''
-   +'#gnwBtn{position:fixed;right:18px;bottom:18px;z-index:9998;background:#1f5c4d;color:#fff;border:0;'
-   +'font-family:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:26px;cursor:pointer;'
-   +'box-shadow:0 6px 20px rgba(20,50,45,.28);}'
-   +'#gnwBtn:hover{background:#153f35;}'
-   +'#gnwP{position:fixed;right:18px;bottom:66px;z-index:9999;width:320px;max-width:92vw;background:#fff;'
-   +'border:1px solid #dfe6e2;border-radius:14px;box-shadow:0 18px 50px rgba(20,50,45,.28);display:none;'
-   +'font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;}'
-   +'#gnwP.open{display:block;}'
-   +'#gnwP .h{background:#1f5c4d;color:#fff;padding:12px 15px;font-family:Georgia,serif;font-size:16px;'
-   +'display:flex;justify-content:space-between;align-items:center;}'
-   +'#gnwP .h b{font-weight:400;} #gnwP .x{cursor:pointer;font-size:20px;opacity:.85;}'
-   +'#gnwP .b{padding:13px 15px 15px;}'
-   +'#gnwP .who{font-size:12px;color:#6a7b76;margin-bottom:8px;}'
-   +'#gnwP .seg{border:1.5px solid #dfe6e2;background:#f2f5f3;color:#3a4a47;font-size:12px;font-weight:700;'
-   +'padding:5px 11px;border-radius:7px;cursor:pointer;margin-left:4px;}'
-   +'#gnwP .seg.on{background:#1f5c4d;border-color:#1f5c4d;color:#fff;}'
-   +'#gnwP textarea{width:100%;box-sizing:border-box;border:1px solid #cfd8d4;border-radius:8px;padding:10px;'
-   +'font-family:inherit;font-size:13.5px;resize:vertical;min-height:74px;}'
-   +'#gnwP .save{width:100%;margin-top:10px;background:#1f5c4d;color:#fff;border:0;font-size:14px;font-weight:700;'
-   +'padding:11px;border-radius:9px;cursor:pointer;} #gnwP .save:hover{background:#153f35;}'
-   +'#gnwS{font-size:12.5px;font-weight:600;margin-top:8px;min-height:16px;} #gnwS.ok{color:#1f7a4d;} #gnwS.err{color:#b0472b;}'
-   +'#gnwP .note{font-size:11px;color:#9aa8a2;margin-top:8px;}';
-  var el=document.createElement('div');
-  el.innerHTML='<style>'+css+'</style>'
-    +'<button id="gnwBtn">✍ Note</button>'
-    +'<div id="gnwP"><div class="h"><b>Note on this page</b><span class="x" id="gnwX">×</span></div>'
-    +'<div class="b"><div class="who">By: <span class="seg on" data-r="Steve">Steve</span>'
-    +'<span class="seg" data-r="Dominic">Dominic</span> · <span style="color:#8a6a2b;">'+page+'</span></div>'
-    +'<textarea id="gnwT" placeholder="Jot a note or a point to raise… it saves and Dominic gets emailed the detail."></textarea>'
-    +'<button class="save" id="gnwSave">Save note</button><div id="gnwS"></div>'
-    +'<div class="note">Saved to the tracker · emailed to Dominic to action.</div></div></div>';
-  document.body.appendChild(el);
-  var P=document.getElementById('gnwP'), T=document.getElementById('gnwT'), S=document.getElementById('gnwS');
-  document.getElementById('gnwBtn').onclick=function(){P.classList.toggle('open');if(P.classList.contains('open'))T.focus();};
-  document.getElementById('gnwX').onclick=function(){P.classList.remove('open');};
-  el.querySelectorAll('#gnwP .seg').forEach(function(s){s.onclick=function(){who=s.getAttribute('data-r');el.querySelectorAll('#gnwP .seg').forEach(function(x){x.classList.toggle('on',x===s);});};});
-  function txt(){return (T.value||'').trim();}
-  document.getElementById('gnwSave').onclick=function(){
-    var v=txt(); if(!v){S.className='err';S.textContent='Write a note first.';return;}
-    S.className='';S.textContent='Saving…';
-    fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({reviewer:who,items:[{item:'Note — '+page,business:biz,type:'Discussion',answer:v}]})})
-      .then(function(r){return r.json().catch(function(){return{};}).then(function(j){return{ok:r.ok,j:j};});})
-      .then(function(res){if(res.ok&&res.j&&res.j.ok){S.className='ok';S.textContent='✓ Saved — Dominic will be emailed.';T.value='';setTimeout(function(){P.classList.remove('open');S.textContent='';},1400);}
-        else{fallback(v);}})
-      .catch(function(){fallback(v);});
-  };
-  function fallback(v){S.className='err';S.textContent='Tracker offline — opening email…';
-    window.location.href='mailto:pullenmarketing@gmail.com?subject='+encodeURIComponent('Note: '+page)+'&body='+encodeURIComponent('('+who+' · '+biz+')\n\n'+v);}
-})();</script>
-
-</body></html>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Island House — Exterior 3D (splat)</title>
+<style>
+  html,body{margin:0;height:100%;background:#0b0d10;overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#fff}
+  #meta{position:fixed;top:14px;left:16px;z-index:5;background:rgba(0,0,0,.45);
+    padding:8px 12px;border-radius:10px;font-size:13px;line-height:1.35}
+  #meta b{font-size:15px;letter-spacing:.02em;color:#c9a15a}
+  #hint{position:fixed;bottom:14px;left:16px;z-index:5;background:rgba(0,0,0,.4);
+    padding:8px 12px;border-radius:10px;font-size:12px;color:#cfd3da}
+  #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    z-index:8;background:#0b0d10;color:#cfd3da;font-size:15px;flex-direction:column;gap:10px}
+  .bar{width:220px;height:4px;background:#22262c;border-radius:2px;overflow:hidden}
+  .bar>i{display:block;height:100%;width:30%;background:#c9a15a;transition:width .2s}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "@mkkellogg/gaussian-splats-3d": "https://cdn.jsdelivr.net/npm/@mkkellogg/gaussian-splats-3d@0.4.7/build/gaussian-splats-3d.module.js"
+} }
+</script>
+</head>
+<body>
+<div id="meta"><b>ISLAND HOUSE</b> — exterior 3D<br>drag to orbit · scroll to zoom · right-drag to pan</div>
+<div id="hint">Gaussian splat · oriented via PCA ground-normal · cleaned (floaters culled)</div>
+<div id="load"><div>Loading exterior model (~67 MB)…</div><div class="bar"><i id="pbar"></i></div></div>
+<script type="module">
+import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
+
+// v2 (6 Aug retrain) exports essentially upright (1.8 deg) -> identity orientation
+const ORIENT=[0,0,0,1];
+// Camera framed on the building
+const CAM=[-0.3,5.0,10.2], LOOK=[-0.3,2.5,0.2];
+
+const viewer=new GaussianSplats3D.Viewer({
+  cameraUp:[0,1,0],
+  initialCameraPosition:CAM,
+  initialCameraLookAt:LOOK,
+  sphericalHarmonicsDegree:0,
+  sharedMemoryForWorkers:false
+});
+viewer.addSplatScene('exterior.splat',{
+  rotation:ORIENT, position:[0,0,0], scale:[1,1,1],
+  splatAlphaRemovalThreshold:8,
+  progressiveLoad:true,
+  onProgress:(pct)=>{const b=document.getElementById('pbar'); if(b)b.style.width=Math.max(5,pct)+'%';}
+}).then(()=>{
+  document.getElementById('load').style.display='none';
+  viewer.start();
+}).catch(e=>{
+  document.getElementById('load').innerHTML='<div>Could not load the splat.<br>'+e+'</div>';
+});
+</script>
+</body>
+</html>

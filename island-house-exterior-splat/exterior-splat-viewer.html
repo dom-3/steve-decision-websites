@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Island House — Exterior 3D (splat)</title>
+<title>Island House — Aerial Site Survey (17 Aug)</title>
 <style>
   html,body{margin:0;height:100%;background:#0b0d10;overflow:hidden;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#fff}
@@ -25,16 +25,16 @@
 </script>
 </head>
 <body>
-<div id="meta"><b>ISLAND HOUSE</b> — exterior 3D<br>drag to orbit · scroll to zoom · right-drag to pan</div>
+<div id="meta"><b>ISLAND HOUSE</b> — aerial site survey (17 Aug)<br>drag to orbit · scroll to zoom · right-drag to pan</div>
 <div id="hint">Gaussian splat · oriented via PCA ground-normal · cleaned (floaters culled)</div>
-<div id="load"><div>Loading exterior model (~67 MB)…</div><div class="bar"><i id="pbar"></i></div></div>
+<div id="load"><div>Loading the site model (~9 MB)…</div><div class="bar"><i id="pbar"></i></div></div>
 <script type="module">
 import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
 
 // v2 (6 Aug retrain) exports essentially upright (1.8 deg) -> identity orientation
 const ORIENT=[0,0,0,1];
-// Camera framed on the building
-const CAM=[-0.3,5.0,10.2], LOOK=[-0.3,2.5,0.2];
+// 17 Aug site model — upright, solid; frame from above-oblique
+const CAM=[-0.2,2.1,3.5], LOOK=[-0.2,-0.2,0.2];
 
 const viewer=new GaussianSplats3D.Viewer({
   cameraUp:[0,1,0],

@@ -46,7 +46,7 @@ const viewer=new GaussianSplats3D.Viewer({
 viewer.addSplatScene('exterior.splat',{
   rotation:ORIENT, position:[0,0,0], scale:[1,1,1],
   splatAlphaRemovalThreshold:8,
-  progressiveLoad:true,
+  progressiveLoad:false,
   onProgress:(pct)=>{const b=document.getElementById('pbar'); if(b)b.style.width=Math.max(5,pct)+'%';}
 }).then(()=>{
   document.getElementById('load').style.display='none';

@@ -48,7 +48,7 @@ const viewer=new GaussianSplats3D.Viewer({
 viewer.addSplatScene('exterior-gpu.splat',{
   rotation:[0,0,0,1], position:[0,0,0], scale:[1,1,1],
   splatAlphaRemovalThreshold:5,
-  progressiveLoad:true,
+  progressiveLoad:false,
   onProgress:(pct)=>{const b=document.getElementById('pbar'); if(b)b.style.width=Math.max(5,pct)+'%';}
 }).then(()=>{
   document.getElementById('load').style.display='none';

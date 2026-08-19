@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Island House — Aerial Site Survey (17 Aug)</title>
+<title>Island House — Exterior 3D (drone survey, 17 Aug)</title>
 <style>
   html,body{margin:0;height:100%;background:#0b0d10;overflow:hidden;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#fff}
-  #meta{position:fixed;top:14px;left:16px;z-index:5;background:rgba(0,0,0,.45);
-    padding:8px 12px;border-radius:10px;font-size:13px;line-height:1.35}
+  #meta{position:fixed;top:14px;left:16px;z-index:5;background:rgba(0,0,0,.5);
+    padding:9px 13px;border-radius:10px;font-size:13px;line-height:1.4;max-width:62vw}
   #meta b{font-size:15px;letter-spacing:.02em;color:#c9a15a}
-  #hint{position:fixed;bottom:14px;left:16px;z-index:5;background:rgba(0,0,0,.4);
+  #meta small{color:#9aa3ab}
+  #hint{position:fixed;bottom:14px;left:16px;z-index:5;background:rgba(0,0,0,.42);
     padding:8px 12px;border-radius:10px;font-size:12px;color:#cfd3da}
   #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-    z-index:8;background:#0b0d10;color:#cfd3da;font-size:15px;flex-direction:column;gap:10px}
-  .bar{width:220px;height:4px;background:#22262c;border-radius:2px;overflow:hidden}
-  .bar>i{display:block;height:100%;width:30%;background:#c9a15a;transition:width .2s}
+    z-index:8;background:#0b0d10;color:#cfd3da;font-size:15px;flex-direction:column;gap:12px;text-align:center;padding:0 20px}
+  .bar{width:240px;height:4px;background:#22262c;border-radius:2px;overflow:hidden}
+  .bar>i{display:block;height:100%;width:5%;background:#c9a15a;transition:width .2s}
 </style>
 <script type="importmap">
 { "imports": {
@@ -25,16 +26,17 @@
 </script>
 </head>
 <body>
-<div id="meta"><b>ISLAND HOUSE</b> — aerial site survey (17 Aug)<br>drag to orbit · scroll to zoom · right-drag to pan</div>
-<div id="hint">Gaussian splat · oriented via PCA ground-normal · cleaned (floaters culled)</div>
-<div id="load"><div>Loading the site model (~9 MB)…</div><div class="bar"><i id="pbar"></i></div></div>
+<div id="meta"><b>ISLAND HOUSE</b> — exterior 3D<br>
+  <small>drone survey · 17 Aug · GPU build · ~1.0M gaussians · full-res</small><br>
+  drag to orbit · scroll to zoom · right-drag to pan</div>
+<div id="hint">Gaussian splat (Nerfstudio / A40 GPU) · cleaned &amp; upright</div>
+<div id="load"><div>Loading exterior model (~32 MB)…</div><div class="bar"><i id="pbar"></i></div>
+  <div style="font-size:12px;color:#8b939b">first load can take a moment</div></div>
 <script type="module">
 import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
 
-// v2 (6 Aug retrain) exports essentially upright (1.8 deg) -> identity orientation
-const ORIENT=[0,0,0,1];
-// 17 Aug site model — upright, solid; frame from above-oblique
-const CAM=[-0.2,2.1,3.5], LOOK=[-0.2,-0.2,0.2];
+// Model is Y-up (nerfstudio-oriented), recentred; building rises from y≈0 to y≈10.
+const CAM=[13, 7, 13], LOOK=[0, 4.2, 0];
 
 const viewer=new GaussianSplats3D.Viewer({
   cameraUp:[0,1,0],
@@ -43,16 +45,17 @@ const viewer=new GaussianSplats3D.Viewer({
   sphericalHarmonicsDegree:0,
   sharedMemoryForWorkers:false
 });
-viewer.addSplatScene('exterior.splat',{
-  rotation:ORIENT, position:[0,0,0], scale:[1,1,1],
-  splatAlphaRemovalThreshold:8,
-  progressiveLoad:false,
+viewer.addSplatScene('exterior-gpu.splat',{
+  rotation:[0,0,0,1], position:[0,0,0], scale:[1,1,1],
+  splatAlphaRemovalThreshold:5,
+  progressiveLoad:true,
   onProgress:(pct)=>{const b=document.getElementById('pbar'); if(b)b.style.width=Math.max(5,pct)+'%';}
 }).then(()=>{
   document.getElementById('load').style.display='none';
   viewer.start();
 }).catch(e=>{
-  document.getElementById('load').innerHTML='<div>Could not load the splat.<br>'+e+'</div>';
+  document.getElementById('load').innerHTML='<div>Could not load the splat.<br>'+e+
+    '<br><br><small>Serve over http — file:// blocks the loader.</small></div>';
 });
 </script>
 </body>

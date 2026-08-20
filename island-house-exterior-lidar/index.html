@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>Island House — Exterior 3D (site model)</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<style>
+  :root{--bg:#111417;--ink:#f4f1ea;--muted:#a7b0b8;--accent:#c9a15a;--line:#2a3036}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  .wrap{display:flex;flex-direction:column;min-height:100vh}
+  header{padding:14px 22px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  header .loc{color:var(--accent);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  header h1{font-size:18px;margin:0;font-weight:600}
+  header .tag{color:var(--muted);font-size:12px;margin-left:auto}
+  .stage{flex:1;position:relative;min-height:78vh}
+  model-viewer{width:100%;height:100%;background:radial-gradient(120% 120% at 50% 20%,#1b2026 0%,#0d0f11 70%);--progress-bar-color:var(--accent)}
+  .hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(0,0,0,.55);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:12px;color:var(--muted);display:flex;gap:14px;white-space:nowrap;flex-wrap:wrap;justify-content:center}
+  .hint b{color:var(--ink)}
+  .btn{position:absolute;top:14px;right:16px;z-index:5;background:rgba(0,0,0,.5);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer}
+  footer{padding:11px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="loc">Island House · Laugharne</span>
+    <h1>Exterior 3D — site model</h1>
+    <span class="tag">18 Aug 2026 · LiDAR survey · metric scale</span>
+  </header>
+  <div class="stage">
+    <button class="btn" id="spin">Pause spin</button>
+    <model-viewer id="mv" src="island-house-lidar.glb"
+      alt="3D site model of Island House exterior"
+      camera-controls touch-action="none"
+      auto-rotate auto-rotate-delay="0" rotation-per-second="12deg"
+      camera-orbit="40deg 72deg auto" field-of-view="42deg"
+      min-camera-orbit="auto auto 1m" max-camera-orbit="auto 100deg auto"
+      interaction-prompt="none" shadow-intensity="0.5" exposure="1.05" environment-image="neutral">
+      <div class="hint">
+        <span><b>Drag</b> to orbit</span><span><b>Scroll / pinch</b> to zoom</span><span><b>Right-drag</b> (or two-finger) to pan</span>
+      </div>
+    </model-viewer>
+  </div>
+  <footer>iPhone Pro LiDAR (Polycam) · measured geometry &amp; real scale · a navigable site model. Building mid-restoration; textured photo-hero recapture when the fabric is complete.</footer>
+</div>
+<script>
+  const mv=document.getElementById('mv'), btn=document.getElementById('spin');
+  btn.addEventListener('click',()=>{
+    const on=mv.hasAttribute('auto-rotate');
+    if(on){mv.removeAttribute('auto-rotate');btn.textContent='Resume spin';}
+    else{mv.setAttribute('auto-rotate','');btn.textContent='Pause spin';}
+  });
+  // stop the auto-spin as soon as the user grabs it, so it doesn't fight them
+  mv.addEventListener('pointerdown',()=>{if(mv.hasAttribute('auto-rotate')){mv.removeAttribute('auto-rotate');btn.textContent='Resume spin';}});
+</script>
+</body>
+</html>

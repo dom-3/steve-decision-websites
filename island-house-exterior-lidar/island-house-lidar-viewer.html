@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>Island House — Exterior 3D (LiDAR survey)</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<style>
+  :root{--bg:#111417;--ink:#f4f1ea;--muted:#a7b0b8;--accent:#c9a15a;--line:#2a3036}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  .wrap{display:flex;flex-direction:column;min-height:100vh}
+  header{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  header .loc{color:var(--accent);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  header h1{font-size:18px;margin:0;font-weight:600}
+  header .tag{color:var(--muted);font-size:12px;margin-left:auto}
+  .stage{flex:1;position:relative;min-height:70vh}
+  model-viewer{width:100%;height:100%;background:radial-gradient(120% 120% at 50% 20%,#1b2026 0%,#0d0f11 70%)}
+  .hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(0,0,0,.55);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:12px;color:var(--muted);display:flex;gap:14px;white-space:nowrap}
+  .hint b{color:var(--ink)}
+  footer{padding:12px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="loc">Island House · Laugharne</span>
+    <h1>Exterior 3D — LiDAR survey</h1>
+    <span class="tag">18 Aug 2026 · metric scale · ~9 m height</span>
+  </header>
+  <div class="stage">
+    <model-viewer src="island-house-lidar.glb"
+      alt="LiDAR 3D survey of Island House exterior"
+      camera-controls touch-action="pan-y"
+      camera-orbit="35deg 68deg auto" min-camera-orbit="auto 20deg auto" max-camera-orbit="auto 92deg auto"
+      interaction-prompt="none" shadow-intensity="0.6" exposure="1.0" environment-image="neutral">
+      <div class="hint">
+        <span><b>Drag</b> to orbit</span><span><b>Scroll / pinch</b> to zoom</span><span><b>Right-drag</b> to pan</span>
+      </div>
+    </model-viewer>
+  </div>
+  <footer>iPhone Pro LiDAR (Polycam) · real metric geometry &amp; scale · a survey model — measure from this, not the splat. Building mid-restoration; hero recapture when the fabric is complete.</footer>
+</div>
+</body>
+</html>
